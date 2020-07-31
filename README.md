@@ -1,8 +1,16 @@
 # Moebius Backend
 
 Languages:
- . Kotlin
+ * Kotlin
+ * Bash
  
 Frameworks:
- . Spring
- . Hibernate
+ * Spring
+ * Hibernate
+ 
+Architecture:
+ * MVC
+ * Modularization by features
+ 
+Build Automation:
+ * Gradle Kotlin DSL
