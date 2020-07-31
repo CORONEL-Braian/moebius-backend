@@ -1,0 +1,10 @@
+Keys.txt
+
+# IntelliJ
+.idea/*
+*.iml
+
+out
+
+# Version control
+vcs.xml
