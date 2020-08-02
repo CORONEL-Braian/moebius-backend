@@ -10,7 +10,7 @@ pluginManagement {
 
 include("app")
 
-include("model")
+include("domain")
 include("common")
 
 // Feature

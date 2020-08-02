@@ -14,7 +14,7 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":model"))
+    implementation(project(":domain"))
 
     implementation(kotlin("stdlib-jdk8"))
     testImplementation("junit", "junit", "4.12")
