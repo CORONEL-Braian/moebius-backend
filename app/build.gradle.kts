@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "com.moebius"
-version = "0.0"
+version = "0.0.0"
 
 repositories {
     maven("https://dl.bintray.com/kotlin/kotlin-eap")
@@ -15,7 +15,7 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
-    testCompile("junit", "junit", "4.12")
+    testImplementation("junit", "junit", "4.12")
 }
 
 configure<JavaPluginConvention> {

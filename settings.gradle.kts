@@ -7,4 +7,15 @@ pluginManagement {
         maven("https://plugins.gradle.org/m2/")
     }
 }
-include("app", "sign_up")
+
+include("app")
+
+include("model")
+include("common")
+
+// Feature
+include("feature_sign_up")
+
+// Library
+include("library_base")
+include("library_test_utils")
