@@ -8,7 +8,7 @@ pluginManagement {
     }
 }
 
-include("app")
+include("backend")
 
 include("domain")
 include("common")

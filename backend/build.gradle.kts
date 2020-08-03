@@ -14,6 +14,8 @@ repositories {
 }
 
 dependencies {
+    implementation(project(":feature_sign_up", "default"))
+
     implementation(kotlin("stdlib-jdk8"))
     testImplementation("junit", "junit", "4.12")
 }
