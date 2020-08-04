@@ -3,5 +3,5 @@ data class User(
         val profile: Profile,
         val account: Account,
         val username: String,
-        val rol: Rol,
+        val rol: Rol
 )
