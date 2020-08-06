@@ -5,7 +5,7 @@ plugins {
     kotlin("jvm") version "1.4-M3"
 }
 
-group = "com.moebius"
+group = "app.möbius"
 version = "0.0.0"
 
 repositories {

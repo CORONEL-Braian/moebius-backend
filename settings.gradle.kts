@@ -20,3 +20,4 @@ include("feature_login")
 // Library
 include("library_base")
 include("library_test_utils")
+include("feature_third_profile")
