@@ -1,0 +1,42 @@
+{
+  "data": [{
+    "type": "users",
+    "attributes": {
+      "username": "username",
+      "created": "2015-05-22T14:56:29.000Z",
+      "updated": "2015-05-22T14:56:28.000Z"
+    },
+    "relationships": {
+      "profile": {
+        "data": {"type": "profile"}
+      },
+      "account": {
+        "data": {"type": "account"}
+      }
+    }
+  }],
+  "included": [
+    {
+      "type": "profile",
+      "attributes": {
+        "dni": "123456789",
+        "name": "Braian",
+        "surname": "Coronel",
+        "facebook_username": "livefull.23",
+        "phone": 1155067943,
+        "birthdate": "1995-10-10",
+        "nationality": "Argentina",
+        "sex": "M",
+        "avatar_url": "http://",
+        "gender": "male"
+      }
+    },
+    {
+      "type": "account",
+      "attributes": {
+        "email": "liveefull@gmail.com",
+        "hash_password": "asd123"
+      }
+    }
+  ]
+}

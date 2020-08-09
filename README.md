@@ -26,3 +26,8 @@ Tools:
 References: 
  * [OpenAPI Specification](https://swagger.io/specification)
  * [Deployment Env](https://en.wikipedia.org/wiki/Deployment_environment)
+ * [JsonAPI](https://jsonapi.org)
+ 
+API Support:
+ * http://www.möbius.app/support/api
+ * Email: braian@itdevexpert.com

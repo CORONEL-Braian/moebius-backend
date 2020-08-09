@@ -16,6 +16,7 @@ include("common")
 // Feature
 include("feature_sign_up")
 include("feature_login")
+include("feature_legal")
 
 // Library
 include("library_base")
