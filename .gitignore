@@ -1,6 +1,9 @@
 Credentials.txt
 Environments.txt
+Temp.txt
 HELP.md
+
+# ---------------
 
 .gradle
 build/

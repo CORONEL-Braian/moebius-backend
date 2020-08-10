@@ -3,7 +3,7 @@
 ###### Immortalizes the essence and consciousness of people
 
 
-###Technologies
+### Technologies
 
 Languages:
  * Kotlin
@@ -21,13 +21,12 @@ Build Automation:
  * Gradle Kotlin DSL
  
 Tools:
- * [Convert Yaml to Json](https://www.convertjson.com/yaml-to-json.htm) 
+ 
  
 References: 
- * [OpenAPI Specification](https://swagger.io/specification)
  * [Deployment Env](https://en.wikipedia.org/wiki/Deployment_environment)
  * [JsonAPI](https://jsonapi.org)
  
 API Support:
  * http://www.möbius.app/support/api
- * Email: braian@itdevexpert.com
+ * Email: braian@itdevexpert.com / gaston@itdevexpert.com
