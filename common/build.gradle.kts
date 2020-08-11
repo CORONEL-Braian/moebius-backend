@@ -1,6 +1,4 @@
 plugins {
-    id("org.springframework.boot") version "2.3.2.RELEASE"
-    id("io.spring.dependency-management") version "1.0.9.RELEASE"
     java
     kotlin("jvm") version "1.4-M3"
 }
@@ -16,6 +14,7 @@ repositories {
 dependencies {
     implementation(project(":domain"))
     implementation(project(":library_base"))
+
     implementation(project(":library_test_utils"))
 
     implementation(kotlin("stdlib-jdk8"))

@@ -14,16 +14,9 @@ repositories {
 }
 
 dependencies {
-//    implementation(project(":feature_sign_up", "default"))
+    implementation(project(":feature_sign_up", "default"))
 
     implementation(kotlin("stdlib-jdk8"))
-
-//    implementation("org.springframework.boot", "spring-boot-autoconfigure", "2.3.2.RELEASE")
-//    api("org.springframework", "spring-context", "5.2.8.RELEASE")
-
-    implementation("org.springframework.boot:spring-boot-starter-web")
-
-
 
     testImplementation("junit", "junit", "4.12")
 }
