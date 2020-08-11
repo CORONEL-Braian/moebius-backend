@@ -14,11 +14,11 @@ repositories {
 }
 
 dependencies {
-    /*implementation(project(":domain"))
+    implementation(project(":domain"))
     implementation(project(":library_base"))
-    implementation(project(":library_test_utils"))*/
+    implementation(project(":library_test_utils"))
 
-    api("org.springframework.boot:spring-boot-starter-web")
+//    api("org.springframework.boot:spring-boot-starter-web")
 
 
     implementation(kotlin("stdlib-jdk8"))
