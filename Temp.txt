@@ -1,1 +1,1 @@
-    https://dzone.com/articles/how-to-import-the-maven-spring-boot-application-in
+https://youtrack.jetbrains.com/issue/KT-31643?project=kt&_ga=2.27921855.2041452170.1597119153-709329503.1594348319

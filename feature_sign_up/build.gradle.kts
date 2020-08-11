@@ -17,7 +17,7 @@ repositories {
  * Source: https://stackoverflow.com/a/57710092/5279996
  */
 dependencies {
-//    implementation(project(":common", "default"))
+    implementation(project(":common", "default"))
 
     api("org.springframework.boot:spring-boot-starter-web")
 
