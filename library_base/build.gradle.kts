@@ -17,7 +17,6 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
     api("org.springframework", "spring-context", "5.2.8.RELEASE")
-    api("io.quarkus", "quarkus-spring-web-api", "5.2.SP4")
 
     testCompile("junit", "junit", "4.12")
 }
