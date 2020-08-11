@@ -9,8 +9,6 @@ import org.springframework.stereotype.Component
 @SpringBootApplication
 open class MoebiusApplication: SpringBootServletInitializer()
 
-
-
 fun main(args: Array<String>) {
     runApplication<MoebiusApplication>(*args)
 }

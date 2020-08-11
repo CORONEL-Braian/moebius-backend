@@ -19,8 +19,6 @@ repositories {
 dependencies {
     implementation(project(":common", "default"))
 
-    api("org.springframework.boot:spring-boot-starter-web")
-
     implementation(kotlin("stdlib-jdk8"))
 
     testImplementation("junit", "junit", "4.12")
