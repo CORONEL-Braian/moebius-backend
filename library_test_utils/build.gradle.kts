@@ -1,8 +1,3 @@
-plugins {
-    java
-    kotlin("jvm") version "1.4-M3"
-}
-
 group = "app.möbius"
 version = "0.0.0"
 

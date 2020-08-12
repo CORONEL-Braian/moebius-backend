@@ -1,10 +1,3 @@
-plugins {
-    id("org.springframework.boot") version "2.3.2.RELEASE"
-    id("io.spring.dependency-management") version "1.0.9.RELEASE"
-    java
-    kotlin("jvm") version "1.4-M3"
-}
-
 group = "app.möbius"
 version = "0.0.0"
 
@@ -17,6 +10,7 @@ dependencies {
     implementation(project(":common", "default"))
 
     implementation(kotlin("stdlib-jdk8"))
+
     testCompile("junit", "junit", "4.12")
 }
 
