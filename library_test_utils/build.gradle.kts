@@ -2,13 +2,10 @@ group = "app.möbius"
 version = "0.0.0"
 
 repositories {
-    maven("https://dl.bintray.com/kotlin/kotlin-eap")
-    mavenCentral()
 }
 
 dependencies {
-    implementation(kotlin("stdlib-jdk8"))
-    testCompile("junit", "junit", "4.12")
+    testImplementation("junit", "junit", "4.12")
 }
 
 configure<JavaPluginConvention> {

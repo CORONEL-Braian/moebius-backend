@@ -26,6 +26,7 @@ Tools:
 References: 
  * [Deployment Env](https://en.wikipedia.org/wiki/Deployment_environment)
  * [JsonAPI](https://jsonapi.org)
+ * [Multi Module](https://spring.io/guides/gs/multi-module)
  
 API Support:
  * http://www.möbius.app/support/api
