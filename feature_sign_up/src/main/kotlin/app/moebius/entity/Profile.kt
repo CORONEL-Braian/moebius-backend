@@ -1,4 +1,4 @@
-package entity
+package app.moebius.entity
 
 data class Profile(
         val profileId: Int,
