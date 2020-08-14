@@ -1,5 +1,6 @@
 package app.moebius.controller
 
+import app.moebius.entity.User
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -7,10 +8,7 @@ import org.springframework.web.bind.annotation.RestController
 class UserController {
 
     @GetMapping("/user")
-    fun greet(): Test {
-        return Test("newUser")
-    }
+    fun getUser(): User = TODO()
 
 }
 
-data class Test(val a: String)

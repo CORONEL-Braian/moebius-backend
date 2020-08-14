@@ -1,13 +1,13 @@
 package app.moebius.controller
 
-import app.moebius.entity.Rol
+import app.moebius.entity.Profile
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class RolController {
+class ProfileController {
 
-    @GetMapping("roles")
-    fun getRoles() = Rol(1, true, true)
+    @GetMapping("/profile")
+    fun getProfile(): Profile = TODO()
 
 }
