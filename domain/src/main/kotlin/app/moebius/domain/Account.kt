@@ -1,3 +1,5 @@
+package app.moebius.domain
+
 data class Account(
         val accountId: Int,
         val email: String,

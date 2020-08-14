@@ -1,3 +1,5 @@
+package app.moebius.domain
+
 data class User(
         val userId: Int,
         val profile: Profile,

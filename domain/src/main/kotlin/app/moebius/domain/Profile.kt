@@ -1,3 +1,5 @@
+package app.moebius.domain
+
 data class Profile(
         val profileId: Int,
         val dni: Int,

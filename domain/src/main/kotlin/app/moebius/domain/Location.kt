@@ -1,3 +1,5 @@
+package app.moebius.domain
+
 data class Location(
         val locationId: Int,
         val coordinate: Coordinate,

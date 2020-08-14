@@ -1,3 +1,5 @@
+package app.moebius.domain
+
 data class Deceased(
         val deceasedId: Int,
         val dni: Int,
