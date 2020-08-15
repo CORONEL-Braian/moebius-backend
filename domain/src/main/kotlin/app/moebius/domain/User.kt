@@ -1,5 +1,7 @@
 package app.moebius.domain
 
+import app.moebius.domain.rol.Rol
+
 data class User(
         val userId: Int,
         val profile: Profile,
