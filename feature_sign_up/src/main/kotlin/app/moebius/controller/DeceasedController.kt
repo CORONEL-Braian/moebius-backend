@@ -1,13 +1,13 @@
 package app.moebius.controller
 
-import app.moebius.entity.Deceased
+import app.moebius.domain.model.Deceased
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class DeceasedController {
 
-    @GetMapping("/deceased")
+    /*@GetMapping("/deceased")
     fun getDeceased() = Deceased(
             deceasedId = 1,
             dni = 123456789,
@@ -19,5 +19,5 @@ class DeceasedController {
             locality = "",
             observation = ""
     )
-
+*/
 }

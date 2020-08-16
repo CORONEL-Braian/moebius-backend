@@ -1,4 +1,4 @@
-package app.moebius.domain
+package app.moebius.domain.model
 
 data class Coordinate(
         val lat: Float,

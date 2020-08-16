@@ -1,4 +1,4 @@
-package app.moebius.domain.rol
+package app.moebius.domain.model.rol
 
 data class Rol(
         val roleId: Int,
