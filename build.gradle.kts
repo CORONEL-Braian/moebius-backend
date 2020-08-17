@@ -1,3 +1,5 @@
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+
 buildscript {
 	repositories {
 		mavenCentral()
@@ -17,6 +19,9 @@ plugins {
 
 version = "0.0.0"
 
+/**
+ * https://stackoverflow.com/a/57069958/5279996
+ */
 subprojects {
 
 	apply {
@@ -43,6 +48,13 @@ subprojects {
 		sourceCompatibility = JavaVersion.VERSION_1_8
 	}
 
+	tasks.getByName<BootJar>("bootJar") {
+		enabled = false
+	}
+
+	tasks.getByName<Jar>("jar") {
+		enabled = true
+	}
 
 }
 
