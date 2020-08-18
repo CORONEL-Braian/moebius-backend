@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class DeceasedController {
 
-    /*@GetMapping("/deceased")
+    @GetMapping("/deceased")
     fun getDeceased() = Deceased(
             deceasedId = 1,
             dni = 123456789,
@@ -19,5 +19,4 @@ class DeceasedController {
             locality = "",
             observation = ""
     )
-*/
 }

@@ -24,10 +24,7 @@ Tools:
  
  
 References: 
- * [Deployment Env](https://en.wikipedia.org/wiki/Deployment_environment)
- * [JsonAPI](https://jsonapi.org)
- * [Multi Module](https://spring.io/guides/gs/multi-module)
- * [Domain-Driven Design](http://static.olivergierke.de/lectures/ddd-and-spring/#intro)
+
  
 API Support:
  * http://www.möbius.app/support/api

@@ -10,8 +10,10 @@ rootProject.name = "Moebius-backend"
 
 include("backend")
 
-include("domain")
+// Common
 include("common")
+include("domain")
+include("service")
 
 // Feature
 include("feature_sign_up")

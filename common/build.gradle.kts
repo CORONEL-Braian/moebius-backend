@@ -6,6 +6,7 @@ repositories {
 
 dependencies {
     implementation(project(":domain"))
+    implementation(project(":service"))
     implementation(project(":library_base"))
     implementation(project(":library_test_utils"))
 
