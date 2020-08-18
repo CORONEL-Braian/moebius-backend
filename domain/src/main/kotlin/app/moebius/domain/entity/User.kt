@@ -8,8 +8,8 @@ import javax.persistence.Table
 @Table(name = "user")
 data class User(
         val userId: Int,
-        val profile: Profile,
-        val account: Account,
         val username: String,
+        val account: Account,
+        val profile: Profile,
         val rol: Rol
 )

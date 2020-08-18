@@ -13,6 +13,7 @@ include("backend")
 // Common
 include("common")
 include("domain")
+include("api")
 include("service")
 
 // Feature

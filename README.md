@@ -5,27 +5,26 @@
 
 ### Technologies
 
-Languages:
+##### Languages:
  * Kotlin
  * Bash
  
-Frameworks:
+##### Frameworks:
  * Spring
  * Hibernate
  
-Architecture:
+##### Architecture:
  * MVC
  * Modularization by features
+ * REST
  
-Build Automation:
+##### Build Automation:
  * Gradle Kotlin DSL
  
-Tools:
+##### Specification:
+ * Json API
+ * Open API Specification
  
- 
-References: 
-
- 
-API Support:
+##### API Support:
  * http://www.möbius.app/support/api
  * Email: braian@itdevexpert.com / gaston@itdevexpert.com
