@@ -1,4 +1,4 @@
-package app.moebius.repository
+package app.moebius.data
 
 interface RolRepository {
 
