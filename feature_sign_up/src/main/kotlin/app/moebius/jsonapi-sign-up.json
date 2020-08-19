@@ -13,9 +13,6 @@
       },
       "profile": {
         "data": {"type": "profile"}
-      },
-      "rol": {
-        "data": {"type": "rol"}
       }
     }
   }],
@@ -24,9 +21,7 @@
       "type": "account",
       "id": "uuid",
       "attributes": {
-        "token": "123",
-        "created": "2015-05-22T14:56:29.000Z",
-        "updated": "2015-05-22T14:56:28.000Z"
+        "token": "123"
       },
       "relationships": {
         "credential": {
@@ -34,9 +29,7 @@
             "type": "credential",
             "id": "uuid",
             "attributes": {
-              "email": "liveefull@gmail.com",
-              "created": "2015-05-22T14:56:29.000Z",
-              "updated": "2015-05-22T14:56:28.000Z"
+              "email": "liveefull@gmail.com"
             },
             "relationships": {
               "password": {
@@ -46,9 +39,7 @@
                   "attributes": {
                     "hash_password": "asd123",
                     "reset_password_token": "asd123",
-                    "reset_password_token_expire": "asd123",
-                    "created": "2015-05-22T14:56:29.000Z",
-                    "updated": "2015-05-22T14:56:28.000Z"
+                    "reset_password_token_expire": "asd123"
                   }
                 }
               }
@@ -58,19 +49,14 @@
         "security": {
           "data": {
             "type": "security",
-            "id": "uuid",
-            "attributes": {
-              "security_level": "3/3",
-              "created": "2015-05-22T14:56:29.000Z",
-              "updated": "2015-05-22T14:56:28.000Z"
-            }
+            "id": "uuid"
           }
         }
       }
     },
     {
       "type": "profile",
-      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "id": "uuid",
       "attributes": {
         "dni": "123456789",
         "name": "Braian",
@@ -82,16 +68,30 @@
         "sex": "M",
         "avatar_url": "http://",
         "gender": "male"
-      }
-    },
-    {
-      "type": "rol",
-      "id": "550e8400-e29b-41d4-a716-446655440000",
-      "attributes": {
-        "is_alive": "true",
-        "security_level": "3/3",
-        "created": "2015-05-22T14:56:29.000Z",
-        "updated": "2015-05-22T14:56:28.000Z"
+      },
+      "relationships": {
+        "birthdate": {
+          "data": {
+            "type": "birthdate",
+            "id": "uuid",
+            "attributes": {
+              "day": "19",
+              "month": "10",
+              "year": "95"
+            }
+          }
+        },
+        "phone": {
+          "data": {
+            "type": "phone",
+            "id": "uuid",
+            "attributes": {
+              "country": "+54",
+              "codeArea": "011",
+              "number": "1234512345"
+            }
+          }
+        }
       }
     }
   ]
