@@ -8,6 +8,7 @@ data class Account(
 )
 
 data class Credential(
+        val credentialId: Int,
         val email: String,
         val password: Password,
 )

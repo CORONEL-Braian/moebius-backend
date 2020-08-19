@@ -1,6 +1,7 @@
 {
   "data": [{
-    "type": "users",
+    "type": "user",
+    "id": "uuid",
     "attributes": {
       "username": "username",
       "created": "2015-05-22T14:56:29.000Z",
@@ -21,21 +22,55 @@
   "included": [
     {
       "type": "account",
+      "id": "uuid",
       "attributes": {
-        "email": "liveefull@gmail.com",
-        "hash_password": "asd123"
+        "token": "123",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
       },
       "relationships": {
         "credential": {
-          "data": {"type": "credential"}
+          "data": {
+            "type": "credential",
+            "id": "uuid",
+            "attributes": {
+              "email": "liveefull@gmail.com",
+              "created": "2015-05-22T14:56:29.000Z",
+              "updated": "2015-05-22T14:56:28.000Z"
+            },
+            "relationships": {
+              "password": {
+                "data": {
+                  "type": "password",
+                  "id": "uuid",
+                  "attributes": {
+                    "hash_password": "asd123",
+                    "reset_password_token": "asd123",
+                    "reset_password_token_expire": "asd123",
+                    "created": "2015-05-22T14:56:29.000Z",
+                    "updated": "2015-05-22T14:56:28.000Z"
+                  }
+                }
+              }
+            }
+          }
         },
         "security": {
-          "data": {"type": "security"}
+          "data": {
+            "type": "security",
+            "id": "uuid",
+            "attributes": {
+              "security_level": "3/3",
+              "created": "2015-05-22T14:56:29.000Z",
+              "updated": "2015-05-22T14:56:28.000Z"
+            }
+          }
         }
       }
     },
     {
       "type": "profile",
+      "id": "550e8400-e29b-41d4-a716-446655440000",
       "attributes": {
         "dni": "123456789",
         "name": "Braian",
@@ -50,10 +85,13 @@
       }
     },
     {
-      "type": "account",
+      "type": "rol",
+      "id": "550e8400-e29b-41d4-a716-446655440000",
       "attributes": {
-        "email": "liveefull@gmail.com",
-        "hash_password": "asd123"
+        "is_alive": "true",
+        "security_level": "3/3",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
       }
     }
   ]
