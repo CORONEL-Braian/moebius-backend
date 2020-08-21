@@ -1,11 +1,9 @@
 package app.moebius.data.datasource
 
-/**
- * User Store
- * OBS:
- */
+import app.moebius.domain.entity.User
+
 interface UserStore {
 
-    fun createUser()
+    fun createUser(user: User)
 
 }

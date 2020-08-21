@@ -5,7 +5,9 @@ repositories {
 }
 
 dependencies {
-    testCompile("junit", "junit", "4.12")
+    implementation(project(":common", "default"))
+
+    testImplementation("junit", "junit", "4.12")
 }
 
 tasks {

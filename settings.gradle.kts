@@ -12,6 +12,7 @@ include("backend")
 
 // Common
 include("common")
+
 include("domain")
 include("api")
 include("service")
@@ -20,11 +21,12 @@ include("service")
 include("feature_sign_up")
 include("feature_login")
 include("feature_legal")
+include("feature_third_profile")
 
 // Library
 include("library_base")
 include("library_test_utils")
-include("feature_third_profile")
 
 // Core
 include("deceased-core")
+include("data-core")

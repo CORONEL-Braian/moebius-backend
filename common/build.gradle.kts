@@ -6,9 +6,14 @@ repositories {
 
 dependencies {
     implementation(project(":domain"))
+    implementation(project(":api"))
     implementation(project(":service"))
+
     implementation(project(":library_base"))
     implementation(project(":library_test_utils"))
+
+    implementation(project(":deceased-core"))
+    implementation(project(":data-core"))
 
     testImplementation("junit", "junit", "4.12")
 }
