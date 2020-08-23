@@ -28,4 +28,3 @@ data class Birthdate(
         val month: Int,
         val year: Int
 )
-
