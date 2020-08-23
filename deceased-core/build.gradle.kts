@@ -5,7 +5,7 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":common", "default"))
+    implementation(project(":domain"))
 
     testImplementation("junit", "junit", "4.12")
 }

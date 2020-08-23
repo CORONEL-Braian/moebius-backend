@@ -9,7 +9,6 @@ data class Profile(
         val identificationNumber: Int,
         val name: String,
         val surname: String,
-        val facebookId: Int,
         val originLocality: String,
         val phone: Phone,
         val birthdate: Birthdate,

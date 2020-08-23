@@ -6,7 +6,6 @@ data class Profile(
         val identificationNumber: Int,
         val name: String,
         val surname: String,
-        val facebookId: Int,
         val originLocality: String,
         val phone: Phone,
         val birthdate: Birthdate,
@@ -17,13 +16,16 @@ data class Profile(
 )
 
 data class Phone(
-        val country: String,
+        val phoneId: Int,
+        val codeCountry: String,
         val codeArea: String,
         val number: Int
 )
 
 data class Birthdate(
+        val birhdateId: Int,
         val day: Int,
         val month: Int,
         val year: Int
 )
+
