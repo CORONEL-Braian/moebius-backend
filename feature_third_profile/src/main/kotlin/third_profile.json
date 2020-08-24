@@ -1,0 +1,78 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Third profile",
+    "description": "Third profile",
+    "termsOfService": "möbius.app/terms",
+    "contact": {
+      "name": "API Support",
+      "url": "http://www.möbius.app/support/api",
+      "email": "support@möbius.app"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "0.0.0"
+  },
+
+  "servers": [
+    {
+      "url": "development.möbius.app/user/sign_up",
+      "description": "Development server"
+    },
+    {
+      "url": "integration.möbius.app/user/sign_up",
+      "description": "Integration server"
+    },
+    {
+      "url": "testing.möbius.app/user/sign_up",
+      "description": "Testing server"
+    },
+    {
+      "url": "staging.möbius.app/user/sign_up",
+      "description": "Staging server"
+    },
+    {
+      "url": "api.möbius.app/user/sign_up",
+      "description": "Production server"
+    }
+
+  ],
+
+  "paths": {
+    "/third_profiles": {
+      "get": {
+        "summary": "Returns a list of third profiles.",
+        "description": "They are users without accounts created by others.",
+        "responses": {
+          "200": {
+            "description": "A JSON array of third profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 4
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Jessica Smith"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+}

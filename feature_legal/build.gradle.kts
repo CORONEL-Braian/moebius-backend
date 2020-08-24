@@ -1,11 +1,10 @@
+group = "app.möbius"
 version = "0.0.0"
 
 repositories {
 }
 
 dependencies {
-    implementation(project(":feature_sign_up", "default"))
-
     testImplementation("junit", "junit", "4.12")
 }
 

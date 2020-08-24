@@ -1,11 +1,3 @@
-tools/*
-tools/Credentials.txt
-tools/Environments.txt
-tools/Temp.txt
-tools/http-client.private.env.json
-
-# ---------------
-
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar

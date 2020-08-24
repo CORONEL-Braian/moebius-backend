@@ -1,10 +1,8 @@
+group = "app.möbius"
 version = "0.0.0"
 
-repositories {
-}
-
 dependencies {
-    implementation(project(":feature_sign_up", "default"))
+    api("org.springframework.boot:spring-boot-starter-web")
 
     testImplementation("junit", "junit", "4.12")
 }

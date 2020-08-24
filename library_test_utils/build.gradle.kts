@@ -1,14 +1,16 @@
+group = "app.möbius"
 version = "0.0.0"
 
 repositories {
 }
 
 dependencies {
-    implementation(project(":feature_sign_up", "default"))
-
     testImplementation("junit", "junit", "4.12")
 }
 
+configure<JavaPluginConvention> {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+}
 tasks {
     compileKotlin {
         kotlinOptions.jvmTarget = "1.8"
