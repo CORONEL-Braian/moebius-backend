@@ -17,10 +17,10 @@
  * MVC
  * Modularization by features
  * REST
- 
+
 ##### Build Automation:
  * Gradle Kotlin DSL
- 
+
 ##### Specification:
  * Json API
  * Open API Specification
