@@ -1,7 +1,7 @@
 package app.moebius.domain.entity.rol
 
 data class Rol(
-        val roleId: Int,
+        val roleUUID: Int,
         val isAlive: Boolean,
         val securityLevel: Int,
         val subscription: Subscription,

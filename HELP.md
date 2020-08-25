@@ -9,6 +9,7 @@ For further reference, please consider the following sections:
  * [JsonAPI](https://jsonapi.org)
  * [Multi Module](https://spring.io/guides/gs/multi-module)
  * [Domain-Driven Design](http://static.olivergierke.de/lectures/ddd-and-spring/#intro)
+ * [uuid-or-giud](https://tomharrisonjr.com/uuid-or-guid-as-primary-keys-be-careful-7b2aa3dcb439)
 
 ### Additional Links
 These additional references should also help you:

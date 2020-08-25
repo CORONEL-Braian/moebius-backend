@@ -7,7 +7,7 @@ import javax.persistence.Table
 @Entity
 @Table(name = "user")
 data class User(
-        val userId: Int,
+        val userUUID: Int,
         val username: String,
         val account: Account,
         val profile: Profile,

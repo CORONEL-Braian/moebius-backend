@@ -4,7 +4,7 @@ import javax.persistence.Entity
 
 @Entity
 data class Profile(
-        val profileId: Int,
+        val profileUUID: Int,
         val dni: Int,
         val identificationNumber: Int,
         val name: String,

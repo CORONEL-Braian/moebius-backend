@@ -1,7 +1,7 @@
 package app.moebius.domain.entity
 
 data class Security(
-        val securityId: Int,
+        val securityUUID: Int,
         val securityLevel: Int = 0,
         val securityMethods: List<SecurityMethods>? = null
 )
@@ -9,7 +9,7 @@ data class Security(
 interface SecurityMethods
 
 data class TwoFA(
-        val twoFAId: Int,
+        val twoFAUUID: Int,
         val enable: Boolean = false,
         val googleAuthentication: GoogleAuthenticaton?,
         val smsAuthentication: SMSAuthentication?,
@@ -17,16 +17,16 @@ data class TwoFA(
 ): SecurityMethods
 
 data class GoogleAuthenticaton(
-        val googleAuthenticationId: Int,
+        val googleAuthenticationUUID: Int,
         val verificationCode: Int
 )
 
 data class SMSAuthentication(
-        val smsAuthenticationId: Int
+        val smsAuthenticationUUID: Int
 )
 
 data class EmailVerification(
-        val emailVerificationId: Int,
+        val emailVerificationUUID: Int,
         val isEmailVerified: Boolean,
         val emailVerificationToken: String,
 )
@@ -41,7 +41,7 @@ enum class State {
 }
 
 data class AntiPishingCode(
-        val antiPishingCodeId: Int,
+        val antiPishingCodeUUID: Int,
         val enable: Boolean,
         val code: String?
 ): SecurityMethods
