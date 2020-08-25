@@ -1,7 +1,9 @@
 package app.moebius.domain.model
 
+import java.util.*
+
 data class Profile(
-        val profileId: Int,
+        val profileUUID: UUID,
         val dni: Int,
         val identificationNumber: Int,
         val name: String,
@@ -16,14 +18,14 @@ data class Profile(
 )
 
 data class Phone(
-        val phoneId: Int,
+        val phoneUUID: UUID,
         val codeCountry: String,
         val codeArea: String,
         val number: Int
 )
 
 data class Birthdate(
-        val birhdateId: Int,
+        val birhdateUUID: UUID,
         val day: Int,
         val month: Int,
         val year: Int
