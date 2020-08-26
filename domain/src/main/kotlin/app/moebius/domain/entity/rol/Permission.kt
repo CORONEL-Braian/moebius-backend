@@ -1,7 +1,9 @@
 package app.moebius.domain.entity.rol
 
+import java.util.*
+
 data class Permission(
-        val permissionUUID: Int,
+        val permissionUUID: UUID,
         val operation: Operation,
         val resource: Resource
 )

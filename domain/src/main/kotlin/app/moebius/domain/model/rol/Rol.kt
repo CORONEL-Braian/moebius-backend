@@ -1,7 +1,9 @@
 package app.moebius.domain.model.rol
 
+import java.util.*
+
 data class Rol(
-        val roleUUID: Int,
+        val roleUUID: UUID,
         val isAlive: Boolean = true,
         val securityLevel: Int = 0,
         val subscription: Subscription,

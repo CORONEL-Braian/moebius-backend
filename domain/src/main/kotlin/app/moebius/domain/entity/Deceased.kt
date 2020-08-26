@@ -1,7 +1,9 @@
 package app.moebius.domain.entity
 
+import java.util.*
+
 data class Deceased(
-        val deceasedUUID: Int,
+        val deceasedUUID: UUID,
         val dni: Int,
         val provider: String,
         val registrationDatetime: String,

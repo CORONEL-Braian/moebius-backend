@@ -1,10 +1,11 @@
 package app.moebius.domain.entity
 
 import javax.persistence.Entity
+import java.util.*
 
 @Entity
 data class Profile(
-        val profileUUID: Int,
+        val profileUUID: UUID,
         val dni: Int,
         val identificationNumber: Int,
         val name: String,
@@ -20,13 +21,15 @@ data class Profile(
 
 @Entity
 data class Phone(
-        val country: String,
+        val phoneUUID: UUID,
+        val codeCountry: String,
         val codeArea: String,
         val number: Int
 )
 
 @Entity
 data class Birthdate(
+        val birhdateUUID: UUID,
         val day: Int,
         val month: Int,
         val year: Int

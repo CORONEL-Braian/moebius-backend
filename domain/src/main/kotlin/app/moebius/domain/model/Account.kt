@@ -1,9 +1,10 @@
 package app.moebius.domain.model
 
 import app.moebius.domain.model.linked_accounts.LinkedAccount
+import java.util.*
 
 data class Account(
-        val accountUUID: Int,
+        val accountUUID: UUID,
         val credential: Credential,
         val security: Security,
         val token: Int,
@@ -11,12 +12,13 @@ data class Account(
 )
 
 data class Credential(
+        val credentialUUID: UUID,
         val email: String,
         val password: Password,
 )
 
 data class Password(
-        val passwordUUID: Int,
+        val passwordUUID: UUID,
         val hashPassword: String,
         val resetPasswordToken: String,
         val resetPasswordTokenExpire: String,

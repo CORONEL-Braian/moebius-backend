@@ -1,7 +1,9 @@
 package app.moebius.domain.model.rol
 
+import java.util.*
+
 data class Subscription(
-        val subscriptionUUID: Int,
+        val subscriptionUUID: UUID,
         val name: Type = Type.BASIC
 )
 
