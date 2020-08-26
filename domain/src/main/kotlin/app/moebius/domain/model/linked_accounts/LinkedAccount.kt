@@ -9,5 +9,6 @@ data class LinkedAccount(
 
 data class Facebook(
         val facebookUUID: UUID,
-        val username: String
+        val username: String,
+        val facebookId: Long? = null
 )

@@ -6,8 +6,6 @@ import java.util.*
 @Entity
 data class Profile(
         val profileUUID: UUID,
-        val dni: Int,
-        val identificationNumber: Int,
         val name: String,
         val surname: String,
         val originLocality: String,
@@ -16,7 +14,6 @@ data class Profile(
         val nationality: String,
         val sex: String,
         val avatarUrl: String,
-        val isIdentityValidated: String,
 )
 
 @Entity

@@ -35,6 +35,8 @@ data class EmailVerification(
 
 data class IdentityVerification(
         val id: Int,
+        val dni: Int,
+        val identificationNumber: Int,
         val state: State,
 ): SecurityMethods
 
