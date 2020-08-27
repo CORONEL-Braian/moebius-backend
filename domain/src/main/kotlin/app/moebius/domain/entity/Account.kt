@@ -7,7 +7,7 @@ data class Account(
         val accountUUID: UUID,
         val credential: Credential,
         val security: Security,
-        val token: Int,
+        val token: String,
         val linkedAccounts: List<LinkedAccount>? = null
 )
 
