@@ -15,7 +15,7 @@ data class TwoFA(
         val enable: Boolean = false,
         val googleAuthentication: GoogleAuthenticaton?,
         val smsAuthentication: SMSAuthentication?,
-        val emailVerification: EmailVerification?
+        val emailVerification: EmailVerification?   //
 ): SecurityMethods
 
 data class GoogleAuthenticaton(
