@@ -1,4 +1,4 @@
-package app.moebius.domain.model.linked_accounts
+package app.moebius.domain.object_values.linked_accounts
 
 import java.util.*
 

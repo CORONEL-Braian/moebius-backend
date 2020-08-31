@@ -1,6 +1,6 @@
 package app.moebius.domain.entity
 
-import app.moebius.domain.model.rol.Rol
+import app.moebius.domain.object_values.rol.Rol
 import java.util.*
 import javax.persistence.Entity
 import javax.persistence.Table

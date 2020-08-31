@@ -1,4 +1,4 @@
-package app.moebius.domain.model
+package app.moebius.domain.object_values
 
 import java.util.*
 

@@ -8,11 +8,13 @@ data class Profile(
         val profileUUID: UUID,
         val name: String,
         val surname: String,
-        val originLocality: String,
+        val nickname: String,
+        val biography: String,
         val phone: Phone,
-        val birthdate: Birthdate,
+        val birthdate: Date,
         val nationality: String,
         val sex: String,
+        val gender: Gender,
         val avatarUrl: String,
 )
 
@@ -25,8 +27,8 @@ data class Phone(
 )
 
 @Entity
-data class Birthdate(
-        val birhdateUUID: UUID,
+data class Date(
+        val dateUUID: UUID,
         val day: Int,
         val month: Int,
         val year: Int

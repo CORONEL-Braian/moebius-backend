@@ -1,6 +1,6 @@
-package app.moebius.domain.model
+package app.moebius.domain.object_values
 
-import app.moebius.domain.model.linked_accounts.LinkedAccount
+import app.moebius.domain.object_values.linked_accounts.LinkedAccount
 import java.util.*
 
 data class Account(
@@ -20,6 +20,7 @@ data class TraditionalCredential(
 data class Password(
         val passwordUUID: UUID,
         val apiHashPassword: String,
+        val dbHashPassword: String,
         val resetPasswordToken: String,
         val resetPasswordTokenExpire: String,
 )

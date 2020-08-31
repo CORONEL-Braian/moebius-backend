@@ -1,6 +1,6 @@
-package app.moebius.domain.model
+package app.moebius.domain.object_values
 
-import app.moebius.domain.model.rol.Rol
+import app.moebius.domain.object_values.rol.Rol
 import java.util.*
 
 data class User(

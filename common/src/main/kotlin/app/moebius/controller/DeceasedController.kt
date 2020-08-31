@@ -1,6 +1,6 @@
 package app.moebius.controller
 
-import app.moebius.domain.model.Deceased
+import app.moebius.domain.object_values.Deceased
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 

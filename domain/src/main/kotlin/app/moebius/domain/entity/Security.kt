@@ -35,13 +35,26 @@ data class EmailVerification(
 
 data class IdentityVerification(
         val id: Int,
-        val dni: Int,
-        val identificationNumber: Int,
-        val state: State,
+        val state: StatusIdentityVerification,
+        val dni: DNI,
 ): SecurityMethods
 
-enum class State {
-    PENDING, VERIFIED, BLOCKED
+data class DNI(
+        val dniUUID: UUID,
+        val surname: String,
+        val name: String,
+        val sex: String,
+        val nationality: String,
+        val ejemplar: String,
+        val birthdate: Date,
+        val dateIssue: Date,
+        val dateExpiry: Date,
+        val originLocality: String,
+        val identificationNumber: Int
+)
+
+enum class StatusIdentityVerification {
+    UNSOLICITED, PENDING, VERIFIED, BLOCKED
 }
 
 data class AntiPishingCode(

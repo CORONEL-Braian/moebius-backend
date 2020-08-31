@@ -1,6 +1,6 @@
 package app.moebius.data
 
-import app.moebius.domain.model.User
+import app.moebius.domain.object_values.User
 
 /**
  * Se comunica con la fuente de datos SQL
