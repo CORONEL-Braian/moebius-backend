@@ -1,6 +1,6 @@
 package app.moebius.domain.entity
 
-import app.moebius.domain.object_values.linked_accounts.LinkedAccount
+import app.moebius.domain.object_values.Linked
 import java.util.*
 
 data class Account(
@@ -8,7 +8,7 @@ data class Account(
         val credential: TraditionalCredential,
         val security: Security,
         val token: String,
-        val linkedAccounts: List<LinkedAccount>? = null
+        val linked: Linked? = null
 )
 
 data class TraditionalCredential(

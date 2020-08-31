@@ -5,10 +5,15 @@ import java.util.*
 data class Security(
         val securityUUID: UUID,
         val securityLevel: Int = 0,
-        val securityMethods: List<SecurityMethods>? = null
+        val securityMethods: SecurityMethods? = null
 )
 
-interface SecurityMethods
+data class SecurityMethods(
+        val securityMethodsUUID: UUID,
+        val twoFA: TwoFA? = null,
+        val identityVerification: IdentityVerification? = null,
+        val antiPishingCode: AntiPishingCode? = null
+)
 
 data class TwoFA(
         val twoFAUUID: UUID,
@@ -16,7 +21,7 @@ data class TwoFA(
         val googleAuthentication: GoogleAuthenticaton?,
         val smsAuthentication: SMSAuthentication?,
         val emailVerification: EmailVerification?
-): SecurityMethods
+)
 
 data class GoogleAuthenticaton(
         val googleAuthenticationUUID: UUID,
@@ -24,7 +29,8 @@ data class GoogleAuthenticaton(
 )
 
 data class SMSAuthentication(
-        val smsAuthenticationUUID: UUID
+        val smsAuthenticationUUID: UUID,
+        val verificationCode: Int
 )
 
 data class EmailVerification(
@@ -35,22 +41,26 @@ data class EmailVerification(
 
 data class IdentityVerification(
         val id: Int,
-        val state: StatusIdentityVerification,
+        val state: StatusIdentityVerification = StatusIdentityVerification.UNSOLICITED,
         val dni: DNI,
-): SecurityMethods
+)
 
 data class DNI(
         val dniUUID: UUID,
         val surname: String,
         val name: String,
         val sex: String,
-        val nationality: String,
+        val nationality: Country,
         val ejemplar: String,
         val birthdate: Date,
         val dateIssue: Date,
         val dateExpiry: Date,
-        val originLocality: String,
         val identificationNumber: Int
+)
+
+data class Country(
+        val countryUUID: UUID,
+        val name: String
 )
 
 enum class StatusIdentityVerification {
@@ -61,4 +71,4 @@ data class AntiPishingCode(
         val antiPishingCodeUUID: UUID,
         val enable: Boolean,
         val code: String?
-): SecurityMethods
+)

@@ -1,11 +1,14 @@
-package app.moebius.domain.entity.linked_accounts
+package app.moebius.domain.entity
 
 import java.util.*
 
-interface LinkedAccount
+data class Linked(
+        val linkedAccountUUID: UUID,
+        val facebook: Facebook
+)
 
 data class Facebook(
         val facebookUUID: UUID,
         val username: String,
         val facebookId: Long? = null
-): LinkedAccount
+)
