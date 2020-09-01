@@ -1,7 +1,7 @@
 package app.moebius.domain.entity
 
 import app.moebius.domain.entity.security.Security
-import app.moebius.domain.object_values.Linked
+import app.moebius.domain.values.Linked
 import java.util.*
 
 data class Account(
