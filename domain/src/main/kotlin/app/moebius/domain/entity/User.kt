@@ -1,6 +1,6 @@
 package app.moebius.domain.entity
 
-import app.moebius.domain.object_values.rol.Rol
+import app.moebius.domain.object_values.role.Role
 import java.util.*
 import javax.persistence.Entity
 import javax.persistence.Table
@@ -12,5 +12,5 @@ data class User(
         val username: String,
         val account: Account,
         val profile: Profile,
-        val rol: Rol
+        val role: Role
 )

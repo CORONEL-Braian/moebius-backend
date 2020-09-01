@@ -4,7 +4,7 @@ import java.util.*
 
 data class Linked(
         val linkedAccountUUID: UUID,
-        val facebook: Facebook
+        val facebook: Facebook? = null
 )
 
 data class Facebook(

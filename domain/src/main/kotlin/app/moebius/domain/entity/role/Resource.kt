@@ -1,4 +1,4 @@
-package app.moebius.domain.entity.rol
+package app.moebius.domain.entity.role
 
 import java.util.*
 

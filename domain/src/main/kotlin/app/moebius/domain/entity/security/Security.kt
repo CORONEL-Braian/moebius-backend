@@ -1,5 +1,7 @@
-package app.moebius.domain.entity
+package app.moebius.domain.entity.security
 
+import app.moebius.domain.entity.Date
+import app.moebius.domain.entity.location.Country
 import java.util.*
 
 data class Security(
@@ -10,8 +12,8 @@ data class Security(
 
 data class SecurityMethods(
         val securityMethodsUUID: UUID,
-        val twoFA: TwoFA? = null,
         val identityVerification: IdentityVerification? = null,
+        val twoFA: TwoFA? = null,
         val antiPishingCode: AntiPishingCode? = null
 )
 
@@ -38,34 +40,6 @@ data class EmailVerification(
         val isEmailVerified: Boolean,
         val emailVerificationToken: String,
 )
-
-data class IdentityVerification(
-        val id: Int,
-        val state: StatusIdentityVerification = StatusIdentityVerification.UNSOLICITED,
-        val dni: DNI,
-)
-
-data class DNI(
-        val dniUUID: UUID,
-        val surname: String,
-        val name: String,
-        val sex: String,
-        val nationality: Country,
-        val ejemplar: String,
-        val birthdate: Date,
-        val dateIssue: Date,
-        val dateExpiry: Date,
-        val identificationNumber: Int
-)
-
-data class Country(
-        val countryUUID: UUID,
-        val name: String
-)
-
-enum class StatusIdentityVerification {
-    UNSOLICITED, PENDING, VERIFIED, BLOCKED
-}
 
 data class AntiPishingCode(
         val antiPishingCodeUUID: UUID,

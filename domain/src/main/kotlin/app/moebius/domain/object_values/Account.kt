@@ -1,10 +1,11 @@
 package app.moebius.domain.object_values
 
+import app.moebius.domain.object_values.security.Security
 import java.util.*
 
 data class Account(
         val accountUUID: UUID,
-        val credential: TraditionalCredential,
+        val traditionalCredential: TraditionalCredential,
         val security: Security,
         val token: String,
         val linked: Linked? = null
