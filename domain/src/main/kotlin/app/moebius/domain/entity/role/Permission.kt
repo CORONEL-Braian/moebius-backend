@@ -7,7 +7,3 @@ data class Permission(
         val operation: Operation,
         val resource: Resource
 )
-
-enum class Operation {
-    CREATE, READ, UPDATE, DELETE
-}

@@ -2,7 +2,7 @@ package app.moebius.domain.entity
 
 import java.util.*
 
-data class Linked(
+data class LinkedAccounts(
         val linkedAccountUUID: UUID,
         val facebook: Facebook? = null
 )

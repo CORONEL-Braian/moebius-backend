@@ -10,9 +10,9 @@ data class IdentityVerification(
 )
 
 data class DocumentationVerification(
-        val id: Int,
-        val state: StatusDocumentationVerification = StatusDocumentationVerification.UNSOLICITED,
-        val dni: DNI,
+        val documentationVerificationUUID: UUID,
+        val statusDocumentationVerification: StatusDocumentationVerification = StatusDocumentationVerification.UNSOLICITED,
+        val dni: DNI? = null,
 )
 
 data class DNI(

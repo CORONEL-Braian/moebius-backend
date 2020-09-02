@@ -12,7 +12,7 @@ data class Account(
         val traditionalCredential: TraditionalCredential,
         val security: Security,
         val token: String,
-        val linked: Linked? = null
+        val linkedAccounts: LinkedAccounts? = null
 )
 
 @Entity
@@ -29,8 +29,8 @@ data class Password(
         val passwordUUID: UUID,
         val apiHashPassword: String,
         val dbHashPassword: String,
-        val resetPasswordToken: String,
-        val resetPasswordTokenExpire: String,
+        val resetPasswordToken: String? = null,
+        val resetPasswordTokenExpire: String? = null,
 )
 
 // TODO: Add more credentials

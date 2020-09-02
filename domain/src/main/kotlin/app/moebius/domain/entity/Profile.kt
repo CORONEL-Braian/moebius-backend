@@ -1,5 +1,6 @@
 package app.moebius.domain.entity
 
+import app.moebius.domain.entity.location.Country
 import javax.persistence.Entity
 import java.util.*
 
@@ -12,7 +13,7 @@ data class Profile(
         val biography: String,
         val phone: Phone,
         val birthdate: Date,
-        val nationality: String,
+        val nationality: Country,
         val sex: String,
         val gender: Gender,
         val avatarUrl: String,

@@ -1,7 +1,5 @@
 package app.moebius.domain.entity.security
 
-import app.moebius.domain.entity.Date
-import app.moebius.domain.entity.location.Country
 import java.util.*
 
 data class Security(
@@ -44,5 +42,5 @@ data class EmailVerification(
 data class AntiPishingCode(
         val antiPishingCodeUUID: UUID,
         val enable: Boolean,
-        val code: String?
+        val code: String? = null
 )
