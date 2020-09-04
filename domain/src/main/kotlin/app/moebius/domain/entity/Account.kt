@@ -10,8 +10,8 @@ import javax.persistence.Table
 data class Account(
         val accountUUID: UUID,
         val traditionalCredential: TraditionalCredential,
-        val security: Security,
-        val token: String,
+        val security: Security? = null,
+        val token: String,  // TODO: Should be?
         val linkedAccounts: LinkedAccounts? = null
 )
 
