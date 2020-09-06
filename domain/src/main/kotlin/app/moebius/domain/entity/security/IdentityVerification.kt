@@ -1,6 +1,6 @@
 package app.moebius.domain.entity.security
 
-import app.moebius.domain.entity.location.Country
+import app.moebius.domain.entity.Country
 import java.util.*
 
 data class IdentityVerification(
