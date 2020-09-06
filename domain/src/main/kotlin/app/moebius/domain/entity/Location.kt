@@ -15,37 +15,33 @@ data class OriginLocation(
         val city: City
 )
 
-/**
- * An island would only have one coordinate
- */
 data class CurrentLocation(
         val currentLocationUUID: UUID,
         val country: Country,
         val province: Province,
         val city: City,
-        val direction: Direction? = null,
-        val coordinate: Coordinate? = null
+        val direction: Direction? = null
 )
 
 data class Country(
         val countryUUID: UUID,
         val name: String,
-        val locationsLimits: LocationsLimits,
+        val locationLimits: LocationLimits,
 )
 
 data class Province(
         val provinceUUID: UUID,
         val name: String,
-        val locationsLimits: LocationsLimits,
+        val locationLimits: LocationLimits,
 )
 
 data class City(
         val cityUUID: UUID,
         val name: String,
-        val locationsLimits: LocationsLimits,
+        val locationLimits: LocationLimits,
 )
 
-data class LocationsLimits(
+data class LocationLimits(
         val limitsUUID: UUID,
         val northeast: Coordinate,
         val southwest: Coordinate
@@ -53,10 +49,10 @@ data class LocationsLimits(
 
 data class Direction(
         val directionUUID: UUID,
-        val name: String,
+        val street: String,
         val number: Int,
-        val street_one: String,
-        val street_two: String,
+        val firstBetweenStreet: String,
+        val secondBetweenStreet: String,
         val coordinate: Coordinate
 )
 

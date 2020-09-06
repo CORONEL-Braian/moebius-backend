@@ -11,9 +11,10 @@ data class Account(
         val accountUUID: UUID,
         val traditionalCredential: TraditionalCredential,
         val security: Security? = null,
-        val token: String,  // TODO: Should be?
         val linkedAccounts: LinkedAccounts? = null
 )
+
+
 
 @Entity
 @Table(name = "traditional_credential")
