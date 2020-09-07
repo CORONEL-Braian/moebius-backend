@@ -10,18 +10,8 @@ import javax.persistence.Table
 data class User(
         val userUUID: UUID,
         val username: String,
-        val accessToken: AccessToken,
         val account: Account,
         val profile: Profile,
         val role: Role,
 )
 
-/**
- * @param accessToken: Access token or API key to identify the user
- */
-data class AccessToken(
-        val tokenUUID: UUID,
-        val accessToken: String,
-        val created: Date,
-        val expiry: Date,
-)
