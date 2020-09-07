@@ -8,51 +8,27 @@ import java.util.*
 data class Security(
         val securityUUID: UUID,
         val securityLevel: Int = 0,
-        val token: Token,
+        val session: Session,
         val securityMethods: SecurityMethods? = null,
 )
 
 /**
- * Expires in 5 minutes
- * @param token: Access token or API key to identify the user
+ *  Obs: Are manipulated by the user
  */
-data class AccessToken(
-        val tokenUUID: UUID,
-        val accessToken: Token,
-)
-
-/**
- * Expires in 1 day
- * In case the user does not enable the reload, only the fingerprint will be used.
- * @param enable:
- * @param reloadAccessToken: Reload the access token
- */
-data class ReloadAccessToken(
-        val dailyAccessTokenUUID: UUID,
-        val enable: Boolean = false,
-        val reloadAccessToken: Token? = null
-)
-
-data class Token(
-        val token: String,
-        val created: Date,
-        val expiry: Date
-)
-
 data class SecurityMethods(
         val securityMethodsUUID: UUID,
         val identityVerification: IdentityVerification? = null,
         val twoFA: TwoFA? = null,
         val antiPishingCode: AntiPishingCode? = null,
-        val reloadAccessToken: ReloadAccessToken? = null
+        val keepSessionDaily: Boolean = false
 )
 
 data class TwoFA(
         val twoFAUUID: UUID,
         val enable: Boolean = false,
-        val googleAuthentication: GoogleAuthenticaton?,
-        val smsAuthentication: SMSAuthentication?,
-        val emailVerification: EmailVerification?
+        val googleAuthentication: GoogleAuthenticaton? = null,
+        val smsAuthentication: SMSAuthentication? = null,
+        val emailVerification: EmailVerification? = null
 )
 
 data class GoogleAuthenticaton(
