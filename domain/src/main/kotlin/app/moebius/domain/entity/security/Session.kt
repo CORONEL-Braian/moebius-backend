@@ -3,6 +3,9 @@ package app.moebius.domain.entity.security
 import java.util.*
 import java.util.Date
 
+/**
+ * TODO: Check if rename to type of auth
+ */
 data class Session(
         val sessionUUID: UUID,
         val token: AccessToken,

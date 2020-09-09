@@ -1,54 +1,52 @@
 package app.moebius.domain.entity.security
 
 import java.util.*
+import javax.persistence.Entity
+import javax.persistence.Table
 
 /**
  * @param securityLevel: [0,4]
  */
 data class Security(
         val securityUUID: UUID,
+        val authentication: Authentication,
         val securityLevel: Int = 0,
-        val session: Session,
         val securityMethods: SecurityMethods? = null,
 )
 
 /**
- *  Obs: Are manipulated by the user
+ * Represents a authentication credential
  */
-data class SecurityMethods(
-        val securityMethodsUUID: UUID,
-        val identityVerification: IdentityVerification? = null,
-        val twoFA: TwoFA? = null,
-        val antiPishingCode: AntiPishingCode? = null,
-        val keepSessionDaily: Boolean = false
+data class Authentication(
+        val authenticationUUID: UUID,
+        val session: Session,
+        val traditionalAuth: TraditionalAuth
 )
 
-data class TwoFA(
-        val twoFAUUID: UUID,
-        val enable: Boolean = false,
-        val googleAuthentication: GoogleAuthenticaton? = null,
-        val smsAuthentication: SMSAuthentication? = null,
-        val emailVerification: EmailVerification? = null
+/**
+ * Represents a traditional authentication
+ * OBS: Other methods will not be considered
+ */
+@Entity
+@Table(name = "traditional_credential")
+data class TraditionalAuth(
+        val traditionalCredentialUUID: UUID,
+        val email: String,
+        val password: Password,
 )
 
-data class GoogleAuthenticaton(
-        val googleAuthenticationUUID: UUID,
-        val verificationCode: Int
+@Entity
+@Table(name = "password")
+data class Password(
+        val passwordUUID: UUID,
+        val apiHashPassword: String,
+        val dbHashPassword: String,
+        val resetPasswordToken: String? = null,
+        val resetPasswordTokenExpire: String? = null,
 )
 
-data class SMSAuthentication(
-        val smsAuthenticationUUID: UUID,
-        val verificationCode: Int
-)
+// TODO: Add more credentials
 
-data class EmailVerification(
-        val emailVerificationUUID: UUID,
-        val isEmailVerified: Boolean,
-        val emailVerificationToken: String,
-)
-
-data class AntiPishingCode(
-        val antiPishingCodeUUID: UUID,
-        val enable: Boolean,
-        val code: String? = null
+data class Email(
+        val emailUUID: UUID
 )
