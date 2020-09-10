@@ -4,7 +4,7 @@ import java.util.*
 import java.util.Date
 
 /**
- * TODO: Check if rename to type of auth
+ * TODO: Check whether to rename some type of authorization
  */
 data class Session(
         val sessionUUID: UUID,
@@ -16,7 +16,7 @@ data class Session(
 /**
  * Represents the access token or AT
  * Expires in 5 minutes
- * @param accessToken: Access token or API key to identify the user
+ * @param accessToken: Access token or API key to identify the person
  */
 data class AccessToken(
         val tokenUUID: UUID,
@@ -25,7 +25,7 @@ data class AccessToken(
 
 /**
  * Represents a daily token to reload the AT
- * Expires in 1 day but is optional for the user
+ * Expires in 1 day but is optional for the identity
  */
 data class DailyReloadToken(
         val dailyAccessTokenUUID: UUID,

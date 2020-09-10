@@ -8,5 +8,5 @@ import javax.persistence.Table
 @Table(name = "account")
 data class Account(
         val accountUUID: UUID,
-        val linkedAccounts: LinkedAccounts? = null
+        val linkedAccounts: LinkedAccounts? = null,
 )

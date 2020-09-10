@@ -8,14 +8,12 @@ import javax.persistence.Entity
 import javax.persistence.Table
 
 @Entity
-@Table(name = "user")
-data class User(
-        val userUUID: UUID,
-        val username: String,
-        val account: Account,
+@Table(name = "identity")
+data class Identity(
+        val identityUUID: UUID,
+        val identityname: String,
         val profile: Profile,
         val setting: Setting,
-        val security: Security,
         val role: Role,
 )
 

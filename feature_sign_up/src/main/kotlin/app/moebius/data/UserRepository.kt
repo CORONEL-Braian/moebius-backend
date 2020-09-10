@@ -1,16 +1,16 @@
 package app.moebius.data
 
-import app.moebius.domain.entity.User
+import app.moebius.domain.entity.Identity
 
 /**
- * Se comunica con la fuente de datos SQL
+ * Communicates with the SQL data source
  * OBS: Without interface
  * Source: https://stackoverflow.com/a/2814869/5279996
  */
-class UserRepository {
+class IdentityRepository {
 
 
-    fun saveUser(user: User) {
+    fun saveIdentity(identity: Identity) {
 
     }
 

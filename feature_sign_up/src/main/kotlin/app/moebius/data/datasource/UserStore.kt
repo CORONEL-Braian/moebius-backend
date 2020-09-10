@@ -1,9 +1,9 @@
 package app.moebius.data.datasource
 
-import app.moebius.domain.entity.User
+import app.moebius.domain.entity.Identity
 
-interface UserStore {
+interface IdentityStore {
 
-    fun createUser(user: User)
+    fun createIdentity(identity: Identity)
 
 }

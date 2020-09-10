@@ -1,16 +1,16 @@
 package app.moebius.data.datasource
 
-import app.moebius.domain.entity.User
+import app.moebius.domain.entity.Identity
 
 
-class SqlUserDataSource: UserStore {
+class SqlIdentityDataSource: IdentityStore {
 
-    override fun createUser(user: User) {
+    override fun createIdentity(identity: Identity) {
 //        TODO: Create a connection with db
     }
 
 }
 
 fun main() {
-//    SqlUserDataSource().createUser()
+//    SqlIdentityDataSource().createIdentity()
 }

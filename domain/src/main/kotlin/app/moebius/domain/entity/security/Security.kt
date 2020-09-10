@@ -16,11 +16,12 @@ data class Security(
 
 /**
  * Represents a authentication credential
+ * TODO: Add app token
  */
 data class Authentication(
         val authenticationUUID: UUID,
         val session: Session,
-        val traditionalAuth: TraditionalAuth
+        val basicAuth: BasicAuth
 )
 
 /**
@@ -29,7 +30,7 @@ data class Authentication(
  */
 @Entity
 @Table(name = "traditional_credential")
-data class TraditionalAuth(
+data class BasicAuth(
         val traditionalCredentialUUID: UUID,
         val email: String,
         val password: Password,

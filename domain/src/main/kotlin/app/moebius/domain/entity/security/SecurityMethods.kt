@@ -4,7 +4,7 @@ import java.util.*
 
 
 /**
- *  Obs: Are manipulated by the user
+ *  Obs: Are manipulated by the identity
  */
 data class SecurityMethods(
         val securityMethodsUUID: UUID,

@@ -1,6 +1,6 @@
 import org.junit.Test
 
-internal class UserTest {
+internal class IdentityTest {
 
     @Test
     fun test() {

@@ -1,19 +1,19 @@
 package app.moebius.controller
 
-import app.moebius.domain.entity.User
+import app.moebius.domain.entity.Identity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class UserController(
+class IdentityController(
 ) {
 
-    @GetMapping("/user")
-    fun getUser(): User = TODO()
+    @GetMapping("/identity")
+    fun getIdentity(): Identity = TODO()
 
-    @PostMapping("/user")
-    fun createUser() {
+    @PostMapping("/identity")
+    fun createIdentity() {
         TODO()
     }
 
