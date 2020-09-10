@@ -1,4 +1,3 @@
 package app.moebius.domain.entity
 
-class Content {
-}
+class Content

@@ -7,6 +7,8 @@ import javax.persistence.Table
 /**
  * @param securityLevel: [0,4]
  */
+@Entity
+@Table(name = "security")
 data class Security(
         val securityUUID: UUID,
         val authentication: Authentication,
@@ -18,6 +20,8 @@ data class Security(
  * Represents a authentication credential
  * TODO: Add app token
  */
+@Entity
+@Table(name = "authentication")
 data class Authentication(
         val authenticationUUID: UUID,
         val session: Session,
@@ -48,6 +52,8 @@ data class Password(
 
 // TODO: Add more credentials
 
+@Entity
+@Table(name = "email")
 data class Email(
         val emailUUID: UUID
 )

@@ -2,19 +2,27 @@ package app.moebius.domain.entity.security
 
 import app.moebius.domain.entity.Country
 import java.util.*
+import javax.persistence.Entity
+import javax.persistence.Table
 
+@Entity
+@Table(name = "identity_verification")
 data class IdentityVerification(
         val identityVerificationUUID: UUID,
         val documentationVerification: DocumentationVerification,
         val liveness: Liveness
 )
 
+@Entity
+@Table(name = "documentation_verification")
 data class DocumentationVerification(
         val documentationVerificationUUID: UUID,
         val statusDocumentationVerification: StatusDocumentationVerification = StatusDocumentationVerification.UNSOLICITED,
         val dni: DNI? = null,
 )
 
+@Entity
+@Table(name = "dni")
 data class DNI(
         val dniUUID: UUID,
         val surname: String,
@@ -32,6 +40,8 @@ enum class StatusDocumentationVerification {
     UNSOLICITED, PENDING, VERIFIED, BLOCKED
 }
 
+@Entity
+@Table(name = "liveness")
 data class Liveness(
         val livenessUUID: UUID,
         val statusLiveness: StatusLiveness = StatusLiveness.UNSOLICITED
