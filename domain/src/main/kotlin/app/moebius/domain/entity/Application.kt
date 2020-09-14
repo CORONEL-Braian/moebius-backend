@@ -8,6 +8,10 @@ import javax.persistence.Table
 @Table(name = "application")
 data class Application(
         val applicationUUID: UUID,
-        val name: String,
+        val environment: Environment,
         val hashPassword: String
 )
+
+enum class Environment {
+    DEV, INTEGRATION, TESTING, STAGING, PRODUCTION
+}
