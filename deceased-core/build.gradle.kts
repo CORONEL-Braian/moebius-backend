@@ -6,8 +6,6 @@ repositories {
 
 dependencies {
     implementation(project(":domain"))
-
-    testImplementation("junit", "junit", "4.12")
 }
 
 tasks {

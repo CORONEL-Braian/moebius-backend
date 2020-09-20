@@ -5,7 +5,9 @@ repositories {
 }
 
 /**
- * https://mvnrepository.com/artifact/org.hibernate/hibernate-core
+ * Sources:
+ *  https://mvnrepository.com/artifact/org.hibernate/hibernate-core
+ *  https://mvnrepository.com/artifact/org.postgresql/postgresql
  */
 dependencies {
     implementation(project(":domain"))
@@ -14,6 +16,12 @@ dependencies {
     implementation(project(":library_test_utils"))
 
     implementation("org.hibernate",  "hibernate-core",  "5.4.21.Final")
+    implementation("org.postgresql",  "postgresql",  "42.2.16")
 
-    testImplementation("junit", "junit", "4.12")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+}
+
+tasks.named<Test>("test") {
+    useJUnitPlatform()
 }

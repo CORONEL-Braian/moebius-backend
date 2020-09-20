@@ -5,8 +5,6 @@ repositories {
 
 dependencies {
     implementation(project(":feature_sign_up", "default"))
-
-    testImplementation("junit", "junit", "4.12")
 }
 
 tasks {

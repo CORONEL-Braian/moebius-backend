@@ -6,6 +6,4 @@ version = "0.0.0"
  */
 dependencies {
     implementation(project(":common", "default"))
-
-    testImplementation("junit", "junit", "4.12")
 }

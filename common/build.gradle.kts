@@ -14,8 +14,6 @@ dependencies {
 
     implementation(project(":deceased-core"))
     implementation(project(":data-core"))
-
-    testImplementation("junit", "junit", "4.12")
 }
 
 tasks {
