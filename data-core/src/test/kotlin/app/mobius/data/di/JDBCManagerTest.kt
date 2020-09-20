@@ -12,7 +12,7 @@ class JDBCManagerTest {
     data class SomeTest(@Id val test: String?)
 
     private fun getSession() =
-            JDBCManager.openSession("hibernate.cfg.xml", SomeTest::class.java)
+            JDBCManager.openSession("secret-hibernate.cfg.xml", SomeTest::class.java)
 
     @Test
     fun `open session in database`() {

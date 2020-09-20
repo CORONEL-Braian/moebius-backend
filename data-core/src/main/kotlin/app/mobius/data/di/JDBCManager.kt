@@ -22,7 +22,7 @@ class JDBCManager {
 
 
         fun test2() {
-            val session = openSession("hibernate.cfg.xml", SomeTest::class.java)
+            val session = openSession("secret-hibernate.cfg.xml", SomeTest::class.java)
 
             executeQuery(session, "Work") {
                 session.save(SomeTest("2"))

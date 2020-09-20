@@ -1,7 +1,14 @@
 group = "app.mobius"
 version = "0.0.0"
 
-repositories {
+//TODO: Inject secret hibernate credential
+/*open class LoadHibernateCredential : DefaultTask() {
+
+}*/
+
+tasks.register<Copy>("copyReport") {
+    from(file("$rootDir/${project.name}/testFile.txt"))
+    into(file("$buildDir/new/testFile2.txt"))
 }
 
 /**
@@ -18,10 +25,5 @@ dependencies {
     implementation("org.hibernate",  "hibernate-core",  "5.4.21.Final")
     implementation("org.postgresql",  "postgresql",  "42.2.16")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
-}
-
-tasks.named<Test>("test") {
-    useJUnitPlatform()
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")   //TODO: Refactor mandatory in this module
 }

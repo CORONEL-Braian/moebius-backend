@@ -10,8 +10,10 @@ For further reference, please consider the following sections:
  * [Multi Module](https://spring.io/guides/gs/multi-module)
  * [Domain-Driven Design](http://static.olivergierke.de/lectures/ddd-and-spring/#intro)
  * [uuid-or-giud](https://tomharrisonjr.com/uuid-or-guid-as-primary-keys-be-careful-7b2aa3dcb439)
+ 
 
 ### Additional Links
 These additional references should also help you:
 
 * [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
+* [Gradle - Working with files](https://docs.gradle.org/current/userguide/working_with_files.html)
