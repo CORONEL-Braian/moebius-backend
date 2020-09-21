@@ -10,17 +10,8 @@ dependencies {
     implementation(project(":service"))
 
     implementation(project(":library_base"))
-    implementation(project(":library_test_utils"))
+    api(project(":library_test_utils"))
 
     implementation(project(":deceased-core"))
     implementation(project(":data-core"))
-}
-
-tasks {
-    compileKotlin {
-        kotlinOptions.jvmTarget = "1.8"
-    }
-    compileTestKotlin {
-        kotlinOptions.jvmTarget = "1.8"
-    }
 }

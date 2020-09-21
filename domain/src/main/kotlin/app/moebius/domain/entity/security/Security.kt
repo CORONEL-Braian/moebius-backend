@@ -2,6 +2,7 @@ package app.moebius.domain.entity.security
 
 import java.util.*
 import javax.persistence.Entity
+import javax.persistence.Id
 import javax.persistence.Table
 
 /**
@@ -10,7 +11,7 @@ import javax.persistence.Table
 @Entity
 @Table(name = "security")
 data class Security(
-        val securityUUID: UUID,
+        @Id val securityUUID: UUID,
         val authentication: Authentication,
         val securityLevel: Int = 0,
         val securityMethods: SecurityMethods? = null,
@@ -23,7 +24,7 @@ data class Security(
 @Entity
 @Table(name = "authentication")
 data class Authentication(
-        val authenticationUUID: UUID,
+        @Id val authenticationUUID: UUID,
         val session: Session,
         val basicAuth: BasicAuth
 )
@@ -35,7 +36,7 @@ data class Authentication(
 @Entity
 @Table(name = "traditional_credential")
 data class BasicAuth(
-        val traditionalCredentialUUID: UUID,
+        @Id val traditionalCredentialUUID: UUID,
         val email: String,
         val password: Password,
 )
@@ -43,7 +44,7 @@ data class BasicAuth(
 @Entity
 @Table(name = "password")
 data class Password(
-        val passwordUUID: UUID,
+        @Id val passwordUUID: UUID,
         val apiHashPassword: String,
         val dbHashPassword: String,
         val resetPasswordToken: String? = null,
@@ -55,5 +56,5 @@ data class Password(
 @Entity
 @Table(name = "email")
 data class Email(
-        val emailUUID: UUID
+        @Id val emailUUID: UUID
 )

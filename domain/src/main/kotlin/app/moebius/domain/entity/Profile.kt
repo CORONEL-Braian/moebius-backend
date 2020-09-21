@@ -2,12 +2,13 @@ package app.moebius.domain.entity
 
 import javax.persistence.Entity
 import java.util.*
+import javax.persistence.Id
 import javax.persistence.Table
 
 @Entity
 @Table(name = "profile")
 data class Profile(
-        val profileUUID: UUID,
+        @Id val profileUUID: UUID,
         val name: String,
         val surname: String,
         val nickname: String,
@@ -23,7 +24,7 @@ data class Profile(
 @Entity
 @Table(name = "phone")
 data class Phone(
-        val phoneUUID: UUID,
+        @Id val phoneUUID: UUID,
         val codeCountry: String,
         val codeArea: String,
         val number: Int
@@ -32,7 +33,7 @@ data class Phone(
 @Entity
 @Table(name = "date")
 data class Date(
-        val dateUUID: UUID,
+        @Id val dateUUID: UUID,
         val day: Int,
         val month: Int,
         val year: Int

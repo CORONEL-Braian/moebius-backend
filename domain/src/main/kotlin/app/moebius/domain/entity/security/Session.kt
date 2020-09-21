@@ -3,6 +3,7 @@ package app.moebius.domain.entity.security
 import java.util.*
 import java.util.Date
 import javax.persistence.Entity
+import javax.persistence.Id
 import javax.persistence.Table
 
 /**
@@ -11,7 +12,7 @@ import javax.persistence.Table
 @Entity
 @Table(name = "session")
 data class Session(
-        val sessionUUID: UUID,
+        @Id val sessionUUID: UUID,
         val token: AccessToken,
         val dailyReloadToken: DailyReloadToken,
         val monthlyReloadToken: MonthlyReloadToken,
@@ -25,7 +26,7 @@ data class Session(
 @Entity
 @Table(name = "access_token")
 data class AccessToken(
-        val tokenUUID: UUID,
+        @Id val tokenUUID: UUID,
         val accessToken: Token,
 )
 
@@ -36,7 +37,7 @@ data class AccessToken(
 @Entity
 @Table(name = "daily_reload_token")
 data class DailyReloadToken(
-        val dailyAccessTokenUUID: UUID,
+        @Id val dailyAccessTokenUUID: UUID,
         val keepSessionDaily: Boolean = false,
         val reloadAccessToken: Token? = null
 )
@@ -48,14 +49,14 @@ data class DailyReloadToken(
 @Entity
 @Table(name = "monthly_reload_token")
 data class MonthlyReloadToken(
-        val dailyAccessTokenUUID: UUID,
+        @Id val dailyAccessTokenUUID: UUID,
         val reloadAccessToken: Token? = null
 )
 
 @Entity
 @Table(name = "token")
 data class Token(
-        val tokenUUID: UUID,
+        @Id val tokenUUID: UUID,
         val token: String,
         val created: Date,
         val expiry: Date

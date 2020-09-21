@@ -2,12 +2,13 @@ package app.moebius.domain.entity
 
 import java.util.*
 import javax.persistence.Entity
+import javax.persistence.Id
 import javax.persistence.Table
 
 @Entity
 @Table(name = "location")
 data class Location(
-        val locationUUID: UUID,
+        @Id val locationUUID: UUID,
         val originLocation: OriginLocation,
         val currentLocation: CurrentLocation
 )
@@ -15,7 +16,7 @@ data class Location(
 @Entity
 @Table(name = "origin_location")
 data class OriginLocation(
-        val originLocationUUID: UUID,
+        @Id val originLocationUUID: UUID,
         val country: Country,
         val province: Province,
         val city: City
@@ -24,7 +25,7 @@ data class OriginLocation(
 @Entity
 @Table(name = "current_location")
 data class CurrentLocation(
-        val currentLocationUUID: UUID,
+        @Id val currentLocationUUID: UUID,
         val country: Country,
         val province: Province,
         val city: City,
@@ -34,7 +35,7 @@ data class CurrentLocation(
 @Entity
 @Table(name = "country")
 data class Country(
-        val countryUUID: UUID,
+        @Id val countryUUID: UUID,
         val name: String,
         val locationLimits: LocationLimits,
 )
@@ -42,7 +43,7 @@ data class Country(
 @Entity
 @Table(name = "province")
 data class Province(
-        val provinceUUID: UUID,
+        @Id val provinceUUID: UUID,
         val name: String,
         val locationLimits: LocationLimits,
 )
@@ -50,7 +51,7 @@ data class Province(
 @Entity
 @Table(name = "city")
 data class City(
-        val cityUUID: UUID,
+        @Id val cityUUID: UUID,
         val name: String,
         val locationLimits: LocationLimits,
 )
@@ -58,7 +59,7 @@ data class City(
 @Entity
 @Table(name = "location_limits")
 data class LocationLimits(
-        val limitsUUID: UUID,
+        @Id val limitsUUID: UUID,
         val northeast: Coordinate,
         val southwest: Coordinate
 )
@@ -66,7 +67,7 @@ data class LocationLimits(
 @Entity
 @Table(name = "direction")
 data class Direction(
-        val directionUUID: UUID,
+        @Id val directionUUID: UUID,
         val street: String,
         val number: Int,
         val firstBetweenStreet: String,
@@ -77,6 +78,6 @@ data class Direction(
 @Entity
 @Table(name = "coordinate")
 data class Coordinate(
-        val lat: Float,
+        @Id val lat: Float,
         val lng: Float,
 )
