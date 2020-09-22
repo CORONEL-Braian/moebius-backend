@@ -1,14 +1,12 @@
 package app.moebius.domain.entity
 
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "deceased")
 data class Deceased(
-        @Id val deceasedUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val deceasedUUID: UUID,
         val dni: Int,
         val provider: String,
         val registrationDatetime: String,

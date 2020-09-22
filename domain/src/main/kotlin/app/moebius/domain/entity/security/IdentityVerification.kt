@@ -2,14 +2,12 @@ package app.moebius.domain.entity.security
 
 import app.moebius.domain.entity.Country
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "identity_verification")
 data class IdentityVerification(
-        @Id val identityVerificationUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val identityVerificationUUID: UUID,
         val documentationVerification: DocumentationVerification,
         val liveness: Liveness
 )
@@ -17,7 +15,7 @@ data class IdentityVerification(
 @Entity
 @Table(name = "documentation_verification")
 data class DocumentationVerification(
-        @Id val documentationVerificationUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val documentationVerificationUUID: UUID,
         val statusDocumentationVerification: StatusDocumentationVerification = StatusDocumentationVerification.UNSOLICITED,
         val dni: DNI? = null,
 )
@@ -25,7 +23,7 @@ data class DocumentationVerification(
 @Entity
 @Table(name = "dni")
 data class DNI(
-        @Id val dniUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val dniUUID: UUID,
         val surname: String,
         val name: String,
         val sex: String,
@@ -44,7 +42,7 @@ enum class StatusDocumentationVerification {
 @Entity
 @Table(name = "liveness")
 data class Liveness(
-        @Id val livenessUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val livenessUUID: UUID,
         val statusLiveness: StatusLiveness = StatusLiveness.UNSOLICITED
 )
 

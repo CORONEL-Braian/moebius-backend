@@ -1,15 +1,13 @@
 package app.mobius.data.di
 
 import org.junit.jupiter.api.Test
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 
 class JDBCManagerTest {
 
     @Entity
     @Table(name = "test")
-    data class SomeTest(@Id val test: String?)
+    data class SomeTest(@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val test: String?)
 
     private fun getSession() =
             JDBCManager.openSession("secret-hibernate.cfg.xml", SomeTest::class.java)

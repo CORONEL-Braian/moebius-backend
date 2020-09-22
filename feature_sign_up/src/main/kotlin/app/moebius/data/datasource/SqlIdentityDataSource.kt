@@ -2,13 +2,11 @@ package app.moebius.data.datasource
 
 import app.mobius.data.di.JDBCManager
 import app.moebius.domain.entity.Identity
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "test")
-data class SomeTest(@Id val test: String?)
+data class SomeTest(@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val test: String?)
 
 class SqlIdentityDataSource: IdentityStore {
 

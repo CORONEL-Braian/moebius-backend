@@ -2,9 +2,7 @@ package app.moebius.domain.entity.security
 
 import java.util.*
 import java.util.Date
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 
 /**
  * TODO: Check whether to rename some type of authorization
@@ -12,7 +10,7 @@ import javax.persistence.Table
 @Entity
 @Table(name = "session")
 data class Session(
-        @Id val sessionUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val sessionUUID: UUID,
         val token: AccessToken,
         val dailyReloadToken: DailyReloadToken,
         val monthlyReloadToken: MonthlyReloadToken,
@@ -26,7 +24,7 @@ data class Session(
 @Entity
 @Table(name = "access_token")
 data class AccessToken(
-        @Id val tokenUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val tokenUUID: UUID,
         val accessToken: Token,
 )
 
@@ -37,7 +35,7 @@ data class AccessToken(
 @Entity
 @Table(name = "daily_reload_token")
 data class DailyReloadToken(
-        @Id val dailyAccessTokenUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val dailyAccessTokenUUID: UUID,
         val keepSessionDaily: Boolean = false,
         val reloadAccessToken: Token? = null
 )
@@ -49,14 +47,14 @@ data class DailyReloadToken(
 @Entity
 @Table(name = "monthly_reload_token")
 data class MonthlyReloadToken(
-        @Id val dailyAccessTokenUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val dailyAccessTokenUUID: UUID,
         val reloadAccessToken: Token? = null
 )
 
 @Entity
 @Table(name = "token")
 data class Token(
-        @Id val tokenUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val tokenUUID: UUID,
         val token: String,
         val created: Date,
         val expiry: Date

@@ -1,14 +1,12 @@
 package app.moebius.domain.entity
 
-import javax.persistence.Entity
 import java.util.*
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "profile")
 data class Profile(
-        @Id val profileUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val profileUUID: UUID,
         val name: String,
         val surname: String,
         val nickname: String,
@@ -24,7 +22,7 @@ data class Profile(
 @Entity
 @Table(name = "phone")
 data class Phone(
-        @Id val phoneUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val phoneUUID: UUID,
         val codeCountry: String,
         val codeArea: String,
         val number: Int
@@ -33,7 +31,7 @@ data class Phone(
 @Entity
 @Table(name = "date")
 data class Date(
-        @Id val dateUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val dateUUID: UUID,
         val day: Int,
         val month: Int,
         val year: Int

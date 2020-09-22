@@ -1,9 +1,7 @@
 package app.moebius.domain.entity
 
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 
 /**
  * Map with:
@@ -14,7 +12,7 @@ import javax.persistence.Table
 @Entity
 @Table(name = "application")
 data class Application(
-        @Id val applicationUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val applicationUUID: UUID,
         val environment: Environment,
         val consumer: Consumer,
         val publicKey: String
@@ -29,7 +27,7 @@ sealed class Consumer {
     @Entity
     @Table(name = "consumer_identities")
     data class Identities(
-            @Id val usersUUID: UUID,
+            @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val usersUUID: UUID,
             val platform: Platform)
 
     /**
@@ -38,7 +36,7 @@ sealed class Consumer {
     @Entity
     @Table(name = "consumer_partner")
     data class Partner(
-            @Id val partnerUUID: UUID,
+            @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val partnerUUID: UUID,
             val name: String,
             val platform: Platform,
             val feature: String)
@@ -49,7 +47,7 @@ sealed class Consumer {
     @Entity
     @Table(name = "consumer_team")
     data class Team(
-            @Id val teamUUID: UUID,
+            @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val teamUUID: UUID,
             val name: String,
             val platform: Platform,
             val feature: String)
@@ -58,7 +56,7 @@ sealed class Consumer {
 @Entity
 @Table(name = "platform")
 data class Platform(
-        @Id val platformUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val platformUUID: UUID,
         val name: String,
         val ecosystem: String
 )

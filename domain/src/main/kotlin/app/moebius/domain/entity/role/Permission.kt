@@ -1,14 +1,12 @@
 package app.moebius.domain.entity.role
 
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "permission")
 data class Permission(
-        @Id val permissionUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val permissionUUID: UUID,
         val operation: Operation,
         val resource: Resource
 )

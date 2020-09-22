@@ -1,14 +1,12 @@
 package app.moebius.domain.entity.role
 
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "subscription")
 data class Subscription(
-        @Id val subscriptionUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val subscriptionUUID: UUID,
         val name: StatusSubscription = StatusSubscription.FREE
 )
 

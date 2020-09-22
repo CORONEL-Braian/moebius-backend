@@ -1,9 +1,7 @@
 package app.moebius.domain.entity.security
 
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 
 /**
  * @param securityLevel: [0,4]
@@ -11,7 +9,7 @@ import javax.persistence.Table
 @Entity
 @Table(name = "security")
 data class Security(
-        @Id val securityUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val securityUUID: UUID,
         val authentication: Authentication,
         val securityLevel: Int = 0,
         val securityMethods: SecurityMethods? = null,
@@ -24,7 +22,7 @@ data class Security(
 @Entity
 @Table(name = "authentication")
 data class Authentication(
-        @Id val authenticationUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val authenticationUUID: UUID,
         val session: Session,
         val basicAuth: BasicAuth
 )
@@ -36,7 +34,7 @@ data class Authentication(
 @Entity
 @Table(name = "traditional_credential")
 data class BasicAuth(
-        @Id val traditionalCredentialUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val traditionalCredentialUUID: UUID,
         val email: String,
         val password: Password,
 )
@@ -44,7 +42,7 @@ data class BasicAuth(
 @Entity
 @Table(name = "password")
 data class Password(
-        @Id val passwordUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val passwordUUID: UUID,
         val apiHashPassword: String,
         val dbHashPassword: String,
         val resetPasswordToken: String? = null,
@@ -56,5 +54,5 @@ data class Password(
 @Entity
 @Table(name = "email")
 data class Email(
-        @Id val emailUUID: UUID
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val emailUUID: UUID
 )
