@@ -17,3 +17,8 @@ These additional references should also help you:
 
 * [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
 * [Gradle - Working with files](https://docs.gradle.org/current/userguide/working_with_files.html)
+
+
+### Testing
+ * [JUnit5](https://junit.org/junit5/docs/current/user-guide/)
+ * [Mockk](https://mockk.io/)

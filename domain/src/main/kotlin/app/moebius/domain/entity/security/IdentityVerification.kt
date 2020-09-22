@@ -7,7 +7,7 @@ import javax.persistence.*
 @Entity
 @Table(name = "identity_verification")
 data class IdentityVerification(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val identityVerificationUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "identity_verification_uuid") val identityVerificationUUID: UUID,
         val documentationVerification: DocumentationVerification,
         val liveness: Liveness
 )
@@ -15,7 +15,7 @@ data class IdentityVerification(
 @Entity
 @Table(name = "documentation_verification")
 data class DocumentationVerification(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val documentationVerificationUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "documentation_verification_uuid") val documentationVerificationUUID: UUID,
         val statusDocumentationVerification: StatusDocumentationVerification = StatusDocumentationVerification.UNSOLICITED,
         val dni: DNI? = null,
 )
@@ -23,7 +23,7 @@ data class DocumentationVerification(
 @Entity
 @Table(name = "dni")
 data class DNI(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val dniUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "dni_uuid") val dniUUID: UUID,
         val surname: String,
         val name: String,
         val sex: String,
@@ -42,7 +42,7 @@ enum class StatusDocumentationVerification {
 @Entity
 @Table(name = "liveness")
 data class Liveness(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val livenessUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "liveness_uuid") val livenessUUID: UUID,
         val statusLiveness: StatusLiveness = StatusLiveness.UNSOLICITED
 )
 

@@ -8,7 +8,7 @@ import javax.persistence.*
 @Entity
 @Table(name = "setting")
 data class Setting(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val settingUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "setting_uuid") val settingUUID: UUID,
         val account: Account,
         val security: Security,
         val theme: Theme

@@ -7,10 +7,10 @@ class JDBCManagerTest {
 
     @Entity
     @Table(name = "test")
-    data class SomeTest(@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val test: String?)
+    data class SomeTest(@Id val test: String?)
 
     private fun getSession() =
-            JDBCManager.openSession("secret-hibernate.cfg.xml", SomeTest::class.java)
+            JDBCManager.openSession(SomeTest::class.java)
 
     @Test
     fun `open session in database`() {

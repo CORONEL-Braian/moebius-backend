@@ -6,7 +6,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "test")
-data class SomeTest(@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val test: String?)
+data class SomeTest(@Id val test: String?)
 
 class SqlIdentityDataSource: IdentityStore {
 

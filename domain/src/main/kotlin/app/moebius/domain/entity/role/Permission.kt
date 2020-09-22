@@ -6,7 +6,7 @@ import javax.persistence.*
 @Entity
 @Table(name = "permission")
 data class Permission(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val permissionUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "permission_uuid") val permissionUUID: UUID,
         val operation: Operation,
         val resource: Resource
 )

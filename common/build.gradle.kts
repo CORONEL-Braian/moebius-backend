@@ -13,5 +13,5 @@ dependencies {
     api(project(":library_test_utils"))
 
     implementation(project(":deceased-core"))
-    implementation(project(":data-core"))
+    implementation(project(":data"))
 }

@@ -13,6 +13,13 @@ include("backend")
 // Common
 include("common")
 
+// Main
+include("data")
+
+// Core
+include("deceased-core")
+include("data-core")
+
 include("domain")
 include("api")
 include("service")
@@ -27,6 +34,3 @@ include("feature_third_profile")
 include("library_base")
 include("library_test_utils")
 
-// Core
-include("deceased-core")
-include("data-core")

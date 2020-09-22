@@ -6,8 +6,12 @@ import javax.persistence.*
 @Entity
 @Table(name = "subscription")
 data class Subscription(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val subscriptionUUID: UUID,
-        val name: StatusSubscription = StatusSubscription.FREE
+
+        @Id @GeneratedValue @Column(name = "subscription_uuid", columnDefinition = "uuid", updatable = false)
+        val subscriptionUUID: UUID,
+
+        /*@Enumerated(EnumType.ORDINAL)*/ @Column(name = "status_subscription")
+        val statusSubscription: StatusSubscription = StatusSubscription.FREE
 )
 
 enum class StatusSubscription {

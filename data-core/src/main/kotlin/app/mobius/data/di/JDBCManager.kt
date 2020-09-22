@@ -12,8 +12,8 @@ class JDBCManager {
         /**
          * Open the session
          */
-        fun openSession(resource: String = "secret-hibernate.cfg.xml", annotatedClass: Class<*>) : Session {
-            val sessionFactory = SessionConfiguration.generate(resource, annotatedClass)
+        fun openSession(annotatedClass: Class<*>, resource: String = "secret-hibernate.cfg.xml") : Session {
+            val sessionFactory = SessionConfiguration.generate(annotatedClass, resource)
             return sessionFactory.openSession().also {
                 println("openSession successfully")
             }
@@ -43,7 +43,7 @@ class JDBCManager {
              * @param annotatedClass The class containing annotations
              * @param resource with extension .cfg.xml
              */
-            fun generate(resource: String, annotatedClass: Class<*>) : SessionFactory =
+            fun generate(annotatedClass: Class<*>, resource: String) : SessionFactory =
                     Configuration()
                             .configure(resource)
                             .addAnnotatedClass(annotatedClass)

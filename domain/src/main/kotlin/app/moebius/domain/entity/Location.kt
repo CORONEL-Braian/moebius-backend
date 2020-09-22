@@ -6,7 +6,7 @@ import javax.persistence.*
 @Entity
 @Table(name = "location")
 data class Location(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val locationUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "location_uuid") val locationUUID: UUID,
         val originLocation: OriginLocation,
         val currentLocation: CurrentLocation
 )
@@ -14,7 +14,7 @@ data class Location(
 @Entity
 @Table(name = "origin_location")
 data class OriginLocation(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val originLocationUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "origin_location_uuid") val originLocationUUID: UUID,
         val country: Country,
         val province: Province,
         val city: City
@@ -23,7 +23,7 @@ data class OriginLocation(
 @Entity
 @Table(name = "current_location")
 data class CurrentLocation(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val currentLocationUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "current_location_uuid") val currentLocationUUID: UUID,
         val country: Country,
         val province: Province,
         val city: City,
@@ -33,7 +33,7 @@ data class CurrentLocation(
 @Entity
 @Table(name = "country")
 data class Country(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val countryUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "country_uuid") val countryUUID: UUID,
         val name: String,
         val locationLimits: LocationLimits,
 )
@@ -41,7 +41,7 @@ data class Country(
 @Entity
 @Table(name = "province")
 data class Province(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val provinceUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "province_uuid") val provinceUUID: UUID,
         val name: String,
         val locationLimits: LocationLimits,
 )
@@ -49,7 +49,7 @@ data class Province(
 @Entity
 @Table(name = "city")
 data class City(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val cityUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "city_uuid") val cityUUID: UUID,
         val name: String,
         val locationLimits: LocationLimits,
 )
@@ -57,7 +57,7 @@ data class City(
 @Entity
 @Table(name = "location_limits")
 data class LocationLimits(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val limitsUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "location_limits_uuid") val limitsUUID: UUID,
         val northeast: Coordinate,
         val southwest: Coordinate
 )
@@ -65,7 +65,7 @@ data class LocationLimits(
 @Entity
 @Table(name = "direction")
 data class Direction(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val directionUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "direction_uuid") val directionUUID: UUID,
         val street: String,
         val number: Int,
         val firstBetweenStreet: String,
@@ -76,6 +76,6 @@ data class Direction(
 @Entity
 @Table(name = "coordinate")
 data class Coordinate(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val lat: Float,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "coordinate_uuid") val lat: Float,
         val lng: Float,
 )

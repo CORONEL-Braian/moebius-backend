@@ -12,7 +12,7 @@ import javax.persistence.*
 @Entity
 @Table(name = "application")
 data class Application(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val applicationUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "application_uuid") val applicationUUID: UUID,
         val environment: Environment,
         val consumer: Consumer,
         val publicKey: String
@@ -27,7 +27,7 @@ sealed class Consumer {
     @Entity
     @Table(name = "consumer_identities")
     data class Identities(
-            @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val usersUUID: UUID,
+            @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "consumer_identities_uuid") val usersUUID: UUID,
             val platform: Platform)
 
     /**
@@ -36,7 +36,7 @@ sealed class Consumer {
     @Entity
     @Table(name = "consumer_partner")
     data class Partner(
-            @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val partnerUUID: UUID,
+            @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "consumer_partner_uuid") val partnerUUID: UUID,
             val name: String,
             val platform: Platform,
             val feature: String)
@@ -47,7 +47,7 @@ sealed class Consumer {
     @Entity
     @Table(name = "consumer_team")
     data class Team(
-            @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val teamUUID: UUID,
+            @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "consumer_team_uuid") val teamUUID: UUID,
             val name: String,
             val platform: Platform,
             val feature: String)
@@ -56,7 +56,7 @@ sealed class Consumer {
 @Entity
 @Table(name = "platform")
 data class Platform(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") val platformUUID: UUID,
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "platform_uuid") val platformUUID: UUID,
         val name: String,
         val ecosystem: String
 )
