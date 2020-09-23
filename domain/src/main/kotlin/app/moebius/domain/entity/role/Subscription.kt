@@ -15,7 +15,7 @@ data class Subscription(
         val subscriptionUUID: UUID,
 
         @Enumerated(EnumType.STRING) @Column(name = "status_subscription") @Type(type = "pgsql_enum")
-        val statusSubscription: StatusSubscription = StatusSubscription.PREMIUM
+        val statusSubscription: StatusSubscription = StatusSubscription.FREE
 
 )
 
