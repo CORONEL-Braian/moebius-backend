@@ -1,4 +1,4 @@
-package app.moebius.domain.entity.role
+package app.moebius.domain.util
 
 import org.hibernate.HibernateException
 import org.hibernate.engine.spi.SharedSessionContractImplementor
@@ -7,8 +7,11 @@ import java.sql.PreparedStatement
 import java.sql.SQLException
 import java.sql.Types
 
+/**
+ * Source: https://stackoverflow.com/a/64021041/5279996
+ */
+class PostgreSQLEnumType : EnumType<Enum<*>>() {
 
-class PostgreSQLEnumType2 : EnumType<Enum<*>>() {
     @Throws(HibernateException::class, SQLException::class)
     override fun nullSafeSet(
             st: PreparedStatement,
@@ -21,4 +24,5 @@ class PostgreSQLEnumType2 : EnumType<Enum<*>>() {
                 Types.OTHER
         )
     }
+
 }
