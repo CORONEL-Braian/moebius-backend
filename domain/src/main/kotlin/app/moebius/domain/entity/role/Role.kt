@@ -10,6 +10,6 @@ data class Role(
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "role_uuid") val roleUUID: UUID,
         val statusLiveness: StatusLiveness = StatusLiveness.UNSOLICITED,
         val securityLevel: Int = 0,
-        val subscription: Subscription,
+        val subscription: Subscription2,
         val permissions: List<Permission>
 )
