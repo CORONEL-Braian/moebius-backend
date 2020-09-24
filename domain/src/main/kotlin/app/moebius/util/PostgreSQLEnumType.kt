@@ -1,4 +1,4 @@
-package app.moebius.domain.util
+package app.moebius.util
 
 import org.hibernate.HibernateException
 import org.hibernate.engine.spi.SharedSessionContractImplementor

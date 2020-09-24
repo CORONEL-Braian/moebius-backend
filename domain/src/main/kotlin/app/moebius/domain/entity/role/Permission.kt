@@ -3,6 +3,12 @@ package app.moebius.domain.entity.role
 import java.util.*
 import javax.persistence.*
 
+/*@Entity
+@Table(name = "")
+data class Permissions(
+
+)*/
+
 @Entity
 @Table(name = "permission")
 data class Permission(

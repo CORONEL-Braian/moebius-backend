@@ -1,6 +1,6 @@
 package app.moebius.domain.entity.role
 
-import app.moebius.domain.util.PostgreSQLEnumType
+import app.moebius.util.PostgreSQLEnumType
 import org.hibernate.annotations.Type
 import org.hibernate.annotations.TypeDef
 import java.util.*
@@ -20,5 +20,5 @@ data class Subscription(
 )
 
 enum class StatusSubscription {
-    FREE, GOLD, PREMIUM
+    FREE, PREMIUM
 }

@@ -1,4 +1,4 @@
-package app.mobius.data.datasource
+package app.mobius.data.datasource.role
 
 import app.mobius.data.di.JDBCManager
 import app.moebius.domain.entity.role.StatusSubscription
