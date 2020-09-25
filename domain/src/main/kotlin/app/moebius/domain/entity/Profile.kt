@@ -6,7 +6,7 @@ import javax.persistence.*
 @Entity
 @Table(name = "profile")
 data class Profile(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "profile_uuid") val profileUUID: UUID,
+        @Id @GeneratedValue @Column(name = "profile_uuid") val profileUUID: UUID,
         val name: String,
         val surname: String,
         val nickname: String,
@@ -22,7 +22,7 @@ data class Profile(
 @Entity
 @Table(name = "phone")
 data class Phone(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "phone_uuid") val phoneUUID: UUID,
+        @Id @GeneratedValue @Column(name = "phone_uuid") val phoneUUID: UUID,
         val codeCountry: String,
         val codeArea: String,
         val number: Int
@@ -31,7 +31,7 @@ data class Phone(
 @Entity
 @Table(name = "date")
 data class Date(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "date_uuid") val dateUUID: UUID,
+        @Id @GeneratedValue @Column(name = "date_uuid") val dateUUID: UUID,
         val day: Int,
         val month: Int,
         val year: Int

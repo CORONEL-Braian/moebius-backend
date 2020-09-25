@@ -6,6 +6,6 @@ import javax.persistence.*
 @Entity
 @Table(name = "account")
 data class Account(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "account_uuid") val accountUUID: UUID,
+        @Id @GeneratedValue @Column(name = "account_uuid") val accountUUID: UUID,
         val linkedAccounts: LinkedAccounts? = null,
 )

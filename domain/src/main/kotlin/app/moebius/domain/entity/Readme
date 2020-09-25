@@ -1,3 +1,15 @@
-Hibernate:
-    UUID: https://stackoverflow.com/a/25634443/5279996
-    Enum: https://stackoverflow.com/a/15988403/5279996
+HIBERNATE
+---------
+
+
+UUID:
+    Use @GeneratedValue (AUTO is default) y dont use IDENTITY to avoid getting the following error:
+        org.hibernate.id.IdentifierGenerationException: unrecognized id type : pg-uuid -> java.util.UUID
+
+    Sources: https://stackoverflow.com/a/64057902/5279996
+
+__________
+
+ENUM:
+
+    Sources: https://stackoverflow.com/a/64021041/5279996

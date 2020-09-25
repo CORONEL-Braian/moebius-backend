@@ -6,7 +6,7 @@ import javax.persistence.*
 @Entity
 @Table(name = "gender")
 data class Gender(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "gender_uuid") val genderUUID: UUID,
+        @Id @GeneratedValue @Column(name = "gender_uuid") val genderUUID: UUID,
         val type: String,
         val description: String,
         val iconUrl: String

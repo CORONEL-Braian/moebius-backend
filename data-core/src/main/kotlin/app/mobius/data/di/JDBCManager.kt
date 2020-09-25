@@ -1,5 +1,7 @@
 package app.mobius.data.di
 
+import app.moebius.domain.entity.role.Permission
+import app.moebius.domain.entity.role.Resource
 import org.hibernate.Session
 import org.hibernate.SessionFactory
 import org.hibernate.Transaction
@@ -47,6 +49,8 @@ class JDBCManager {
                     Configuration()
                             .configure(resource)
                             .addAnnotatedClass(annotatedClass)
+//                            .addAnnotatedClass(Permission::class.java)
+//                            .addAnnotatedClass(Resource::class.java)
                             .buildSessionFactory()
         }
 

@@ -10,7 +10,7 @@ import javax.persistence.*
 @Entity
 @Table(name = "session")
 data class Session(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "session_uuid") val sessionUUID: UUID,
+        @Id @GeneratedValue @Column(name = "session_uuid") val sessionUUID: UUID,
         val token: AccessToken,
         val dailyReloadToken: DailyReloadToken,
         val monthlyReloadToken: MonthlyReloadToken,
@@ -24,7 +24,7 @@ data class Session(
 @Entity
 @Table(name = "access_token")
 data class AccessToken(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "access_token_uuid") val tokenUUID: UUID,
+        @Id @GeneratedValue @Column(name = "access_token_uuid") val tokenUUID: UUID,
         val accessToken: Token,
 )
 
@@ -35,7 +35,7 @@ data class AccessToken(
 @Entity
 @Table(name = "daily_reload_token")
 data class DailyReloadToken(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "daily_reload_token_uuid") val dailyAccessTokenUUID: UUID,
+        @Id @GeneratedValue @Column(name = "daily_reload_token_uuid") val dailyAccessTokenUUID: UUID,
         val keepSessionDaily: Boolean = false,
         val reloadAccessToken: Token? = null
 )
@@ -47,14 +47,14 @@ data class DailyReloadToken(
 @Entity
 @Table(name = "monthly_reload_token")
 data class MonthlyReloadToken(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "monthly_reload_token_uuid") val dailyAccessTokenUUID: UUID,
+        @Id @GeneratedValue @Column(name = "monthly_reload_token_uuid") val dailyAccessTokenUUID: UUID,
         val reloadAccessToken: Token? = null
 )
 
 @Entity
 @Table(name = "token")
 data class Token(
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "token_uuid") val tokenUUID: UUID,
+        @Id @GeneratedValue @Column(name = "token_uuid") val tokenUUID: UUID,
         val token: String,
         val created: Date,
         val expiry: Date
