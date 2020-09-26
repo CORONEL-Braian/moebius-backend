@@ -2,8 +2,8 @@ package app.mobius.data.datasource
 
 import app.mobius.domain.entity.Identity
 
-interface DeceasedStore {
+interface IdentityStore {
 
-    fun saveDeceased(identity: Identity)
+    fun createIdentity(identity: Identity)
 
 }

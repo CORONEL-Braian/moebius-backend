@@ -2,7 +2,8 @@ group = "app.möbius"
 version = "0.0.0"
 
 /**
- * https://jar-download.com/artifacts/org.hibernate/hibernate-core/5.3.3.Final/source-code/org/hibernate/type/EnumType.java
+ * https://mvnrepository.com/artifact/org.hibernate/hibernate-core
+ * https://mvnrepository.com/artifact/org.postgresql/postgresql
  */
 dependencies {
     api("javax.persistence", "javax.persistence-api", "2.2")

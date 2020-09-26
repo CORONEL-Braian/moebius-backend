@@ -1,4 +1,5 @@
 src/main/resources/secret-hibernate.cfg.xml
+src/main/resources/META-INF/secret-persistence.xml
 
 .gradle
 build/

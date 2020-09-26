@@ -10,11 +10,11 @@ class JDBCManagerTest {
     data class SomeTest(@Id val test: String?)
 
     private fun getSession() =
-            JDBCManager.openSession(SomeTest::class.java)
+            JDBCManager.openSession_2(SomeTest::class.java)
 
     @Test
     fun `open session in database`() {
-        getSession()
+        JDBCManager.openSession_3()
     }
 
     @Test

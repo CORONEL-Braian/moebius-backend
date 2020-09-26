@@ -10,11 +10,12 @@ version = "0.0.0"
 
 /**
  * Sources:
- *  https://mvnrepository.com/artifact/org.hibernate/hibernate-core
- *  https://mvnrepository.com/artifact/org.postgresql/postgresql
+ *  https://github.com/ronmamo/reflections
  */
 dependencies {
     implementation(project(":domain"))
+
+    implementation("org.reflections:reflections:0.9.12")
 
     implementation(project(":library_base"))
     implementation(project(":library_test_utils"))

@@ -33,7 +33,7 @@ class SomeTest {
     @Test
     fun `save a mockk of Test`() {
         val someTest = SomeTest("1")
-        val session = JDBCManager.openSession(annotatedClass = SomeTest::class.java)
+        val session = JDBCManager.openSession_2(annotatedClass = SomeTest::class.java)
         JDBCManager.executeQuery(session, "Work") {
             session.save(someTest)
         }
