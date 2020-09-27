@@ -19,6 +19,7 @@ These additional references should also help you:
 * [Gradle - Working with files](https://docs.gradle.org/current/userguide/working_with_files.html)
 
 * [Hibernate JPA](https://vladmihalcea.com/jpa-persistence-xml/)
+* [Hibernate JPA 2](https://thorben-janssen.com/hibernate-tips-access-hibernate-apis-jpa/)
 
 ### Testing
  * [JUnit5](https://junit.org/junit5/docs/current/user-guide/)

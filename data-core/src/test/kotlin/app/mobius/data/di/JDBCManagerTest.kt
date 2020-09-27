@@ -9,18 +9,18 @@ class JDBCManagerTest {
     @Table(name = "test")
     data class SomeTest(@Id val test: String?)
 
-    private fun getSession() =
-            JDBCManager.openSession_2(SomeTest::class.java)
 
     @Test
-    fun `open session in database`() {
-        JDBCManager.openSession_3()
+    fun `open session type 1`() {
+        JDBCManager.openSession_1(SomeTest::class.java)
     }
 
     @Test
-    fun `close session in database`() {
+    fun `close session typ 1 in database`() {
+        val session = JDBCManager.openSession_1(SomeTest::class.java)
+
 //        Execute an empty operation for close session
-        JDBCManager.executeQuery(getSession(), "") {}
+        JDBCManager.executeQuery(session, "") {}
     }
 
 }

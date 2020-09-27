@@ -13,7 +13,7 @@ class SqlRoleDataSourceTest {
         val uuid = UUID.randomUUID()
         val subscription = Subscription(uuid)
         print("Test subscription $uuid")
-        val session = JDBCManager.openSession_1_1(Subscription::class.java)
+        val session = JDBCManager.openSession_1(Subscription::class.java)
         JDBCManager.executeQuery(session, "Work") {
             session.save(subscription)
         }

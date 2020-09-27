@@ -8,13 +8,20 @@ import org.hibernate.SessionFactory
 import org.hibernate.Transaction
 import org.hibernate.cfg.Configuration
 import org.reflections.Reflections
+import org.springframework.boot.autoconfigure.domain.EntityScanner
 import java.util.*
 import javax.persistence.Entity
 import javax.persistence.EntityManagerFactory
 import javax.persistence.Persistence
 import javax.persistence.PersistenceUnit
 
-
+/**
+ * TODO:
+ * https://stackoverflow.com/questions/970573/hibernate-error-cannot-resolve-table
+ * https://stackoverflow.com/questions/12420996/intellij-idea-highlights-entity-class-names-with-cannot-resolve-symbol-in-jpq
+ * https://www.baeldung.com/hibernate-mappingexception-unknown-entity
+ * https://stackoverflow.com/a/38506382/5279996
+ */
 class JDBCManager {
 
     companion object {
@@ -25,7 +32,7 @@ class JDBCManager {
         /**
          * Open the session
          */
-        fun openSession_1(annotatedClass: Class<*>, resource: String = "secret-hibernate.cfg.xml") : Session {
+        fun openSession_1(annotatedClass: Class<*>, resource: String = "resources/secret-hibernate.cfg.xml") : Session {
             val sessionFactory = SessionConfiguration.generate_1(annotatedClass, resource)
             return sessionFactory.openSession().also {
                 println("openSession successfully")
@@ -40,6 +47,7 @@ class JDBCManager {
             }
         }
 
+//        https://stackoverflow.com/a/4148294/5279996
         fun openSession_2(annotatedClass: Class<*>, resource: String = "secret-hibernate.cfg.xml") : Session {
             entityManagerFactory = createEntityManagerFactory(SessionConfiguration.generate_2(annotatedClass, resource))
             return entityManagerFactory?.let { getSessionFactory(it)!!.openSession() }!!
@@ -52,6 +60,7 @@ class JDBCManager {
             return session
         }
 
+//        https://stackoverflow.com/a/30125601/5279996
         fun createEntityManagerFactory(hibConfiguration: Configuration): EntityManagerFactory? {
             val p: Properties = hibConfiguration.properties
 
@@ -106,8 +115,11 @@ class JDBCManager {
                             .addAnnotatedClass(Resource::class.java)*/
 
             /**
+             * TODO: Ver si puedo EVITAR usar reflexion usando el archivo de persistencia que deberia hacerlo
+             * TODO:  https://stackoverflow.com/questions/28097847/hibernate-4-3-x-load-all-entity-annotated-classes
              * Add all the classes annotated with Entity in the configuration
              * Precondition: The prefix contains classes with a configured hibernate mapping
+             * Source: https://stackoverflow.com/a/60015879/5279996
              */
             fun generate_1_1(resource: String) : SessionFactory {
                 val configuration = Configuration()
@@ -126,7 +138,10 @@ class JDBCManager {
 
             }
 
+//            TODO: Ver respuestas: https://stackoverflow.com/q/23214454/5279996
             fun generate_2(annotatedClass: Class<*>, resource: String) : Configuration {
+//                val test = EntityScanner  //TODO: Analizar
+
                 val configuration = Configuration()
                         .configure(resource)
                 /*val reflections = Reflections("app.mobius")
