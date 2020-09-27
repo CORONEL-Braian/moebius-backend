@@ -1,30 +1,29 @@
 package app.mobius.data.di
 
+import org.hibernate.HibernateException
 import org.hibernate.Session
 import org.hibernate.SessionFactory
 import org.hibernate.Transaction
 import org.hibernate.cfg.Configuration
 import org.reflections.Reflections
+import java.io.File
 import java.util.*
 import javax.persistence.*
+import javax.xml.bind.Element
 
 
 /**
  *
- * Source: https://docs.jboss.org/hibernate/core/3.3/reference/en/html/session-configuration.html
- *
- * TODO:
- * https://stackoverflow.com/questions/970573/hibernate-error-cannot-resolve-table
- * https://stackoverflow.com/questions/12420996/intellij-idea-highlights-entity-class-names-with-cannot-resolve-symbol-in-jpq
- * https://www.baeldung.com/hibernate-mappingexception-unknown-entity
+ * Source:
+ *  https://docs.jboss.org/hibernate/core/3.3/reference/en/html/session-configuration.html
+ *  https://stackoverflow.com/a/44816353/5279996
+ *  https://www.baeldung.com/hibernate-mappingexception-unknown-entity
  */
 class JDBCManager {
 
-    @PersistenceUnit(name = "hypersistence-optimizer")
-    private var entityManagerFactory: EntityManagerFactory? = null
-
-
     object HibernateCfg {
+
+        private const val HIBERNATE_CONFIGURATION = "secret-hibernate.cfg.xml"
 
         /**
          * @param operation: e.g: save/update/read
@@ -42,9 +41,10 @@ class JDBCManager {
 
         /**
          * Open the session using hibernate cfg for only mapped entity
+         * @param canonicalName: e.g: secret-hibernate.cfg.xml
          */
-        fun openSession(annotatedClass: Class<*>, resource: String = "hibernate.cfg.xml") : Session {
-            val sessionFactory = generateSessionFactory(annotatedClass, resource)
+        fun openSession(annotatedClass: Class<*>, canonicalName: String = HIBERNATE_CONFIGURATION) : Session {
+            val sessionFactory = CustomSessionFactory.getSessionFactory(annotatedClass, canonicalName)
             return sessionFactory.openSession()
         }
 
@@ -52,23 +52,41 @@ class JDBCManager {
         /**
          * Open the session using hibernate cfg for all mapped entities
          */
-        fun openSessionWithCfgForAll(resource: String = "hibernate.cfg.xml") : Session {
+        fun openSessionWithCfgForAll(resource: String = "secret-hibernate.cfg.xml") : Session {
             val sessionFactory = autoScanEntities(resource)
             return sessionFactory.openSession()
         }
 
-        /**
-         * Generate session configuration for a simple entity
-         * PRE: Configure entity mapping in open-persistence.xml necessary for the class hierarchy
-         * OBS: Session Factory puede tener varias sesiones abiertas.
-         * @param annotatedClass The class containing annotations
-         * @param resource with extension .cfg.xml
-         */
-        private fun generateSessionFactory(annotatedClass: Class<*>, resource: String) : SessionFactory =
-                Configuration()
-                        .configure(resource)
+        object CustomSessionFactory {
+            /**
+             * Generate session configuration for a simple entity
+             * PRE: Configure entity mapping in open-persistence.xml necessary for the class hierarchy
+             * OBS: Session Factory puede tener varias sesiones abiertas.
+             * @param annotatedClass The class containing annotations
+             * @param canonicalName: e.g: secret-hibernate.cfg.xml
+             */
+            @Throws(HibernateException::class)
+            fun getSessionFactory(annotatedClass: Class<*>, canonicalName: String) : SessionFactory {
+                return Configuration()
+                        .configure(getFile(canonicalName))
                         .addAnnotatedClass(annotatedClass)
                         .buildSessionFactory()
+            }
+
+            /**
+             * Get absolute path of file of secret-hibernate
+             * @param canonicalName: e.g: secret-hibernate.cfg.xml
+             * Source: https://stackoverflow.com/a/64084771/5279996
+             */
+            private fun getFile(canonicalName: String): File {
+                val currentWorkingDir = System.getProperty("user.dir")
+                val absoulutePath = "$currentWorkingDir/src/main/resources/$canonicalName"
+                println("Absolute Path of secret-hibernate.cfg.xml: $absoulutePath")
+                return File(absoulutePath)
+            }
+
+        }
+
 
         /**
          * Generate session factory for a lot of mapped entities
@@ -136,8 +154,8 @@ class JDBCManager {
     @SuppressWarnings
     object CustomPersistence {
 
-        fun executeQuery(session: Session, message: String, annotatedClass: Class<*>, operation: () -> Unit) {
-            val entityManager = createEntityManager(annotatedClass)
+        fun executeQuery(session: Session, operation: () -> Unit) {
+            val entityManager = createEntityManager()
             beginTransaction(entityManager)
             executeOperation(session, operation)
             closeTransaction(entityManager)
@@ -145,38 +163,20 @@ class JDBCManager {
 
         /**
          * Open session using JPA without entities
-         */
-        fun openSessionWithJPA(annotatedClass: Class<*>) = createEntityManager(annotatedClass).unwrap(Session::class.java)
 
-        fun createEntityManager(annotatedClass: Class<*>): EntityManager {
+         TODO: Probar obtener el SessionManager y escanear un paquete:
+         sessionFactory.setPackagesToScan(
+            new String[] { "com.baeldung.ex.mappingexception.persistence.model" });
+
+         */
+        fun openSessionWithJPA() = createEntityManager().unwrap(Session::class.java)
+
+        fun createEntityManager(): EntityManager {
             val entityManagerFactory = Persistence.createEntityManagerFactory(
                     "hypersistence-optimizer"
             )
-            /*val entityManagerFactory = createEntityManagerFactory(
-                    createConfiguration(annotatedClass)
-            )*/
             return entityManagerFactory.createEntityManager()
         }
-
-        //        https://stackoverflow.com/a/30125601/5279996
-        private fun createEntityManagerFactory(configuration: Configuration): EntityManagerFactory {
-            val p: Properties = configuration.properties
-
-            // convert to Map
-            val pMap: MutableMap<String?, String?> = HashMap()
-            val e: Enumeration<*> = p.propertyNames()
-            while (e.hasMoreElements()) {
-                val s = e.nextElement() as String
-                pMap[s] = p.getProperty(s)
-            }
-
-            // create EntityManagerFactory
-            return Persistence.createEntityManagerFactory("hypersistence-optimizer", pMap)
-        }
-        private fun createConfiguration(annotatedClass: Class<*>) : Configuration =
-                Configuration()
-                        .configure("hibernate.cfg.xml")
-                        .addAnnotatedClass(annotatedClass)
 
         private fun beginTransaction(entityManager: EntityManager) {
             entityManager.transaction.begin()
@@ -190,7 +190,6 @@ class JDBCManager {
             operation()
             return session
         }
-
 
         private fun closeTransaction(entityManager: EntityManager) {
             entityManager.transaction.commit()

@@ -15,22 +15,22 @@ include("common")
 
 // Main
 include("data")
+include("domain")
+include("api")
+include("service")
+include("build-src")
 
 // Core
 include("deceased-core")
 include("data-core")
 
-include("domain")
-include("api")
-include("service")
+// Library
+include("library_base")
+include("library_test_utils")
 
 // Feature
 include("feature_sign_up")
 include("feature_login")
 include("feature_legal")
 include("feature_third_profile")
-
-// Library
-include("library_base")
-include("library_test_utils")
 

@@ -1,6 +1,9 @@
 package app.mobius.data.di
 
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
+import java.io.FileInputStream
+import java.io.InputStream
 import javax.persistence.Entity
 import javax.persistence.Id
 import javax.persistence.Table
@@ -12,6 +15,14 @@ class JDBCManagerTest {
     @Entity
     @Table(name = "test")
     data class SomeTest(@Id val test: String?)
+
+    @Test
+    fun `get input stream for configuration of session factory`() {
+        val currentWorkingDir = System.getProperty("user.dir")
+        val absoulutePath = "$currentWorkingDir/src/main/resources/secret-hibernate.cfg.xml"
+        val targetStream: InputStream = FileInputStream(absoulutePath)
+        Assertions.assertNotEquals(targetStream, null)
+    }
 
     @Test
     fun `open session with hibernate cfg and only one entity`() {
@@ -35,13 +46,13 @@ class JDBCManagerTest {
 
     @Test
     fun `open session with JPA`() {
-        JDBCManager.CustomPersistence.openSessionWithJPA(SomeTest::class.java)
+        JDBCManager.CustomPersistence.openSessionWithJPA()
     }
 
     @Test
     fun `create some entity with JPA`() {
-        val session = JDBCManager.CustomPersistence.openSessionWithJPA(SomeTest::class.java)
-        JDBCManager.CustomPersistence.executeQuery(session, "Work", SomeTest::class.java) {
+        val session = JDBCManager.CustomPersistence.openSessionWithJPA()
+        JDBCManager.CustomPersistence.executeQuery(session, ) {
             session.save(SomeTest("123"))
         }
     }

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
 Specify a full configuration
 OBS: This file can be used as a replacement for the hibernate.properties file or, if both are present, to override properties.
@@ -7,7 +6,6 @@ OBS: This file can be used as a replacement for the hibernate.properties file or
 <!DOCTYPE hibernate-configuration PUBLIC
         "-//Hibernate/Hibernate Configuration DTD//EN"
         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
-
 <!-- Not binding SessionFactory to JNDI -->
 <hibernate-configuration>
     <session-factory>
