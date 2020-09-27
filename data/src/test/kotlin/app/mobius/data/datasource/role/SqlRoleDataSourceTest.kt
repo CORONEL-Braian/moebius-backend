@@ -13,8 +13,8 @@ class SqlRoleDataSourceTest {
         val uuid = UUID.randomUUID()
         val subscription = Subscription(uuid)
         print("Test subscription $uuid")
-        val session = JDBCManager.openSession_1(Subscription::class.java)
-        JDBCManager.executeQuery(session, "Work") {
+        val session = JDBCManager.HibernateCfg.openSession(Subscription::class.java)
+        JDBCManager.HibernateCfg.executeQuery(session, "Work") {
             session.save(subscription)
         }
     }
@@ -24,8 +24,8 @@ class SqlRoleDataSourceTest {
         val uuid = UUID.randomUUID()
         val subscription = Subscription(uuid, StatusSubscription.PREMIUM)
         print("Test subscription $uuid")
-        val session = JDBCManager.openSession_2(annotatedClass = Subscription::class.java)
-        JDBCManager.executeQuery(session, "Work") {
+        val session = JDBCManager.HibernateCfg.openSession(annotatedClass = Subscription::class.java)
+        JDBCManager.HibernateCfg.executeQuery(session, "Work") {
             session.save(subscription)
         }
     }

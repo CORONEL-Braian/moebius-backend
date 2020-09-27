@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+PRE: This file is called persistence.xml and is located inside resources/META-INF path
+Source: https://stackoverflow.com/a/64084771/5279996
+-->
 <persistence version="2.2"
              xmlns="http://xmlns.jcp.org/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
      http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 
-    <persistence-unit name="HypersistenceOptimizer">
+    <persistence-unit name="HypersistenceOptimizer-Open">
 
         <description>
             Hypersistence Optimizer is a dynamic analyzing tool that can scan
@@ -19,9 +23,11 @@
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <!--<exclude-unlisted-classes>false</exclude-unlisted-classes>-->  <!-- Dont work -->
 
         <properties>
+            <!-- Scan for annotated classes and Hibernate mapping XML files -->
+            <!--<property name="hibernate.archive.autodetection" value="class, hbm"/>-->  <!-- Dont work -->
            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL94Dialect" />
            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/your-db" />

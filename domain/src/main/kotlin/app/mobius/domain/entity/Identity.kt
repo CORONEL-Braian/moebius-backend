@@ -2,6 +2,7 @@ package app.mobius.domain.entity
 
 import app.mobius.domain.entity.role.Role
 import app.mobius.domain.entity.setting.Setting
+import app.mobius.domain.mapper.Profile
 import java.util.*
 import javax.persistence.*
 
