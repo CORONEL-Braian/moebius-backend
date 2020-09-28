@@ -32,10 +32,16 @@ class JDBM {
             try {
                 beginTransaction(session)
                 executeOperation(session, operation)
+                println("MetaModel: ${session.metamodel.managedTypes}")
+                println("MetaModel: ${session.metamodel}")
                 commitTransaction(session, message)
             } finally {
                 endSession(session, session.sessionFactory)
             }
+        }
+
+        fun executeHQL() {
+
         }
 
         /**
@@ -102,7 +108,7 @@ class JDBM {
             println("-------")
             for (clazz in importantClasses) {
                 i += 1
-                println("Mapped classes $i: $clazz")
+                println("Mapped entities $i: $clazz")
                 configuration.addAnnotatedClass(clazz)
             }
             println("-------")

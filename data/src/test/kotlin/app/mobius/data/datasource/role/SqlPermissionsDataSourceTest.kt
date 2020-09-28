@@ -14,20 +14,19 @@ class SqlPermissionsDataSourceTest {
 
     @Test
     fun `create a permission`() {
-        val resource = Resource(getUUID("resource"), "test", "/test ${randomString()}")
-        val resource2 = Resource(
-                UUID.fromString("054fd609-9d2d-5da3-89fb-11cd41a8ded9"),
-                "test", "/test ${randomString()}")
+        val randomLocation = randomString("/test")
+        val resource = Resource(name = "test", location = randomLocation)
 
 //        TODO: An option will be save the resource and use uuid it
 
-        val permission = Permission(getUUID("permission"), Operation.CREATE, resource2)
+        val permission = Permission(operation = Operation.CREATE, resource = resource)
         val session = JDBM.Hibernate.openSession()
         JDBM.Hibernate.executeQuery(session, "Work") {
             session.save(permission)
+            val query = session.createQuery("FROM Resource").resultList
+            print("Query: $query")
         }
     }
-
 
 
 }
