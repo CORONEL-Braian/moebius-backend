@@ -3,10 +3,14 @@ HIBERNATE
 
 
 UUID:
-    Use @GeneratedValue (AUTO is default) y dont use IDENTITY to avoid getting the following error:
+    1. Entity with relations: ASSIGN A NULL TO ALL UUIDs BY DEFAULT, so that they can be automatically generated
+     in the relationships at the time of insertions in the database !!! And use JoinColumn, dont PKJoinColumn
+    . Only entity: Use @GeneratedValue (AUTO is default) y dont use IDENTITY to avoid getting the following error:
         org.hibernate.id.IdentifierGenerationException: unrecognized id type : pg-uuid -> java.util.UUID
 
-    Sources: https://stackoverflow.com/a/64057902/5279996
+    Sources:
+        1. https://stackoverflow.com/a/64096963/5279996
+        https://stackoverflow.com/a/64057902/5279996
 
 __________
 

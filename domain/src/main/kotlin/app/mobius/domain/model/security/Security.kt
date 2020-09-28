@@ -9,7 +9,7 @@ import javax.persistence.*
 @Entity
 @Table(name = "security")
 data class Security(
-        @Id @GeneratedValue @Column(name = "security_uuid") val securityUUID: UUID,
+        @Id @GeneratedValue @Column(name = "security_uuid") val securityUUID: UUID? = null,
         val authentication: Authentication,
         val securityLevel: Int = 0,
         val securityMethods: SecurityMethods? = null,
@@ -22,7 +22,7 @@ data class Security(
 @Entity
 @Table(name = "authentication")
 data class Authentication(
-        @Id @GeneratedValue @Column(name = "authentication_uuid") val authenticationUUID: UUID,
+        @Id @GeneratedValue @Column(name = "authentication_uuid") val authenticationUUID: UUID? = null,
         val session: Session,
         val basicAuth: BasicAuth
 )
@@ -34,7 +34,7 @@ data class Authentication(
 @Entity
 @Table(name = "traditional_credential")
 data class BasicAuth(
-        @Id @GeneratedValue @Column(name = "traditional_credential_uuid") val traditionalCredentialUUID: UUID,
+        @Id @GeneratedValue @Column(name = "traditional_credential_uuid") val traditionalCredentialUUID: UUID? = null,
         val email: String,
         val password: Password,
 )
@@ -42,7 +42,7 @@ data class BasicAuth(
 @Entity
 @Table(name = "password")
 data class Password(
-        @Id @GeneratedValue @Column(name = "password_uuid") val passwordUUID: UUID,
+        @Id @GeneratedValue @Column(name = "password_uuid") val passwordUUID: UUID? = null,
         val apiHashPassword: String,
         val dbHashPassword: String,
         val resetPasswordToken: String? = null,

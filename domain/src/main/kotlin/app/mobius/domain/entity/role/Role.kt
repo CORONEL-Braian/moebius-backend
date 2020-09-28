@@ -1,4 +1,4 @@
-package app.mobius.domain.model.role
+package app.mobius.domain.entity.role
 
 import app.mobius.domain.model.security.StatusLiveness
 import app.mobius.domain.entity.role.Permission
@@ -6,12 +6,16 @@ import app.mobius.domain.entity.role.Subscription
 import java.util.*
 import javax.persistence.*
 
-@Entity
+//@Entity
 @Table(name = "role")
 data class Role(
-        @Id @GeneratedValue @Column(name = "role_uuid") val roleUUID: UUID,
+        @Id @GeneratedValue @Column(name = "role_uuid") val roleUUID: UUID? = null,
         val statusLiveness: StatusLiveness = StatusLiveness.UNSOLICITED,
         val securityLevel: Int = 0,
-        val subscription: Subscription,
-        val permissions: List<Permission>
-)
+        val subscription: Subscription?,
+        val permissions: List<Permission>?
+) {
+    constructor() : this(subscription = null, permissions = null) {
+
+    }
+}

@@ -29,13 +29,4 @@ class SomeTest {
         assertEquals("a", result)
     }
 
-   /* @Test
-    fun `save a mockk of Test`() {
-        val someTest = SomeTest("1")
-        val session = JDBCManager.openSession(annotatedClass = SomeTest::class.java)
-        JDBCManager.executeQuery(session, "Work") {
-            session.save(someTest)
-        }
-    }*/
-
 }

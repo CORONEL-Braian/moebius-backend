@@ -12,7 +12,7 @@ import javax.persistence.Entity;
 @TypeDef(name = "pgsql_enum", typeClass = PostgreSQLEnumType::class)
 data class Subscription(
         @Id @GeneratedValue @Column(name = "subscription_uuid", updatable = false)
-        val subscriptionUUID: UUID,
+        val subscriptionUUID: UUID? = null,
         @Enumerated(EnumType.STRING) @Column(name = "status_subscription") @Type(type = "pgsql_enum")
         val statusSubscription: StatusSubscription = StatusSubscription.FREE
 ) {

@@ -9,9 +9,6 @@ data class Resource(
         @Id @GeneratedValue @Column(name = "resource_uuid") val resourceUUID: UUID? = null,
         @Column(name = "name") val name: String,
         @Column(name = "location") val location: String,
-
-        /*@OneToOne(mappedBy = "resource", cascade = [CascadeType.ALL])
-        var permission: Permission? = null*/
 ) {
     constructor() : this(name = "", location = "")
 }

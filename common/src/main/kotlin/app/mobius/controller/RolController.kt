@@ -1,6 +1,6 @@
 package app.mobius.controller
 
-import app.mobius.domain.model.role.Role
+import app.mobius.domain.entity.role.Role
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 

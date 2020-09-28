@@ -12,7 +12,7 @@ import javax.persistence.*
 @Entity
 @Table(name = "application")
 data class Application(
-        @Id @GeneratedValue @Column(name = "application_uuid") val applicationUUID: UUID,
+        @Id @GeneratedValue @Column(name = "application_uuid") val applicationUUID: UUID? = null,
         val environment: Environment,
         val consumer: Consumer,
         val publicKey: String
@@ -27,7 +27,7 @@ sealed class Consumer {
     @Entity
     @Table(name = "consumer_identities")
     data class Identities(
-            @Id @GeneratedValue @Column(name = "consumer_identities_uuid") val usersUUID: UUID,
+            @Id @GeneratedValue @Column(name = "consumer_identities_uuid") val usersUUID: UUID? = null,
             val platform: Platform)
 
     /**
@@ -36,7 +36,7 @@ sealed class Consumer {
     @Entity
     @Table(name = "consumer_partner")
     data class Partner(
-            @Id @GeneratedValue @Column(name = "consumer_partner_uuid") val partnerUUID: UUID,
+            @Id @GeneratedValue @Column(name = "consumer_partner_uuid") val partnerUUID: UUID? = null,
             val name: String,
             val platform: Platform,
             val feature: String)
@@ -47,7 +47,7 @@ sealed class Consumer {
     @Entity
     @Table(name = "consumer_team")
     data class Team(
-            @Id @GeneratedValue @Column(name = "consumer_team_uuid") val teamUUID: UUID,
+            @Id @GeneratedValue @Column(name = "consumer_team_uuid") val teamUUID: UUID? = null,
             val name: String,
             val platform: Platform,
             val feature: String)
@@ -56,7 +56,7 @@ sealed class Consumer {
 @Entity
 @Table(name = "platform")
 data class Platform(
-        @Id @GeneratedValue @Column(name = "platform_uuid") val platformUUID: UUID,
+        @Id @GeneratedValue @Column(name = "platform_uuid") val platformUUID: UUID? = null,
         val name: String,
         val ecosystem: String
 )

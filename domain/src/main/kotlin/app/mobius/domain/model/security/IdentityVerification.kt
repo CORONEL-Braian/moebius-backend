@@ -7,7 +7,7 @@ import javax.persistence.*
 @Entity
 @Table(name = "identity_verification")
 data class IdentityVerification(
-        @Id @GeneratedValue @Column(name = "identity_verification_uuid") val identityVerificationUUID: UUID,
+        @Id @GeneratedValue @Column(name = "identity_verification_uuid") val identityVerificationUUID: UUID? = null,
         val documentationVerification: DocumentationVerification,
         val liveness: Liveness
 )
@@ -15,7 +15,7 @@ data class IdentityVerification(
 @Entity
 @Table(name = "documentation_verification")
 data class DocumentationVerification(
-        @Id @GeneratedValue @Column(name = "documentation_verification_uuid") val documentationVerificationUUID: UUID,
+        @Id @GeneratedValue @Column(name = "documentation_verification_uuid") val documentationVerificationUUID: UUID? = null,
         val statusDocumentationVerification: StatusDocumentationVerification = StatusDocumentationVerification.UNSOLICITED,
         val dni: DNI? = null,
 )
@@ -23,7 +23,7 @@ data class DocumentationVerification(
 @Entity
 @Table(name = "dni")
 data class DNI(
-        @Id @GeneratedValue @Column(name = "dni_uuid") val dniUUID: UUID,
+        @Id @GeneratedValue @Column(name = "dni_uuid") val dniUUID: UUID? = null,
         val surname: String,
         val name: String,
         val sex: String,
@@ -42,7 +42,7 @@ enum class StatusDocumentationVerification {
 @Entity
 @Table(name = "liveness")
 data class Liveness(
-        @Id @GeneratedValue @Column(name = "liveness_uuid") val livenessUUID: UUID,
+        @Id @GeneratedValue @Column(name = "liveness_uuid") val livenessUUID: UUID? = null,
         val statusLiveness: StatusLiveness = StatusLiveness.UNSOLICITED
 )
 
