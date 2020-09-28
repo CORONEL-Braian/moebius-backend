@@ -36,7 +36,7 @@ data class Permission(
         val operation: Operation?,
 
         @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-        @JoinColumn(name = "resource_uuid", referencedColumnName = "resource")
+        @JoinColumn(name = "resource_uuid", referencedColumnName = "resource_uuid")
         var resource: Resource?
 ) {
         constructor() : this(operation = null, resource = null)
