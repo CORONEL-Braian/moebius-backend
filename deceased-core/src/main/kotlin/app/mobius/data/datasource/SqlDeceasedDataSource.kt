@@ -1,6 +1,6 @@
 package app.mobius.data.datasource
 
-import app.mobius.domain.entity.Identity
+import app.mobius.domain.model.Identity
 
 class SqlDeceasedDataSource: DeceasedStore {
 

@@ -1,4 +1,4 @@
-package app.mobius.domain.mapper.role
+package app.mobius.domain.entity.role
 
 import app.mobius.util.PostgreSQLEnumType
 import org.hibernate.annotations.Type
@@ -15,7 +15,9 @@ data class Subscription(
         val subscriptionUUID: UUID,
         @Enumerated(EnumType.STRING) @Column(name = "status_subscription") @Type(type = "pgsql_enum")
         val statusSubscription: StatusSubscription = StatusSubscription.FREE
-)
+) {
+    constructor() : this(UUID.randomUUID())
+}
 
 enum class StatusSubscription {
     FREE, PREMIUM

@@ -1,7 +1,7 @@
-package app.mobius.domain.entity.setting
+package app.mobius.domain.model.setting
 
-import app.mobius.domain.entity.Account
-import app.mobius.domain.entity.security.Security
+import app.mobius.domain.model.Account
+import app.mobius.domain.model.security.Security
 import java.util.*
 import javax.persistence.*
 

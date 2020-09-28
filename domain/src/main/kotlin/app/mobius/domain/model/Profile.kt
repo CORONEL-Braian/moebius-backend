@@ -1,9 +1,9 @@
-package app.mobius.domain.mapper
+package app.mobius.domain.model
 
 import java.util.*
 import javax.persistence.*
 
-//@Entity
+@Entity
 @Table(name = "profile")
 data class Profile(
         @Id @GeneratedValue @Column(name = "profile_uuid") val profileUUID: UUID,
@@ -19,7 +19,7 @@ data class Profile(
         val avatarUrl: String,
 )
 
-//@Entity
+@Entity
 @Table(name = "phone")
 data class Phone(
         @Id @GeneratedValue @Column(name = "phone_uuid") val phoneUUID: UUID,
@@ -28,7 +28,7 @@ data class Phone(
         val number: Int
 )
 
-//@Entity
+@Entity
 @Table(name = "date")
 data class Date(
         @Id @GeneratedValue @Column(name = "date_uuid") val dateUUID: UUID,

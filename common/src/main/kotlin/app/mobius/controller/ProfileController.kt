@@ -1,6 +1,6 @@
 package app.mobius.controller
 
-import app.mobius.domain.mapper.Profile
+import app.mobius.domain.model.Profile
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 

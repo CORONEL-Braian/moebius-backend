@@ -1,6 +1,6 @@
-package app.mobius.domain.entity.security
+package app.mobius.domain.model.security
 
-import app.mobius.domain.entity.Country
+import app.mobius.domain.model.Country
 import java.util.*
 import javax.persistence.*
 

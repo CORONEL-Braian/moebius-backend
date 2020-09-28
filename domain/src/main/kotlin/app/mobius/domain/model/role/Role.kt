@@ -1,8 +1,8 @@
-package app.mobius.domain.entity.role
+package app.mobius.domain.model.role
 
-import app.mobius.domain.entity.security.StatusLiveness
-import app.mobius.domain.mapper.role.Permission
-import app.mobius.domain.mapper.role.Subscription
+import app.mobius.domain.model.security.StatusLiveness
+import app.mobius.domain.entity.role.Permission
+import app.mobius.domain.entity.role.Subscription
 import java.util.*
 import javax.persistence.*
 

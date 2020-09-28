@@ -11,19 +11,18 @@ import java.util.*
 import javax.persistence.*
 import javax.xml.bind.Element
 
-
 /**
- *
+ * Java data base managment
  * Source:
  *  https://docs.jboss.org/hibernate/core/3.3/reference/en/html/session-configuration.html
- *  https://stackoverflow.com/a/44816353/5279996
- *  https://www.baeldung.com/hibernate-mappingexception-unknown-entity
+ * TODO: Auto scan with spring -> https://www.baeldung.com/the-persistence-layer-with-spring-and-jpa
  */
-class JDBCManager {
+class JDBM {
 
-    object HibernateCfg {
+    object Hibernate {
 
         private const val HIBERNATE_CONFIGURATION = "secret-hibernate.cfg.xml"
+        private const val PACKAGE_ENTITIES = "app.mobius.domain.entity"
 
         /**
          * @param operation: e.g: save/update/read
@@ -43,7 +42,7 @@ class JDBCManager {
          * Open the session using hibernate cfg for only mapped entity
          * @param canonicalName: e.g: secret-hibernate.cfg.xml
          */
-        fun openSession(annotatedClass: Class<*>, canonicalName: String = HIBERNATE_CONFIGURATION) : Session {
+        fun openSessionForOnly(annotatedClass: Class<*>, canonicalName: String = HIBERNATE_CONFIGURATION) : Session {
             val sessionFactory = CustomSessionFactory.getSessionFactory(annotatedClass, canonicalName)
             return sessionFactory.openSession()
         }
@@ -52,7 +51,7 @@ class JDBCManager {
         /**
          * Open the session using hibernate cfg for all mapped entities
          */
-        fun openSessionWithCfgForAll(resource: String = "secret-hibernate.cfg.xml") : Session {
+        fun openSession(resource: String = HIBERNATE_CONFIGURATION) : Session {
             val sessionFactory = autoScanEntities(resource)
             return sessionFactory.openSession()
         }
@@ -87,18 +86,17 @@ class JDBCManager {
 
         }
 
-
         /**
          * Generate session factory for a lot of mapped entities
-         * TODO: Ver si puedo EVITAR usar reflexion usando el archivo de persistencia que deberia hacerlo
          * Add all the classes annotated with Entity in the configuration
          * Precondition: The prefix contains classes with a configured hibernate mapping
+         * OBS: Spring could be auto scan by packages with LocalContainerEntityManagerFactoryBean
          * Source: https://stackoverflow.com/a/60015879/5279996
          */
         private fun autoScanEntities(resource: String) : SessionFactory {
             val configuration = Configuration()
                     .configure(resource)
-            val reflections = Reflections("app.mobius.domain.mapper")
+            val reflections = Reflections(PACKAGE_ENTITIES)
             val importantClasses: Set<Class<*>> = reflections.getTypesAnnotatedWith(Entity::class.java)
             var i = 0
             println("-------")
@@ -146,13 +144,17 @@ class JDBCManager {
 
     }
 
+
     /**
      * Observation: persistence.xml file dont work for auto scan
      *      . Hibernate only scans for JPA Entities inside jar files, and not in classes/ folders !!!
-     * Source: https://stackoverflow.com/a/41845759/5279996
+     * Source:
+     *  . https://stackoverflow.com/a/44816353/5279996
+     *  . https://stackoverflow.com/a/41845759/5279996
+     *  . https://stackoverflow.com/a/13756652/5279996
      */
     @SuppressWarnings
-    object CustomPersistence {
+    private object JPA {
 
         fun executeQuery(session: Session, operation: () -> Unit) {
             val entityManager = createEntityManager()
@@ -162,14 +164,9 @@ class JDBCManager {
         }
 
         /**
-         * Open session using JPA without entities
-
-         TODO: Probar obtener el SessionManager y escanear un paquete:
-         sessionFactory.setPackagesToScan(
-            new String[] { "com.baeldung.ex.mappingexception.persistence.model" });
-
+         * Open session without entities
          */
-        fun openSessionWithJPA() = createEntityManager().unwrap(Session::class.java)
+        fun openSession() = createEntityManager().unwrap(Session::class.java)
 
         fun createEntityManager(): EntityManager {
             val entityManagerFactory = Persistence.createEntityManagerFactory(

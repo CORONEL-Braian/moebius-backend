@@ -1,19 +1,20 @@
 package app.mobius.data.datasource.role
 
-import app.mobius.data.di.JDBCManager
+import app.mobius.data.di.JDBM
 import app.mobius.data.util.getUUID
 import app.mobius.data.util.randomString
-import app.mobius.domain.mapper.role.Resource
+import app.mobius.domain.entity.role.Resource
 import org.junit.jupiter.api.Test
 
 class SqlResourceDataSourceTest {
 
     @Test
     fun `create a resource`() {
-        val resource = Resource(getUUID("resource"), "test", "/test ${randomString()}")
+        val randomLocation = randomString("/test")
+        val resource = Resource(getUUID("resource"), "test", randomLocation)
 
-        val session = JDBCManager.openSession_2(annotatedClass = Resource::class.java)
-        JDBCManager.executeQuery(session, "Work") {
+        val session = JDBM.Hibernate.openSession()
+        JDBM.Hibernate.executeQuery(session, "Work") {
             session.save(resource)
         }
     }
