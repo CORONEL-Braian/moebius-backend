@@ -21,7 +21,15 @@ data class Role(
         @OneToOne(cascade = [CascadeType.ALL])
         @JoinColumn(name = "subscription_uuid", referencedColumnName = "subscription_uuid")
         val subscription: Subscription,
-//        val permissions: List<Permission>?
+
+        @ManyToMany(cascade = [CascadeType.ALL])
+        @JoinTable(
+                name = "role_has_permission",
+                joinColumns = [ JoinColumn(name = "role_uuid") ],
+                inverseJoinColumns = [ JoinColumn(name = "permission_uuid") ]
+        )
+        val permissions: List<Permission>
+
 ) {
-        constructor() : this(subscription = Subscription())
+        constructor() : this(subscription = Subscription(), permissions = listOf())
 }

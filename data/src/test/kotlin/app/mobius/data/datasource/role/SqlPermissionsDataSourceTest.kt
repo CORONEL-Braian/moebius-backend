@@ -11,9 +11,11 @@ class SqlPermissionsDataSourceTest {
 
     @Test
     fun `create a permission with nulls in the entities uuid`() {
+//        Given
         val randomLocation = randomString("/test")
         val resource = Resource(resourceUUID = null, name = "test", location = randomLocation)
 
+//        When
         val permission = Permission(permissionUUID = null, operation = Operation.CREATE, resource = resource)
         val session = JDBM.Hibernate.openSession()
         JDBM.Hibernate.executeQuery(session) {

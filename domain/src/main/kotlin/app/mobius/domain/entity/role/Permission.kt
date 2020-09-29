@@ -6,11 +6,7 @@ import org.hibernate.annotations.TypeDef
 import java.util.*
 import javax.persistence.*
 
-/*@Entity
-@Table(name = "")
-data class Permissions(
-
-)*/
+//data class Permissions()
 
 /**
  * https://stackoverflow.com/a/14286082/5279996

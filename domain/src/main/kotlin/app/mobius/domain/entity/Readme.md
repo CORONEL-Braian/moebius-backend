@@ -27,3 +27,7 @@ The entity class may have other constructors as well. The no-arg constructor mus
 ##### @Enum:
 [Source](https://stackoverflow.com/a/64021041/5279996)
 
+
+##### @ManyToMany:
+
+[Source](https://www.baeldung.com/hibernate-many-to-many)
