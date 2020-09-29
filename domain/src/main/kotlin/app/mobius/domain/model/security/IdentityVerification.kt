@@ -1,5 +1,6 @@
 package app.mobius.domain.model.security
 
+import app.mobius.domain.entity.StatusLiveness
 import app.mobius.domain.model.Country
 import java.util.*
 import javax.persistence.*
@@ -45,7 +46,3 @@ data class Liveness(
         @Id @GeneratedValue @Column(name = "liveness_uuid") val livenessUUID: UUID? = null,
         val statusLiveness: StatusLiveness = StatusLiveness.UNSOLICITED
 )
-
-enum class StatusLiveness {
-    UNSOLICITED, ALIVE, MISSING, DECEASED
-}

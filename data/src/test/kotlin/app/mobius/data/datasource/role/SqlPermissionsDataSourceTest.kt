@@ -16,7 +16,7 @@ class SqlPermissionsDataSourceTest {
 
         val permission = Permission(permissionUUID = null, operation = Operation.CREATE, resource = resource)
         val session = JDBM.Hibernate.openSession()
-        JDBM.Hibernate.executeQuery(session, "Work") {
+        JDBM.Hibernate.executeQuery(session) {
             session.save(permission)
             val query = session.createQuery("FROM Resource").resultList
             print("Query: $query")

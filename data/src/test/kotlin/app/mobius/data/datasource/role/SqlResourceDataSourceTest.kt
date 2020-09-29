@@ -13,7 +13,7 @@ class SqlResourceDataSourceTest {
         val resource = Resource(null, "test", randomLocation)
 
         val session = JDBM.Hibernate.openSession()
-        JDBM.Hibernate.executeQuery(session, "Work") {
+        JDBM.Hibernate.executeQuery(session) {
             session.save(resource)
         }
     }

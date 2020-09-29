@@ -7,12 +7,12 @@ import org.junit.jupiter.api.Test
 class SqlRoleDataSourceTest {
 
     @Test
-    fun `create a resource`() {
-//        val role = Role()
+    fun `create a role`() {
+        val role = Role()
 
         val session = JDBM.Hibernate.openSession()
-        JDBM.Hibernate.executeQuery(session, "Work") {
-//            session.save(role)
+        JDBM.Hibernate.executeQuery(session) {
+            session.save(role)
         }
     }
 

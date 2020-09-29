@@ -22,7 +22,7 @@ class SqlIdentityDataSourceTest {
     fun `create role`() {
 //        val role = Role()
         val session = JDBM.Hibernate.openSession()
-        JDBM.Hibernate.executeQuery(session, "Work") {
+        JDBM.Hibernate.executeQuery(session) {
 //            session.save(role)
         }
     }
@@ -31,7 +31,7 @@ class SqlIdentityDataSourceTest {
     fun `create identity`() {
 //        val identity = Identity()
         val session = JDBM.Hibernate.openSession()
-        JDBM.Hibernate.executeQuery(session, "Work") {
+        JDBM.Hibernate.executeQuery(session) {
 //            session.save(identity)
         }
     }

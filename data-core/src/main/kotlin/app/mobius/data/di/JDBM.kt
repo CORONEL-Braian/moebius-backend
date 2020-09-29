@@ -28,7 +28,7 @@ class JDBM {
          * @param operation: e.g: save/update/read
          * @param message: successfully
          */
-        fun executeQuery(session: Session, message: String, operation: () -> Unit) {
+        fun executeQuery(session: Session, message: String = "", operation: () -> Unit) {
             try {
                 beginTransaction(session)
                 executeOperation(session, operation)
@@ -135,9 +135,9 @@ class JDBM {
          * Commit transaction
          * Obs: A rollback could also be performed as an alternative
          */
-        private fun commitTransaction(session: Session, message: String) : Unit =
+        private fun commitTransaction(session: Session, message: String = "") : Unit =
                 session.transaction.commit().apply {
-                    println("commitTransaction to db successfully: $message")
+                    println("JDBM: commitTransaction to db successfully $message")
                 }
 
         /**

@@ -16,7 +16,7 @@ data class Subscription(
         @Enumerated(EnumType.STRING) @Column(name = "status_subscription") @Type(type = "pgsql_enum")
         val statusSubscription: StatusSubscription = StatusSubscription.FREE
 ) {
-    constructor() : this(UUID.randomUUID())
+    constructor() : this(null)
 }
 
 enum class StatusSubscription {
