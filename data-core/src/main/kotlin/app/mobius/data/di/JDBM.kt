@@ -28,6 +28,7 @@ class JDBM {
          * @param operation: e.g: save/update/read
          * @param message: successfully
          */
+        @Throws(HibernateException::class)
         fun executeQuery(session: Session, message: String = "", operation: () -> Unit) {
             try {
                 beginTransaction(session)
@@ -35,6 +36,8 @@ class JDBM {
                 println("MetaModel: ${session.metamodel.managedTypes}")
                 println("MetaModel: ${session.metamodel}")
                 commitTransaction(session, message)
+            } catch (e: HibernateException) {
+                e.printStackTrace()
             } finally {
                 endSession(session, session.sessionFactory)
             }

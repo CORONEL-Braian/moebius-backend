@@ -1,5 +1,6 @@
 package app.mobius.data.di
 
+import app.mobius.domain.entity.role.Resource
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import java.io.FileInputStream
@@ -19,12 +20,12 @@ class JDBMTest {
 
     @Test
     fun `open session with hibernate cfg and only one entity`() {
-        JDBM.Hibernate.openSessionForOnly(SomeTest::class.java)
+        JDBM.Hibernate.openSessionForOnly(Resource::class.java)
     }
 
     @Test
     fun `close session with hibernate cfg and only one entity`() {
-        val session = JDBM.Hibernate.openSessionForOnly(SomeTest::class.java)
+        val session = JDBM.Hibernate.openSessionForOnly(Resource::class.java)
 
 //        Execute an empty operation for close session
         JDBM.Hibernate.executeQuery(session, "") {}

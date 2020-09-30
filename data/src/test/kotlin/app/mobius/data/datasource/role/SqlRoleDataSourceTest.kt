@@ -21,12 +21,14 @@ class SqlRoleDataSourceTest {
     fun `create a role with permissions`() {
 //        Given
         val randomLocation = randomString("/test")
-        val resource = Resource(resourceUUID = null, name = "test", location = randomLocation)
-        val permission = Permission(permissionUUID = null, operation = Operation.CREATE, resource = resource)
+        val resource = Resource(resourceUUID = null, name = "test", location = "/test 12345")
+        val permission1 = Permission(permissionUUID = null, operation = Operation.CREATE, resource = resource)
+        val permission2 = Permission(permissionUUID = null, operation = Operation.READ, resource = resource)
 
 //        When
         val permissions = listOf(
-                permission
+                permission1,
+                permission2
         )
         val role = Role(subscription = Subscription(), permissions = permissions)
         val session = JDBM.Hibernate.openSession()
