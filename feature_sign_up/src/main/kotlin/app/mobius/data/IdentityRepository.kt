@@ -1,6 +1,6 @@
 package app.mobius.data
 
-import app.mobius.domain.model.Identity
+import app.mobius.domain.model.Person
 
 /**
  * Communicates with the SQL data source
@@ -10,7 +10,7 @@ import app.mobius.domain.model.Identity
 class IdentityRepository {
 
 
-    fun saveIdentity(identity: Identity) {
+    fun saveIdentity(person: Person) {
 
     }
 

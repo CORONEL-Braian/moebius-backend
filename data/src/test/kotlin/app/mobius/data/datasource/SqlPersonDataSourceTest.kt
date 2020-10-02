@@ -1,12 +1,9 @@
 package app.mobius.data.datasource
 
 import app.mobius.data.di.JDBM
-import app.mobius.domain.model.Identity
-import app.mobius.domain.entity.role.Role
-import io.mockk.mockk
 import org.junit.jupiter.api.Test
 
-class SqlIdentityDataSourceTest {
+class SqlPersonDataSourceTest {
 
     @Test
     fun `create profile`() {

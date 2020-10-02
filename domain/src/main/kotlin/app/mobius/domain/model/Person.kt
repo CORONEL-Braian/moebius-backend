@@ -5,9 +5,12 @@ import app.mobius.domain.model.setting.Setting
 import java.util.*
 import javax.persistence.*
 
+/**
+ * Be endowed with reason, self-aware and possessed of their own identity
+ */
 @Entity
-@Table(name = "identity")
-data class Identity(
+@Table(name = "person")
+data class Person(
         @Id @GeneratedValue @Column(name = "identity_uuid") val identityUUID: UUID? = null,
         val identityname: String,
         val profile: Profile,

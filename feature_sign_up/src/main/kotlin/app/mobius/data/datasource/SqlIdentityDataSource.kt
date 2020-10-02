@@ -1,6 +1,6 @@
 package app.mobius.data.datasource
 
-import app.mobius.domain.model.Identity
+import app.mobius.domain.model.Person
 import javax.persistence.*
 
 @Entity
@@ -9,7 +9,7 @@ data class SomeTest(@Id val test: String?)
 
 class SqlIdentityDataSource: IdentityStore {
 
-    override fun createIdentity(identity: Identity) {
+    override fun createIdentity(person: Person) {
 
 
     }
