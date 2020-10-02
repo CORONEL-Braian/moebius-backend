@@ -52,7 +52,7 @@ class JDBM {
          * @param canonicalName: e.g: secret-hibernate.cfg.xml
          */
         fun openSessionForOnly(annotatedClass: Class<*>, canonicalName: String = HIBERNATE_CONFIGURATION) : Session {
-            val sessionFactory = CustomSessionFactory.getSessionFactory(annotatedClass, canonicalName)
+            val sessionFactory = getSessionFactory(annotatedClass, canonicalName)
             return sessionFactory.openSession()
         }
 
@@ -65,34 +65,31 @@ class JDBM {
             return sessionFactory.openSession()
         }
 
-        object CustomSessionFactory {
-            /**
-             * Generate session configuration for a simple entity
-             * PRE: Configure entity mapping in open-persistence.xml necessary for the class hierarchy
-             * OBS: Session Factory puede tener varias sesiones abiertas.
-             * @param annotatedClass The class containing annotations
-             * @param canonicalName: e.g: secret-hibernate.cfg.xml
-             */
-            @Throws(HibernateException::class)
-            fun getSessionFactory(annotatedClass: Class<*>, canonicalName: String) : SessionFactory {
-                return Configuration()
-                        .configure(getFile(canonicalName))
-                        .addAnnotatedClass(annotatedClass)
-                        .buildSessionFactory()
-            }
+        /**
+         * Generate session configuration for a simple entity
+         * PRE: Configure entity mapping in open-persistence.xml necessary for the class hierarchy
+         * OBS: Session Factory puede tener varias sesiones abiertas.
+         * @param annotatedClass The class containing annotations
+         * @param canonicalName: e.g: secret-hibernate.cfg.xml
+         */
+        @Throws(HibernateException::class)
+        fun getSessionFactory(annotatedClass: Class<*>, canonicalName: String) : SessionFactory {
+            return Configuration()
+                    .configure(getFile(canonicalName))
+                    .addAnnotatedClass(annotatedClass)
+                    .buildSessionFactory()
+        }
 
-            /**
-             * Get absolute path of file of secret-hibernate
-             * @param canonicalName: e.g: secret-hibernate.cfg.xml
-             * Source: https://stackoverflow.com/a/64084771/5279996
-             */
-            private fun getFile(canonicalName: String): File {
-                val currentWorkingDir = System.getProperty("user.dir")
-                val absoulutePath = "$currentWorkingDir/src/main/resources/$canonicalName"
-                println("Absolute Path of secret-hibernate.cfg.xml: $absoulutePath")
-                return File(absoulutePath)
-            }
-
+        /**
+         * Get absolute path of file of secret-hibernate
+         * @param canonicalName: e.g: secret-hibernate.cfg.xml
+         * Source: https://stackoverflow.com/a/64084771/5279996
+         */
+        private fun getFile(canonicalName: String): File {
+            val currentWorkingDir = System.getProperty("user.dir")
+            val absoulutePath = "$currentWorkingDir/src/main/resources/$canonicalName"
+            println("Absolute Path of secret-hibernate.cfg.xml: $absoulutePath")
+            return File(absoulutePath)
         }
 
         /**
@@ -102,9 +99,9 @@ class JDBM {
          * OBS: Spring could be auto scan by packages with LocalContainerEntityManagerFactoryBean
          * Source: https://stackoverflow.com/a/60015879/5279996
          */
-        private fun autoScanEntities(resource: String) : SessionFactory {
+        private fun autoScanEntities(canonicalName: String) : SessionFactory {
             val configuration = Configuration()
-                    .configure(resource)
+                    .configure(getFile(canonicalName))
             val reflections = Reflections(PACKAGE_ENTITIES)
             val importantClasses: Set<Class<*>> = reflections.getTypesAnnotatedWith(Entity::class.java)
             var i = 0
