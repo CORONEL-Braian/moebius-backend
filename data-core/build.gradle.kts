@@ -19,4 +19,5 @@ dependencies {
 
     implementation(project(":library_base"))
     implementation(project(":library_test_utils"))
+    implementation(kotlin("reflect"))
 }

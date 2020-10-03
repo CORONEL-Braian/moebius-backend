@@ -7,9 +7,7 @@ import org.hibernate.Transaction
 import org.hibernate.cfg.Configuration
 import org.reflections.Reflections
 import java.io.File
-import java.util.*
 import javax.persistence.*
-import javax.xml.bind.Element
 
 /**
  * Java data base managment
@@ -82,14 +80,16 @@ class JDBM {
 
         /**
          * Get absolute path of file of secret-hibernate
+         * PRE: File is in data-core module
          * @param canonicalName: e.g: secret-hibernate.cfg.xml
          * Source: https://stackoverflow.com/a/64084771/5279996
          */
         private fun getFile(canonicalName: String): File {
-            val currentWorkingDir = System.getProperty("user.dir")
-            val absoulutePath = "$currentWorkingDir/src/main/resources/$canonicalName"
-            println("Absolute Path of secret-hibernate.cfg.xml: $absoulutePath")
-            return File(absoulutePath)
+            val absolutePathCurrentModule = System.getProperty("user.dir")
+            val pathFromProjectRoot = absolutePathCurrentModule.dropLastWhile { it != '/' }
+            val absolutePathFromProjectRoot = "$pathFromProjectRoot/data-core/src/main/resources/$canonicalName"
+            println("Absolute Path of secret-hibernate.cfg.xml: $absolutePathFromProjectRoot")
+            return File(absolutePathFromProjectRoot)
         }
 
         /**

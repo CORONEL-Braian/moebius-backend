@@ -1,10 +1,12 @@
 package app.mobius.data.datasource.role
 
+import app.mobius.data.di.HibernateUtil
 import app.mobius.data.di.JDBM
 import app.mobius.data.util.randomString
 import app.mobius.domain.entity.role.Resource
 import org.hibernate.AssertionFailure
 import org.hibernate.HibernateException
+import org.hibernate.Session
 import org.hibernate.engine.jdbc.spi.SqlExceptionHelper
 import org.hibernate.exception.ConstraintViolationException
 import org.junit.jupiter.api.*
@@ -12,20 +14,37 @@ import org.postgresql.util.PSQLException
 import java.lang.Exception
 import kotlin.properties.Delegates
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SqlResourceDataSourceTest {
 
-    private var exists by Delegates.notNull<Boolean>()
+    private lateinit var hibernate : HibernateUtil
+    private lateinit var session : Session
+
+    val exists = true
 
     @BeforeAll
     fun before() {
-        exists = resourceExist()
-
+        hibernate = HibernateUtil()
     }
 
-    private fun resourceExist(): Boolean {
-        return false
+    @BeforeEach
+    fun beforeEach() {
+        session = JDBM.Hibernate.openSession()
     }
 
+
+    @Test
+    fun isThereAUniqueExistingField() {
+        val session = JDBM.Hibernate.openSession()
+
+        val resource = Resource(name = "/test", location = "/test")
+        Assertions.assertEquals(
+                true,
+                hibernate.isThereAUniqueExistingField(
+                        Resource::class.java, resource
+                )
+        )
+    }
 
     @Test
     fun `given a random name and location if not exists, when insert, then create a resource  -- should doesn't throw Exception`() {

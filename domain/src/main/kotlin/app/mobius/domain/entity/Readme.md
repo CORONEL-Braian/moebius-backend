@@ -33,3 +33,7 @@ The entity class may have other constructors as well. The no-arg constructor mus
 This association has two sides i.e. the owning side and the inverse side
 
 [Source](https://www.baeldung.com/hibernate-many-to-many)
+
+
+#### @Column
+ * unique: https://stackoverflow.com/a/36945146/5279996
