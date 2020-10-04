@@ -8,9 +8,6 @@ import javax.persistence.*
 import javax.persistence.criteria.CriteriaQuery
 import javax.persistence.criteria.Root
 
-/**
- * https://codingexplained.com/coding/java/hibernate/unique-field-validation-using-hibernate-spring
- */
 class HibernateUtil {
 
     private val session = JDBM.Hibernate.openSession()
@@ -31,16 +28,16 @@ class HibernateUtil {
      * throughout the entity hierarchy with Unique and UniqueConstraint
      * OBS: It is not guaranteed that the value does not exist when an entity is being persisted
      */
-    fun <T> isUniquenessValid(t: Class<T>, candidateObject: Any) : Boolean {
+    fun isUniquenessValid(candidateObject: Any) : Boolean {
 //        TODO: Evaluate @JoinColumn
 //        TODO: Evaluate @Table uniqueConstraints
 
-        val uniqueFields = getUniqueFieldsOfColumn(t)
+        val uniqueFields = getUniqueFieldsOfColumn(candidateObject::class.java)
         uniqueFields.map { field ->
             val value = candidateObject.propertyValue<Any>(field.name)
-            if (isExistingField(t, field.name, value)) return true
+            if (isExistingField(candidateObject::class.java, field.name, value)) return false
         }
-        return false
+        return true
     }
 
     /**

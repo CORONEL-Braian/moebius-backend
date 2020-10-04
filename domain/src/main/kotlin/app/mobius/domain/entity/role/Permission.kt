@@ -14,9 +14,9 @@ import javax.persistence.*
 @Entity
 @Table(
         name = "permission",
-        uniqueConstraints = [
+       /* uniqueConstraints = [
                 UniqueConstraint(columnNames = ["permission_uuid"]),
-        ]
+        ]*/
 )
 @TypeDef(name = "pgsql_enum", typeClass = PostgreSQLEnumType::class)
 data class Permission(

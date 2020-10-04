@@ -36,4 +36,8 @@ This association has two sides i.e. the owning side and the inverse side
 
 
 #### @Column
- * unique: https://stackoverflow.com/a/36945146/5279996
+ * uniqueness: 
+    *Sources:*
+             * https://stackoverflow.com/a/36945146/5279996
+             * https://codingexplained.com/coding/java/hibernate/unique-field-validation-using-hibernate-spring
+    

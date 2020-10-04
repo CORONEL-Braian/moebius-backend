@@ -18,12 +18,10 @@ data class Role(
 
         @Column(name = "security_level") val securityLevel: Int = 0,
 
-        @Column(unique = true)
         @OneToOne(cascade = [CascadeType.ALL])
         @JoinColumn(name = "subscription_uuid", referencedColumnName = "subscription_uuid")
         val subscription: Subscription,
 
-        @Column(unique = true)
         @ManyToMany(cascade = [CascadeType.ALL])
         @JoinTable(
                 name = "role_has_permission",
