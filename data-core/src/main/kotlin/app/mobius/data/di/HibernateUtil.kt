@@ -4,7 +4,7 @@ import app.mobius.data.util.propertyValue
 import app.mobius.domain.entity.role.Resource
 import org.hibernate.query.Query
 import java.lang.reflect.Field
-import javax.persistence.Column
+import javax.persistence.*
 import javax.persistence.criteria.CriteriaQuery
 import javax.persistence.criteria.Root
 
@@ -27,12 +27,17 @@ class HibernateUtil {
     }
 
     /**
-     * Describe si hay algun campo que tiene un valor unico existente
+     * Describes if a new object is compatible with respect to uniqueness
+     * throughout the entity hierarchy with Unique and UniqueConstraint
+     * OBS: It is not guaranteed that the value does not exist when an entity is being persisted
      */
-    fun <T> isThereAUniqueExistingField(t: Class<T>, instance: Any) : Boolean {
+    fun <T> isUniquenessValid(t: Class<T>, candidateObject: Any) : Boolean {
+//        TODO: Evaluate @JoinColumn
+//        TODO: Evaluate @Table uniqueConstraints
+
         val uniqueFields = getUniqueFieldsOfColumn(t)
         uniqueFields.map { field ->
-            val value = instance.propertyValue<Any>(field.name)
+            val value = candidateObject.propertyValue<Any>(field.name)
             if (isExistingField(t, field.name, value)) return true
         }
         return false
@@ -56,17 +61,17 @@ class HibernateUtil {
     }
 
     /**
-     * Describe the unique fields that do have annotation @Column
+     * Describes the unique fields with @Column
      */
     private fun <T> getUniqueFieldsOfColumn(t: Class<T>): List<Field> {
         val declaredFields = t.declaredFields
         return declaredFields.filter { field ->
-            isUniqueFieldOfColumn(field)
+            isUniqueFieldOfColumn(field) && !field.isAnnotationPresent(Id::class.java)
         }
     }
 
     /**
-     * Describe si un campo tiene la anotacion @Column y es unico
+     * Describes if a field has the @Column annotation and is unique
      * Source: https://stackoverflow.com/a/4296973/5279996
      */
     private fun isUniqueFieldOfColumn(field: Field) : Boolean {
@@ -75,6 +80,22 @@ class HibernateUtil {
                 field.getAnnotation(annotationClass).unique
     }
 
+    /**
+     * Describes if a field has an entity association and is unique
+     */
+    private fun isUniqueFieldOfJoinColumn(field: Field) : Boolean {
+        val annotationClass = JoinColumn::class.java
+        return field.isAnnotationPresent(annotationClass) &&
+                field.getAnnotation(annotationClass).unique
+    }
+
+    private fun <T> getUniqueConstraints(t: Class<T>) : List<UniqueConstraint> {
+        val declaredFields = t.declaredFields
+        declaredFields.map {
+            it.getAnnotation(Table::class.java).uniqueConstraints
+        }
+        return listOf() //TODO
+    }
 
     private fun <T> getCriteriaQuery(t: Class<T>) : CriteriaQuery<T> {
         return builder.createQuery(t)

@@ -4,15 +4,9 @@ import app.mobius.data.di.HibernateUtil
 import app.mobius.data.di.JDBM
 import app.mobius.data.util.randomString
 import app.mobius.domain.entity.role.Resource
-import org.hibernate.AssertionFailure
-import org.hibernate.HibernateException
 import org.hibernate.Session
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper
-import org.hibernate.exception.ConstraintViolationException
 import org.junit.jupiter.api.*
-import org.postgresql.util.PSQLException
 import java.lang.Exception
-import kotlin.properties.Delegates
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SqlResourceDataSourceTest {
@@ -40,7 +34,7 @@ class SqlResourceDataSourceTest {
         val resource = Resource(name = "/test", location = "/test")
         Assertions.assertEquals(
                 true,
-                hibernate.isThereAUniqueExistingField(
+                hibernate.isUniquenessValid(
                         Resource::class.java, resource
                 )
         )
