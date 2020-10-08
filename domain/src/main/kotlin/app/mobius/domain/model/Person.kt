@@ -12,7 +12,7 @@ import javax.persistence.*
 @Table(name = "person")
 data class Person(
         @Id @GeneratedValue @Column(name = "identity_uuid") val identityUUID: UUID? = null,
-        val identityname: String,
+        val username: String,
         val profile: Profile,
         val setting: Setting,
         val role: Role,

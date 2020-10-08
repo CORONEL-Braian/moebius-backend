@@ -14,8 +14,6 @@ class SqlResourceDataSourceTest {
     private lateinit var hibernate : HibernateUtil
     private lateinit var session : Session
 
-    val exists = true
-
     @BeforeAll
     fun before() {
         hibernate = HibernateUtil()
