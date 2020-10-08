@@ -26,30 +26,25 @@ class SqlPermissionsDataSourceTest {
     }
 
     @Test
-    fun testJoin() {
-
-    }
-
-    @Test
-    fun `given a permission and is uniqueness valid, when insert, then create a permission -- should doesn't throw Exception`() {
+    fun `given a same permission, when uniqueness is valid and insert, then create a permission -- should doesn't throw Exception`() {
 //        Given
         val name = "/test 4"; val location = "/test 4"
         val resource = Resource(null, name, location)
         val permission = Permission(permissionUUID = null, operation = Operation.CREATE, resource = resource)
 
         assertDoesNotThrow("") {
-         /*   if (hibernate.isUniquenessValid(permission)) {
+            if (hibernate.isUniquenessValid(permission)) {
                 JDBM.Hibernate.executeQuery(session) {
                     session.save(permission)
                 }
-            }*/
+            }
         }
 
         Assertions.assertEquals(false, hibernate.isUniquenessValid(permission))
     }
 
     @Test
-    fun `create a permission with nulls in the entities uuid`() {
+    fun `create a random permission, when uniqueness is valid and insert, then create a permission -- should doesn't throw Exception`() {
 //        Given
         val randomName = randomString("/test")
         val randomLocation = randomString("/test")
@@ -57,12 +52,15 @@ class SqlPermissionsDataSourceTest {
         val permission = Permission(permissionUUID = null, operation = Operation.CREATE, resource = resource)
 
 //        When
-        val session = JDBM.Hibernate.openSession()
-        JDBM.Hibernate.executeQuery(session) {
-            session.save(permission)
-            val query = session.createQuery("FROM Resource").resultList
-            print("Query: $query")
+        assertDoesNotThrow("") {
+            if (hibernate.isUniquenessValid(permission)) {
+                JDBM.Hibernate.executeQuery(session) {
+                    session.save(permission)
+                }
+            }
         }
+
+        Assertions.assertEquals(false, hibernate.isUniquenessValid(permission))
     }
 
 }

@@ -3,7 +3,6 @@ package app.mobius.data.di
 import app.mobius.data.util.propertyValue
 import app.mobius.domain.entity.role.Resource
 import org.hibernate.query.Query
-import java.lang.Exception
 import java.lang.reflect.Field
 import java.util.*
 import javax.persistence.*
@@ -43,6 +42,7 @@ class HibernateUtil {
     fun isUniquenessValid(instance: Any) : Boolean {
         val declaredFields = instance::class.java.declaredFields
         val joinColumn = JoinColumn::class.java
+        val joinTable = JoinTable::class.java
 
         declaredFields.filter {
             !it.isAnnotationPresent(Id::class.java)
@@ -52,7 +52,6 @@ class HibernateUtil {
                 if (isExistingField(instance::class.java, field.name, value)) return false
 
             /**
-             * If the field is @JoinColumn:
              *  1. If the uniqueness of the sub-entity is valid: @return true
              *      . Is not necessary to know the uniqueness of the entity because a new sub-entity uuid is generated in entity
              *  2. If the uniqueness of the sub-entity is not valid: @return false
@@ -61,7 +60,15 @@ class HibernateUtil {
             } else if (field.isAnnotationPresent(joinColumn)) {
                 val subEntity = instance.propertyValue<Any>(field.name)
                 if (!isUniquenessValid(subEntity)) return false
+
+            /**
+             *
+             */
+            } else if (field.isAnnotationPresent(joinTable)) {
+
             }
+
+
         }
         return true
     }
