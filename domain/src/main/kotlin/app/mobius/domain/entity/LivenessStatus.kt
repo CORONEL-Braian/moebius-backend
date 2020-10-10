@@ -1,6 +1,6 @@
 package app.mobius.domain.entity
 
 
-enum class StatusLiveness {
+enum class LivenessStatus {
     UNSOLICITED, ALIVE, MISSING, DECEASED
 }

@@ -1,6 +1,6 @@
 package app.mobius.domain.entity.role
 
-import app.mobius.domain.entity.StatusLiveness
+import app.mobius.domain.entity.LivenessStatus
 import app.mobius.util.PostgreSQLEnumType
 import org.hibernate.annotations.Type
 import org.hibernate.annotations.TypeDef
@@ -11,22 +11,22 @@ import javax.persistence.*
 @Table(name = "role")
 @TypeDef(name = "pgsql_enum", typeClass = PostgreSQLEnumType::class)
 data class Role(
-        @Id @GeneratedValue @Column(name = "role_uuid") val roleUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "roleUUID") val roleUUID: UUID? = null,
 
-        @Enumerated(EnumType.STRING) @Column(name = "status_liveness") @Type(type = "pgsql_enum")
-        val statusLiveness: StatusLiveness = StatusLiveness.UNSOLICITED,
+        @Enumerated(EnumType.STRING) @Column(name = "livenessStatus") @Type(type = "pgsql_enum")
+        val livenessStatus: LivenessStatus = LivenessStatus.UNSOLICITED,
 
-        @Column(name = "security_level") val securityLevel: Int = 0,
+        @Column(name = "securityLevel") val securityLevel: Int = 0,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "subscription_uuid", referencedColumnName = "subscription_uuid")
+        @JoinColumn(name = "subscriptionUUID", referencedColumnName = "subscriptionUUID")
         val subscription: Subscription,
 
         @ManyToMany(cascade = [CascadeType.ALL])
         @JoinTable(
-                name = "role_has_permission",
-                joinColumns = [ JoinColumn(name = "role_uuid") ],
-                inverseJoinColumns = [ JoinColumn(name = "permission_uuid") ]
+                name = "role_permission",
+                joinColumns = [ JoinColumn(name = "roleUUID") ],
+                inverseJoinColumns = [ JoinColumn(name = "permissionUUID") ]
         )
         val permissions: List<Permission>
 

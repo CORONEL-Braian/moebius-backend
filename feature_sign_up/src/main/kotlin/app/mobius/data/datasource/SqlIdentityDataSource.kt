@@ -7,9 +7,9 @@ import javax.persistence.*
 @Table(name = "test")
 data class SomeTest(@Id val test: String?)
 
-class SqlIdentityDataSource: IdentityStore {
+class SqlPersonDataSource: PersonStore {
 
-    override fun createIdentity(person: Person) {
+    override fun createPerson(person: Person) {
 
 
     }
@@ -25,7 +25,7 @@ class SqlIdentityDataSource: IdentityStore {
 }
 
 fun main() {
-//    SqlIdentityDataSource().createIdentity()
-    SqlIdentityDataSource().test()
+//    SqlPersonDataSource().createPerson()
+    SqlPersonDataSource().test()
 }
 

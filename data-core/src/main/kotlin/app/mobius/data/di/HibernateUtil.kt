@@ -30,58 +30,66 @@ class HibernateUtil {
     }
 
     /**
-     * Describes whether a new object is valid for uniqueness in the entity hierarchy.
+     * - Describes whether a new object is valid for uniqueness in the entity hierarchy.
      * Uniqueness is contemplated in @Column, @JoinColumn and @Table#UniqueConstraint which includes the 2 above.
-     * OBS:
+     * - OBS:
      *  . It is not guaranteed that the value does not exist when an entity is being persisted
      *  . Only @return false is used if the uniqueness is not fulfilled, because with @return true it would stop searching in the
      * first that is valid.
      *  . Kotlin prohibits usage of a variable or a property inside its own initializer.
-     * TODO: Evaluate UniqueConstraints in one table and multiple tables
+     * - TODO: Evaluate UniqueConstraints in one table and multiple tables
      */
     fun isUniquenessValid(instance: Any) : Boolean {
         val declaredFields = instance::class.java.declaredFields
-        val joinColumn = JoinColumn::class.java
-        val joinTable = JoinTable::class.java
 
         declaredFields.filter {
             !it.isAnnotationPresent(Id::class.java)
         }.map {  field ->
-            if (isUniqueFieldOfColumn(field) ) {
-                val value = instance.propertyValue<Any>(field.name)
-                if (isExistingField(instance::class.java, field.name, value)) return false
-
-            /**
-             * Implementation note for @JoinColumn:
-             *  1. If the uniqueness of the sub-entity is valid: @return true
-             *      . Is not necessary to know the uniqueness of the entity because a new sub-entity uuid is generated in entity
-             *  2. If the uniqueness of the sub-entity is not valid: @return false
-             *      . Depending on if the sub-entity has to be unique or not in the entity, some things or others will be done.
-             */
-            } else if (field.isAnnotationPresent(joinColumn)) {
-                val subEntity = instance.propertyValue<Any>(field.name)
-                if (!isUniquenessValid(subEntity)) return false
-
-            } else if (field.isAnnotationPresent(joinTable)) {
-                val subEntities = instance.propertyValue<List<Any>>(field.name)
-                subEntities.map { subEntity ->
-                    if (!isUniquenessValid(subEntity)) return false
-                }
-            }
-
+            if (!isUniquenessValidOfColumn(instance, field)) return false
+            else if (!isUniquenessValidOfJoinColumn(instance, field))  return false
+            else if (!isUniquenessValidOfJoinTable(instance, field)) return false
+            else if (!isUniquenessValidOfUniqueConstraint(instance, field)) return false
         }
         return true
     }
 
-    private fun isUniquenessValidOfColumn() {
-
-    }
-
-    private fun isTableUniqueConstraintValid(instance: Any, field: Field): Boolean {
+    private fun isUniquenessValidOfColumn(instance: Any, field: Field) : Boolean {
         if (isUniqueFieldOfColumn(field) ) {
             val value = instance.propertyValue<Any>(field.name)
             if (isExistingField(instance::class.java, field.name, value)) return false
         }
+        return true
+    }
+
+    /**
+     *  1. If the uniqueness of the sub-entity is valid: @return true
+     *      . Is not necessary to know the uniqueness of the entity because a new sub-entity uuid is generated in entity
+     *  2. If the uniqueness of the sub-entity is not valid: @return false
+     *      . Depending on if the sub-entity has to be unique or not in the entity, some things or others will be done.
+     */
+    private fun isUniquenessValidOfJoinColumn(instance: Any, field: Field) : Boolean {
+        val joinColumn = JoinColumn::class.java
+        if (field.isAnnotationPresent(joinColumn)) {
+            val subEntity = instance.propertyValue<Any>(field.name)
+            if (!isUniquenessValid(subEntity)) return false
+        }
+        return true
+    }
+
+    private fun isUniquenessValidOfJoinTable(instance: Any, field: Field) : Boolean {
+        val joinTable = JoinTable::class.java
+        if (field.isAnnotationPresent(joinTable)) {
+            val subEntities = instance.propertyValue<List<Any>>(field.name)
+            subEntities.map { subEntity ->
+                if (!isUniquenessValid(subEntity)) return false
+            }
+        }
+        return true
+    }
+
+    private fun isUniquenessValidOfUniqueConstraint(instance: Any, field: Field) : Boolean {
+        val table = Table::class.java
+
         return true
     }
 

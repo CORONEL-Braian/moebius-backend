@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class IdentityController(
+class PersonController(
 ) {
 
-    @GetMapping("/identity")
-    fun getIdentity(): Person = TODO()
+    @GetMapping("/person")
+    fun getPerson(): Person = TODO()
 
-    @PostMapping("/identity")
-    fun createIdentity() {
+    @PostMapping("/person")
+    fun createPerson() {
         TODO()
     }
 

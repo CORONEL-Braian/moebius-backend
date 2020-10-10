@@ -2,8 +2,8 @@ package app.mobius.data.datasource
 
 import app.mobius.domain.model.Person
 
-interface IdentityStore {
+interface PersonStore {
 
-    fun createIdentity(person: Person)
+    fun createPerson(person: Person)
 
 }

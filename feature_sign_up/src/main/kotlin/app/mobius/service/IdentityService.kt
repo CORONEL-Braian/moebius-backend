@@ -2,21 +2,21 @@ package app.mobius.service
 
 import org.springframework.stereotype.Service
 
-interface IdentityService {
-    fun createIdentity()
+interface PersonService {
+    fun createPerson()
 }
 
 @Service
-class BaseIdentityService: IdentityService {
+class BasePersonService: PersonService {
 
-    override fun createIdentity() {
+    override fun createPerson() {
         TODO("Not yet implemented")
     }
 
     /**
-     * Describe if a identity is valid
+     * Describe if a person is valid
      */
-    fun isValidIdentity() {
+    fun isValidPerson() {
 
     }
 

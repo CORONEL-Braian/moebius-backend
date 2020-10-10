@@ -25,11 +25,11 @@ class SqlPersonDataSourceTest {
     }
 
     @Test
-    fun `create identity`() {
-//        val identity = Identity()
+    fun `create person`() {
+//        val person = Person()
         val session = JDBM.Hibernate.openSession()
         JDBM.Hibernate.executeQuery(session) {
-//            session.save(identity)
+//            session.save(person)
         }
     }
 

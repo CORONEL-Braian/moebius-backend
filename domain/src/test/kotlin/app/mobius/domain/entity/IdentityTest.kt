@@ -1,5 +1,5 @@
 package app.mobius.domain.entity
 
-class IdentityTest {
+class PersonTest {
 
 }

@@ -1,7 +1,5 @@
-package app.mobius.domain.model.security
+package app.mobius.domain.entity.setting.security
 
-import app.mobius.domain.entity.StatusLiveness
-import org.hibernate.annotations.Type
 import java.util.*
 import javax.persistence.*
 
@@ -11,11 +9,19 @@ import javax.persistence.*
 @Entity
 @Table(name = "security")
 data class Security(
-        @Id @GeneratedValue @Column(name = "security_uuid") val securityUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "securityUUID") val securityUUID: UUID? = null,
+
+        @OneToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name = "authenticationUUID", referencedColumnName = "authenticationUUID")
         val authentication: Authentication,
+
+        @Column(name = "securityLevel")
         val securityLevel: Int = 0,
+
         val securityMethods: SecurityMethods? = null,
-)
+) {
+    constructor() : this(authentication = Authentication())
+}
 
 /**
  * Represents a authentication credential
@@ -24,10 +30,12 @@ data class Security(
 @Entity
 @Table(name = "authentication")
 data class Authentication(
-        @Id @GeneratedValue @Column(name = "authentication_uuid") val authenticationUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "authenticationUUID") val authenticationUUID: UUID? = null,
         val session: Session,
         val basicAuth: BasicAuth
-)
+) {
+    constructor() : this()
+}
 
 /**
  * Represents a traditional authentication
@@ -36,35 +44,33 @@ data class Authentication(
 @Entity
 @Table(name = "traditional_credential")
 data class BasicAuth(
-        @Id @GeneratedValue @Column(name = "traditional_credential_uuid") val traditionalCredentialUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "traditional_credentialUUID") val traditionalCredentialUUID: UUID? = null,
         val email: Email,
         val password: Password,
-)
+) {
+    constructor() : this()
+}
 
 @Entity
 @Table(name = "password")
 data class Password(
-        @Id @GeneratedValue @Column(name = "password_uuid") val passwordUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "passwordUUID") val passwordUUID: UUID? = null,
         val apiHashPassword: String,
         val dbHashPassword: String,
         val resetPasswordToken: String? = null,
         val resetPasswordTokenExpire: String? = null,
-)
+) {
+    constructor() : this()
+}
 
 // TODO: Add more credentials
 
 @Entity
 @Table(name = "email")
 data class Email(
-        @Id @GeneratedValue @Column(name = "email_uuid") val emailUUID: UUID,
-
+        @Id @GeneratedValue @Column(name = "emailUUID") val emailUUID: UUID,
         @Column(name = "email") val email: String,
-
-        @Enumerated(EnumType.STRING) @Column(name = "status_email") @Type(type = "pgsql_enum")
-        val statusEmail: StatusEmail = StatusEmail.UNVERIFIED
-
-)
-
-enum class StatusEmail {
-    UNVERIFIED, INVALID, VERIFIED
+) {
+    constructor() : this()
 }
+

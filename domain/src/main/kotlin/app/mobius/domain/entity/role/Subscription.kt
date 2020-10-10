@@ -11,14 +11,14 @@ import javax.persistence.Entity;
 @Table(name = "subscription")
 @TypeDef(name = "pgsql_enum", typeClass = PostgreSQLEnumType::class)
 data class Subscription(
-        @Id @GeneratedValue @Column(name = "subscription_uuid", updatable = false)
+        @Id @GeneratedValue @Column(name = "subscriptionUUID", updatable = false)
         val subscriptionUUID: UUID? = null,
-        @Enumerated(EnumType.STRING) @Column(name = "status_subscription") @Type(type = "pgsql_enum")
-        val statusSubscription: StatusSubscription = StatusSubscription.FREE
+        @Enumerated(EnumType.STRING) @Column(name = "subscriptionStatus") @Type(type = "pgsql_enum")
+        val subscriptionStatus: SubscriptionStatus = SubscriptionStatus.FREE
 ) {
     constructor() : this(null)
 }
 
-enum class StatusSubscription {
+enum class SubscriptionStatus {
     FREE, PREMIUM
 }

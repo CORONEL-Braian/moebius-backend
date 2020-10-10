@@ -6,7 +6,7 @@ import javax.persistence.*
 @Entity
 @Table(name = "resource")
 data class Resource(
-        @Id @GeneratedValue @Column(name = "resource_uuid") val resourceUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "resourceUUID") val resourceUUID: UUID? = null,
         @Column(name = "name", unique = true) val name: String,
         @Column(name = "location", unique = true) val location: String,
 ) {

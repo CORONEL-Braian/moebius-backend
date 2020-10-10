@@ -7,10 +7,10 @@ import app.mobius.domain.model.Person
  * OBS: Without interface
  * Source: https://stackoverflow.com/a/2814869/5279996
  */
-class IdentityRepository {
+class PersonRepository {
 
 
-    fun saveIdentity(person: Person) {
+    fun savePerson(person: Person) {
 
     }
 
