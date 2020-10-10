@@ -1,5 +1,7 @@
 package app.mobius.domain.model.security
 
+import app.mobius.domain.entity.StatusLiveness
+import org.hibernate.annotations.Type
 import java.util.*
 import javax.persistence.*
 
@@ -35,7 +37,7 @@ data class Authentication(
 @Table(name = "traditional_credential")
 data class BasicAuth(
         @Id @GeneratedValue @Column(name = "traditional_credential_uuid") val traditionalCredentialUUID: UUID? = null,
-        val email: String,
+        val email: Email,
         val password: Password,
 )
 
@@ -54,5 +56,15 @@ data class Password(
 @Entity
 @Table(name = "email")
 data class Email(
-        @Id @GeneratedValue @Column(name = "email_uuid") val emailUUID: UUID
+        @Id @GeneratedValue @Column(name = "email_uuid") val emailUUID: UUID,
+
+        @Column(name = "email") val email: String,
+
+        @Enumerated(EnumType.STRING) @Column(name = "status_email") @Type(type = "pgsql_enum")
+        val statusEmail: StatusEmail = StatusEmail.UNVERIFIED
+
 )
+
+enum class StatusEmail {
+    UNVERIFIED, INVALID, VERIFIED
+}
