@@ -36,10 +36,12 @@ class SqlRoleDataSourceTest {
     @Test
     fun `given a resource and permissions, when insert role, then create a role -- should does not throw Exception`() {
 //        Given
+        val randomName = randomString("/test")
         val randomLocation = randomString("/test")
-        val resource = Resource(resourceUUID = null, name = "test", location = "/test 12345")
-        val permission1 = Permission(permissionUUID = null, operation = Operation.CREATE, resource = resource)
-        val permission2 = Permission(permissionUUID = null, operation = Operation.READ, resource = resource)
+        val resource = Resource(null, randomName, randomLocation)
+        val permission1 = Permission(permissionUUID = null, operation = Operation.UPDATE, resource = resource)
+        val permission2 = Permission(permissionUUID = null, operation = Operation.UPDATE, resource = resource)
+
 
 //        When
         val permissions = listOf(
@@ -48,12 +50,8 @@ class SqlRoleDataSourceTest {
         )
         val role = Role(subscription = Subscription(), permissions = permissions)
 
-//        Assertions.assertEquals(false, hibernate.isUniquenessValid(resource))
-        Assertions.assertEquals(false, hibernate.isUniquenessValid(role))
-//        Assertions.assertEquals(true, hibernate.isUniquenessValid(role))
 
-
- /*       assertDoesNotThrow("") {
+        assertDoesNotThrow("") {
             if (hibernate.isUniquenessValid(role)) {
                 JDBM.Hibernate.executeQuery(session) {
                     session.save(role)
@@ -61,7 +59,7 @@ class SqlRoleDataSourceTest {
             }
         }
 
-        Assertions.assertEquals(true, hibernate.isUniquenessValid(role))*/
+        Assertions.assertEquals(false, hibernate.isUniquenessValid(role))
 
     }
 

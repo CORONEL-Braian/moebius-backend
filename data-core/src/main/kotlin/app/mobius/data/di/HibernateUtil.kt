@@ -52,6 +52,7 @@ class HibernateUtil {
                 if (isExistingField(instance::class.java, field.name, value)) return false
 
             /**
+             * Implementation note for @JoinColumn:
              *  1. If the uniqueness of the sub-entity is valid: @return true
              *      . Is not necessary to know the uniqueness of the entity because a new sub-entity uuid is generated in entity
              *  2. If the uniqueness of the sub-entity is not valid: @return false
@@ -61,13 +62,12 @@ class HibernateUtil {
                 val subEntity = instance.propertyValue<Any>(field.name)
                 if (!isUniquenessValid(subEntity)) return false
 
-            /**
-             *
-             */
             } else if (field.isAnnotationPresent(joinTable)) {
-
+                val subEntities = instance.propertyValue<List<Any>>(field.name)
+                subEntities.map { subEntity ->
+                    if (!isUniquenessValid(subEntity)) return false
+                }
             }
-
 
         }
         return true
