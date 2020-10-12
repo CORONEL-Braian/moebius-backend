@@ -1,4 +1,4 @@
-package app.mobius.domain.model
+package app.mobius.domain.entity
 
 import java.util.*
 import javax.persistence.*

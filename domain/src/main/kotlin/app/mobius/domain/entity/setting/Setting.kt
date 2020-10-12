@@ -1,6 +1,5 @@
 package app.mobius.domain.entity.setting
 
-import app.mobius.domain.model.Account
 import app.mobius.domain.entity.setting.security.Security
 import app.mobius.util.PostgreSQLEnumType
 import org.hibernate.annotations.Type

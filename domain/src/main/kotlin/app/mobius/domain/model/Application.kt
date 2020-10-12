@@ -25,9 +25,9 @@ enum class Environment {
 
 sealed class Consumer {
     @Entity
-    @Table(name = "consumerIdentities")
+    @Table(name = "consumerPeople")
     data class Identities(
-            @Id @GeneratedValue @Column(name = "consumer_identitiesUUID") val usersUUID: UUID? = null,
+            @Id @GeneratedValue @Column(name = "consumerIdentitiesUUID") val usersUUID: UUID? = null,
             val platform: Platform)
 
     /**
@@ -36,7 +36,7 @@ sealed class Consumer {
     @Entity
     @Table(name = "consumerPartner")
     data class Partner(
-            @Id @GeneratedValue @Column(name = "consumer_partnerUUID") val partnerUUID: UUID? = null,
+            @Id @GeneratedValue @Column(name = "consumerPartnerUUID") val partnerUUID: UUID? = null,
             val name: String,
             val platform: Platform,
             val feature: String)
@@ -47,7 +47,7 @@ sealed class Consumer {
     @Entity
     @Table(name = "consumerTeam")
     data class Team(
-            @Id @GeneratedValue @Column(name = "consumer_teamUUID") val teamUUID: UUID? = null,
+            @Id @GeneratedValue @Column(name = "consumerTeamUUID") val teamUUID: UUID? = null,
             val name: String,
             val platform: Platform,
             val feature: String)

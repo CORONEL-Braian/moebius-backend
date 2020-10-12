@@ -1,7 +1,7 @@
 package app.mobius.domain.entity.setting.security
 
 import app.mobius.domain.entity.LivenessStatus
-import app.mobius.domain.model.Country
+import app.mobius.domain.entity.Country
 import app.mobius.util.PostgreSQLEnumType
 import org.hibernate.annotations.Type
 import org.hibernate.annotations.TypeDef
@@ -61,7 +61,7 @@ data class DNI(
         @Column(name = "number", unique = true) val number: Int,
 
 
-) {
+        ) {
     constructor() : this(
             surname = "",
             name = "",

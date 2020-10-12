@@ -18,6 +18,8 @@ data class Security(
         @Column(name = "securityLevel")
         val securityLevel: Int = 0,
 
+        @OneToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name = "securityMethodsUUID", referencedColumnName = "securityMethodsUUID", unique = true)
         val securityMethods: SecurityMethods? = null,
 ) {
     constructor() : this(authentication = Authentication())
@@ -31,37 +33,43 @@ data class Security(
 @Table(name = "authentication")
 data class Authentication(
         @Id @GeneratedValue @Column(name = "authenticationUUID") val authenticationUUID: UUID? = null,
+
+        @OneToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name = "sessionUUID", referencedColumnName = "sessionUUID", unique = true)
         val session: Session,
+
+        @OneToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name = "basicAuthUUID", referencedColumnName = "basicAuthUUID", unique = true)
         val basicAuth: BasicAuth
 ) {
-    constructor() : this()
+    constructor() : this(session = Session(), basicAuth = BasicAuth())
 }
 
 /**
- * Represents a traditional authentication
+ * Represents a traditional or basic authentication
  * OBS: Other methods will not be considered
  */
 @Entity
-@Table(name = "traditionalCredential")
+@Table(name = "BasicAuth")
 data class BasicAuth(
         @Id @GeneratedValue @Column(name = "traditional_credentialUUID") val traditionalCredentialUUID: UUID? = null,
-        val email: String,
+        @Column(name = "email") val email: String,
+
+        @OneToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name = "passwordUUID", referencedColumnName = "passwordUUID")
         val password: Password,
 ) {
-    constructor() : this()
+    constructor() : this(email = "", password = Password())
 }
 
 @Entity
 @Table(name = "password")
 data class Password(
         @Id @GeneratedValue @Column(name = "passwordUUID") val passwordUUID: UUID? = null,
-        val apiHashPassword: String,
-        val dbHashPassword: String,
-        val resetPasswordToken: String? = null,
-        val resetPasswordTokenExpire: String? = null,
+        @Column(name = "apiHashPassword") val apiHashPassword: String,
+        @Column(name = "dbHashPassword") val dbHashPassword: String,
+        @Column(name = "resetPasswordToken") val resetPasswordToken: String? = null,
+        @Column(name = "resetPasswordTokenExpire") val resetPasswordTokenExpire: String? = null,
 ) {
-    constructor() : this()
+    constructor() : this(apiHashPassword = "", dbHashPassword = "")
 }
-
-// TODO: Add more credentials
-

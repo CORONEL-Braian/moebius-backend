@@ -1,6 +1,6 @@
 package app.mobius.controller
 
-import app.mobius.domain.model.Account
+import app.mobius.domain.entity.setting.Account
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
