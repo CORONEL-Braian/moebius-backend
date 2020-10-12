@@ -4,9 +4,9 @@ import java.util.*
 import javax.persistence.*
 
 @Entity
-@Table(name = "LinkedAccounts")
+@Table(name = "linkedAccounts")
 data class LinkedAccounts(
-        @Id @GeneratedValue @Column(name = "linked_accountsUUID") val linkedAccountUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "linkedAccountsUUID") val linkedAccountUUID: UUID? = null,
 
         @OneToOne(cascade = [CascadeType.ALL])
         @JoinColumn(name = "facebookUUID", referencedColumnName = "facebookUUID")
@@ -14,7 +14,7 @@ data class LinkedAccounts(
 )
 
 @Entity
-@Table(name = "Facebook")
+@Table(name = "facebook")
 data class Facebook(
         @Id @GeneratedValue @Column(name = "facebookUUID") val facebookUUID: UUID? = null,
         @Column(name = "username") val username: String,

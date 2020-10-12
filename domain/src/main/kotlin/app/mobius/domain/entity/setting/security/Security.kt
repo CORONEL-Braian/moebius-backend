@@ -50,9 +50,9 @@ data class Authentication(
  * OBS: Other methods will not be considered
  */
 @Entity
-@Table(name = "BasicAuth")
+@Table(name = "basicAuth")
 data class BasicAuth(
-        @Id @GeneratedValue @Column(name = "traditional_credentialUUID") val traditionalCredentialUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "basicAuthUUID") val basicAuthUUID: UUID? = null,
         @Column(name = "email") val email: String,
 
         @OneToOne(cascade = [CascadeType.ALL])

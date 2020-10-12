@@ -17,7 +17,7 @@ data class SecurityMethods(
         val identityVerification: IdentityVerification? = null,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "twoFactorAuthtenticationUUID", referencedColumnName = "twoFactorAuthtenticationUUID")
+        @JoinColumn(name = "twoFactorAuthenticationUUID", referencedColumnName = "twoFactorAuthenticationUUID")
         val TwoFactorAuth: TwoFactorAuth? = null,
 
         @OneToOne(cascade = [CascadeType.ALL])
@@ -32,7 +32,7 @@ data class TwoFactorAuth(
 
         @OneToOne(cascade = [CascadeType.ALL])
         @JoinColumn(name = "googleAuthenticationUUID", referencedColumnName = "googleAuthenticationUUID")
-        val googleAuthentication: GoogleAuthenticaton,
+        val googleAuthentication: GoogleAuth,
 
         @OneToOne(cascade = [CascadeType.ALL])
         @JoinColumn(name = "smsAuthenticationUUID", referencedColumnName = "smsAuthenticationUUID")
@@ -43,14 +43,14 @@ data class TwoFactorAuth(
         val emailVerification: EmailVerification
 ) {
     constructor() : this(
-            googleAuthentication = GoogleAuthenticaton(),
+            googleAuthentication = GoogleAuth(),
             smsAuthentication = SMSAuthentication(),
             emailVerification = EmailVerification())
 }
 
 @Entity
 @Table(name = "googleAuthentication")
-data class GoogleAuthenticaton(
+data class GoogleAuth(
         @Id @GeneratedValue @Column(name = "googleAuthenticationUUID") val googleAuthenticationUUID: UUID? = null,
         @Column(name = "enable") val enable: Boolean = false,
         @Column(name = "verificationCode") val verificationCode: Int

@@ -61,4 +61,5 @@ class SqlResourceDataSourceTest {
         Assertions.assertEquals(false, hibernate.isUniquenessValid(resource))
     }
 
+
 }

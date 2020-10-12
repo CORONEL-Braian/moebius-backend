@@ -11,7 +11,7 @@ import javax.persistence.*
 @Entity
 @Table(name = "identityVerification")
 data class IdentityVerification(
-        @Id @GeneratedValue @Column(name = "identity_verificationUUID") val identityVerificationUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "identityVerificationUUID") val identityVerificationUUID: UUID? = null,
 
         @OneToOne(cascade = [CascadeType.ALL])
         @JoinColumn(name = "documentationVerificationUUID", referencedColumnName = "documentationVerificationUUID")
@@ -28,7 +28,7 @@ data class IdentityVerification(
 @Table(name = "documentationVerification")
 @TypeDef(name = "pgsql_enum", typeClass = PostgreSQLEnumType::class)
 data class DocumentationVerification(
-        @Id @GeneratedValue @Column(name = "documentation_verificationUUID") val documentationVerificationUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "documentationVerificationUUID") val documentationVerificationUUID: UUID? = null,
 
         @Enumerated(EnumType.STRING) @Column(name = "documentationVerificationStatus") @Type(type = "pgsql_enum")
         val documentationVerificationStatus: DocumentationVerificationStatus = DocumentationVerificationStatus.UNSOLICITED,
