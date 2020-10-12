@@ -21,6 +21,7 @@ These additional references should also help you:
 * [Hibernate JPA](https://vladmihalcea.com/jpa-persistence-xml/)
 * [Hibernate JPA 2](https://thorben-janssen.com/hibernate-getting-started/)
 * [Hibernate - Criteria](https://www.baeldung.com/hibernate-criteria-queries)
+* [Hibernate - NamingStrategy](https://vladmihalcea.com/map-camel-case-properties-snake-case-column-names-hibernate)
 
 ### Testing
  * [JUnit5](https://junit.org/junit5/docs/current/user-guide/)
