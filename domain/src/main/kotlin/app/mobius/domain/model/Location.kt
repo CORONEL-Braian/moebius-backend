@@ -12,7 +12,7 @@ data class Location(
 )
 
 @Entity
-@Table(name = "origin_location")
+@Table(name = "originLocation")
 data class OriginLocation(
         @Id @GeneratedValue @Column(name = "origin_locationUUID") val originLocationUUID: UUID? = null,
         val country: Country,
@@ -21,7 +21,7 @@ data class OriginLocation(
 )
 
 @Entity
-@Table(name = "current_location")
+@Table(name = "currentLocation")
 data class CurrentLocation(
         @Id @GeneratedValue @Column(name = "current_locationUUID") val currentLocationUUID: UUID? = null,
         val country: Country,
@@ -55,7 +55,7 @@ data class City(
 )
 
 @Entity
-@Table(name = "location_limits")
+@Table(name = "locationLimits")
 data class LocationLimits(
         @Id @GeneratedValue @Column(name = "location_limitsUUID") val limitsUUID: UUID? = null,
         val northeast: Coordinate,

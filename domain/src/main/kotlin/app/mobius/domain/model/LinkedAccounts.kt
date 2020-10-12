@@ -4,7 +4,7 @@ import java.util.*
 import javax.persistence.*
 
 @Entity
-@Table(name = "linked_accounts")
+@Table(name = "linkedAccounts")
 data class LinkedAccounts(
         @Id @GeneratedValue @Column(name = "linked_accountsUUID") val linkedAccountUUID: UUID? = null,
         val facebook: Facebook? = null

@@ -42,10 +42,10 @@ data class Authentication(
  * OBS: Other methods will not be considered
  */
 @Entity
-@Table(name = "traditional_credential")
+@Table(name = "traditionalCredential")
 data class BasicAuth(
         @Id @GeneratedValue @Column(name = "traditional_credentialUUID") val traditionalCredentialUUID: UUID? = null,
-        val email: Email,
+        val email: String,
         val password: Password,
 ) {
     constructor() : this()
@@ -64,13 +64,4 @@ data class Password(
 }
 
 // TODO: Add more credentials
-
-@Entity
-@Table(name = "email")
-data class Email(
-        @Id @GeneratedValue @Column(name = "emailUUID") val emailUUID: UUID,
-        @Column(name = "email") val email: String,
-) {
-    constructor() : this()
-}
 

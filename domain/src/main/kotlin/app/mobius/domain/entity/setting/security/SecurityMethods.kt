@@ -4,75 +4,94 @@ import org.hibernate.annotations.Type
 import java.util.*
 import javax.persistence.*
 
-
 /**
  *  Obs: Are manipulated by the person
  */
 @Entity
-@Table(name = "security_methods")
+@Table(name = "securityMethods")
 data class SecurityMethods(
-        @Id @GeneratedValue @Column(name = "security_methodsUUID") val securityMethodsUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "securityMethodsUUID") val securityMethodsUUID: UUID? = null,
+
+        @OneToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name = "identityVerificationUUID", referencedColumnName = "identityVerificationUUID")
         val identityVerification: IdentityVerification? = null,
-        val twoFA: TwoFA? = null,
+
+        @OneToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name = "twoFactorAuthtenticationUUID", referencedColumnName = "twoFactorAuthtenticationUUID")
+        val TwoFactorAuth: TwoFactorAuth? = null,
+
+        @OneToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name = "antiPishingCodeUUID", referencedColumnName = "antiPishingCodeUUID")
         val antiPishingCode: AntiPishingCode? = null,
-        val keepSessionDaily: Boolean = false
+)
+
+@Entity
+@Table(name = "twoFactorAuthentication")
+data class TwoFactorAuth(
+        @Id @GeneratedValue @Column(name = "twoFactorAuthenticationUUID") val twoFAUUID: UUID? = null,
+
+        @OneToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name = "googleAuthenticationUUID", referencedColumnName = "googleAuthenticationUUID")
+        val googleAuthentication: GoogleAuthenticaton,
+
+        @OneToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name = "smsAuthenticationUUID", referencedColumnName = "smsAuthenticationUUID")
+        val smsAuthentication: SMSAuthentication,
+
+        @OneToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name = "emailVerificationUUID", referencedColumnName = "emailVerificationUUID")
+        val emailVerification: EmailVerification
 ) {
-    constructor() : this()
+    constructor() : this(
+            googleAuthentication = GoogleAuthenticaton(),
+            smsAuthentication = SMSAuthentication(),
+            emailVerification = EmailVerification())
 }
 
 @Entity
-@Table(name = "two_factor_authentication")
-data class TwoFA(
-        @Id @GeneratedValue @Column(name = "two_factor_authenticationUUID") val twoFAUUID: UUID? = null,
-        val enable: Boolean = false,
-        val googleAuthentication: GoogleAuthenticaton? = null,
-        val smsAuthentication: SMSAuthentication? = null,
-        val emailVerification: EmailVerification? = null
-) {
-    constructor() : this()
-}
-
-@Entity
-@Table(name = "google_authentication")
+@Table(name = "googleAuthentication")
 data class GoogleAuthenticaton(
-        @Id @GeneratedValue @Column(name = "google_authenticationUUID") val googleAuthenticationUUID: UUID? = null,
-        val verificationCode: Int
+        @Id @GeneratedValue @Column(name = "googleAuthenticationUUID") val googleAuthenticationUUID: UUID? = null,
+        @Column(name = "enable") val enable: Boolean = false,
+        @Column(name = "verificationCode") val verificationCode: Int
 ) {
-    constructor() : this()
+    constructor() : this(verificationCode = -1)
 }
 
 @Entity
-@Table(name = "sms_authentication")
+@Table(name = "smsAuthentication")
 data class SMSAuthentication(
-        @Id @GeneratedValue @Column(name = "sms_authenticationUUID") val smsAuthenticationUUID: UUID? = null,
-        val verificationCode: Int
+        @Id @GeneratedValue @Column(name = "smsAuthenticationUUID") val smsAuthenticationUUID: UUID? = null,
+        @Column(name = "enable") val enable: Boolean = false,
+        @Column(name = "verificationCode") val verificationCode: Int
 ) {
-    constructor() : this()
+    constructor() : this(verificationCode = -1)
 }
 
 @Entity
-@Table(name = "email_verification")
+@Table(name = "emailVerification")
 data class EmailVerification(
-        @Id @GeneratedValue @Column(name = "email_verificationUUID") val emailVerificationUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "emailVerificationUUID") val emailVerificationUUID: UUID? = null,
+        @Column(name = "enable") val enable: Boolean = false,
 
-        @Enumerated(EnumType.STRING) @Column(name = "status_email") @Type(type = "pgsql_enum")
-        val emailStatus: EmailStatus = EmailStatus.UNCONFIRMED,
+        @Enumerated(EnumType.STRING) @Column(name = "emailStatus") @Type(type = "pgsql_enum")
+        val emailVerificationStatus: EmailVerificationStatus = EmailVerificationStatus.UNCONFIRMED,
 
-        val emailVerificationToken: String,
-) {
-    constructor() : this()
-}
+        @OneToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name = "tokenUUID", referencedColumnName = "tokenUUID")
+        val token: Token? = null
+)
 
-enum class EmailStatus {
+enum class EmailVerificationStatus {
     UNCONFIRMED, INVALID, CONFIRMED
 }
 
 @Entity
-@Table(name = "anti_pishing_code")
+@Table(name = "antiPishingCode")
 data class AntiPishingCode(
-        @Id @GeneratedValue @Column(name = "anti_pishing_codeUUID") val antiPishingCodeUUID: UUID? = null,
-        val enable: Boolean,
-        val code: String? = null
+        @Id @GeneratedValue @Column(name = "antiPishingCodeUUID") val antiPishingCodeUUID: UUID? = null,
+        @Column(name = "enable") val enable: Boolean = false,
+        @Column(name = "code") val code: String
 ) {
-    constructor() : this()
+    constructor() : this(enable = false, code = "")
 }

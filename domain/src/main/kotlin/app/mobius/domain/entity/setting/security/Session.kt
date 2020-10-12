@@ -1,7 +1,6 @@
 package app.mobius.domain.entity.setting.security
 
 import java.util.*
-import java.util.Date
 import javax.persistence.*
 
 /**
@@ -11,40 +10,55 @@ import javax.persistence.*
 @Table(name = "session")
 data class Session(
         @Id @GeneratedValue @Column(name = "sessionUUID") val sessionUUID: UUID? = null,
-        val accessToken: MyAccessToken,
+
+        @OneToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name = "accessTokenUUID", referencedColumnName = "accessTokenUUID")
+        val accessToken: AccessToken,
+
+        @OneToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name = "dailyReloadTokenUUID", referencedColumnName = "dailyReloadTokenUUID")
         val dailyReloadToken: DailyReloadToken,
+
+        @OneToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name = "monthlyReloadTokenUUID", referencedColumnName = "monthlyReloadTokenUUID")
         val monthlyReloadToken: MonthlyReloadToken,
 ) {
-    constructor() : this()
+    constructor() : this(accessToken = AccessToken(), dailyReloadToken = DailyReloadToken(), monthlyReloadToken = MonthlyReloadToken())
 }
 
 /**
  * Represents the access token or AT
  * Expires in 5 minutes
- * OBS: Dont use AccessToken as name to avoid conflicts of mapping
- * @param accessToken: Access token or API key to identify the person
+ * OBS: Dont use AccessToken as name to avoid conflicts of mapping TODO
+ * @param token: Access token or API key to identify the person
  */
 @Entity
 @Table(name = "accessToken")
-data class MyAccessToken(
+data class AccessToken(
         @Id @GeneratedValue @Column(name = "accessTokenUUID") val tokenUUID: UUID? = null,
-        @Column(name = "accessToken") val accessToken: Token,
+
+        @OneToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name = "tokenUUID", referencedColumnName = "tokenUUID")
+        val token: Token
 ) {
-    constructor() : this()
+    constructor() : this(token = Token())
 }
 
 /**
  * Represents a daily token to reload the AT
- * Expires in 1 day but is optional for the person
+ * @param keepSessionDaily: Expires in 1 day but is optional for the person
  */
 @Entity
 @Table(name = "dailyReloadToken")
 data class DailyReloadToken(
         @Id @GeneratedValue @Column(name = "dailyReloadTokenUUID") val dailyAccessTokenUUID: UUID? = null,
-        val keepSessionDaily: Boolean = false,
-        @Column(name = "dailyReloadToken") val reloadAccessToken: Token? = null
+        @Column(name = "keepSessionDaily") val keepSessionDaily: Boolean = false,
+
+        @OneToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name = "tokenUUID", referencedColumnName = "tokenUUID")
+        val token: Token
 ) {
-    constructor() : this()
+    constructor() : this(token = Token())
 }
 
 /**
@@ -55,18 +69,10 @@ data class DailyReloadToken(
 @Table(name = "monthlyReloadToken")
 data class MonthlyReloadToken(
         @Id @GeneratedValue @Column(name = "monthlyReloadTokenUUID") val dailyAccessTokenUUID: UUID? = null,
-        val reloadAccessToken: Token? = null
-) {
-    constructor() : this()
-}
 
-@Entity
-@Table(name = "token")
-data class Token(
-        @Id @GeneratedValue @Column(name = "tokenUUID") val tokenUUID: UUID? = null,
-        val token: String,
-        val created: Date = Date(),
-        val expiry: Date
+        @OneToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name = "tokenUUID", referencedColumnName = "tokenUUID")
+        val token: Token
 ) {
-    constructor() : this(token = "", expiry = Date())
+    constructor() : this(token = Token())
 }

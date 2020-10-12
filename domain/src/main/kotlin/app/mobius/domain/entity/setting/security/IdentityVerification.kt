@@ -6,7 +6,7 @@ import java.util.*
 import javax.persistence.*
 
 @Entity
-@Table(name = "identity_verification")
+@Table(name = "identityVerification")
 data class IdentityVerification(
         @Id @GeneratedValue @Column(name = "identity_verificationUUID") val identityVerificationUUID: UUID? = null,
         val documentationVerification: DocumentationVerification,
@@ -14,7 +14,7 @@ data class IdentityVerification(
 )
 
 @Entity
-@Table(name = "documentation_verification")
+@Table(name = "documentationVerification")
 data class DocumentationVerification(
         @Id @GeneratedValue @Column(name = "documentation_verificationUUID") val documentationVerificationUUID: UUID? = null,
         val documentationVerificationStatus: DocumentationVerificationStatus = DocumentationVerificationStatus.UNSOLICITED,

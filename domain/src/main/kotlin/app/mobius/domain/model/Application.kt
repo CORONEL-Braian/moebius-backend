@@ -25,7 +25,7 @@ enum class Environment {
 
 sealed class Consumer {
     @Entity
-    @Table(name = "consumer_identities")
+    @Table(name = "consumerIdentities")
     data class Identities(
             @Id @GeneratedValue @Column(name = "consumer_identitiesUUID") val usersUUID: UUID? = null,
             val platform: Platform)
@@ -34,7 +34,7 @@ sealed class Consumer {
      * A partner consumes a particular feature
      */
     @Entity
-    @Table(name = "consumer_partner")
+    @Table(name = "consumerPartner")
     data class Partner(
             @Id @GeneratedValue @Column(name = "consumer_partnerUUID") val partnerUUID: UUID? = null,
             val name: String,
@@ -45,7 +45,7 @@ sealed class Consumer {
      * A team consumes a particular feature
      */
     @Entity
-    @Table(name = "consumer_team")
+    @Table(name = "consumerTeam")
     data class Team(
             @Id @GeneratedValue @Column(name = "consumer_teamUUID") val teamUUID: UUID? = null,
             val name: String,
