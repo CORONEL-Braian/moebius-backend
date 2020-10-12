@@ -36,7 +36,9 @@ data class Country(
         @Id @GeneratedValue @Column(name = "countryUUID") val countryUUID: UUID? = null,
         val name: String,
         val locationLimits: LocationLimits,
-)
+) {
+    constructor() : this(name = "", locationLimits = LocationLimits())
+}
 
 @Entity
 @Table(name = "province")
@@ -60,7 +62,9 @@ data class LocationLimits(
         @Id @GeneratedValue @Column(name = "location_limitsUUID") val limitsUUID: UUID? = null,
         val northeast: Coordinate,
         val southwest: Coordinate
-)
+) {
+    constructor() : this(northeast = Coordinate(), southwest = Coordinate())
+}
 
 @Entity
 @Table(name = "direction")
@@ -76,6 +80,9 @@ data class Direction(
 @Entity
 @Table(name = "coordinate")
 data class Coordinate(
-        @Id @GeneratedValue @Column(name = "coordinateUUID") val lat: Float,
-        val lng: Float,
-)
+        @Id @GeneratedValue @Column(name = "coordinateUUID") val coordinateUUID: UUID? = null,
+        val lat: Double,
+        val lng: Double,
+) {
+    constructor() : this(lat = 0.0, lng = 0.0)
+}
