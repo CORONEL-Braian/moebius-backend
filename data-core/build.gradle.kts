@@ -16,9 +16,6 @@ dependencies {
     implementation(project(":domain"))
 
     implementation("org.reflections:reflections:0.9.12")
-    // https://mvnrepository.com/artifact/com.vladmihalcea/hibernate-types-52
-    implementation("com.vladmihalcea", "hibernate-types-52","2.10.0")
-
 
     implementation(project(":library_base"))
     implementation(project(":library_test_utils"))

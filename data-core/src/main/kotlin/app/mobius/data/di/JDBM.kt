@@ -6,6 +6,8 @@ import org.hibernate.SessionFactory
 import org.hibernate.Transaction
 import org.hibernate.cfg.Configuration
 import org.reflections.Reflections
+import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+import org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
 import java.io.File
 import javax.persistence.*
 
@@ -50,7 +52,7 @@ class JDBM {
          * @param canonicalName: e.g: secret-hibernate.cfg.xml
          */
         fun openSessionForOnly(annotatedClass: Class<*>, canonicalName: String = HIBERNATE_CONFIGURATION) : Session {
-            val sessionFactory = getSessionFactory(annotatedClass, canonicalName)
+            val sessionFactory = getSessionFactoryForOnly(annotatedClass, canonicalName)
             return sessionFactory.openSession()
         }
 
@@ -64,14 +66,14 @@ class JDBM {
         }
 
         /**
-         * Generate session configuration for a simple entity
+         * Generate session factory for a simple entity
          * PRE: Configure entity mapping in open-persistence.xml necessary for the class hierarchy
          * OBS: Session Factory puede tener varias sesiones abiertas.
          * @param annotatedClass The class containing annotations
          * @param canonicalName: e.g: secret-hibernate.cfg.xml
          */
         @Throws(HibernateException::class)
-        fun getSessionFactory(annotatedClass: Class<*>, canonicalName: String) : SessionFactory {
+        fun getSessionFactoryForOnly(annotatedClass: Class<*>, canonicalName: String) : SessionFactory {
             return Configuration()
                     .configure(getFile(canonicalName))
                     .addAnnotatedClass(annotatedClass)
@@ -93,15 +95,19 @@ class JDBM {
         }
 
         /**
-         * Generate session factory for a lot of mapped entities
+         * Generate session factory for a lot of mapped entities and using naming strategy
          * Add all the classes annotated with Entity in the configuration
          * Precondition: The prefix contains classes with a configured hibernate mapping
          * OBS: Spring could be auto scan by packages with LocalContainerEntityManagerFactoryBean
-         * Source: https://stackoverflow.com/a/60015879/5279996
+         * Source:
+         *  . Reflections: https://stackoverflow.com/a/60015879/5279996
+         *  . Naming strategy: https://stackoverflow.com/a/57617237/5279996
          */
         private fun autoScanEntities(canonicalName: String) : SessionFactory {
             val configuration = Configuration()
                     .configure(getFile(canonicalName))
+
+//            Auto Scan Entities
             val reflections = Reflections(PACKAGE_ENTITIES)
             val importantClasses: Set<Class<*>> = reflections.getTypesAnnotatedWith(Entity::class.java)
             var i = 0
@@ -112,6 +118,11 @@ class JDBM {
                 configuration.addAnnotatedClass(clazz)
             }
             println("-------")
+
+//            Naming Strategy: from camelCase to snake_case db attributes
+            configuration.setImplicitNamingStrategy(SpringImplicitNamingStrategy.INSTANCE)
+            configuration.setPhysicalNamingStrategy(SpringPhysicalNamingStrategy())
+
             return configuration.buildSessionFactory()
         }
 
