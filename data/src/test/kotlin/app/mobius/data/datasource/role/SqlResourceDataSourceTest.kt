@@ -33,13 +33,13 @@ class SqlResourceDataSourceTest {
 
         assertDoesNotThrow("") {
             if (hibernate.isUniquenessValid(resource)) {
-               /* JDBM.Hibernate.executeQuery(session) {
+                JDBM.Hibernate.executeQuery(session) {
                     session.save(resource)
-                }*/
+                }
             }
         }
 
-//        Assertions.assertEquals(false, hibernate.isUniquenessValid(resource))
+        Assertions.assertEquals(false, hibernate.isUniquenessValid(resource))
     }
 
     @Test

@@ -48,7 +48,7 @@ class SqlPermissionsDataSourceTest {
 //        Given
         val randomName = randomString("/test")
         val randomLocation = randomString("/test")
-        val resource = Resource(resourceUUID = null, nameTest = randomName, location = randomLocation)
+        val resource = Resource(resourceUUID = null, name = randomName, location = randomLocation)
         val permission = Permission(permissionUUID = null, operation = Operation.CREATE, resource = resource)
 
 //        When

@@ -8,8 +8,8 @@ import javax.persistence.*
 @Table(name = "resource")
 data class Resource(
         @Id @GeneratedValue @Column(name = "resource_uuid") val resourceUUID: UUID? = null,
-        @Column(unique = true) val nameTest: String,
+        @Column(unique = true) val name: String,
         @Column(unique = true) val location: String,
 ) {
-    constructor() : this(nameTest = "", location = "")
+    constructor() : this(name = "", location = "")
 }
