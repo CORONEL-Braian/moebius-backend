@@ -9,17 +9,17 @@ import javax.persistence.*
 @Entity
 @Table(name = "security")
 data class Security(
-        @Id @GeneratedValue @Column(name = "securityUUID") val securityUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "security_uuid") val securityUUID: UUID? = null,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "authenticationUUID", referencedColumnName = "authenticationUUID")
+        @JoinColumn(name = "authentication_uuid", referencedColumnName = "authentication_uuid")
         val authentication: Authentication,
 
         @Column(name = "securityLevel")
         val securityLevel: Int = 0,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "securityMethodsUUID", referencedColumnName = "securityMethodsUUID", unique = true)
+        @JoinColumn(name = "securityMethods_uuid", referencedColumnName = "securityMethods_uuid", unique = true)
         val securityMethods: SecurityMethods? = null,
 ) {
     constructor() : this(authentication = Authentication())
@@ -32,14 +32,14 @@ data class Security(
 @Entity
 @Table(name = "authentication")
 data class Authentication(
-        @Id @GeneratedValue @Column(name = "authenticationUUID") val authenticationUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "authentication_uuid") val authenticationUUID: UUID? = null,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "sessionUUID", referencedColumnName = "sessionUUID", unique = true)
+        @JoinColumn(name = "session_uuid", referencedColumnName = "session_uuid", unique = true)
         val session: Session,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "basicAuthUUID", referencedColumnName = "basicAuthUUID", unique = true)
+        @JoinColumn(name = "basicAuth_uuid", referencedColumnName = "basicAuth_uuid", unique = true)
         val basicAuth: BasicAuth
 ) {
     constructor() : this(session = Session(), basicAuth = BasicAuth())
@@ -52,11 +52,11 @@ data class Authentication(
 @Entity
 @Table(name = "basicAuth")
 data class BasicAuth(
-        @Id @GeneratedValue @Column(name = "basicAuthUUID") val basicAuthUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "basicAuth_uuid") val basicAuthUUID: UUID? = null,
         @Column(name = "email") val email: String,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "passwordUUID", referencedColumnName = "passwordUUID")
+        @JoinColumn(name = "password_uuid", referencedColumnName = "password_uuid")
         val password: Password,
 ) {
     constructor() : this(email = "", password = Password())
@@ -65,7 +65,7 @@ data class BasicAuth(
 @Entity
 @Table(name = "password")
 data class Password(
-        @Id @GeneratedValue @Column(name = "passwordUUID") val passwordUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "password_uuid") val passwordUUID: UUID? = null,
         @Column(name = "apiHashPassword") val apiHashPassword: String,
         @Column(name = "dbHashPassword") val dbHashPassword: String,
         @Column(name = "resetPasswordToken") val resetPasswordToken: String? = null,

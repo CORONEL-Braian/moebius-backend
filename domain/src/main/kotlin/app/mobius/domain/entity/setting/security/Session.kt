@@ -9,18 +9,18 @@ import javax.persistence.*
 @Entity
 @Table(name = "session")
 data class Session(
-        @Id @GeneratedValue @Column(name = "sessionUUID") val sessionUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "session_uuid") val sessionUUID: UUID? = null,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "accessTokenUUID", referencedColumnName = "accessTokenUUID")
+        @JoinColumn(name = "accessToken_uuid", referencedColumnName = "accessToken_uuid")
         val accessToken: AccessToken,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "dailyReloadTokenUUID", referencedColumnName = "dailyReloadTokenUUID")
+        @JoinColumn(name = "dailyReloadToken_uuid", referencedColumnName = "dailyReloadToken_uuid")
         val dailyReloadToken: DailyReloadToken,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "monthlyReloadTokenUUID", referencedColumnName = "monthlyReloadTokenUUID")
+        @JoinColumn(name = "monthlyReloadToken_uuid", referencedColumnName = "monthlyReloadToken_uuid")
         val monthlyReloadToken: MonthlyReloadToken,
 ) {
     constructor() : this(accessToken = AccessToken(), dailyReloadToken = DailyReloadToken(), monthlyReloadToken = MonthlyReloadToken())
@@ -35,10 +35,10 @@ data class Session(
 @Entity
 @Table(name = "accessToken")
 data class AccessToken(
-        @Id @GeneratedValue @Column(name = "accessTokenUUID") val tokenUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "accessToken_uuid") val tokenUUID: UUID? = null,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "tokenUUID", referencedColumnName = "tokenUUID")
+        @JoinColumn(name = "token_uuid", referencedColumnName = "token_uuid")
         val token: Token
 ) {
     constructor() : this(token = Token())
@@ -51,11 +51,11 @@ data class AccessToken(
 @Entity
 @Table(name = "dailyReloadToken")
 data class DailyReloadToken(
-        @Id @GeneratedValue @Column(name = "dailyReloadTokenUUID") val dailyAccessTokenUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "dailyReloadToken_uuid") val dailyAccessTokenUUID: UUID? = null,
         @Column(name = "keepSessionDaily") val keepSessionDaily: Boolean = false,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "tokenUUID", referencedColumnName = "tokenUUID")
+        @JoinColumn(name = "token_uuid", referencedColumnName = "token_uuid")
         val token: Token
 ) {
     constructor() : this(token = Token())
@@ -68,10 +68,10 @@ data class DailyReloadToken(
 @Entity
 @Table(name = "monthlyReloadToken")
 data class MonthlyReloadToken(
-        @Id @GeneratedValue @Column(name = "monthlyReloadTokenUUID") val dailyAccessTokenUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "monthlyReloadToken_uuid") val dailyAccessTokenUUID: UUID? = null,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "tokenUUID", referencedColumnName = "tokenUUID")
+        @JoinColumn(name = "token_uuid", referencedColumnName = "token_uuid")
         val token: Token
 ) {
     constructor() : this(token = Token())

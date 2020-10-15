@@ -11,14 +11,14 @@ import javax.persistence.*
 @Entity
 @Table(name = "identityVerification")
 data class IdentityVerification(
-        @Id @GeneratedValue @Column(name = "identityVerificationUUID") val identityVerificationUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "identityVerification_uuid") val identityVerificationUUID: UUID? = null,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "documentationVerificationUUID", referencedColumnName = "documentationVerificationUUID")
+        @JoinColumn(name = "documentationVerification_uuid", referencedColumnName = "documentationVerification_uuid")
         val documentationVerification: DocumentationVerification,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "livenessUUID", referencedColumnName = "livenessUUID")
+        @JoinColumn(name = "liveness_uuid", referencedColumnName = "liveness_uuid")
         val liveness: Liveness
 ) {
     constructor() : this(documentationVerification = DocumentationVerification(), liveness = Liveness())
@@ -28,13 +28,13 @@ data class IdentityVerification(
 @Table(name = "documentationVerification")
 @TypeDef(name = "pgsql_enum", typeClass = PostgreSQLEnumType::class)
 data class DocumentationVerification(
-        @Id @GeneratedValue @Column(name = "documentationVerificationUUID") val documentationVerificationUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "documentationVerification_uuid") val documentationVerificationUUID: UUID? = null,
 
         @Enumerated(EnumType.STRING) @Column(name = "documentationVerificationStatus") @Type(type = "pgsql_enum")
         val documentationVerificationStatus: DocumentationVerificationStatus = DocumentationVerificationStatus.UNSOLICITED,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "dniUUID", referencedColumnName = "dniUUID")
+        @JoinColumn(name = "dni_uuid", referencedColumnName = "dni_uuid")
         val dni: DNI? = null,
 )
 
@@ -42,7 +42,7 @@ data class DocumentationVerification(
 @Table(name = "dni")
 @TypeDef(name = "pgsql_enum", typeClass = PostgreSQLEnumType::class)
 data class DNI(
-        @Id @GeneratedValue @Column(name = "dniUUID") val dniUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "dni_uuid") val dniUUID: UUID? = null,
         @Column(name = "surname") val surname: String,
         @Column(name = "name") val name: String,
 
@@ -50,7 +50,7 @@ data class DNI(
         val sex: Sex,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "nationalityUUID", referencedColumnName = "countryUUID")
+        @JoinColumn(name = "nationality_uuid", referencedColumnName = "country_uuid")
         val nationality: Country,
 
         @Column(name = "ejemplar") val ejemplar: String,
@@ -87,6 +87,6 @@ enum class DocumentationVerificationStatus {
 @Entity
 @Table(name = "liveness")
 data class Liveness(
-        @Id @GeneratedValue @Column(name = "livenessUUID") val livenessUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "liveness_uuid") val livenessUUID: UUID? = null,
         val livenessStatus: LivenessStatus = LivenessStatus.UNSOLICITED
 )

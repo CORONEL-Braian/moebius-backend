@@ -20,14 +20,14 @@ import javax.persistence.*
 data class Permission(
         @Id
         @GeneratedValue
-        @Column(name = "permissionUUID")
+        @Column(name = "permission_uuid")
         val permissionUUID: UUID? = null,
 
         @Enumerated(EnumType.STRING) @Column(name = "operation") @Type(type = "pgsql_enum")
         val operation: Operation?,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "resourceUUID", referencedColumnName = "resource_uuid", unique = true)
+        @JoinColumn(name = "resource_uuid", referencedColumnName = "resource_uuid", unique = true)
         var resource: Resource?
 ) {
         constructor() : this(operation = null, resource = null)

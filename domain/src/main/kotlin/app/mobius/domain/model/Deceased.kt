@@ -6,7 +6,7 @@ import javax.persistence.*
 @Entity
 @Table(name = "deceased")
 data class Deceased(
-        @Id @GeneratedValue @Column(name = "deceasedUUID") val deceasedUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "deceased_uuid") val deceasedUUID: UUID? = null,
         val dni: Int,
         val provider: String,
         val registrationDatetime: String,

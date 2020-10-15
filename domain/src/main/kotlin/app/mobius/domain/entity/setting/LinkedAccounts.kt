@@ -6,17 +6,17 @@ import javax.persistence.*
 @Entity
 @Table(name = "linkedAccounts")
 data class LinkedAccounts(
-        @Id @GeneratedValue @Column(name = "linkedAccountsUUID") val linkedAccountUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "linkedAccounts_uuid") val linkedAccountUUID: UUID? = null,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "facebookUUID", referencedColumnName = "facebookUUID")
+        @JoinColumn(name = "facebook_uuid", referencedColumnName = "facebook_uuid")
         val facebook: Facebook? = null
 )
 
 @Entity
 @Table(name = "facebook")
 data class Facebook(
-        @Id @GeneratedValue @Column(name = "facebookUUID") val facebookUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "facebook_uuid") val facebookUUID: UUID? = null,
         @Column(name = "username") val username: String,
         @Column(name = "facebookId") val facebookId: Long? = null
 ) {

@@ -11,7 +11,7 @@ import javax.persistence.*
 @Entity
 @Table(name = "person")
 data class Person(
-        @Id @GeneratedValue @Column(name = "personUUID") val personUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "person_uuid") val personUUID: UUID? = null,
         val username: String,
         val profile: Profile,
         val setting: Setting,

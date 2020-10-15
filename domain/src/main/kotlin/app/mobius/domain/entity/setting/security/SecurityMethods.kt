@@ -10,36 +10,36 @@ import javax.persistence.*
 @Entity
 @Table(name = "securityMethods")
 data class SecurityMethods(
-        @Id @GeneratedValue @Column(name = "securityMethodsUUID") val securityMethodsUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "securityMethods_uuid") val securityMethodsUUID: UUID? = null,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "identityVerificationUUID", referencedColumnName = "identityVerificationUUID")
+        @JoinColumn(name = "identityVerification_uuid", referencedColumnName = "identityVerification_uuid")
         val identityVerification: IdentityVerification? = null,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "twoFactorAuthenticationUUID", referencedColumnName = "twoFactorAuthenticationUUID")
+        @JoinColumn(name = "twoFactorAuthentication_uuid", referencedColumnName = "twoFactorAuthentication_uuid")
         val TwoFactorAuth: TwoFactorAuth? = null,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "antiPishingCodeUUID", referencedColumnName = "antiPishingCodeUUID")
+        @JoinColumn(name = "antiPishingCode_uuid", referencedColumnName = "antiPishingCode_uuid")
         val antiPishingCode: AntiPishingCode? = null,
 )
 
 @Entity
 @Table(name = "twoFactorAuthentication")
 data class TwoFactorAuth(
-        @Id @GeneratedValue @Column(name = "twoFactorAuthenticationUUID") val twoFAUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "twoFactorAuthentication_uuid") val twoFAUUID: UUID? = null,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "googleAuthenticationUUID", referencedColumnName = "googleAuthenticationUUID")
+        @JoinColumn(name = "googleAuthentication_uuid", referencedColumnName = "googleAuthentication_uuid")
         val googleAuthentication: GoogleAuth,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "smsAuthenticationUUID", referencedColumnName = "smsAuthenticationUUID")
+        @JoinColumn(name = "smsAuthentication_uuid", referencedColumnName = "smsAuthentication_uuid")
         val smsAuthentication: SMSAuthentication,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "emailVerificationUUID", referencedColumnName = "emailVerificationUUID")
+        @JoinColumn(name = "emailVerification_uuid", referencedColumnName = "emailVerification_uuid")
         val emailVerification: EmailVerification
 ) {
     constructor() : this(
@@ -51,7 +51,7 @@ data class TwoFactorAuth(
 @Entity
 @Table(name = "googleAuthentication")
 data class GoogleAuth(
-        @Id @GeneratedValue @Column(name = "googleAuthenticationUUID") val googleAuthenticationUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "googleAuthentication_uuid") val googleAuthenticationUUID: UUID? = null,
         @Column(name = "enable") val enable: Boolean = false,
         @Column(name = "verificationCode") val verificationCode: Int
 ) {
@@ -61,7 +61,7 @@ data class GoogleAuth(
 @Entity
 @Table(name = "smsAuthentication")
 data class SMSAuthentication(
-        @Id @GeneratedValue @Column(name = "smsAuthenticationUUID") val smsAuthenticationUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "smsAuthentication_uuid") val smsAuthenticationUUID: UUID? = null,
         @Column(name = "enable") val enable: Boolean = false,
         @Column(name = "verificationCode") val verificationCode: Int
 ) {
@@ -71,14 +71,14 @@ data class SMSAuthentication(
 @Entity
 @Table(name = "emailVerification")
 data class EmailVerification(
-        @Id @GeneratedValue @Column(name = "emailVerificationUUID") val emailVerificationUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "emailVerification_uuid") val emailVerificationUUID: UUID? = null,
         @Column(name = "enable") val enable: Boolean = false,
 
         @Enumerated(EnumType.STRING) @Column(name = "emailStatus") @Type(type = "pgsql_enum")
         val emailVerificationStatus: EmailVerificationStatus = EmailVerificationStatus.UNCONFIRMED,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "tokenUUID", referencedColumnName = "tokenUUID")
+        @JoinColumn(name = "token_uuid", referencedColumnName = "token_uuid")
         val token: Token? = null
 )
 
@@ -89,7 +89,7 @@ enum class EmailVerificationStatus {
 @Entity
 @Table(name = "antiPishingCode")
 data class AntiPishingCode(
-        @Id @GeneratedValue @Column(name = "antiPishingCodeUUID") val antiPishingCodeUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "antiPishingCode_uuid") val antiPishingCodeUUID: UUID? = null,
         @Column(name = "enable") val enable: Boolean = false,
         @Column(name = "code") val code: String
 ) {

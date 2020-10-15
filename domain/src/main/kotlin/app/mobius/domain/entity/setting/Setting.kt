@@ -11,14 +11,14 @@ import javax.persistence.*
 @Table(name = "setting")
 @TypeDef(name = "pgsql_enum", typeClass = PostgreSQLEnumType::class)
 data class Setting(
-        @Id @GeneratedValue @Column(name = "settingUUID") val settingUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "setting_uuid") val settingUUID: UUID? = null,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "accountUUID", referencedColumnName = "accountUUID")
+        @JoinColumn(name = "account_uuid", referencedColumnName = "account_uuid")
         val account: Account,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "securityUUID", referencedColumnName = "securityUUID")
+        @JoinColumn(name = "security_uuid", referencedColumnName = "security_uuid")
         val security: Security,
 
         @Enumerated(EnumType.STRING) @Column(name = "theme") @Type(type = "pgsql_enum")

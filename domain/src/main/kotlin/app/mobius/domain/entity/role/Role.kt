@@ -11,7 +11,7 @@ import javax.persistence.*
 @Table(name = "role")
 @TypeDef(name = "pgsql_enum", typeClass = PostgreSQLEnumType::class)
 data class Role(
-        @Id @GeneratedValue @Column(name = "roleUUID") val roleUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "role_uuid") val roleUUID: UUID? = null,
 
         @Enumerated(EnumType.STRING) @Column(name = "livenessStatus") @Type(type = "pgsql_enum")
         val livenessStatus: LivenessStatus = LivenessStatus.UNSOLICITED,
@@ -19,14 +19,14 @@ data class Role(
         @Column(name = "securityLevel") val securityLevel: Int = 0,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "subscriptionUUID", referencedColumnName = "subscriptionUUID")
+        @JoinColumn(name = "subscription_uuid", referencedColumnName = "subscription_uuid")
         val subscription: Subscription,
 
         @ManyToMany(cascade = [CascadeType.ALL])
         @JoinTable(
                 name = "role_permission",
-                joinColumns = [ JoinColumn(name = "roleUUID") ],
-                inverseJoinColumns = [ JoinColumn(name = "permissionUUID") ]
+                joinColumns = [ JoinColumn(name = "role_uuid") ],
+                inverseJoinColumns = [ JoinColumn(name = "permission_uuid") ]
         )
         val permissions: List<Permission>
 
