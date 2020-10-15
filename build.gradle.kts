@@ -17,11 +17,6 @@ plugins {
 
 }
 
-tasks.register<Copy>("copy") {
-	from("/home/braian/Projects/Moebius/Backend/Moebius-backend/HELP.md")
-	into("/home/braian/Projects/Moebius/Backend/Moebius-backend/HELP2.md")
-}
-
 version = "0.0.0"
 
 /**

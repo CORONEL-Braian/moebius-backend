@@ -119,7 +119,7 @@ class JDBM {
             }
             println("-------")
 
-//            Naming Strategy: from camelCase to snake_case db attributes
+//            Naming Strategy: from camelCase/snake_case of backend to snake_case db attributes
             configuration.setImplicitNamingStrategy(SpringImplicitNamingStrategy.INSTANCE)
             configuration.setPhysicalNamingStrategy(SpringPhysicalNamingStrategy())
 
