@@ -1,6 +1,13 @@
 HIBERNATE
 ---------
 
+##### Naming Strategy
+
+Use camelCase, snake_case or annotation in:
+ * @Id -> testUuid and not testUUID
+ * @Enumerated
+ * 
+
 ##### @Entity
 *The entity class must have a no-arg constructor. 
 The entity class may have other constructors as well. The no-arg constructor must be public or protected.*
@@ -41,3 +48,4 @@ This association has two sides i.e. the owning side and the inverse side
              * https://stackoverflow.com/a/36945146/5279996
              * https://codingexplained.com/coding/java/hibernate/unique-field-validation-using-hibernate-spring
     
+   

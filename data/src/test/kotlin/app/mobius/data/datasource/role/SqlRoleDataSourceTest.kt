@@ -39,8 +39,8 @@ class SqlRoleDataSourceTest {
         val randomName = randomString("/test")
         val randomLocation = randomString("/test")
         val resource = Resource(null, randomName, randomLocation)
-        val permission1 = Permission(permissionUUID = null, operation = Operation.UPDATE, resource = resource)
-        val permission2 = Permission(permissionUUID = null, operation = Operation.UPDATE, resource = resource)
+        val permission1 = Permission(permissionUuid = null, operation = Operation.UPDATE, resource = resource)
+        val permission2 = Permission(permissionUuid = null, operation = Operation.UPDATE, resource = resource)
 
 
 //        When

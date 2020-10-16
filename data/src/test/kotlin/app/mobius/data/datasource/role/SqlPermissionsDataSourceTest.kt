@@ -30,7 +30,7 @@ class SqlPermissionsDataSourceTest {
 //        Given
         val name = "/test 4"; val location = "/test 4"
         val resource = Resource(null, name, location)
-        val permission = Permission(permissionUUID = null, operation = Operation.CREATE, resource = resource)
+        val permission = Permission(permissionUuid = null, operation = Operation.CREATE, resource = resource)
 
         assertDoesNotThrow("") {
             if (hibernate.isUniquenessValid(permission)) {
@@ -49,7 +49,7 @@ class SqlPermissionsDataSourceTest {
         val randomName = randomString("/test")
         val randomLocation = randomString("/test")
         val resource = Resource(resourceUUID = null, name = randomName, location = randomLocation)
-        val permission = Permission(permissionUUID = null, operation = Operation.CREATE, resource = resource)
+        val permission = Permission(permissionUuid = null, operation = Operation.CREATE, resource = resource)
 
 //        When
         assertDoesNotThrow("") {

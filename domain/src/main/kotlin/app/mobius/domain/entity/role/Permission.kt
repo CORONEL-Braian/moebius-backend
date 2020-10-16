@@ -21,9 +21,9 @@ data class Permission(
         @Id
         @GeneratedValue
         @Column(name = "permission_uuid")
-        val permissionUUID: UUID? = null,
+        val permissionUuid: UUID? = null,
 
-        @Enumerated(EnumType.STRING) @Column(name = "operation") @Type(type = "pgsql_enum")
+        @Enumerated(EnumType.STRING) @Type(type = "pgsql_enum")
         val operation: Operation?,
 
         @OneToOne(cascade = [CascadeType.ALL])
