@@ -1,14 +1,23 @@
 group = "app.mobius"
 version = "0.0.0"
 
-repositories {
-}
+//TODO: Inject secret hibernate credential
+//open class LoadHibernateCredential : DefaultTask() {}
+/*tasks.register<Copy>("copy") {
+    from(file("$rootDir/${project.name}/file.txt"))
+    into("$buildDir/newFile.txt")
+}*/
 
+/**
+ * Sources:
+ *  https://github.com/ronmamo/reflections
+ */
 dependencies {
     implementation(project(":domain"))
 
+    implementation("org.reflections:reflections:0.9.12")
+
     implementation(project(":library_base"))
     implementation(project(":library_test_utils"))
-
-    testImplementation("junit", "junit", "4.12")
+    implementation(kotlin("reflect"))
 }

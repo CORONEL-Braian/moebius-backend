@@ -18,23 +18,23 @@
 
   "servers": [
     {
-      "url": "development.möbius.app/user/sign_up",
+      "url": "development.möbius.app/person/sign_up",
       "description": "Development server"
     },
     {
-      "url": "integration.möbius.app/user/sign_up",
+      "url": "integration.möbius.app/person/sign_up",
       "description": "Integration server"
     },
     {
-      "url": "testing.möbius.app/user/sign_up",
+      "url": "testing.möbius.app/person/sign_up",
       "description": "Testing server"
     },
     {
-      "url": "staging.möbius.app/user/sign_up",
+      "url": "staging.möbius.app/person/sign_up",
       "description": "Staging server"
     },
     {
-      "url": "api.möbius.app/user/sign_up",
+      "url": "api.möbius.app/person/sign_up",
       "description": "Production server"
     }
 
@@ -44,7 +44,7 @@
     "/third_profiles": {
       "get": {
         "summary": "Returns a list of third profiles.",
-        "description": "They are users without accounts created by others.",
+        "description": "They are profiles without identity created by some person.",
         "responses": {
           "200": {
             "description": "A JSON array of third profile",

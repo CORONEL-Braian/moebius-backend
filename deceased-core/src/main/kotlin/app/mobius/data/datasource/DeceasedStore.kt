@@ -1,9 +1,9 @@
 package app.mobius.data.datasource
 
-import app.moebius.domain.entity.User
+import app.mobius.domain.model.Person
 
 interface DeceasedStore {
 
-    fun saveDeceased(user: User)
+    fun saveDeceased(person: Person)
 
 }

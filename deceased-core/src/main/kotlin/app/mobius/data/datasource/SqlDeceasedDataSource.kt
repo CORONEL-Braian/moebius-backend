@@ -1,10 +1,10 @@
 package app.mobius.data.datasource
 
-import app.moebius.domain.entity.User
+import app.mobius.domain.model.Person
 
 class SqlDeceasedDataSource: DeceasedStore {
 
-    override fun saveDeceased(user: User) {
+    override fun saveDeceased(person: Person) {
         TODO("Not yet implemented")
     }
 

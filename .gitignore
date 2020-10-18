@@ -1,8 +1,8 @@
-tools/*
-tools/Credentials.txt
-tools/Environments.txt
-tools/Temp.txt
-tools/http-client.private.env.json
+external/*
+external/Credentials.txt
+external/Environments.txt
+external/Temp.txt
+external/http-client.private.env.json
 
 # ---------------
 
