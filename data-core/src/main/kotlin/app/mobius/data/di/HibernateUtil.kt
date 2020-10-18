@@ -48,15 +48,16 @@ class HibernateUtil {
             if (!isUniquenessValidOfColumn(instance, field)) return false
             else if (!isUniquenessValidOfJoinColumn(instance, field))  return false
             else if (!isUniquenessValidOfJoinTable(instance, field)) return false
-            else if (!isUniquenessValidOfUniqueConstraint(instance, field)) return false
+//            else if (!isUniquenessValidOfUniqueConstraint(instance, field)) return false
         }
         return true
     }
 
     private fun isUniquenessValidOfColumn(instance: Any, field: Field) : Boolean {
         if (isUniqueFieldOfColumn(field) ) {
-            val value = instance.propertyValue<Any>(field.name)
-            if (isExistingField(instance::class.java, field.name, value)) return false
+            instance.propertyValue<Any?>(field.name)?.let { value ->
+                if (isExistingField(instance::class.java, field.name, value)) return false
+            }
         }
         return true
     }
@@ -70,8 +71,9 @@ class HibernateUtil {
     private fun isUniquenessValidOfJoinColumn(instance: Any, field: Field) : Boolean {
         val joinColumn = JoinColumn::class.java
         if (field.isAnnotationPresent(joinColumn)) {
-            val subEntity = instance.propertyValue<Any>(field.name)
-            if (!isUniquenessValid(subEntity)) return false
+            instance.propertyValue<Any?>(field.name)?.let { subEntity ->
+                if (!isUniquenessValid(subEntity)) return false
+            }
         }
         return true
     }
@@ -79,9 +81,10 @@ class HibernateUtil {
     private fun isUniquenessValidOfJoinTable(instance: Any, field: Field) : Boolean {
         val joinTable = JoinTable::class.java
         if (field.isAnnotationPresent(joinTable)) {
-            val subEntities = instance.propertyValue<List<Any>>(field.name)
-            subEntities.map { subEntity ->
-                if (!isUniquenessValid(subEntity)) return false
+            instance.propertyValue<List<Any>>(field.name)?.let { subEntities ->
+                subEntities.map { subEntity ->
+                    if (!isUniquenessValid(subEntity)) return false
+                }
             }
         }
         return true
@@ -107,12 +110,13 @@ class HibernateUtil {
         declaredFields.filter {
             !it.isAnnotationPresent(Id::class.java)
         }.map {  field ->
-            if (isUniqueFieldOfColumn(field) ) {
-                val value = instance.propertyValue<Any>(field.name)
-                if (isExistingField(instance::class.java, field.name, value)) throw IllegalArgumentException("@Column not valid")
+            if (isUniqueFieldOfColumn(field)) {
+                instance.propertyValue<Any?>(field.name)?.let { value ->
+                    if (isExistingField(instance::class.java, field.name, value)) throw IllegalArgumentException("@Column not valid")
 
 //                For get UUID of sub-entity
-                if (isSubEntity) mapOfSubEntity[field.name] = value
+                    if (isSubEntity) mapOfSubEntity[field.name] = value
+                }
 
                 /**
                  * If the uniqueness of the sub-entity is not valid: @return false
@@ -121,22 +125,26 @@ class HibernateUtil {
             } else if (field.isAnnotationPresent(joinColumn)) {
                 isSubEntity = true
 
-                val subEntity = instance.propertyValue<Any>(field.name)
-                if (!isUniquenessValid(subEntity)) {
+                instance.propertyValue<Any>(field.name)?.let { subEntity ->
+                    if (!isUniquenessValid(subEntity)) {
 
-                    if (field.getAnnotation(joinColumn).unique) {
+                        if (field.getAnnotation(joinColumn).unique) {
 
 //                    val subEntityUUID = getUUID(subEntity)
-                        val subEntityUUID = getUUID(subEntity::class.java, mapOfSubEntity)
+                            val subEntityUUID = getUUID(subEntity::class.java, mapOfSubEntity)
 
-                        if (isExistingField(instance::class.java, field.name, subEntityUUID))
-                            throw IllegalArgumentException("Sub-entity must be unique in entity")
+                            if (isExistingField(instance::class.java, field.name, subEntityUUID))
+                                throw IllegalArgumentException("Sub-entity must be unique in entity")
 
+                        }
                     }
                 }
 
                 isSubEntity = false
+            } else {
+
             }
+
         }
     }
 
@@ -177,8 +185,9 @@ class HibernateUtil {
     fun isColumnValid(candidateObject: Any) : Boolean {
         val uniqueFields = getUniqueFieldsOfColumn(candidateObject::class.java)
         uniqueFields.map { field ->
-            val value = candidateObject.propertyValue<Any>(field.name)
-            if (isExistingField(candidateObject::class.java, field.name, value)) return false
+            candidateObject.propertyValue<Any>(field.name)?.let { value ->
+                if (isExistingField(candidateObject::class.java, field.name, value)) return false
+            }
         }
         return true
     }

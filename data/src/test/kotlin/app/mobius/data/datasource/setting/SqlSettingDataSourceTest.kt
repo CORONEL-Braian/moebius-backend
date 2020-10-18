@@ -28,10 +28,10 @@ class SqlSettingDataSourceTest {
     fun `create a empty setting`() {
         val setting = Setting()
 
-        val session = JDBM.Hibernate.openSession()
+ /*       val session = JDBM.Hibernate.openSession()
         JDBM.Hibernate.executeQuery(session) {
             session.save(setting)
-        }
+        }*/
     }
 
 }

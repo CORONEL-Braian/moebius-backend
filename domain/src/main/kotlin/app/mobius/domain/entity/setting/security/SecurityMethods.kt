@@ -13,7 +13,7 @@ data class SecurityMethods(
         @Id @GeneratedValue @Column(name = "securityMethods_uuid") val securityMethodsUUID: UUID? = null,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "identityVerification_uuid", referencedColumnName = "identityVerification_uuid")
+        @JoinColumn(name = "identity_verification_uuid", referencedColumnName = "identity_verification_uuid")
         val identityVerification: IdentityVerification? = null,
 
         @OneToOne(cascade = [CascadeType.ALL])
