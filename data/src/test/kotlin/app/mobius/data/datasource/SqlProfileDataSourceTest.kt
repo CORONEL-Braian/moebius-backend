@@ -2,13 +2,12 @@ package app.mobius.data.datasource
 
 import app.mobius.data.di.HibernateUtil
 import app.mobius.data.di.JDBM
-import app.mobius.domain.entity.Person
-import app.mobius.domain.entity.Profile
+import app.mobius.domain.entity.Profile as PersonProfile
 import org.hibernate.Session
 import org.junit.jupiter.api.*
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class SqlPersonDataSourceTest {
+class SqlProfileDataSourceTest {
 
     private lateinit var hibernate : HibernateUtil
     private lateinit var session : Session
@@ -24,13 +23,13 @@ class SqlPersonDataSourceTest {
     }
 
     @Test
-    fun `given a person, when insert it, then create it -- should does not throw Exception`() {
-        val person = Person()
+    fun `given a profile, when insert it, then create it -- should does not throw Exception`() {
+        val profile = PersonProfile()
 
-        assertDoesNotThrow("person exception") {
+        assertDoesNotThrow("setting exception") {
             JDBM.Hibernate.executeQuery(session) {
-                if (hibernate.isUniquenessValid(person)) {
-                    session.save(person)
+                if (hibernate.isUniquenessValid(profile)) {
+                    session.save(profile)
                 }
             }
         }

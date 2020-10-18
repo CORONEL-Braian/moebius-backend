@@ -1,4 +1,4 @@
-package app.mobius.domain.model
+package app.mobius.domain.entity
 
 import java.util.*
 import javax.persistence.*
@@ -8,6 +8,8 @@ import javax.persistence.*
 data class Gender(
         @Id @GeneratedValue @Column(name = "gender_uuid") val genderUUID: UUID? = null,
         val type: String,
-        val description: String,
-        val iconUrl: String
-)
+        val description: String? = null,
+        val iconUrl: String? = null
+) {
+    constructor() : this(type = "")
+}

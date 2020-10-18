@@ -52,7 +52,7 @@ class SqlSecurityMethodsDataSourceTest {
     }
 
     @Test
-    fun `given a twoFactorAuth and 2FA with email pending, when insert securityMethods, then create it -- should does not throw Exception`() {
+    fun `given a 2FA with email pending and securityMethods, when insert securityMethods, then create it -- should does not throw Exception`() {
         val twoFactorAuth = TwoFactorAuth(
                 googleAuthentication = GoogleAuth(),
                 smsAuthentication = SMSAuthentication(),

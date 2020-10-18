@@ -1,6 +1,6 @@
 package app.mobius.data.datasource
 
-import app.mobius.domain.model.Person
+import app.mobius.domain.entity.Person
 import javax.persistence.*
 
 @Entity

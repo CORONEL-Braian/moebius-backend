@@ -9,6 +9,6 @@ data class Account(
         @Id @GeneratedValue @Column(name = "account_uuid") val accountUUID: UUID? = null,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "linkedAccounts_uuid", referencedColumnName = "linkedAccounts_uuid")
-        val linkedAccounts: LinkedAccounts? = null,
+        @JoinColumn(name = "linked_account_uuid", referencedColumnName = "linked_account_uuid")
+        val linkedAccount: LinkedAccount? = null,
 )

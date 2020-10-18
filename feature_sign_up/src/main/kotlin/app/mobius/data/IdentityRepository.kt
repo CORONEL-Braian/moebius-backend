@@ -1,6 +1,6 @@
 package app.mobius.data
 
-import app.mobius.domain.model.Person
+import app.mobius.domain.entity.Person
 
 /**
  * Communicates with the SQL data source
