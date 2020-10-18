@@ -1,4 +1,4 @@
-package app.mobius.data.datasource.setting
+package app.mobius.data.datasource.setting.security
 
 import app.mobius.data.di.HibernateUtil
 import app.mobius.data.di.JDBM

@@ -19,7 +19,7 @@ data class Security(
         val securityLevel: Int = 0,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "securityMethods_uuid", referencedColumnName = "securityMethods_uuid", unique = true)
+        @JoinColumn(name = "security_methods_uuid", referencedColumnName = "security_methods_uuid", unique = true)
         val securityMethods: SecurityMethods? = null,
 ) {
     constructor() : this(authentication = Authentication())

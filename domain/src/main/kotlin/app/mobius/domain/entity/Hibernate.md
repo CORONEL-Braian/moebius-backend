@@ -3,7 +3,7 @@ HIBERNATE
 
 ##### Naming Strategy
 
-Use camelCase, snake_case or annotation in:
+Use camelCase or snake_case in annotation or variable name:
  * @Id -> testUuid and not testUUID
  * @Enumerated
  * 
@@ -42,10 +42,16 @@ This association has two sides i.e. the owning side and the inverse side
 [Source](https://www.baeldung.com/hibernate-many-to-many)
 
 
-#### @Column
+##### @Column
  * uniqueness: 
     *Sources:*
              * https://stackoverflow.com/a/36945146/5279996
              * https://codingexplained.com/coding/java/hibernate/unique-field-validation-using-hibernate-spring
     
-   
+##### @Generated(GenerationTime.INSERT)
+
+Instruct Hibernate to reload the entity after the Persistence Context is flushed, otherwise, 
+the database-generated value will not be synchronized with the in-memory entity state.
+
+*Source:*
+ * https://stackoverflow.com/a/61838180/5279996
