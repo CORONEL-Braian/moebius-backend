@@ -37,18 +37,11 @@ data class Profile(
         @Enumerated(EnumType.STRING) @Type(type = "pgsql_enum")
         val sex: Sex,
 
-//        @Generated(GenerationTime.INSERT)
-        @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
-        @JoinColumn(name = "gender_uuid", referencedColumnName = "gender_uuid")
-        @MapsId
-        val gender: Gender
+        @OneToOne(cascade = [CascadeType.ALL])
+        @JoinColumn(name = "gender_uuid", referencedColumnName = "gender_uuid", insertable=false, updatable = false)
+        val gender: Gender? = null
 
 ) {
-        /**
-         * TODO:
-         * Insert default value for sub-entity
-         * Insert some existing value
-         */
         constructor() : this(
                 name = "",
                 surname = "",
@@ -60,12 +53,8 @@ data class Profile(
                 phone = Phone(),
                 birthdate = Date(),
                 sex = Sex.F,
-                gender = Gender()
-//                gender = Gender(genderUUID = UUID.fromString("c87ee95b-06f1-52ab-83ed-5d882ae400e6"), type = "")
         )
 }
-
-
 
 @Entity
 @Table(name = "phone")
