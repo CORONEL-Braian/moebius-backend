@@ -37,9 +37,10 @@ data class Profile(
         @Enumerated(EnumType.STRING) @Type(type = "pgsql_enum")
         val sex: Sex,
 
-        @Generated(GenerationTime.INSERT)
-        @OneToOne(cascade = [CascadeType.ALL])
+//        @Generated(GenerationTime.INSERT)
+        @OneToOne(cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
         @JoinColumn(name = "gender_uuid", referencedColumnName = "gender_uuid")
+        @MapsId
         val gender: Gender
 
 ) {
@@ -59,7 +60,8 @@ data class Profile(
                 phone = Phone(),
                 birthdate = Date(),
                 sex = Sex.F,
-                gender = Gender(genderUUID = UUID.fromString("c87ee95b-06f1-52ab-83ed-5d882ae400e6"), type = "")
+                gender = Gender()
+//                gender = Gender(genderUUID = UUID.fromString("c87ee95b-06f1-52ab-83ed-5d882ae400e6"), type = "")
         )
 }
 
