@@ -31,10 +31,6 @@ class SqlProfileDataSourceTest {
         val profile = PersonProfile()
         val defaultGender = UUID.fromString("c87ee95b-06f1-52ab-83ed-5d882ae400e6")
 
-//        TODO: Use default from db with annotations
-//        val gender = Gender(type = randomString(), genderUUID = defaultGender)
-//        profile.gender = gender
-
         assertDoesNotThrow("save profile exception") {
             JDBM.Hibernate.executeQuery(session) {
                 if (hibernate.isUniquenessValid(profile)) {

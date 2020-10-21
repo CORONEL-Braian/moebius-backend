@@ -11,6 +11,7 @@ import javax.persistence.Table
 @Entity
 @Table(name = "profile")
 @TypeDef(name = "pgsql_enum", typeClass = PostgreSQLEnumType::class)
+@DynamicInsert
 data class Profile(
         @Id @GeneratedValue @Column(name = "profile_uuid") val profileUUID: UUID? = null,
         var name: String,
@@ -43,8 +44,7 @@ data class Profile(
 //                columnDefinition = "c87ee95b-06f1-52ab-83ed-5d882ae400e6"
 //                insertable=false, updatable = false
         )
-        @ColumnDefault(value = "c87ee95b-06f1-52ab-83ed-5d882ae400e6")
-        @Generated(GenerationTime.INSERT)
+//        @Generated(GenerationTime.INSERT)
         var gender: Gender? = null
 
 ) {
