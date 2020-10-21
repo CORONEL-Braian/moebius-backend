@@ -1,45 +1,51 @@
 package app.mobius.domain.entity
 
 import app.mobius.util.PostgreSQLEnumType
-import org.hibernate.annotations.Generated
-import org.hibernate.annotations.GenerationTime
-import org.hibernate.annotations.Type
-import org.hibernate.annotations.TypeDef
+import org.hibernate.annotations.*
 import java.util.*
 import javax.persistence.*
+import javax.persistence.CascadeType
+import javax.persistence.Entity
+import javax.persistence.Table
 
 @Entity
 @Table(name = "profile")
 @TypeDef(name = "pgsql_enum", typeClass = PostgreSQLEnumType::class)
 data class Profile(
         @Id @GeneratedValue @Column(name = "profile_uuid") val profileUUID: UUID? = null,
-        val name: String,
-        val surname: String,
+        var name: String,
+        var surname: String,
 
         @OneToOne(cascade = [CascadeType.ALL])
         @JoinColumn(name = "location_uuid", referencedColumnName = "location_uuid")
-        val location: Location,
+        var location: Location,
 
         @OneToOne(cascade = [CascadeType.ALL])
         @JoinColumn(name = "nationality_uuid", referencedColumnName = "country_uuid")
-        val nationality: Country,
+        var nationality: Country,
 
-        val avatarUrl: String?,
-        val nickname: String?,
-        val biography: String?,
+        var avatarUrl: String?,
+        var nickname: String?,
+        var biography: String?,
 
         @OneToOne(cascade = [CascadeType.ALL])
         @JoinColumn(name = "phone_uuid", referencedColumnName = "phone_uuid")
-        val phone: Phone,
+        var phone: Phone,
 
-        val birthdate: Date,
+        var birthdate: Date,
 
         @Enumerated(EnumType.STRING) @Type(type = "pgsql_enum")
-        val sex: Sex,
+        var sex: Sex,
+
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "gender_uuid", referencedColumnName = "gender_uuid", insertable=false, updatable = false)
-        val gender: Gender? = null
+        @JoinColumn(name = "gender_uuid", referencedColumnName = "gender_uuid",
+//                columnDefinition = "c87ee95b-06f1-52ab-83ed-5d882ae400e6"
+//                insertable=false, updatable = false
+        )
+        @ColumnDefault(value = "c87ee95b-06f1-52ab-83ed-5d882ae400e6")
+        @Generated(GenerationTime.INSERT)
+        var gender: Gender? = null
 
 ) {
         constructor() : this(
@@ -60,9 +66,9 @@ data class Profile(
 @Table(name = "phone")
 data class Phone(
         @Id @GeneratedValue @Column(name = "phone_uuid") val phoneUUID: UUID? = null,
-        val codeCountry: String,
-        val codeArea: String,
-        val number: Int
+        var codeCountry: String,
+        var codeArea: String,
+        var number: Int
 ) {
         constructor() : this(codeCountry = "", codeArea = "", number = -1)
 }

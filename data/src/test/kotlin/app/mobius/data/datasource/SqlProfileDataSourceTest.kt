@@ -2,6 +2,7 @@ package app.mobius.data.datasource
 
 import app.mobius.data.di.HibernateUtil
 import app.mobius.data.di.JDBM
+import app.mobius.data.util.randomString
 import app.mobius.domain.entity.Gender
 import app.mobius.domain.entity.Profile as PersonProfile
 import org.hibernate.Session
@@ -26,10 +27,13 @@ class SqlProfileDataSourceTest {
     }
 
     @Test
-    fun `given a default gender and profile, when insert profile, then create profile -- should does not throw Exception`() {
-        val defaultGenderUUID = UUID.fromString("c87ee95b-06f1-52ab-83ed-5d882ae400e6")
-
+    fun `given a default gender and profile, when insert profile, then create profile without insert gender -- should does not throw Exception`() {
         val profile = PersonProfile()
+        val defaultGender = UUID.fromString("c87ee95b-06f1-52ab-83ed-5d882ae400e6")
+
+//        TODO: Use default from db with annotations
+//        val gender = Gender(type = randomString(), genderUUID = defaultGender)
+//        profile.gender = gender
 
         assertDoesNotThrow("save profile exception") {
             JDBM.Hibernate.executeQuery(session) {
@@ -39,18 +43,21 @@ class SqlProfileDataSourceTest {
             }
         }
 
-//        Assert.isTrue(hibernate.getUUID(profile.gender.genderUUID) == defaultGenderUUID, "")
+        val profileGender = UUID.fromString("c87ee95b-06f1-52ab-83ed-5d882ae400e6")
+
+        Assertions.assertEquals(defaultGender, profileGender)
     }
 
     @Test
-    fun `given a gender not default and profile, when insert profile, then create profile -- should does not throw Exception`() {
-        val genderUUID = UUID.fromString("8ece806e-cee7-5fb2-9996-2097595eb3f3")
+    fun `given a gender with existing UUID, when insert profile with gender, then create profile without insert gender -- should does not throw Exception`() {
+        val profile = PersonProfile()
 
-     /*   val profile = PersonProfile(
-                gender = Gender(
-                        genderUUID = genderUUID
-                )
-        )
+        val gender = Gender(type = randomString(), genderUUID = UUID.fromString("8ece806e-cee7-5fb2-9996-2097595eb3f3"))
+//        TODO: Enable insertable and updatable in Gender
+//        TODO: Prepare generic class that can have insertable and updatable attributes as optional at runtime
+
+
+        profile.gender = gender
 
         assertDoesNotThrow("save profile exception") {
             JDBM.Hibernate.executeQuery(session) {
@@ -59,7 +66,6 @@ class SqlProfileDataSourceTest {
                 }
             }
         }
-*/
 //        Assert.isTrue(hibernate.getUUID(profile.gender.genderUUID) == defaultGenderUUID, "")
 
 

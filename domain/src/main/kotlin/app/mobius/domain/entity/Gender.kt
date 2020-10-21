@@ -6,10 +6,10 @@ import javax.persistence.*
 @Entity
 @Table(name = "gender")
 data class Gender(
-        @Id @GeneratedValue @Column(name = "gender_uuid") val genderUUID: UUID? = null,
-        val type: String,
-        val description: String? = null,
-        val iconUrl: String? = null
+        @Id @GeneratedValue @Column(name = "gender_uuid", insertable = false, updatable = false) var genderUUID: UUID? = null,
+        @Column(insertable = false, updatable = false) var type: String,
+        @Column(insertable = false, updatable = false) var description: String? = null,
+        @Column(insertable = false, updatable = false) var iconUrl: String? = null
 ) {
     constructor() : this(type = "")
 }
