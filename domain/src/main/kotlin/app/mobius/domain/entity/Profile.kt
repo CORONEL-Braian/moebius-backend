@@ -38,13 +38,8 @@ data class Profile(
         @Enumerated(EnumType.STRING) @Type(type = "pgsql_enum")
         var sex: Sex,
 
-
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "gender_uuid", referencedColumnName = "gender_uuid",
-//                columnDefinition = "c87ee95b-06f1-52ab-83ed-5d882ae400e6"
-//                insertable=false, updatable = false
-        )
-//        @Generated(GenerationTime.INSERT)
+        @JoinColumn(name = "gender_uuid", referencedColumnName = "gender_uuid")
         var gender: Gender? = null
 
 ) {
@@ -76,3 +71,4 @@ data class Phone(
 enum class Sex {
     F, M
 }
+

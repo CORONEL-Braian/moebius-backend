@@ -48,10 +48,7 @@ class SqlProfileDataSourceTest {
     fun `given a gender with existing UUID, when insert profile with gender, then create profile without insert gender -- should does not throw Exception`() {
         val profile = PersonProfile()
 
-        val gender = Gender(type = randomString(), genderUUID = UUID.fromString("8ece806e-cee7-5fb2-9996-2097595eb3f3"))
-//        TODO: Enable insertable and updatable in Gender
-//        TODO: Prepare generic class that can have insertable and updatable attributes as optional at runtime
-
+        val gender = Gender(type = randomString(), genderUUID = UUID.fromString("95a7b26d-52e2-5ed1-a93e-5ee5472751ca"))
 
         profile.gender = gender
 
