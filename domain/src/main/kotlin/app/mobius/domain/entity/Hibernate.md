@@ -56,16 +56,10 @@ the database-generated value will not be synchronized with the in-memory entity 
 *Source:*
  * https://stackoverflow.com/a/61838180/5279996
  
-___
-
-## Samples
  
-##### Insert default value in the sub-entity UUID
+##### @DynamicInsert
 
-Use `insertable=false, updatable = false` and `? = null`
-
-See Profile > Gender
+Insert default value using DBMS and optional using Hibernate
 
 *Source:*
- * https://stackoverflow.com/a/61838180/5279996
- * https://stackoverflow.com/a/35408428/5279996
+ * https://stackoverflow.com/a/64474863/5279996

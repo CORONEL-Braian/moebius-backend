@@ -2,8 +2,11 @@ package app.mobius.data.datasource
 
 import app.mobius.data.di.HibernateUtil
 import app.mobius.data.di.JDBM
+import app.mobius.data.util.randomString
 import app.mobius.domain.entity.Person
 import app.mobius.domain.entity.Profile
+import app.mobius.domain.entity.role.Role
+import app.mobius.domain.entity.setting.Setting
 import org.hibernate.Session
 import org.junit.jupiter.api.*
 
@@ -24,8 +27,13 @@ class SqlPersonDataSourceTest {
     }
 
     @Test
-    fun `given a person, when insert it, then create it -- should does not throw Exception`() {
-        val person = Person()
+    fun `given a username and a person, when insert person, then create it`() {
+        val person = Person(
+                username = randomString(),
+                profile = Profile(),
+                setting = Setting(),
+                role = Role()
+        )
 
         assertDoesNotThrow("person exception") {
             JDBM.Hibernate.executeQuery(session) {

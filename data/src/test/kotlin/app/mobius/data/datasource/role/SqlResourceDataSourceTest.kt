@@ -25,7 +25,7 @@ class SqlResourceDataSourceTest {
     }
 
     @Test
-    fun `given a name and location if is uniqueness valid, when insert, then create a resource -- should doesn't throw Exception`() {
+    fun `given a name and location if is uniqueness valid, when insert, then create a resource`() {
         val name = "/test"
         val location = "/test"
 
@@ -43,7 +43,7 @@ class SqlResourceDataSourceTest {
     }
 
     @Test
-    fun `given a random name and location if is uniqueness valid, when insert, then create a resource  -- should doesn't throw Exception`() {
+    fun `given a random name and location if is uniqueness valid, when insert, then create a resource `() {
         val randomName = randomString("/test")
         val randomLocation = randomString("/test")
 

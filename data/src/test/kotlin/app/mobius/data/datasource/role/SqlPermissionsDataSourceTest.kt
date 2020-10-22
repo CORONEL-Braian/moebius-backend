@@ -26,7 +26,7 @@ class SqlPermissionsDataSourceTest {
     }
 
     @Test
-    fun `given a same permission, when uniqueness is valid and insert, then create a permission -- should doesn't throw Exception`() {
+    fun `given a same permission, when uniqueness is valid and insert, then create a permission`() {
 //        Given
         val name = "/test 4"; val location = "/test 4"
         val resource = Resource(null, name, location)
@@ -44,7 +44,7 @@ class SqlPermissionsDataSourceTest {
     }
 
     @Test
-    fun `create a random permission, when uniqueness is valid and insert, then create a permission -- should doesn't throw Exception`() {
+    fun `create a random permission, when uniqueness is valid and insert, then create a permission`() {
 //        Given
         val randomName = randomString("/test")
         val randomLocation = randomString("/test")

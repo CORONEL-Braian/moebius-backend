@@ -2,7 +2,6 @@ package app.mobius.data.datasource
 
 import app.mobius.data.di.HibernateUtil
 import app.mobius.data.di.JDBM
-import app.mobius.data.util.randomString
 import app.mobius.domain.entity.Gender
 import app.mobius.domain.entity.Profile as PersonProfile
 import org.hibernate.Session
@@ -27,9 +26,9 @@ class SqlProfileDataSourceTest {
     }
 
     @Test
-    fun `given a default gender and profile, when insert profile, then create profile without insert gender -- should does not throw Exception`() {
+    fun `given a default gender and profile, when insert profile, then create profile without insert gender`() {
         val profile = PersonProfile()
-        val defaultGender = UUID.fromString("c87ee95b-06f1-52ab-83ed-5d882ae400e6")
+        val defaultGenderUUID = UUID.fromString("c87ee95b-06f1-52ab-83ed-5d882ae400e6")
 
         assertDoesNotThrow("save profile exception") {
             JDBM.Hibernate.executeQuery(session) {
@@ -39,18 +38,19 @@ class SqlProfileDataSourceTest {
             }
         }
 
-        val profileGender = UUID.fromString("c87ee95b-06f1-52ab-83ed-5d882ae400e6")
+//        TODO: Get real profile gender UUID
+        val profileGenderUUID = UUID.fromString("c87ee95b-06f1-52ab-83ed-5d882ae400e6")
 
-        Assertions.assertEquals(defaultGender, profileGender)
+        Assertions.assertEquals(defaultGenderUUID, profileGenderUUID)
     }
 
     @Test
-    fun `given a gender with existing UUID, when insert profile with gender, then create profile without insert gender -- should does not throw Exception`() {
+    fun `given a gender with existing UUID, when insert profile with gender, then create profile without insert gender`() {
         val profile = PersonProfile()
 
-        val gender = Gender(type = randomString(), genderUUID = UUID.fromString("95a7b26d-52e2-5ed1-a93e-5ee5472751ca"))
+        val genderUUID =  UUID.fromString("95a7b26d-52e2-5ed1-a93e-5ee5472751ca")
 
-        profile.gender = gender
+        profile.gender = Gender(genderUUID = genderUUID)
 
         assertDoesNotThrow("save profile exception") {
             JDBM.Hibernate.executeQuery(session) {
@@ -59,8 +59,12 @@ class SqlProfileDataSourceTest {
                 }
             }
         }
-//        Assert.isTrue(hibernate.getUUID(profile.gender.genderUUID) == defaultGenderUUID, "")
 
+        //        TODO: Get real profile gender UUID
+        val profileGenderUUID = UUID.fromString("95a7b26d-52e2-5ed1-a93e-5ee5472751ca")
+//        hibernate.getUUID(profile.gender.genderUUID)
+
+        Assert.isTrue( genderUUID == profileGenderUUID, "")
 
     }
 

@@ -23,7 +23,7 @@ class SqlSecurityDataSourceTest {
     }
 
     @Test
-    fun `given a default security, when insert security, then create it -- should does not throw Exception`() {
+    fun `given a default security, when insert security, then create it`() {
         val security = Security()
 
         assertDoesNotThrow("security exception") {
@@ -36,7 +36,7 @@ class SqlSecurityDataSourceTest {
     }
 
     @Test
-    fun `given a securityMethods empty and security, when insert security, then create it -- should does not throw Exception`() {
+    fun `given a securityMethods empty and security, when insert security, then create it`() {
         val security = Security(authentication = Authentication(), securityMethods = SecurityMethods())
 
         assertDoesNotThrow("security exception") {

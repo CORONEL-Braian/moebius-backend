@@ -25,7 +25,7 @@ class SqlIdentityVerificationDataSourceTest {
     }
 
     @Test
-    fun `given a liveness, when insert it, then create it -- should does not throw Exception`() {
+    fun `given a liveness, when insert it, then create it`() {
         val liveness = Liveness()
 
         assertDoesNotThrow("liveness exception") {
@@ -38,7 +38,7 @@ class SqlIdentityVerificationDataSourceTest {
     }
 
     @Test
-    fun `given a documentationVerification, when insert it, then create it -- should does not throw Exception`() {
+    fun `given a documentationVerification, when insert it, then create it`() {
         val documentationVerification = DocumentationVerification()
 
         assertDoesNotThrow("documentationVerification exception") {
@@ -52,7 +52,7 @@ class SqlIdentityVerificationDataSourceTest {
     }
 
     @Test
-    fun `given a identityVerification, when insert it, then create it -- should does not throw Exception`() {
+    fun `given a identityVerification, when insert it, then create it`() {
         val identityVerification = IdentityVerification()
 
         assertDoesNotThrow("identityVerification exception") {

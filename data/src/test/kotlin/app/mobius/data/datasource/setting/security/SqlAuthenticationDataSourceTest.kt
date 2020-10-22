@@ -28,7 +28,7 @@ class SqlAuthenticationDataSourceTest {
     }
 
     @Test
-    fun `given a basicAuth and authentication, when insert authentication, then create it -- should does not throw Exception`() {
+    fun `given a basicAuth and authentication, when insert authentication, then create it`() {
         val basicAuth = BasicAuth(
                 email = "test email",
                 password = Password(apiHashPassword = randomString(endIndex = 20))  // TODO: Create fun apiHashPassword(pw: String)

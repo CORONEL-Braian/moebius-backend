@@ -25,7 +25,7 @@ class SqlSettingDataSourceTest {
     }
 
     @Test
-    fun `given a setting, when insert it, then create it -- should does not throw Exception`() {
+    fun `given a setting, when insert it, then create it`() {
         val setting = Setting()
 
         assertDoesNotThrow("setting exception") {

@@ -11,5 +11,5 @@ data class Gender(
         @Column(insertable = false, updatable = false) var description: String? = null,
         @Column(insertable = false, updatable = false) var iconUrl: String? = null
 ) {
-    constructor() : this(type = "")
+    constructor(genderUUID: UUID?) : this(genderUUID = genderUUID, type = "")
 }

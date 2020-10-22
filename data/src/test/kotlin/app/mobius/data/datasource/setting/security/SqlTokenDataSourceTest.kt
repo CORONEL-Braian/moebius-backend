@@ -23,7 +23,7 @@ class SqlTokenDataSourceTest {
     }
 
     @Test
-    fun `given a token, when insert it, then create it -- should does not throw Exception`() {
+    fun `given a token, when insert it, then create it`() {
         val token = Token()
 
         assertDoesNotThrow("token exception") {
