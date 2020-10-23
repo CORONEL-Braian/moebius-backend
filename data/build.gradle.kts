@@ -2,7 +2,7 @@ group = "app.mobius"
 version = "0.0.0"
 
 dependencies {
-    implementation(project(":data-core"))
+    implementation("org.springframework.data", "spring-data-jpa", "2.3.4.RELEASE")
 
-    implementation(project(":common", "default"))
+    api(project(":data-core"))
 }

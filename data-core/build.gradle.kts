@@ -13,7 +13,7 @@ version = "0.0.0"
  *  https://github.com/ronmamo/reflections
  */
 dependencies {
-    implementation(project(":domain"))
+    api(project(":domain"))
 
     implementation("org.reflections:reflections:0.9.12")
 

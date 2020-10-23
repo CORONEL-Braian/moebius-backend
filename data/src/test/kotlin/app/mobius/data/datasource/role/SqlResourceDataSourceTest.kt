@@ -6,7 +6,6 @@ import app.mobius.data.util.randomString
 import app.mobius.domain.entity.role.Resource
 import org.hibernate.Session
 import org.junit.jupiter.api.*
-import java.lang.Exception
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SqlResourceDataSourceTest {
