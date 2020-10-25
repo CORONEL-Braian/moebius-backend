@@ -11,5 +11,5 @@ class RolController {
     fun getRoles(): Role = TODO()
 
     @GetMapping("/rol")
-    fun editRol(role: Role): Role = TODO()
+    fun editRol(role: Role): Role = Role()
 }

@@ -11,6 +11,7 @@ import org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
 import java.io.File
 import javax.persistence.*
 
+
 /**
  * Java data base managment
  * Source:
@@ -24,6 +25,11 @@ class JDBM {
         private const val HIBERNATE_CONFIGURATION = "secret-hibernate.cfg.xml"
         private const val PACKAGE_ENTITIES = "app.mobius.domain.entity"
 
+       /* @Bean(name = ["entityManagerFactory"])
+        fun sessionFactory(): LocalSessionFactoryBean? {
+            return LocalSessionFactoryBean()
+        }
+*/
         /**
          * @param operation: e.g: save/update/read
          * @param message: successfully
