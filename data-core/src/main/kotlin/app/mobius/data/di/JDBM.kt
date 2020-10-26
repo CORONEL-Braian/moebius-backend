@@ -13,10 +13,9 @@ import javax.persistence.*
 
 
 /**
- * Java data base managment
+ * Java Data Base Managment
  * Source:
  *  https://docs.jboss.org/hibernate/core/3.3/reference/en/html/session-configuration.html
- * TODO: Auto scan with spring -> https://www.baeldung.com/the-persistence-layer-with-spring-and-jpa
  */
 class JDBM {
 

@@ -11,5 +11,6 @@ import org.springframework.stereotype.Repository
  * . AUTO IMPLEMENTED by Spring into a Bean called personRepository
  * . Communicates with the SQL data source
  */
+/*
 @Repository
-interface PersonRepository: CrudRepository<Person, Int>
+interface PersonRepository: CrudRepository<Person, Long>*/
