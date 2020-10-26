@@ -25,3 +25,7 @@ These additional references should also help you:
 ### Testing
  * [JUnit5](https://junit.org/junit5/docs/current/user-guide/)
  * [Mockk](https://mockk.io/)
+ 
+### Spring 
+
+* [Data access with JDBC](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/data-access.html#jdbc)
