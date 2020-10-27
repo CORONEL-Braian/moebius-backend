@@ -1,7 +1,9 @@
 package app.mobius.data.data_access
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.core.env.Environment
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor
 import org.springframework.jdbc.datasource.DriverManagerDataSource
 import org.springframework.orm.jpa.JpaTransactionManager
@@ -18,13 +20,15 @@ import javax.sql.DataSource
  * Source:
  *  . https://www.baeldung.com/the-persistence-layer-with-spring-and-jpa
  *  . https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-data-access
- *  . https://www.baeldung.com/properties-with-spring
  *
  *  . TODO: https://developer.okta.com/blog/2019/02/01/spring-hibernate-guide
  */
 @Configuration
 @EnableTransactionManagement
 open class PersistenceJPAConfig {
+
+    @Autowired
+    private lateinit var env: Environment
 
     /**
      * Source:
@@ -47,10 +51,10 @@ open class PersistenceJPAConfig {
     open fun dataSource(): DataSource {
         val dataSource = DriverManagerDataSource()
 
-//        dataSource.driverClassName = "org.postgresql.Driver"  TODO: Check postgreSQL
-        dataSource.url = "jdbc:postgresql://localhost:5432/"
-        dataSource.username = ""
-        dataSource.password = ""
+        dataSource.url = env.getProperty("spring.datasource.url")
+//        dataSource.url = "jdbc:postgresql://localhost:5432/db"
+        dataSource.username = "user"
+        dataSource.password = "pw"
 
         return dataSource
     }

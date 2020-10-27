@@ -3,7 +3,6 @@ package app.mobius.controller
 import app.mobius.data.PersonRepository
 import app.mobius.domain.entity.Person
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Component
 import org.springframework.web.bind.annotation.*
 
 /**
