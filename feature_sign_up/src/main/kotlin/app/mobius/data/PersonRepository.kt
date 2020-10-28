@@ -1,7 +1,7 @@
 package app.mobius.data
 
 import app.mobius.domain.entity.Person
-import org.springframework.data.repository.CrudRepository
+import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 /**
@@ -9,4 +9,4 @@ import org.springframework.stereotype.Repository
  * . Communicates with the SQL data source
  */
 @Repository
-interface PersonRepository: CrudRepository<Person, Long>
+interface PersonRepository: JpaRepository<Person, Long>
