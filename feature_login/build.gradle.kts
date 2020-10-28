@@ -5,7 +5,7 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":common", "default"))
+    implementation(project(":common-feature", "default"))
 }
 
 tasks {

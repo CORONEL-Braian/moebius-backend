@@ -13,4 +13,5 @@ dependencies {
 
     implementation(project(":deceased-core"))
     implementation(project(":data"))
+    implementation(project(":core"))
 }

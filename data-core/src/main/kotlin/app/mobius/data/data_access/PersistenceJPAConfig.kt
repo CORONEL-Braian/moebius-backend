@@ -52,9 +52,8 @@ open class PersistenceJPAConfig {
         val dataSource = DriverManagerDataSource()
 
         dataSource.url = env.getProperty("spring.datasource.url")
-//        dataSource.url = "jdbc:postgresql://localhost:5432/db"
-        dataSource.username = "user"
-        dataSource.password = "pw"
+        dataSource.username = env.getProperty("spring.datasource.username")
+        dataSource.password = env.getProperty("spring.datasource.password")
 
         return dataSource
     }

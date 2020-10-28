@@ -11,7 +11,7 @@ rootProject.name = "Moebius-backend"
 include("backend")
 
 // Common
-include("common")
+include("common-feature")
 
 // Main
 include("data")
@@ -21,6 +21,7 @@ include("service")
 include("build-src")
 
 // Core
+include("core")
 include("deceased-core")
 include("data-core")
 
@@ -33,4 +34,3 @@ include("feature_sign_up")
 include("feature_login")
 include("feature_legal")
 include("feature_third_profile")
-
