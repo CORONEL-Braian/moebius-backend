@@ -70,9 +70,13 @@ open class PersistenceJPAConfig {
         return PersistenceExceptionTranslationPostProcessor()
     }
 
+    /**
+     * Sources:
+     *  . https://stackoverflow.com/a/23678638/5279996
+     */
     private fun additionalProperties(): Properties {
         val properties = Properties()
-        properties.setProperty("hibernate.hbm2ddl.auto", "create-drop")
+        properties.setProperty("hibernate.hbm2ddl.auto", "update")
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL95Dialect")
 
         properties.setProperty("hibernate.show_sql", "true")
