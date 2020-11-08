@@ -6,7 +6,6 @@ HIBERNATE
 Use camelCase or snake_case in annotation or variable name:
  * @Id -> testUuid and not testUUID
  * @Enumerated
- * 
 
 ##### @Entity
 *The entity class must have a no-arg constructor. 
@@ -63,3 +62,19 @@ Insert default value using DBMS and optional using Hibernate
 
 *Source:*
  * https://stackoverflow.com/a/64474863/5279996
+
+
+---
+---
+
+## ERRORS:
+
+`alter table if exists role add column securityLevel int4 not null;`
+[23502] ERROR: column "securitylevel" contains null values
+
+Solution: Add annotation
+ * From: `val securityLevel: Int = 0,`
+ * To: `@Column(name = "security_level") val securityLevel: Int = 0,`
+
+---
+

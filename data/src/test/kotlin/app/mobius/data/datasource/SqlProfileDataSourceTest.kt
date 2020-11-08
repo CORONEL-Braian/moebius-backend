@@ -53,7 +53,7 @@ class SqlProfileDataSourceTest {
 
         val genderUUID =  UUID.fromString("9cc4becd-4d22-5131-8c20-a93aaa12b323")
 
-        profile.gender = Gender(genderUUID = genderUUID)
+        profile.gender = Gender(genderUUID = genderUUID, type = "")
 
         assertDoesNotThrow("save profile exception") {
             JDBM.Hibernate.executeQuery(session) {

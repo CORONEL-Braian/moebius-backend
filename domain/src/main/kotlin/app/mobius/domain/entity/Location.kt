@@ -34,7 +34,7 @@ data class Country(
         @Column(name = "name") val name: String,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "locationLimits_uuid", referencedColumnName = "locationLimits_uuid")
+        @JoinColumn(name = "location_limits_uuid", referencedColumnName = "location_limits_uuid")
         val locationLimits: LocationLimits,
 ) {
     constructor() : this(name = "", locationLimits = LocationLimits())
@@ -47,7 +47,7 @@ data class Province(
         @Column(name = "name") val name: String,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "locationLimits_uuid", referencedColumnName = "locationLimits_uuid")
+        @JoinColumn(name = "location_limits_uuid", referencedColumnName = "location_limits_uuid")
         val locationLimits: LocationLimits,
 ) {
     constructor() : this(name = "", locationLimits = LocationLimits())
@@ -60,16 +60,16 @@ data class City(
         @Column(name = "name") val name: String,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "locationLimits_uuid", referencedColumnName = "locationLimits_uuid")
+        @JoinColumn(name = "location_limits_uuid", referencedColumnName = "location_limits_uuid")
         val locationLimits: LocationLimits,
 ) {
     constructor() : this(name = "", locationLimits = LocationLimits())
 }
 
 @Entity
-@Table(name = "locationLimits")
+@Table(name = "location_limits")
 data class LocationLimits(
-        @Id @GeneratedValue @Column(name = "locationLimits_uuid") val limitsUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "location_limits_uuid") val limitsUUID: UUID? = null,
 
         @OneToOne(cascade = [CascadeType.ALL])
         @JoinColumn(name = "northeast_uuid", referencedColumnName = "coordinate_uuid")
@@ -86,10 +86,10 @@ data class LocationLimits(
 @Table(name = "direction")
 data class Direction(
         @Id @GeneratedValue @Column(name = "direction_uuid") val directionUUID: UUID? = null,
-        @Column(name = "street") val street: String,
-        @Column(name = "number") val number: Int,
-        @Column(name = "firstBetweenStreet") val firstBetweenStreet: String? = null,
-        @Column(name = "secondBetweenStreet") val secondBetweenStreet: String? = null,
+        val street: String,
+        val number: Int,
+        val firstBetweenStreet: String? = null,
+        val secondBetweenStreet: String? = null,
 
         @OneToOne(cascade = [CascadeType.ALL])
         @JoinColumn(name = "coordinate_uuid", referencedColumnName = "coordinate_uuid")
@@ -102,8 +102,8 @@ data class Direction(
 @Table(name = "coordinate")
 data class Coordinate(
         @Id @GeneratedValue @Column(name = "coordinate_uuid") val coordinateUUID: UUID? = null,
-        @Column(name = "lat") val lat: Double,
-        @Column(name = "lng") val lng: Double,
+        val lat: Double,
+        val lng: Double,
 ) {
     constructor() : this(lat = 0.0, lng = 0.0)
 }
