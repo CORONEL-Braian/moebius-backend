@@ -20,7 +20,7 @@ data class Authentication(
         val session: Session,
 
         @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "basicAuth_uuid", referencedColumnName = "basicAuth_uuid", unique = true)
+        @JoinColumn(name = "basic_auth_uuid", referencedColumnName = "basic_auth_uuid", unique = true)
         val basicAuth: BasicAuth
 ) {
     constructor() : this(session = Session(), basicAuth = BasicAuth())
@@ -31,9 +31,9 @@ data class Authentication(
  * OBS: Other methods will not be considered
  */
 @Entity
-@Table(name = "basicAuth")
+@Table(name = "basic_auth")
 data class BasicAuth(
-        @Id @GeneratedValue @Column(name = "basicAuth_uuid") val basicAuthUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "basic_auth_uuid") val basicAuthUUID: UUID? = null,
         val email: String,
 
         @OneToOne(cascade = [CascadeType.ALL])

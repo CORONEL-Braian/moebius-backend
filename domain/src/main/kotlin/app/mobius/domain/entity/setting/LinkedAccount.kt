@@ -18,7 +18,7 @@ data class LinkedAccount(
 data class Facebook(
         @Id @GeneratedValue @Column(name = "facebook_uuid") val facebookUUID: UUID? = null,
         val username: String,
-        val facebookId: Long? = null
+        @Column(name = "facebook_id") val facebookId: Long? = null
 ) {
     constructor() : this(username = "")
 }

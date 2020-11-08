@@ -22,6 +22,7 @@ import javax.sql.DataSource
  *  . https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-data-access
  *
  *  . TODO: https://developer.okta.com/blog/2019/02/01/spring-hibernate-guide
+ *  . TODO: Add name strategy to Spring (in Hibernate already exists)
  */
 @Configuration
 @EnableTransactionManagement

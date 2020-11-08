@@ -1,7 +1,11 @@
 package app.mobius.controller
 
 import app.mobius.data.PersonRepository
+import app.mobius.data.util.randomString
 import app.mobius.domain.entity.Person
+import app.mobius.domain.entity.Profile
+import app.mobius.domain.entity.role.Role
+import app.mobius.domain.entity.setting.Setting
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
@@ -23,7 +27,9 @@ class PersonController {
     @ResponseBody
     fun addPerson(/*@RequestParam person: Person*/) : String  {
 //        personRepository.save(person)
-        personRepository.save(Person())
+        personRepository.save(Person(
+                username = randomString(), profile = Profile(), setting = Setting(), role = Role()
+        ))
         return "Saved"
     }
     /**
