@@ -25,10 +25,13 @@ class SqlProfileDataSourceTest {
         session = JDBM.Hibernate.openSession()
     }
 
+    /**
+     * Precondition: Make sure that the default value of the gender in the db profile exists
+     */
     @Test
     fun `given a default gender and profile, when insert profile, then create profile without insert gender`() {
         val profile = PersonProfile()
-        val defaultGenderUUID = UUID.fromString("c87ee95b-06f1-52ab-83ed-5d882ae400e6")
+        val defaultGenderUUID = UUID.fromString("03915d99-c1da-4584-93e9-680d572b5295")
 
         assertDoesNotThrow("save profile exception") {
             JDBM.Hibernate.executeQuery(session) {
@@ -39,7 +42,7 @@ class SqlProfileDataSourceTest {
         }
 
 //        TODO: Get real profile gender UUID
-        val profileGenderUUID = UUID.fromString("c87ee95b-06f1-52ab-83ed-5d882ae400e6")
+        val profileGenderUUID = UUID.fromString("03915d99-c1da-4584-93e9-680d572b5295")
 
         Assertions.assertEquals(defaultGenderUUID, profileGenderUUID)
     }
@@ -48,7 +51,7 @@ class SqlProfileDataSourceTest {
     fun `given a gender with existing UUID, when insert profile with gender, then create profile without insert gender`() {
         val profile = PersonProfile()
 
-        val genderUUID =  UUID.fromString("95a7b26d-52e2-5ed1-a93e-5ee5472751ca")
+        val genderUUID =  UUID.fromString("9cc4becd-4d22-5131-8c20-a93aaa12b323")
 
         profile.gender = Gender(genderUUID = genderUUID)
 
@@ -61,7 +64,7 @@ class SqlProfileDataSourceTest {
         }
 
         //        TODO: Get real profile gender UUID
-        val profileGenderUUID = UUID.fromString("95a7b26d-52e2-5ed1-a93e-5ee5472751ca")
+        val profileGenderUUID = UUID.fromString("9cc4becd-4d22-5131-8c20-a93aaa12b323")
 //        hibernate.getUUID(profile.gender.genderUUID)
 
         Assert.isTrue( genderUUID == profileGenderUUID, "")
