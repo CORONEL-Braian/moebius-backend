@@ -59,7 +59,7 @@ data class DNI(
         @Column(name = "birthdate") val birthdate: Date,
         @Column(name = "date_issue") val dateIssue: Date,
         @Column(name = "date_expiry") val dateExpiry: Date,
-        @Column(name = "identification_number", unique = true) val identificationNumber: Int,
+        @Column(name = "identification_number", unique = true) val identificationNumber: Long,
         @Column(name = "number", unique = true) val number: Int,
 
 

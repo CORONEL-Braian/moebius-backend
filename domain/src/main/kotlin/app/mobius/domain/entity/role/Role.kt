@@ -16,7 +16,7 @@ data class Role(
         @Enumerated(EnumType.STRING) @Type(type = "pgsql_enum")
         val livenessStatus: LivenessStatus = LivenessStatus.UNSOLICITED,
 
-        @Column(name = "security_level") val securityLevel: Int = 0,
+        @Column(name = "security_level") val securityLevel: Byte = 0,
 
         @OneToOne(cascade = [CascadeType.ALL])
         @JoinColumn(name = "subscription_uuid", referencedColumnName = "subscription_uuid")

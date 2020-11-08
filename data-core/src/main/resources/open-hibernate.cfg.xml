@@ -16,6 +16,6 @@ OBS: This file can be used as a replacement for the hibernate.properties file or
         <property name="connection.password">(YOUR-PASSWORD)</property>
         <property name="dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
         <property name="hibernate.show_sql">true</property>
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">validate</property>
     </session-factory>
 </hibernate-configuration>

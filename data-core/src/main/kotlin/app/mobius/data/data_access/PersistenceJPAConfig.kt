@@ -1,6 +1,8 @@
 package app.mobius.data.data_access
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+import org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.env.Environment
@@ -12,9 +14,9 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter
 import org.springframework.transaction.PlatformTransactionManager
 import org.springframework.transaction.annotation.EnableTransactionManagement
-
 import java.util.*
 import javax.sql.DataSource
+
 
 /**
  * Source:
@@ -22,7 +24,6 @@ import javax.sql.DataSource
  *  . https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-data-access
  *
  *  . TODO: https://developer.okta.com/blog/2019/02/01/spring-hibernate-guide
- *  . TODO: Add name strategy to Spring (in Hibernate already exists)
  */
 @Configuration
 @EnableTransactionManagement
@@ -43,9 +44,28 @@ open class PersistenceJPAConfig {
 
         val vendorAdapter: JpaVendorAdapter = HibernateJpaVendorAdapter()
         em.jpaVendorAdapter = vendorAdapter
+
         em.setJpaProperties(additionalProperties())
 
         return em
+    }
+
+    /**
+     * Sources:
+     *  . https://stackoverflow.com/a/40511351/5279996
+     *  . https://stackoverflow.com/a/23678638/5279996
+     */
+    private fun additionalProperties(): Properties {
+        val properties = Properties()
+        properties.setProperty("hibernate.hbm2ddl.auto", "validate")
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL95Dialect")
+
+//        Naming Strategy in Spring
+        properties.setProperty("hibernate.physical_naming_strategy", SpringPhysicalNamingStrategy::class.java.name)
+        properties.setProperty("hibernate.implicit_naming_strategy", SpringImplicitNamingStrategy::class.java.name)
+
+        properties.setProperty("hibernate.show_sql", "true")
+        return properties
     }
 
     @Bean
@@ -71,18 +91,4 @@ open class PersistenceJPAConfig {
         return PersistenceExceptionTranslationPostProcessor()
     }
 
-    /**
-     * Sources:
-     *  . https://stackoverflow.com/a/23678638/5279996
-     */
-    private fun additionalProperties(): Properties {
-        val properties = Properties()
-        properties.setProperty("hibernate.hbm2ddl.auto", "update")
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL95Dialect")
-
-        properties.setProperty("hibernate.show_sql", "true")
-        return properties
-    }
-
 }
-

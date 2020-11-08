@@ -15,7 +15,7 @@ data class Security(
         @JoinColumn(name = "authentication_uuid", referencedColumnName = "authentication_uuid")
         val authentication: Authentication,
 
-        @Column(name = "security_level") val securityLevel: Int = 0,
+        val securityLevel: Byte = 0,
 
         @OneToOne(cascade = [CascadeType.ALL])
         @JoinColumn(name = "security_methods_uuid", referencedColumnName = "security_methods_uuid", unique = true)
