@@ -1,4 +1,4 @@
-package app.mobius.data
+package app.mobius.data.dao
 
 import app.mobius.domain.entity.Person
 import org.springframework.data.jpa.repository.JpaRepository

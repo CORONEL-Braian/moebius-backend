@@ -1,7 +1,4 @@
-package app.mobius.data.data_access
-
-import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Value
+package app.mobius.data.dataAccess
 
 /*
 @RunWith(SpringRunner::class)

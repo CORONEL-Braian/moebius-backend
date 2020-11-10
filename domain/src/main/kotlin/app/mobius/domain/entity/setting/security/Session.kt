@@ -27,7 +27,7 @@ data class Session(
 }
 
 /**
- * Represents the data_access token or AT
+ * Represents the dataAccess token or AT
  * Expires in 5 minutes
  * OBS: Dont use AccessToken as name to avoid conflicts of mapping TODO
  * @param token: Access token or API key to identify the person

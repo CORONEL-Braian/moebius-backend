@@ -31,3 +31,10 @@ These additional references should also help you:
 * [Data access with JDBC](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/data-access.html#jdbc)
 * [Profiles](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles)
 * [Spring Data Repositores](https://www.baeldung.com/spring-data-repositories)
+
+___
+
+## Architecture
+
+#### Controller
+ * [DTO](https://www.baeldung.com/entity-to-and-from-dto-for-a-java-spring-application)

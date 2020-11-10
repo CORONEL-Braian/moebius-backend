@@ -1,4 +1,4 @@
-package app.mobius.data.data_access
+package app.mobius.data.dataAccess
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy

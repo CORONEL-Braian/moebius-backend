@@ -23,6 +23,7 @@ include("build-src")
 // Core
 include("deceased-core")
 include("data-core")
+include("infrastructure-core")
 
 // Library
 include("library_base")

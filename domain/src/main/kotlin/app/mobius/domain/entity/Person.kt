@@ -12,6 +12,7 @@ import javax.persistence.*
 @Table(name = "person")
 data class Person(
         @Id @GeneratedValue @Column(name = "person_uuid") val personUUID: UUID? = null,
+
         val username: String,
 
         @OneToOne(cascade = [CascadeType.ALL])
