@@ -2,11 +2,10 @@ group = "app.möbius"
 version = "0.0.0"
 
 /**
- * Katharsis: https://mvnrepository.com/artifact/io.katharsis/katharsis-spring
+ * CRNK: https://mvnrepository.com/artifact/io.crnk/crnk-spring
  */
 dependencies {
-    implementation("io.katharsis", "katharsis-spring", "3.0.2")
-
+    api("io.crnk", "crnk-spring", "2.6.20180430102904")
 
     implementation(project(":api"))
     implementation(project(":service"))

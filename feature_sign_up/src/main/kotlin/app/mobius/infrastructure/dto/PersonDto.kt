@@ -1,8 +1,6 @@
 package app.mobius.infrastructure.dto
 
 import app.mobius.domain.entity.Profile
-import io.katharsis.resource.annotations.JsonApiId
-import io.katharsis.resource.annotations.JsonApiResource
 import java.util.*
 import javax.persistence.*
 
@@ -11,9 +9,9 @@ data class PersonDto(
 
         val username: String,
 
-        /*@OneToOne(cascade = [CascadeType.ALL])
+        @OneToOne(cascade = [CascadeType.ALL])
         @JoinColumn(name = "profile_uuid", referencedColumnName = "profile_uuid")
-        val profile: Profile,*/
+        val profile: Profile,
 ) {
-    constructor() : this(username = "")
+    constructor() : this(username = "", profile = Profile())
 }

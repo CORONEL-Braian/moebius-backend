@@ -1,6 +1,7 @@
 package app.mobius.service
 
 import app.mobius.data.dao.PersonRepository
+import app.mobius.data.katharsis.IdentityResourceRepository
 import app.mobius.domain.entity.Person
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -16,6 +17,9 @@ class PersonService {
     @Autowired
     private lateinit var personRepository: PersonRepository
 
+    @Autowired
+    private lateinit var identityResourceRepository: IdentityResourceRepository
+
     fun createPerson(person: Person) : String {
         personRepository.save(person)
         return "Saved"
@@ -24,6 +28,10 @@ class PersonService {
     fun getPeople() : List<Person> {
         return personRepository.findAll()
     }
+
+ /*   fun getIdentities() : List<Person> {
+        return identityResourceRepository.findAll()
+    }*/
 
     fun getPersonById() : Person {
         return Person() //TODO

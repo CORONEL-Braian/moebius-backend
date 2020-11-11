@@ -8,10 +8,11 @@ import javax.persistence.*
 /**
  * Be endowed with reason, self-aware and possessed of their own person
  */
+@JsonApiResource(type = "people")
 @Entity
 @Table(name = "person")
 data class Person(
-        @Id @GeneratedValue @Column(name = "person_uuid") val personUUID: UUID? = null,
+        @JsonApiId @Id @GeneratedValue @Column(name = "person_uuid") val personUUID: UUID? = null,
 
         val username: String,
 

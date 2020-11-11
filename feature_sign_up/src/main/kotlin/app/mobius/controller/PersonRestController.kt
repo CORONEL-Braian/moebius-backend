@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.*
  *
  * TODO
  * https://www.baeldung.com/json-api-java-spring-web-app
- *
- * https://stackoverflow.com/q/28703401/5279996
- *
  */
 @RestController
 @RequestMapping("/people")
@@ -52,7 +49,8 @@ class PersonRestController {
     private fun convertFromEntityToDto(person: Person) : PersonDto {
         return PersonDto(
                 personUUID = person.personUUID,
-                username = person.username
+                username = person.username,
+                profile = person.profile
         )
     }
 

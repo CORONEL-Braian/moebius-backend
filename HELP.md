@@ -38,3 +38,6 @@ ___
 
 #### Controller
  * [DTO](https://www.baeldung.com/entity-to-and-from-dto-for-a-java-spring-application)
+ 
+
+ * [JSON Api](http://www.crnk.io/)
