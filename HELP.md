@@ -40,4 +40,5 @@ ___
  * [DTO](https://www.baeldung.com/entity-to-and-from-dto-for-a-java-spring-application)
  
 
- * [JSON Api](http://www.crnk.io/)
+ * [JSON Api | CRNK](http://www.crnk.io/)
+ * [JSON API | CRNK example](https://github.com/crnk-project/crnk-framework/tree/master/crnk-integration-examples/spring-boot-example)
