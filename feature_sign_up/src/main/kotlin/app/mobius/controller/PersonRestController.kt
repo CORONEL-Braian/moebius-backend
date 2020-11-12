@@ -23,7 +23,7 @@ class PersonRestController {
     @Autowired
     private lateinit var personService: PersonService
 
-    @PostMapping("/add")    // Map ONLY POST Requests
+    @PostMapping("/add")
     @ResponseBody
     fun addPerson(/*@RequestParam person: Person*/) : String  {
 //        personRepository.save(person)

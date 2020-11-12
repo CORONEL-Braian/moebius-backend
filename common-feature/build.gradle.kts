@@ -2,10 +2,12 @@ group = "app.möbius"
 version = "0.0.0"
 
 /**
- * CRNK: https://mvnrepository.com/artifact/io.crnk/crnk-spring
+ * CRNK:
+ *  . https://mvnrepository.com/artifact/io.crnk/crnk-spring
+ *  . https://bintray.com/crnk-project/maven/crnk-setup-spring
  */
 dependencies {
-    api("io.crnk", "crnk-spring", "2.6.20180430102904")
+    api("io.crnk", "crnk-setup-spring", "3.3.20200920055408")
 
     implementation(project(":api"))
     implementation(project(":service"))

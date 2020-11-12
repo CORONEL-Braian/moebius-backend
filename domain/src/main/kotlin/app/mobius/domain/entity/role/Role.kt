@@ -22,14 +22,14 @@ data class Role(
         @JoinColumn(name = "subscription_uuid", referencedColumnName = "subscription_uuid")
         val subscription: Subscription,
 
-        @ManyToMany(cascade = [CascadeType.ALL])
+        /*@ManyToMany(cascade = [CascadeType.ALL])
         @JoinTable(
                 name = "role_permission",
                 joinColumns = [ JoinColumn(name = "role_uuid") ],
                 inverseJoinColumns = [ JoinColumn(name = "permission_uuid") ]
         )
-        val permissions: List<Permission>
+        val permissions: List<Permission>*/
 
 ) {
-        constructor() : this(subscription = Subscription(), permissions = listOf())
+        constructor() : this(subscription = Subscription()/*, permissions = listOf()*/)
 }

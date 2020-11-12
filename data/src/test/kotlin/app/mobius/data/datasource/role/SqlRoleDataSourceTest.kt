@@ -48,7 +48,7 @@ class SqlRoleDataSourceTest {
                 permission1,
                 permission2
         )
-        val role = Role(subscription = Subscription(), permissions = permissions)
+        val role = Role(subscription = Subscription()/*, permissions = permissions*/)
 
 
         assertDoesNotThrow("") {

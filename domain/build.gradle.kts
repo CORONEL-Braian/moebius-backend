@@ -9,7 +9,8 @@ dependencies {
     api("javax.persistence", "javax.persistence-api", "2.2")
     api("org.hibernate", "hibernate-core",  "5.4.21.Final")
 
-    api("io.crnk", "crnk-spring", "2.6.20180430102904")
+//    TODO: Use only in common-feature
+    api("io.crnk", "crnk-setup-spring", "3.3.20200920055408")
 
     implementation(project(":build-src"))
 }

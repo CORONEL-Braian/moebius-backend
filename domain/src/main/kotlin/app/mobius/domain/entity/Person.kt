@@ -2,6 +2,8 @@ package app.mobius.domain.entity
 
 import app.mobius.domain.entity.role.Role
 import app.mobius.domain.entity.setting.Setting
+import io.crnk.core.resource.annotations.JsonApiId
+import io.crnk.core.resource.annotations.JsonApiResource
 import java.util.*
 import javax.persistence.*
 
