@@ -2,19 +2,16 @@ package app.mobius.domain.entity
 
 import app.mobius.domain.entity.role.Role
 import app.mobius.domain.entity.setting.Setting
-import io.crnk.core.resource.annotations.JsonApiId
-import io.crnk.core.resource.annotations.JsonApiResource
 import java.util.*
 import javax.persistence.*
 
 /**
  * Be endowed with reason, self-aware and possessed of their own person
  */
-@JsonApiResource(type = "people")
 @Entity
 @Table(name = "person")
 data class Person(
-        @JsonApiId @Id @GeneratedValue @Column(name = "person_uuid") val personUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "person_uuid") val personUUID: UUID? = null,
 
         val username: String,
 
