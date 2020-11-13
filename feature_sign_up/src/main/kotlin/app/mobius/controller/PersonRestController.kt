@@ -36,11 +36,18 @@ class PersonRestController {
     /**
      * @return JSON or XML with the people
      */
-    @GetMapping("/all")
+    /*@GetMapping("/all")
     @ResponseBody
     fun getPeopleDto() : List<PersonDto> {
         val people = personService.getPeople()
         return people.map { convertFromEntityToDto(it) }
+    }*/
+
+    @GetMapping("/all2")
+    @ResponseBody
+    fun getPeopleResourceDto() : List<PersonDto>? {
+        val people = personService.getPeopleResource()
+        return people?.map { convertFromEntityToDto(it) }
     }
 
     /*@GetMapping("/person")

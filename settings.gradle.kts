@@ -24,6 +24,7 @@ include("build-src")
 include("deceased-core")
 include("data-core")
 include("infrastructure-core")
+include("json-api")
 
 // Library
 include("library_base")
