@@ -94,7 +94,7 @@ class JDBM {
         private fun getFile(canonicalName: String): File {
             val absolutePathCurrentModule = System.getProperty("user.dir")
             val pathFromProjectRoot = absolutePathCurrentModule.dropLastWhile { it != '/' }
-            val absolutePathFromProjectRoot = "$pathFromProjectRoot/data-core/src/main/resources/$canonicalName"
+            val absolutePathFromProjectRoot = "${pathFromProjectRoot}data-core/src/main/resources/$canonicalName"
             println("Absolute Path of secret-hibernate.cfg.xml: $absolutePathFromProjectRoot")
             return File(absolutePathFromProjectRoot)
         }
