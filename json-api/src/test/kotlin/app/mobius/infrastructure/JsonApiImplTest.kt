@@ -2,7 +2,7 @@ package app.mobius.infrastructure
 
 import org.junit.jupiter.api.Test
 
-class JsonApiTest {
+class JsonApiImplTest {
 
     @Test
     fun fromEntityToJson() {
