@@ -1,4 +1,4 @@
-package app.mobius.infrastructure
+package app.mobius.infrastructure.model.response
 
 data class Links(
         val self: String? = null,

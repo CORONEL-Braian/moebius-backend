@@ -1,11 +1,12 @@
-package app.mobius.infrastructure
+package app.mobius.infrastructure.model.request
 
+import app.mobius.infrastructure.model.Attribute
 import java.util.*
 
 data class DataItem(
         val type: String,
-        val uuid: UUID,
-        val attributes: List<*>,
+        val id: UUID? = null,
+        val attributes: List<Attribute>,
         val relationships: List<Relationship>,
         val links: Links
 )
@@ -15,12 +16,11 @@ data class Relationship(
 )
 
 data class RelationshipValue(
-        val links: Links,
         val datas: List<DataRelationship>
 )
 
 data class DataRelationship(
         val type: String,
-        val uuid: UUID
+        val id: UUID
 )
 

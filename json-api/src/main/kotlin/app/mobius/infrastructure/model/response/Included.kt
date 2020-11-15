@@ -1,5 +1,6 @@
-package app.mobius.infrastructure
+package app.mobius.infrastructure.model.response
 
+import app.mobius.infrastructure.model.Attribute
 import java.util.*
 
 data class Included(
@@ -8,8 +9,3 @@ data class Included(
         val attributes: List<Attribute>,
         val links: Links
 )
-
-data class Attribute(
-        val attribute: Map<String, *>
-)
-

@@ -1,55 +1,45 @@
 {
   "data": [{
     "type": "person",
-    "id": "uuid",
     "attributes": {
-      "username": "username",
-      "created": "2015-05-22T14:56:29.000Z",
-      "updated": "2015-05-22T14:56:28.000Z"
+      "username": "username"
     },
     "relationships": {
-      "account": {
-        "data": {"type": "account"}
-      },
       "profile": {
         "data": {"type": "profile"}
+      },
+      "setting": {
+        "data": {"type": "account"}
       }
     }
   }],
   "included": [
     {
-      "type": "account",
-      "id": "uuid",
+      "type": "profile",
+      "id": "053325bb-0f50-4ffe-a1bb-475f77a190f6",
       "attributes": {
-        "token": "123"
+        "name": "Braian",
+        "surname": "Coronel",
+        "nationality": "Argentina",
+        "avatarUrl": "http://",
+        "nickname": "nickname",
+        "biography": "biography",
+        "birthdate": "1995-10-10",
+        "sex": "M",
+        "genderUUID": "03915d99-c1da-4584-93e9-680d572b5295"
       },
       "relationships": {
-        "credential": {
+        "location": {},
+        "nationality": {},
+        "phone": {
           "data": {
-            "type": "credential",
+            "type": "phone",
             "id": "uuid",
             "attributes": {
-              "email": "liveefull@gmail.com"
-            },
-            "relationships": {
-              "password": {
-                "data": {
-                  "type": "password",
-                  "id": "uuid",
-                  "attributes": {
-                    "hash_password": "asd123",
-                    "reset_password_token": "asd123",
-                    "reset_password_token_expire": "asd123"
-                  }
-                }
-              }
+              "country": "+54",
+              "codeArea": "011",
+              "number": "1234512345"
             }
-          }
-        },
-        "security": {
-          "data": {
-            "type": "security",
-            "id": "uuid"
           }
         }
       }

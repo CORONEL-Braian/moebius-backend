@@ -26,7 +26,6 @@ class PersonRestController {
     @PostMapping("/add")
     @ResponseBody
     fun addPerson(/*@RequestParam person: Person*/) : String  {
-//        personRepository.save(person)
         return personService.createPerson(
                 Person(
                         username = randomString(), profile = Profile(), setting = Setting(), role = Role()

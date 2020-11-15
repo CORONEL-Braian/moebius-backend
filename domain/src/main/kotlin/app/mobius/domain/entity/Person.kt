@@ -15,6 +15,8 @@ data class Person(
 
         val username: String,
 
+//              TODO: Add Metadata
+
         @OneToOne(cascade = [CascadeType.ALL])
         @JoinColumn(name = "profile_uuid", referencedColumnName = "profile_uuid")
         val profile: Profile,
