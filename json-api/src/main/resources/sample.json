@@ -35,7 +35,8 @@
       "self": "http://example.com/articles/1"
     }
   }],
-  "included": [{
+  "included": [
+    {
     "type": "people",
     "id": "9",
     "attributes": {
@@ -46,7 +47,8 @@
     "links": {
       "self": "http://example.com/people/9"
     }
-  }, {
+  },
+    {
     "type": "comments",
     "id": "5",
     "attributes": {
@@ -60,7 +62,8 @@
     "links": {
       "self": "http://example.com/comments/5"
     }
-  }, {
+  },
+    {
     "type": "comments",
     "id": "12",
     "attributes": {
@@ -74,5 +77,6 @@
     "links": {
       "self": "http://example.com/comments/12"
     }
-  }]
+  }
+  ]
 }

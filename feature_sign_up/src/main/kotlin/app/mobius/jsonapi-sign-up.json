@@ -6,82 +6,212 @@
     },
     "relationships": {
       "profile": {
-        "data": {"type": "profile"}
+        "data": {
+          "type": "profile",
+          "attributes": {
+            "name": "Braian",
+            "surname": "Coronel",
+            "avatarUrl": "http://",
+            "nickname": "nickname",
+            "biography": "",
+            "birthdate": "1995-10-10",
+            "sex": "M",
+            "genderUUID": "03915d99-c1da-4584-93e9-680d572b5295"
+          },
+          "relationships": {
+            "location": {
+              "data": {
+                "type": "location",
+                "relationships": {
+                  "country": {
+                    "data": {
+                      "type": "country",
+                      "attributes": {
+                        "name": "Argentina"
+                      },
+                      "relationships": {
+                        "locationLimits": {
+                          "data": {
+                            "type": "locationLimits",
+                            "relationships": {
+                              "northeast": {
+                                "data": {
+                                  "type": "coordinate",
+                                  "attributes": {
+                                    "lat": 0.0,
+                                    "lng": 0.0
+                                  }
+                                }
+                              },
+                              "southwest": {
+                                "data": {
+                                  "type": "coordinate",
+                                  "attributes": {
+                                    "lat": 0.0,
+                                    "lng": 0.0
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "province": {
+                    "data": {
+                      "type": "province",
+                      "attributes": {
+                        "name": "Buenos Aires"
+                      },
+                      "relationships": {
+                        "locationLimits": {
+                          "data": {
+                            "type": "locationLimits",
+                            "relationships": {
+                              "northeast": {
+                                "data": {
+                                  "type": "coordinate",
+                                  "attributes": {
+                                    "lat": 0.0,
+                                    "lng": 0.0
+                                  }
+                                }
+                              },
+                              "southwest": {
+                                "data": {
+                                  "type": "coordinate",
+                                  "attributes": {
+                                    "lat": 0.0,
+                                    "lng": 0.0
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "city": {
+                    "data": {
+                      "type": "city",
+                      "attributes": {
+                        "name": "Bosques"
+                      },
+                      "relationships": {
+                        "locationLimits": {
+                          "data": {
+                            "type": "locationLimits",
+                            "relationships": {
+                              "northeast": {
+                                "data": {
+                                  "type": "coordinate",
+                                  "attributes": {
+                                    "lat": 0.0,
+                                    "lng": 0.0
+                                  }
+                                }
+                              },
+                              "southwest": {
+                                "data": {
+                                  "type": "coordinate",
+                                  "attributes": {
+                                    "lat": 0.0,
+                                    "lng": 0.0
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "direction": {
+                    "data": {
+                      "type": "direction",
+                      "attributes": {
+                        "street": "street",
+                        "number": 1234,
+                        "firstBetweenStreet": "first",
+                        "secondBetweenStreet": "second"
+                      },
+                      "relationships": {
+                        "coordinate": {
+                          "data": {
+                            "type": "coordinate",
+                            "attributes": {
+                              "lat": 0.0,
+                              "lng": 0.0
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "nationality": {
+              "data": {
+                "type": "country",
+                "attributes": {
+                  "name": "Argentina"
+                },
+                "relationships": {
+                  "locationLimits": {
+                    "data": {
+                      "type": "locationLimits",
+                      "relationships": {
+                        "northeast": {
+                          "data": {
+                            "type": "coordinate",
+                            "attributes": {
+                              "lat": 0.0,
+                              "lng": 0.0
+                            }
+                          }
+                        },
+                        "southwest": {
+                          "data": {
+                            "type": "coordinate",
+                            "attributes": {
+                              "lat": 0.0,
+                              "lng": 0.0
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "phone": {
+              "data": {
+                "type": "phone",
+                "attributes": {
+                  "country": "+54",
+                  "codeArea": "011",
+                  "number": "1234512345"
+                }
+              }
+            }
+          }
+        }
       },
       "setting": {
-        "data": {"type": "account"}
-      }
-    }
-  }],
-  "included": [
-    {
-      "type": "profile",
-      "id": "053325bb-0f50-4ffe-a1bb-475f77a190f6",
-      "attributes": {
-        "name": "Braian",
-        "surname": "Coronel",
-        "nationality": "Argentina",
-        "avatarUrl": "http://",
-        "nickname": "nickname",
-        "biography": "biography",
-        "birthdate": "1995-10-10",
-        "sex": "M",
-        "genderUUID": "03915d99-c1da-4584-93e9-680d572b5295"
-      },
-      "relationships": {
-        "location": {},
-        "nationality": {},
-        "phone": {
-          "data": {
-            "type": "phone",
-            "id": "uuid",
-            "attributes": {
-              "country": "+54",
-              "codeArea": "011",
-              "number": "1234512345"
-            }
-          }
-        }
-      }
-    },
-    {
-      "type": "profile",
-      "id": "uuid",
-      "attributes": {
-        "dni": "123456789",
-        "name": "Braian",
-        "surname": "Coronel",
-        "phone": 1155067943,
-        "birthdate": "1995-10-10",
-        "nationality": "Argentina",
-        "sex": "M",
-        "avatar_url": "http://",
-        "gender": "male"
-      },
-      "relationships": {
-        "birthdate": {
-          "data": {
-            "type": "birthdate",
-            "id": "uuid",
-            "attributes": {
-              "day": "19",
-              "month": "10",
-              "year": "95"
-            }
-          }
-        },
-        "phone": {
-          "data": {
-            "type": "phone",
-            "id": "uuid",
-            "attributes": {
-              "country": "+54",
-              "codeArea": "011",
-              "number": "1234512345"
-            }
+        "data": {
+          "type": "setting",
+          "attributes": {
+
+          },
+          "relationships": {
+
           }
         }
       }
     }
-  ]
+  }]
 }
