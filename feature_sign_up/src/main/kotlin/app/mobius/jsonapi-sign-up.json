@@ -205,10 +205,62 @@
         "data": {
           "type": "setting",
           "attributes": {
-
+            "theme": "DEFAULT"
           },
           "relationships": {
+            "account": {
+              "data": {
+                "type": "account",
+                "relationships": {
+                  "linkedAccount": {
+                    "data": {
+                      "type": "linkedAccount",
+                      "relationships": {
+                        "facebook": {
+                          "data": {
+                            "type": "facebook",
+                            "attributes": {
+                              "username": "LiveFull.23"
+                            }
+                          }
+                        }
+                      }
+                    }
 
+                  }
+                }
+              }
+            },
+            "security": {
+              "data": {
+                "type": "security",
+                "relationships": {
+                  "authentication": {
+                    "data": {
+                      "type": "authentication",
+                      "relationships": {
+                        "basicAuth": {
+                          "type": "basicAuth",
+                          "attributes": {
+                            "email": "braian@itdevexpert.com"
+                          },
+                          "relationships": {
+                            "password": {
+                              "data": {
+                                "type": "password",
+                                "attributes": {
+                                  "apiHashPassword": "apiHashPassword"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }

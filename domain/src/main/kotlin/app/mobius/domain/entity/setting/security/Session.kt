@@ -62,7 +62,7 @@ data class DailyReloadToken(
 }
 
 /**
- * Represents a monthly token to reload the AT
+ * Represents a monthly token to reload the dailyReloadToken
  * Obs: Expires in 1 month
  */
 @Entity
