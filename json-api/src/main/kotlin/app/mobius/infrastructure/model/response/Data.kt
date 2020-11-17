@@ -2,7 +2,7 @@ package app.mobius.infrastructure.model.response
 
 import java.util.*
 
-data class DataItem(
+data class Data(
         val type: String,
         val id: UUID,
         val attributes: List<*>,

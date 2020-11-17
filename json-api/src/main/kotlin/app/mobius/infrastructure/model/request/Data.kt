@@ -3,9 +3,9 @@ package app.mobius.infrastructure.model.request
 import app.mobius.infrastructure.model.Attribute
 import java.util.*
 
-data class DataItem(
+data class Data(
         val type: String,
-        val id: UUID? = null,
+//        val id: UUID? = null,
         val attributes: List<Attribute>,
         val relationships: List<Relationship>,
         val links: Links
@@ -16,11 +16,5 @@ data class Relationship(
 )
 
 data class RelationshipValue(
-        val datas: List<DataRelationship>
+        val data: List<Data>
 )
-
-data class DataRelationship(
-        val type: String,
-        val id: UUID
-)
-

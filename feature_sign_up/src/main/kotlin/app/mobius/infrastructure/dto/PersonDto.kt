@@ -1,17 +1,14 @@
 package app.mobius.infrastructure.dto
 
 import app.mobius.domain.entity.Profile
+import app.mobius.domain.entity.setting.Setting
 import java.util.*
 import javax.persistence.*
 
 data class PersonDto(
-        @Id @GeneratedValue @Column(name = "person_uuid") val personUUID: UUID? = null,
-
         val username: String,
-
-        @OneToOne(cascade = [CascadeType.ALL])
-        @JoinColumn(name = "profile_uuid", referencedColumnName = "profile_uuid")
         val profile: Profile,
+        val setting: Setting,
 ) {
-    constructor() : this(username = "", profile = Profile())
+    constructor() : this(username = "", profile = Profile(), setting = Setting())
 }

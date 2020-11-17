@@ -3,6 +3,8 @@ package app.mobius.infrastructure
 import com.fasterxml.jackson.databind.ObjectMapper
 import java.io.File
 
+
+// JSON   KT
 object JsonApi {
 
     fun writeKtAsJson(value: Any) : String {
@@ -35,7 +37,7 @@ object JsonApi {
     /**
      * Precondition: Entities have secondary constructor
      */
-    fun <T> readJsonAsJvm(jsonString: String, t: Class<T>): T {
+    fun <T> readJsonAsKt(jsonString: String, t: Class<T>): T {
         val objectMapper = ObjectMapper()
         return objectMapper.readValue(jsonString, t)
     }

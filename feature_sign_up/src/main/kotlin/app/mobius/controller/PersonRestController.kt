@@ -25,7 +25,7 @@ class PersonRestController {
 
     @PostMapping("/add")
     @ResponseBody
-    fun addPerson(/*@RequestParam person: Person*/) : String  {
+    fun addPerson(/*@RequestParam person: PersonDto*/) : String  {
         return personService.createPerson(
                 Person(
                         username = randomString(), profile = Profile(), setting = Setting(), role = Role()
@@ -37,6 +37,15 @@ class PersonRestController {
      */
     @GetMapping("/all")
     @ResponseBody
+    fun getPeople() : List<Person> {
+        return personService.getPeople()
+    }
+
+    /**
+     * @return JSON or XML with the people
+     */
+    @GetMapping("/allDTO")
+    @ResponseBody
     fun getPeopleDto() : List<PersonDto> {
         val people = personService.getPeople()
         return people.map { convertFromEntityToDto(it) }
@@ -47,17 +56,16 @@ class PersonRestController {
 
     private fun convertFromEntityToDto(person: Person) : PersonDto {
         return PersonDto(
-                personUUID = person.personUUID,
                 username = person.username,
-                profile = person.profile
+                profile = person.profile,
+                setting = person.setting
         )
     }
 
-    private fun convertFromDtoToEntity(personDto: PersonDto): Person? {
-        var person: Person? = null
-        if (personDto.personUUID != null) {
-            person = personService.getPersonById()
-        }
+    private fun convertFromDtoToEntity(personDto: PersonDto): Person {
+        var person: Person = Person()
+//               TODO:
+
         return person
     }
 

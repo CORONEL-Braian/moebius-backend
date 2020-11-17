@@ -1,5 +1,5 @@
 package app.mobius.infrastructure.model.request
 
 data class JsonApiResource(
-        val data: List<DataItem>,
+        val data: List<Data>,
 )
