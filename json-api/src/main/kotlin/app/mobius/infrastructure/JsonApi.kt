@@ -3,8 +3,6 @@ package app.mobius.infrastructure
 import com.fasterxml.jackson.databind.ObjectMapper
 import java.io.File
 
-
-// JSON   KT
 object JsonApi {
 
     fun writeKtAsJson(value: Any) : String {

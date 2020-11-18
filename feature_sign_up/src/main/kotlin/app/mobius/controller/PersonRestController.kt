@@ -6,6 +6,7 @@ import app.mobius.domain.entity.Profile
 import app.mobius.domain.entity.role.Role
 import app.mobius.domain.entity.setting.Setting
 import app.mobius.infrastructure.dto.PersonDto
+import app.mobius.infrastructure.model.request.JsonApiRequest
 import app.mobius.service.PersonService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -23,9 +24,16 @@ class PersonRestController {
     @Autowired
     private lateinit var personService: PersonService
 
+    /**
+     * OBS: Map of Any to JsonApiRequest for use debugging
+     */
     @PostMapping("/add")
     @ResponseBody
-    fun addPerson(/*@RequestParam person: PersonDto*/) : String  {
+//    fun addPerson(@RequestBody person: Any) : String  {
+    fun addPerson(@RequestBody person: JsonApiRequest) : String  {
+//        TODO: Add default constructor to JsonApiRequest
+//        TODO: Map of Any to JsonApiRequest
+
         return personService.createPerson(
                 Person(
                         username = randomString(), profile = Profile(), setting = Setting(), role = Role()
@@ -57,8 +65,8 @@ class PersonRestController {
     private fun convertFromEntityToDto(person: Person) : PersonDto {
         return PersonDto(
                 username = person.username,
-                profile = person.profile,
-                setting = person.setting
+                /*profile = person.profile,
+                setting = person.setting*/
         )
     }
 

@@ -7,8 +7,8 @@ import javax.persistence.*
 
 data class PersonDto(
         val username: String,
-        val profile: Profile,
-        val setting: Setting,
+        /*val profile: Profile,
+        val setting: Setting,*/
 ) {
-    constructor() : this(username = "", profile = Profile(), setting = Setting())
+    constructor() : this(username = ""/*, profile = Profile(), setting = Setting()*/)
 }
