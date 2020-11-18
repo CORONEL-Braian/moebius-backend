@@ -25,14 +25,16 @@ class PersonRestController {
     private lateinit var personService: PersonService
 
     /**
-     * OBS: Map of Any to JsonApiRequest for use debugging
+     * PRE: Composite classes in JsonApiRequest have a default constructor
+     * OBS: Replace JsonApiRequest with Any for debugging
+     *
+     * jsonapi-sign-up.json -> JsonApiRequest -> PersonDTO
      */
     @PostMapping("/add")
     @ResponseBody
-//    fun addPerson(@RequestBody person: Any) : String  {
     fun addPerson(@RequestBody person: JsonApiRequest) : String  {
-//        TODO: Add default constructor to JsonApiRequest
-//        TODO: Map of Any to JsonApiRequest
+
+//        TODO: Transform from JsonApiRequest to PersonDTO.
 
         return personService.createPerson(
                 Person(

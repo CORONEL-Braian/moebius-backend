@@ -1,18 +1,15 @@
 package app.mobius.infrastructure.model.request
 
-import app.mobius.infrastructure.model.Attribute
-import com.fasterxml.jackson.core.type.TypeReference
 import java.util.*
-import kotlin.collections.ArrayList
 
 data class Data(
         val type: String,
-//        val id: UUID? = null,
-        val attributes: TypeReference<Attribute>,
+        val id: UUID? = null,
+        val attributes: Map<String, Any>,
         val relationships: List<Relationship>,
-//        val links: Links
+        val links: Links? = null
 ) {
-    constructor() : this(type = "", attributes = listOf<Attribute>(), relationships = listOf())
+    constructor() : this(type = "", attributes = mapOf(), relationships = listOf())
 }
 
 data class Relationship(

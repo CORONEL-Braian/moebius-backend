@@ -35,7 +35,7 @@ object JsonApi {
     /**
      * Precondition: Entities have secondary constructor
      */
-    fun <T> readJsonAsKt(jsonString: String, t: Class<T>): T {
+    fun <T> writeJsonAsKt(jsonString: String, t: Class<T>): T {
         val objectMapper = ObjectMapper()
         return objectMapper.readValue(jsonString, t)
     }
@@ -43,7 +43,7 @@ object JsonApi {
     /**
      * Precondition: Entities have secondary constructor
      */
-    fun <T> readJsonAsJvmFromFile(canonicalFileName: String, t: Class<T>): T {
+    fun <T> writeJsonAsKtFromFile(canonicalFileName: String, t: Class<T>): T {
         return ObjectMapper().readValue(getFile(canonicalFileName), t)
     }
 

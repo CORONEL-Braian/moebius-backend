@@ -2,13 +2,24 @@ package app.mobius.infrastructure
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
 import java.io.File
 
 class JsonApiTest {
 
+    val canonicalFileName = "some.json"
+
     data class SomeTest(val a: String, val b: String) {
         constructor() : this("1", "2")
     }
+
+    data class AttributesTest(val attributes: Map<String, Any>) {
+        constructor() : this(attributes = mapOf())
+    }
+
+    data class Username(val username: String)
+
+
 
     @Test
     fun writeKtAsJson() {
@@ -46,23 +57,35 @@ class JsonApiTest {
 
         Assertions.assertEquals(
                 expected,
-                JsonApi.readJsonAsKt(jsonString, SomeTest::class.java),
+                JsonApi.writeJsonAsKt(jsonString, SomeTest::class.java),
 
         )
     }
 
     @Test
-    fun `readJsonAsJvmFromFile`() {
+    fun `writeJsonAsKtFromFile`() {
 //        Given
         val some = SomeTest("4", "4")
-        val canonicalFileName = "some.json"
 
         JsonApi.writeKtAsJsonToFile(canonicalFileName, some)
 
         Assertions.assertEquals(
-                JsonApi.readJsonAsJvmFromFile(canonicalFileName, SomeTest::class.java),
+                JsonApi.writeJsonAsKtFromFile(canonicalFileName, SomeTest::class.java),
                 some
         )
+    }
+
+    @Test
+    fun `write list of json as kt`() {
+        val listJson =  "{\n" +
+                        "    \"attributes\": {\n" +
+                        "      \"username\": \"itdev\"\n" +
+                        "    }\n" +
+                        "}"
+
+        assertDoesNotThrow("read list of json exception") {
+            JsonApi.writeJsonAsKt(listJson, AttributesTest::class.java)
+        }
     }
 
 }
