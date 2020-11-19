@@ -42,22 +42,15 @@ class PersonRestController {
                 )
         )
     }
+
     /**
      * @return JSON or XML with the people
      */
     @GetMapping("/all")
     @ResponseBody
-    fun getPeople() : List<Person> {
-        return personService.getPeople()
-    }
-
-    /**
-     * @return JSON or XML with the people
-     */
-    @GetMapping("/allDTO")
-    @ResponseBody
-    fun getPeopleDto() : List<PersonDto> {
+    fun getPeople() : List<PersonDto> {
         val people = personService.getPeople()
+//        TODO: Return transform from PersonDTO to JsonApiRequest
         return people.map { convertFromEntityToDto(it) }
     }
 
