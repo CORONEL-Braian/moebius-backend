@@ -6,7 +6,6 @@ import app.mobius.data.util.randomString
 import app.mobius.domain.entity.role.Resource
 import org.hibernate.Session
 import org.junit.jupiter.api.*
-import java.lang.Exception
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SqlResourceDataSourceTest {
@@ -25,7 +24,7 @@ class SqlResourceDataSourceTest {
     }
 
     @Test
-    fun `given a name and location if is uniqueness valid, when insert, then create a resource -- should doesn't throw Exception`() {
+    fun `given a name and location if is uniqueness valid, when insert, then create a resource`() {
         val name = "/test"
         val location = "/test"
 
@@ -43,7 +42,7 @@ class SqlResourceDataSourceTest {
     }
 
     @Test
-    fun `given a random name and location if is uniqueness valid, when insert, then create a resource  -- should doesn't throw Exception`() {
+    fun `given a random name and location if is uniqueness valid, when insert, then create a resource `() {
         val randomName = randomString("/test")
         val randomLocation = randomString("/test")
 

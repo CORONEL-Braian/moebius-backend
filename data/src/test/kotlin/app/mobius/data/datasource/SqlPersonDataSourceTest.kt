@@ -1,35 +1,46 @@
 package app.mobius.data.datasource
 
+import app.mobius.data.di.HibernateUtil
 import app.mobius.data.di.JDBM
-import org.junit.jupiter.api.Test
+import app.mobius.data.util.randomString
+import app.mobius.domain.entity.Person
+import app.mobius.domain.entity.Profile
+import app.mobius.domain.entity.role.Role
+import app.mobius.domain.entity.setting.Setting
+import org.hibernate.Session
+import org.junit.jupiter.api.*
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SqlPersonDataSourceTest {
 
-    @Test
-    fun `create profile`() {
+    private lateinit var hibernate : HibernateUtil
+    private lateinit var session : Session
 
+    @BeforeAll
+    fun before() {
+        hibernate = HibernateUtil()
+    }
+
+    @BeforeEach
+    fun beforeEach() {
+        session = JDBM.Hibernate.openSession()
     }
 
     @Test
-    fun `create setting`() {
+    fun `given a username and a person, when insert person, then create it`() {
+        val person = Person(
+                username = randomString(),
+                profile = Profile(),
+                setting = Setting(),
+                role = Role()
+        )
 
-    }
-
-    @Test
-    fun `create role`() {
-//        val role = Role()
-        val session = JDBM.Hibernate.openSession()
-        JDBM.Hibernate.executeQuery(session) {
-//            session.save(role)
-        }
-    }
-
-    @Test
-    fun `create person`() {
-//        val person = Person()
-        val session = JDBM.Hibernate.openSession()
-        JDBM.Hibernate.executeQuery(session) {
-//            session.save(person)
+        assertDoesNotThrow("person exception") {
+            JDBM.Hibernate.executeQuery(session) {
+                if (hibernate.isUniquenessValid(person)) {
+                    session.save(person)
+                }
+            }
         }
     }
 

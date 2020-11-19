@@ -24,7 +24,7 @@ class SqlSecurityMethodsDataSourceTest {
     }
 
     @Test
-    fun `given a empty securityMethods, when insert it, then create it with null methods -- should does not throw Exception`() {
+    fun `given a empty securityMethods, when insert it, then create it with null methods`() {
         val securityMethods = SecurityMethods()
 
         assertDoesNotThrow("securityMethods exception") {
@@ -37,7 +37,7 @@ class SqlSecurityMethodsDataSourceTest {
     }
 
     @Test
-    fun `given a identityVerification, when insert securityMethods, then create it -- should does not throw Exception`() {
+    fun `given a identityVerification, when insert securityMethods, then create it`() {
         val securityMethods = SecurityMethods(
                 identityVerification = IdentityVerification()
         )
@@ -52,7 +52,7 @@ class SqlSecurityMethodsDataSourceTest {
     }
 
     @Test
-    fun `given a twoFactorAuth and 2FA with email pending, when insert securityMethods, then create it -- should does not throw Exception`() {
+    fun `given a 2FA with email pending and securityMethods, when insert securityMethods, then create it`() {
         val twoFactorAuth = TwoFactorAuth(
                 googleAuthentication = GoogleAuth(),
                 smsAuthentication = SMSAuthentication(),
@@ -75,7 +75,7 @@ class SqlSecurityMethodsDataSourceTest {
     }
 
     @Test
-    fun `given a antiPishingCode, when insert securityMethods, then create it -- should does not throw Exception`() {
+    fun `given a antiPishingCode, when insert securityMethods, then create it`() {
         val securityMethods = SecurityMethods(
                 antiPishingCode = AntiPishingCode()
         )
@@ -90,7 +90,7 @@ class SqlSecurityMethodsDataSourceTest {
     }
 
     @Test
-    fun `given a identityVerification, twoFactorAuth and antiPishingCode, when insert securityMethods, then create it -- should does not throw Exception`() {
+    fun `given a identityVerification, twoFactorAuth and antiPishingCode, when insert securityMethods, then create it`() {
         val securityMethods = SecurityMethods(
                 antiPishingCode = AntiPishingCode()
         )
@@ -105,7 +105,7 @@ class SqlSecurityMethodsDataSourceTest {
     }
 
     @Test
-    fun `given a securityMethods, when insert it, then create it -- should does not throw Exception`() {
+    fun `given a securityMethods, when insert it, then create it`() {
         val securityMethods = SecurityMethods()
 
         assertDoesNotThrow("securityMethods exception") {

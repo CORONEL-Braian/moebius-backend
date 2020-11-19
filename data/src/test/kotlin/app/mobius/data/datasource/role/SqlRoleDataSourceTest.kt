@@ -34,7 +34,7 @@ class SqlRoleDataSourceTest {
     }
 
     @Test
-    fun `given a resource and permissions, when insert role, then create a role -- should does not throw Exception`() {
+    fun `given a resource and permissions, when insert role, then create a role`() {
 //        Given
         val randomName = randomString("/test")
         val randomLocation = randomString("/test")

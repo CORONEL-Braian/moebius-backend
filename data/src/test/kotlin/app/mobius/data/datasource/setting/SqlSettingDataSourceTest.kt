@@ -25,13 +25,17 @@ class SqlSettingDataSourceTest {
     }
 
     @Test
-    fun `create a empty setting`() {
+    fun `given a setting, when insert it, then create it`() {
         val setting = Setting()
 
- /*       val session = JDBM.Hibernate.openSession()
-        JDBM.Hibernate.executeQuery(session) {
-            session.save(setting)
-        }*/
+        assertDoesNotThrow("setting exception") {
+            JDBM.Hibernate.executeQuery(session) {
+                if (hibernate.isUniquenessValid(setting)) {
+                    session.save(setting)
+                }
+            }
+        }
+
     }
 
 }

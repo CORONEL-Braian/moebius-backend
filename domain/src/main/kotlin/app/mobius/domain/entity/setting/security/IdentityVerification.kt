@@ -59,7 +59,7 @@ data class DNI(
         @Column(name = "birthdate") val birthdate: Date,
         @Column(name = "date_issue") val dateIssue: Date,
         @Column(name = "date_expiry") val dateExpiry: Date,
-        @Column(name = "identification_number", unique = true) val identificationNumber: Int,
+        @Column(name = "identification_number", unique = true) val identificationNumber: Long,
         @Column(name = "number", unique = true) val number: Int,
 
 
@@ -93,5 +93,5 @@ data class Liveness(
         @Id @GeneratedValue @Column(name = "liveness_uuid") val livenessUUID: UUID? = null,
 
         @Enumerated(EnumType.STRING) @Type(type = "pgsql_enum")
-        val livenessStatus: LivenessStatus = LivenessStatus.UNSOLICITED
+        @Column(name = "liveness_status") val livenessStatus: LivenessStatus = LivenessStatus.UNSOLICITED
 )

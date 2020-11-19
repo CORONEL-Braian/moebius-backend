@@ -25,3 +25,23 @@ These additional references should also help you:
 ### Testing
  * [JUnit5](https://junit.org/junit5/docs/current/user-guide/)
  * [Mockk](https://mockk.io/)
+ 
+### Spring 
+
+* [Data access with JDBC](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/data-access.html#jdbc)
+* [Profiles](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles)
+* [Spring Data Repositores](https://www.baeldung.com/spring-data-repositories)
+* [Request|Response Body](https://www.baeldung.com/spring-request-response-body)
+___
+
+## Architecture
+
+#### Controller
+ * [DTO](https://www.baeldung.com/entity-to-and-from-dto-for-a-java-spring-application)
+ * [Jackson JSON Tutorial](https://www.baeldung.com/jackson)
+ 
+
+#### Json API
+  * [CRNK](http://www.crnk.io/)
+  * [Elide](https://elide.io/)
+  * [Hateoas](https://github.com/toedter/spring-hateoas-jsonapi)

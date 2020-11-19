@@ -11,11 +11,11 @@ import org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
 import java.io.File
 import javax.persistence.*
 
+
 /**
- * Java data base managment
+ * Java Data Base Managment
  * Source:
  *  https://docs.jboss.org/hibernate/core/3.3/reference/en/html/session-configuration.html
- * TODO: Auto scan with spring -> https://www.baeldung.com/the-persistence-layer-with-spring-and-jpa
  */
 class JDBM {
 
@@ -24,6 +24,11 @@ class JDBM {
         private const val HIBERNATE_CONFIGURATION = "secret-hibernate.cfg.xml"
         private const val PACKAGE_ENTITIES = "app.mobius.domain.entity"
 
+       /* @Bean(name = ["entityManagerFactory"])
+        fun sessionFactory(): LocalSessionFactoryBean? {
+            return LocalSessionFactoryBean()
+        }
+*/
         /**
          * @param operation: e.g: save/update/read
          * @param message: successfully
@@ -89,7 +94,7 @@ class JDBM {
         private fun getFile(canonicalName: String): File {
             val absolutePathCurrentModule = System.getProperty("user.dir")
             val pathFromProjectRoot = absolutePathCurrentModule.dropLastWhile { it != '/' }
-            val absolutePathFromProjectRoot = "$pathFromProjectRoot/data-core/src/main/resources/$canonicalName"
+            val absolutePathFromProjectRoot = "${pathFromProjectRoot}data-core/src/main/resources/$canonicalName"
             println("Absolute Path of secret-hibernate.cfg.xml: $absolutePathFromProjectRoot")
             return File(absolutePathFromProjectRoot)
         }

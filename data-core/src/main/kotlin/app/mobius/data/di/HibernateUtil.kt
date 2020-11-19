@@ -29,6 +29,15 @@ class HibernateUtil {
         return query.resultList
     }
 
+    fun <T> readRow(t: Class<T>) : String {
+        val inserted = session.get(t, getPropertyNameOfUuid())
+        return "Inserted: $inserted"
+    }
+
+    private fun getPropertyNameOfUuid(): String {
+        return "profile_uuid"   //TODO
+    }
+
     /**
      * - Describes whether a new object is valid for uniqueness in the entity hierarchy.
      * Uniqueness is contemplated in @Column, @JoinColumn and @Table#UniqueConstraint which includes the 2 above.
@@ -100,6 +109,7 @@ class HibernateUtil {
      * Save analogous entity, that is, with existing sub-entity (not valid) that may or may not be unique in the entity
      * Precondition: The columns are valid
      *
+     * TODO: WARNING: This reuse might not make sense because it would generate dependencies
      * e.g: Person with same location
      */
     @Throws(IllegalArgumentException::class)
@@ -148,7 +158,7 @@ class HibernateUtil {
         }
     }
 
-    fun <T> getUUID(t: Class<T>, entity: MutableMap<String, Any>) : UUID {
+    fun <T> getUUID(t: Class<T>, entity: MutableMap<String, Any>) : List<UUID> {
         val criteriaQuery: CriteriaQuery<T> = getCriteriaQuery(t)
 
         val root: Root<T> = criteriaQuery.from(t)
@@ -170,7 +180,7 @@ class HibernateUtil {
         val query: Query<T> = session.createQuery(criteriaQuery)
         val results: List<T> = query.resultList
 //        TODO
-        return UUID.randomUUID()
+        return listOf()
     }
 
     fun getUUID(instance: Any) : UUID {
@@ -178,11 +188,11 @@ class HibernateUtil {
         return UUID.randomUUID()
     }
 
-    fun <T> isTableUniqueConstraintValid(candidateObject: Any) : Boolean {
+    private fun <T> isTableUniqueConstraintValid(candidateObject: Any) : Boolean {
         return false    //TODO
     }
 
-    fun isColumnValid(candidateObject: Any) : Boolean {
+    private fun isColumnValid(candidateObject: Any) : Boolean {
         val uniqueFields = getUniqueFieldsOfColumn(candidateObject::class.java)
         uniqueFields.map { field ->
             candidateObject.propertyValue<Any>(field.name)?.let { value ->
