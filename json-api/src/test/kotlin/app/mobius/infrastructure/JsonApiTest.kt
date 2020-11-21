@@ -3,11 +3,10 @@ package app.mobius.infrastructure
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
-import java.io.File
 
 class JsonApiTest {
 
-    val canonicalFileName = "some.json"
+    val canonicalFileName = "some2.json"
 
     data class SomeTest(val a: String, val b: String) {
         constructor() : this("1", "2")
@@ -28,19 +27,6 @@ class JsonApiTest {
                 "{\"a\":\"2\",\"b\":\"2\"}",
                 JsonApi.writeKtAsJson(some)
         )
-    }
-
-    @Test
-    fun getFile() {
-        val canonicalName = "some.json"
-
-        val absolutePathCurrentModule = System.getProperty("user.dir")
-        val pathFromProjectRoot = absolutePathCurrentModule.dropLastWhile { it != '/' }
-
-        val actual = JsonApi.getFile(canonicalName)
-        val expected = File("${pathFromProjectRoot}json-api/src/main/resources/${canonicalName}")
-
-        Assertions.assertEquals(actual, expected)
     }
 
     @Test
@@ -87,5 +73,8 @@ class JsonApiTest {
             JsonApi.writeJsonAsKt(listJson, AttributesTest::class.java)
         }
     }
+
+
+
 
 }
