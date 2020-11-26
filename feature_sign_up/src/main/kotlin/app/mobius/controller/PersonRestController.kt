@@ -32,7 +32,7 @@ class PersonRestController {
      */
     @PostMapping("/add")
     @ResponseBody
-    fun addPerson(@RequestBody person: JsonApiRequest) : String  {
+        fun addPerson(@RequestBody person: JsonApiRequest) : String  {
 
 //        TODO: Transform from JsonApiRequest to PersonDTO.
 //        TODO: Transform PersonDTO to Person

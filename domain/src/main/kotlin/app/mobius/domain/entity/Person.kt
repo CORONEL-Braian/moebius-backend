@@ -28,6 +28,8 @@ data class Person(
         @OneToOne(cascade = [CascadeType.ALL])
         @JoinColumn(name = "role_uuid", referencedColumnName = "role_uuid")
         val role: Role,
+
+//        val identities: List<Identity>  //TODO | Next version
 ) {
         constructor() : this(username = "", profile = Profile(), setting = Setting(), role = Role())
 }
