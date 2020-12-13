@@ -26,15 +26,16 @@ class PersonRestController {
 
     /**
      * PRE: Composite classes in JsonApiRequest have a default constructor
-     * OBS: Replace JsonApiRequest with Any for debugging
+     * OBS: For debugging, replace data type of @param JsonApiRequest with Any
      *
-     * jsonapi-sign-up.json -> JsonApiRequest -> PersonDTO
+     * signUpJsonApi.json -> JsonApiRequest -> PersonDTO
      */
     @PostMapping("/add")
     @ResponseBody
-    fun addPerson(@RequestBody person: JsonApiRequest) : String  {
+        fun addPerson(@RequestBody person: JsonApiRequest) : String  {
 
 //        TODO: Transform from JsonApiRequest to PersonDTO.
+//        TODO: Transform PersonDTO to Person
 
         return personService.createPerson(
                 Person(
@@ -70,6 +71,17 @@ class PersonRestController {
 //               TODO:
 
         return person
+    }
+
+//     TODO: Return T
+    private  fun <T> convertJsonApiRequestToDTO(jsonApiRequest: JsonApiRequest, instance: T) : Any {
+        var username = ""
+        jsonApiRequest.data.map {
+            username = it.attributes["username"] as String
+        }
+        return PersonDto(
+                username = username
+        )
     }
 
 }
