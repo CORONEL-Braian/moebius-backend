@@ -2,9 +2,20 @@
   {
     "username": " d1ff6",
     "profile": {
-      "profileUUID": "615d1c47-5b8e-4076-bf37-039450a96cb0",
-      "name": "",
-      "surname": "",
+      "avatarUrl": "http://",
+      "biography": "",
+      "birthDate": "2020-11-13",
+      "birthTime": "00:18",
+      "name": "Braian",
+      "nickname": "itdev",
+      "sex": "M",
+      "surname": "Coronel",
+      "gender": {
+        "genderUUID": "03915d99-c1da-4584-93e9-680d572b5295",
+        "type": "Heterosexual",
+        "description": "Atracción hacia personas del sexo contrario",
+        "iconUrl": null
+      },
       "location": {
         "currentLocationUUID": "93f0b2d6-35bd-48cf-ac78-c312362a5fe6",
         "country": {
@@ -60,39 +71,15 @@
         },
         "direction": null
       },
-      "nationality": {
-        "countryUUID": "21af1e31-4597-4c69-8a81-d9fa6fb805ee",
-        "name": "",
-        "locationLimits": {
-          "limitsUUID": "781f750c-a564-433a-9164-aa13a6cfb606",
-          "northeast": {
-            "coordinateUUID": "57834712-5009-470e-8d35-93c2c6eeb269",
-            "lat": 0.0,
-            "lng": 0.0
-          },
-          "southwest": {
-            "coordinateUUID": "65f215bb-8f0e-4d8f-a394-a7f10ea77a52",
-            "lat": 0.0,
-            "lng": 0.0
-          }
-        }
-      },
-      "avatarUrl": null,
-      "nickname": null,
-      "biography": null,
       "phone": {
         "phoneUUID": "933e50b3-d7d8-4868-8647-0f6b74323d83",
         "codeCountry": "",
         "codeArea": "",
         "number": -1
       },
-      "birthdate": "2020-11-13T00:18:35.428+00:00",
-      "sex": "F",
-      "gender": {
-        "genderUUID": "03915d99-c1da-4584-93e9-680d572b5295",
-        "type": "Heterosexual",
-        "description": "Atracción hacia personas del sexo contrario",
-        "iconUrl": null
+      "nationality": {
+        "countryUUID": "21af1e31-4597-4c69-8a81-d9fa6fb805ee",
+        "name": "Argentina"
       }
     },
     "setting": {
