@@ -15,7 +15,9 @@ data class Application(
         @Id @GeneratedValue @Column(name = "application_uuid") val applicationUUID: UUID? = null,
         val environment: Environment,
         val consumer: Consumer,
-        val publicKey: String
+        val publicKey: String,
+        val version: Byte,
+        val unauthorizedTokenApp: String
 )
 
 enum class Environment {
@@ -26,33 +28,37 @@ enum class Environment {
 sealed class Consumer {
     @Entity
     @Table(name = "consumerPeople")
-    data class Identities(
+    data class ConsumerIdentities(
             @Id @GeneratedValue @Column(name = "consumerIdentities_uuid") val usersUUID: UUID? = null,
-            val platform: Platform)
+            val platform: Platform) : Consumer()
 
     /**
      * A partner consumes a particular feature
      */
     @Entity
     @Table(name = "consumerPartner")
-    data class Partner(
+    data class ConsumerPartner(
             @Id @GeneratedValue @Column(name = "consumerPartner_uuid") val partnerUUID: UUID? = null,
             val name: String,
             val platform: Platform,
-            val feature: String)
+            val feature: String) : Consumer()
 
     /**
      * A team consumes a particular feature
      */
     @Entity
     @Table(name = "consumerTeam")
-    data class Team(
+    data class ConsumerTeam(
             @Id @GeneratedValue @Column(name = "consumerTeam_uuid") val teamUUID: UUID? = null,
             val name: String,
             val platform: Platform,
-            val feature: String)
+            val feature: String) : Consumer()
 }
 
+/**
+ * @param name: i.e: Android
+ * @param ecosystem: i.e: Auto, TV, Wear OS
+ */
 @Entity
 @Table(name = "platform")
 data class Platform(
