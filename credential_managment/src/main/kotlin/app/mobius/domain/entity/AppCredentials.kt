@@ -3,26 +3,20 @@ package app.mobius.domain.entity
 import java.util.*
 import javax.persistence.*
 
-/**
- * Map with:
- *  . AppConsumerUsers
- *  . AppConsumerPartner
- *  . AppConsumerOrganization
- */
 @Entity
-@Table(name = "application")
-data class Application(
+@Table(name = "app_credentials")
+data class AppCredentials(
         @Id @GeneratedValue @Column(name = "application_uuid") val applicationUUID: UUID? = null,
-        val environment: Environment,
+        val appGlobalSessionToken: AppGlobalSessionToken,
         val consumer: Consumer,
-        val publicKey: String,
+        val environment: Environment,
+        val password: String,
         val version: Double,
 )
 
 enum class Environment {
     DEV, INTEGRATION, TESTING, STAGING, PRODUCTION
 }
-
 
 sealed class Consumer {
 
