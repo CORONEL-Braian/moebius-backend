@@ -1,4 +1,4 @@
-package app.mobius.domain.model
+package app.mobius.domain.entity
 
 import java.util.*
 import javax.persistence.*
@@ -16,8 +16,7 @@ data class Application(
         val environment: Environment,
         val consumer: Consumer,
         val publicKey: String,
-        val version: Byte,
-        val unauthorizedTokenApp: String
+        val version: Double,
 )
 
 enum class Environment {
@@ -26,9 +25,10 @@ enum class Environment {
 
 
 sealed class Consumer {
+
     @Entity
     @Table(name = "consumerPeople")
-    data class ConsumerIdentities(
+    data class ConsumerPeople(
             @Id @GeneratedValue @Column(name = "consumerIdentities_uuid") val usersUUID: UUID? = null,
             val platform: Platform) : Consumer()
 

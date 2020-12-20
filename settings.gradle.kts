@@ -18,7 +18,6 @@ include("data")
 include("domain")
 include("api")
 include("service")
-include("build-src")
 
 // Core
 include("deceased-core")
@@ -35,3 +34,4 @@ include("feature_sign_up")
 include("feature_login")
 include("feature_legal")
 include("feature_third_profile")
+include("credential_managment")
