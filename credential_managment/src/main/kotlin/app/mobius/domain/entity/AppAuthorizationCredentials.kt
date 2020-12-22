@@ -5,9 +5,8 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "app_credentials")
-data class AppCredentials(
+data class AppAuthorizationCredentials(
         @Id @GeneratedValue @Column(name = "application_uuid") val applicationUUID: UUID? = null,
-        val appGlobalSessionToken: AppGlobalSessionToken,
         val consumer: Consumer,
         val environment: Environment,
         val password: String,

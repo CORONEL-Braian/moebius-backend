@@ -1,6 +1,6 @@
 package app.mobius.data.dao
 
-import app.mobius.domain.entity.AppCredentials
+import app.mobius.domain.entity.AppAuthorizationCredentials
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
@@ -9,4 +9,4 @@ import org.springframework.stereotype.Repository
  * . Communicates with the SQL data source
  */
 @Repository
-interface AppCredentialsRepository: JpaRepository<AppCredentials, String>
+interface AppCredentialsRepository: JpaRepository<AppAuthorizationCredentials, String>
