@@ -52,13 +52,14 @@ This association has two sides i.e. the owning side and the inverse side
 Instruct Hibernate to reload the entity after the Persistence Context is flushed, otherwise, 
 the database-generated value will not be synchronized with the in-memory entity state.
 
-*Source:*
- * https://stackoverflow.com/a/61838180/5279996
- 
+* [Source](https://stackoverflow.com/a/61838180/5279996)
  
 ##### @DynamicInsert
 
 Insert default value using DBMS and optional using Hibernate
 
-*Source:*
- * https://stackoverflow.com/a/64474863/5279996
+* [Source](https://stackoverflow.com/a/64474863/5279996)
+ 
+##### @MappedSuperclass
+
+* [Source](https://thorben-janssen.com/hibernate-tips-map-multiple-entities-same-table/#:~:text=Yes%2C%20you%20can%20map%20two,better%20use%20a%20DTO%20projection.)

@@ -1,8 +1,8 @@
 package app.mobius.service
 
 import app.mobius.data.dao.AppCredentialsRepository
-import app.mobius.domain.entity.AppAuthSessionToken
-import app.mobius.domain.entity.AppAuthorizationCredentials
+import app.mobius.domain.entity.security.AppAuthSessionToken
+import app.mobius.domain.entity.security.AppAuthorizationCredentials
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.*
@@ -20,8 +20,13 @@ class ApplicationAuthorizationService {
     fun getAppAuthorizationSessionToken(
             appAuthorizationCredentials: AppAuthorizationCredentials
     ): AppAuthSessionToken {
-//        TODO
+//        TODO: Impl
         return AppAuthSessionToken(UUID.randomUUID(), "", 0)
+    }
+
+    fun checkAppAuthorizationSessionToken(appAuthSessionToken: AppAuthSessionToken) : Boolean {
+//        TODO: Impl
+        return true
     }
 
 }
