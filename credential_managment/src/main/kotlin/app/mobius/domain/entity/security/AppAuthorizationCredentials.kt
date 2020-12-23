@@ -3,6 +3,7 @@ package app.mobius.domain.entity.security
 import java.util.*
 import javax.persistence.*
 
+// TODO: Error when scan entities
 sealed class AppAuthorization(
         @Id @GeneratedValue @Column(name = "application_uuid") val applicationUUID: UUID? = null,
         private val appConsumer: AppConsumer,   //TODO: Check if must be private
