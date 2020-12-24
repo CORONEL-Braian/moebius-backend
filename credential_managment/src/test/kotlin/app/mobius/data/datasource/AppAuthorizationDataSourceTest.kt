@@ -26,13 +26,41 @@ class AppAuthorizationDataSourceTest {
     }
 
     @Test
-    fun `when select Android Mobile platform, then get it`() {
-        val platform = Platform(name = "Android", ecosystem = "Mobile")
+    fun `when select platforms in db, then the Android Mobile platform exists`() {
+        val androidMobile = Platform(name = "Android", ecosystem = "Mobile")
 
         JDBM.Hibernate.executeQuery(session) {
-            hibernate.allTheRows(Platform::class.java).map {
-                println(it)
-            }
+            assert(
+                    hibernate.allTheRows(Platform::class.java).any {
+                        androidMobile.name == it.name && androidMobile.ecosystem == it.ecosystem
+                    }
+            )
+        }
+    }
+
+    @Test
+    fun `when select platforms in db, then the iOS Mobile platform exists`() {
+        val iOSMobile = Platform(name = "iOS", ecosystem = "Mobile")
+
+        JDBM.Hibernate.executeQuery(session) {
+            assert(
+                    hibernate.allTheRows(Platform::class.java).any {
+                        iOSMobile.name == it.name && iOSMobile.ecosystem == it.ecosystem
+                    }
+            )
+        }
+    }
+
+    @Test
+    fun `when select platforms in db, then the Web Mobile platform exists`() {
+        val webMobile = Platform(name = "Web", ecosystem = "Mobile")
+
+        JDBM.Hibernate.executeQuery(session) {
+            assert(
+                    hibernate.allTheRows(Platform::class.java).any {
+                        webMobile.name == it.name && webMobile.ecosystem == it.ecosystem
+                    }
+            )
         }
     }
 

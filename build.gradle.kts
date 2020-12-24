@@ -1,3 +1,4 @@
+import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.include
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 buildscript {

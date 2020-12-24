@@ -3,8 +3,7 @@ package app.mobius.domain.entity.security
 import java.util.*
 import javax.persistence.*
 
-// TODO: Error when scan entities
-sealed class AppAuthorization(
+/*sealed class AppAuthorization(
         @Id @GeneratedValue @Column(name = "application_uuid") val applicationUUID: UUID? = null,
         private val appConsumer: AppConsumer,   //TODO: Check if must be private
         val environment: Environment,
@@ -32,7 +31,7 @@ sealed class AppAuthorization(
     @Table(name = "app_authorization_team")
     object AppAuthorizationTeam : AppAuthorization()
 
-}
+}*/
 
 
 enum class Environment {
@@ -42,35 +41,54 @@ enum class Environment {
 sealed class AppConsumer {
 
     @Entity
-    @Table(name = "consumerPeople")
+    @Table(name = "app_consumer_people")
     data class AppConsumerPeople(
-            @Id @GeneratedValue @Column(name = "consumerIdentities_uuid") val usersUUID: UUID? = null,
+            @Id @GeneratedValue @Column(name = "app_consumer_people_uuid") val appConsumerPeopleUUID: UUID? = null,
+
+            @OneToOne(cascade = [CascadeType.ALL])
+            @JoinColumn(name = "platform_uuid", referencedColumnName = "platform_uuid")
             val platform: Platform
     ) : AppConsumer() {
-            constructor() : this(platform = Platform())
+        constructor() : this(platform = Platform())
     }
 
-    /**
-     * A partner consumes a particular feature
-     */
-    @Entity
-    @Table(name = "consumerPartner")
-    data class AppConsumerPartner(
-            @Id @GeneratedValue @Column(name = "consumerPartner_uuid") val partnerUUID: UUID? = null,
-            val name: String,
-            val platform: Platform,
-            val feature: String) : AppConsumer()
 
-    /**
-     * A team consumes a particular feature
-     */
+//    A partner consumes a particular feature
     @Entity
-    @Table(name = "consumerTeam")
-    data class AppConsumerTeam(
-            @Id @GeneratedValue @Column(name = "consumerTeam_uuid") val teamUUID: UUID? = null,
+    @Table(name = "app_consumer_partner")
+    data class AppConsumerPartner(
+            @Id @GeneratedValue @Column(name = "app_consumer_partner_uuid") val appConsumerPartnerUUID: UUID? = null,
+
             val name: String,
+
+            @OneToOne(cascade = [CascadeType.ALL])
+            @JoinColumn(name = "platform_uuid", referencedColumnName = "platform_uuid")
             val platform: Platform,
-            val feature: String) : AppConsumer()
+
+            @OneToOne(cascade = [CascadeType.ALL])
+            @JoinColumn(name = "feature_uuid", referencedColumnName = "feature_uuid")
+            val feature: Feature
+    ) : AppConsumer() {
+    constructor() : this(name = "", platform = Platform(), feature = Feature())
+    }
+
+//      A team consumes a particular feature
+    @Entity
+    @Table(name = "app_consumer_team")
+    data class AppConsumerTeam(
+            @Id @GeneratedValue @Column(name = "app_consumer_team_uuid") val appConsumerTeamUUID: UUID? = null,
+            val name: String,
+
+            @OneToOne(cascade = [CascadeType.ALL])
+            @JoinColumn(name = "platform_uuid", referencedColumnName = "platform_uuid")
+            val platform: Platform,
+
+            @OneToOne(cascade = [CascadeType.ALL])
+            @JoinColumn(name = "feature_uuid", referencedColumnName = "feature_uuid")
+            val feature: Feature
+    ) : AppConsumer() {
+        constructor() : this(name = "", platform = Platform(), feature = Feature())
+    }
 }
 
 /**
@@ -85,4 +103,13 @@ data class Platform(
         val ecosystem: String
 ) {
     constructor() : this(name = "Android", ecosystem = "Mobile")
+}
+
+@Entity
+@Table(name = "feature")
+data class Feature(
+        @Id @GeneratedValue @Column(name = "feature_uuid") val featureUUID: UUID? = null,
+        val name: String,
+) {
+    constructor() : this(name = "Sign Up")
 }
