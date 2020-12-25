@@ -1,37 +1,49 @@
 package app.mobius.domain.entity.security
 
+import app.mobius.util.PostgreSQLEnumType
+import org.hibernate.annotations.Type
+import org.hibernate.annotations.TypeDef
 import java.util.*
 import javax.persistence.*
 
-/*sealed class AppAuthorization(
-        @Id @GeneratedValue @Column(name = "application_uuid") val applicationUUID: UUID? = null,
-        private val appConsumer: AppConsumer,   //TODO: Check if must be private
-        val environment: Environment,
-        val appAuthSessionToken: AppAuthSessionToken? = null,
-        val hashPassword: String,
-        val version: Double
+sealed class AppAuthorization(
+        open val appAuthorizationUUID: UUID? = null,
+        open val appConsumer: AppConsumer,
+
+        @Enumerated(EnumType.STRING) @Type(type = "pgsql_enum") private val environment: Environment,
+        @Column(name = "db_hash_pw") private val hashPassword: String,
+        private val version: Double,
+        private val sessionToken: String? = null,
 ) {
 
     constructor() : this(
             appConsumer = AppConsumer.AppConsumerPeople(),
             environment = Environment.DEV,
             hashPassword = "",
-            version = 0.0
+            version = 0.0,
     )
 
     @Entity
     @Table(name = "app_authorization_people")
-    object AppAuthorizationPeople : AppAuthorization()
+    @TypeDef(name = "pgsql_enum", typeClass = PostgreSQLEnumType::class)
+    data class AppAuthorizationPeople(
+            @Id @GeneratedValue @Column(name = "app_authorization_people_uuid")
+            override val appAuthorizationUUID: UUID? = null,
 
-    @Entity
+            @OneToOne(cascade = [CascadeType.ALL])
+            @JoinColumn(name = "app_consumer_people_uuid", referencedColumnName = "app_consumer_people_uuid")
+            override val appConsumer: AppConsumer.AppConsumerPeople,
+    ) : AppAuthorization()
+
+/*    @Entity
     @Table(name = "app_authorization_partner")
     object AppAuthorizationPartner : AppAuthorization()
 
     @Entity
     @Table(name = "app_authorization_team")
-    object AppAuthorizationTeam : AppAuthorization()
+    object AppAuthorizationTeam : AppAuthorization()*/
 
-}*/
+}
 
 
 enum class Environment {

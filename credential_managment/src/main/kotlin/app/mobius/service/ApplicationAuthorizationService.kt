@@ -1,8 +1,6 @@
 package app.mobius.service
 
-import app.mobius.domain.entity.security.AppAuthSessionToken
 //import app.mobius.domain.entity.security.AppAuthorization
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -18,12 +16,12 @@ class ApplicationAuthorizationService {
 
     fun getAppAuthorizationSessionToken(
 //            appAuthorizationCredentials: AppAuthorization
-    ): AppAuthSessionToken {
+    ): String {
 //        TODO: Impl
-        return AppAuthSessionToken(UUID.randomUUID(), "", 0)
+        return "sessionToken"
     }
 
-    fun checkAppAuthorizationSessionToken(appAuthSessionToken: AppAuthSessionToken) : Boolean {
+    fun checkAppAuthorizationSessionToken(appAuthorizationSessionToken: String) : Boolean {
 //        TODO: Impl
         return true
     }
