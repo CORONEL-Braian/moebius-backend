@@ -1,6 +1,8 @@
 HIBERNATE
 ---------
 
+### Annotations
+
 ##### Naming Strategy
 
 Use camelCase or snake_case in annotation or variable name:

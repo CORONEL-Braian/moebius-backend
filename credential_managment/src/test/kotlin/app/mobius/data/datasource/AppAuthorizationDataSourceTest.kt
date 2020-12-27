@@ -74,11 +74,17 @@ class AppAuthorizationDataSourceTest {
         }
     }
 
+    @Test
+    fun `when select db_mobius_is_match_hash_pw_app function, then it exists`() {
+        val query = session.createNativeQuery("SELECT ${Routines.IS_MATCH_HASH_PW_APP}()")
+        query.list().map {
+            println("SQLQuery: $it")
+        }
+    }
 
     @Test
-    fun `when select a app authorization people valid, then get the session token`() {
-//        TODO: Generate match
-//        TODO: Run routine from backend
+    fun `when checks the app authorization people with valid pw, then the match is true`() {
+//    TODO
     }
 
 }
