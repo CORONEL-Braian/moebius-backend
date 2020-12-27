@@ -29,7 +29,8 @@ class SqlPersonDataSourceTest {
     @Test
     fun `given a username and a person, when insert person, then create it`() {
         val person = Person(
-                username = randomString(),
+//                username = randomString(),
+                username = "Brenda",
                 profile = Profile(),
                 setting = Setting(),
                 role = Role()

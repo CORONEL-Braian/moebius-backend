@@ -75,7 +75,7 @@ sealed class AppConsumer(
 
         @OneToOne(cascade = [CascadeType.ALL])
         @JoinColumn(name = "platform_uuid", referencedColumnName = "platform_uuid")
-        val platform: Platform,
+        open val platform: Platform,
 ) {
 
     constructor() : this(platform = Platform())
@@ -84,7 +84,13 @@ sealed class AppConsumer(
     @Table(name = "app_consumer_people")
     data class AppConsumerPeople(
             @Id @GeneratedValue @Column(name = "app_consumer_people_uuid") override val appConsumerUUID: UUID? = null,
-    ) : AppConsumer(platform = Platform())
+
+            @OneToOne(cascade = [CascadeType.ALL])
+            @JoinColumn(name = "platform_uuid", referencedColumnName = "platform_uuid", unique = true)
+            override val platform: Platform,
+    ) : AppConsumer(platform = Platform()) {
+        constructor() : this(platform = Platform())
+    }
 
 
 //    A partner consumes a particular feature

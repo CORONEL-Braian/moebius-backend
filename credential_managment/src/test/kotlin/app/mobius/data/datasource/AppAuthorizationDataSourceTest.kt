@@ -64,4 +64,21 @@ class AppAuthorizationDataSourceTest {
         }
     }
 
+    @Test
+    fun `when select all app consumer people in db, then it is not empty`() {
+
+        JDBM.Hibernate.executeQuery(session) {
+            assert(
+                    hibernate.allTheRows(Platform::class.java).isNotEmpty()
+            )
+        }
+    }
+
+
+    @Test
+    fun `when select a app authorization people valid, then get the session token`() {
+//        TODO: Generate match
+//        TODO: Run routine from backend
+    }
+
 }
