@@ -1,8 +1,7 @@
 package app.mobius.data.datasource
 
-import app.mobius.data.di.HibernateUtil
-import app.mobius.data.di.JDBM
-import app.mobius.data.util.randomString
+import app.mobius.data.dataAccess.hibernate.HibernateData
+import app.mobius.data.dataAccess.JDBMConfig
 import app.mobius.domain.entity.Person
 import app.mobius.domain.entity.Profile
 import app.mobius.domain.entity.role.Role
@@ -13,17 +12,17 @@ import org.junit.jupiter.api.*
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SqlPersonDataSourceTest {
 
-    private lateinit var hibernate : HibernateUtil
+    private lateinit var hibernate : HibernateData
     private lateinit var session : Session
 
     @BeforeAll
     fun before() {
-        hibernate = HibernateUtil()
+        hibernate = HibernateData()
     }
 
     @BeforeEach
     fun beforeEach() {
-        session = JDBM.Hibernate.openSession()
+        session = JDBMConfig.Hibernate.openSession()
     }
 
     @Test
@@ -37,7 +36,7 @@ class SqlPersonDataSourceTest {
         )
 
         assertDoesNotThrow("person exception") {
-            JDBM.Hibernate.executeQuery(session) {
+            JDBMConfig.Hibernate.executeQuery(session) {
                 if (hibernate.isUniquenessValid(person)) {
                     session.save(person)
                 }

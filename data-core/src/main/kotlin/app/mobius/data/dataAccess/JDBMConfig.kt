@@ -1,4 +1,4 @@
-package app.mobius.data.di
+package app.mobius.data.dataAccess
 
 import org.hibernate.HibernateException
 import org.hibernate.Session
@@ -17,7 +17,7 @@ import javax.persistence.*
  * Source:
  *  https://docs.jboss.org/hibernate/core/3.3/reference/en/html/session-configuration.html
  */
-class JDBM {
+class JDBMConfig {
 
     object Hibernate {
 
@@ -165,7 +165,6 @@ class JDBM {
         }
 
     }
-
 
     /**
      * Observation: persistence.xml file dont work for auto scan

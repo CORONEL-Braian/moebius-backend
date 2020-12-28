@@ -1,7 +1,7 @@
 package app.mobius.data.datasource.setting.security
 
-import app.mobius.data.di.HibernateUtil
-import app.mobius.data.di.JDBM
+import app.mobius.data.dataAccess.hibernate.HibernateData
+import app.mobius.data.dataAccess.JDBMConfig
 import app.mobius.domain.entity.setting.security.*
 import org.hibernate.Session
 import org.junit.jupiter.api.*
@@ -10,17 +10,17 @@ import java.util.*
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SqlSecurityMethodsDataSourceTest {
 
-    private lateinit var hibernate: HibernateUtil
+    private lateinit var hibernate: HibernateData
     private lateinit var session: Session
 
     @BeforeAll
     fun before() {
-        hibernate = HibernateUtil()
+        hibernate = HibernateData()
     }
 
     @BeforeEach
     fun beforeEach() {
-        session = JDBM.Hibernate.openSession()
+        session = JDBMConfig.Hibernate.openSession()
     }
 
     @Test
@@ -28,7 +28,7 @@ class SqlSecurityMethodsDataSourceTest {
         val securityMethods = SecurityMethods()
 
         assertDoesNotThrow("securityMethods exception") {
-            JDBM.Hibernate.executeQuery(session) {
+            JDBMConfig.Hibernate.executeQuery(session) {
                 if (hibernate.isUniquenessValid(securityMethods)) {
                     session.save(securityMethods)
                 }
@@ -43,7 +43,7 @@ class SqlSecurityMethodsDataSourceTest {
         )
 
         assertDoesNotThrow("securityMethods exception") {
-            JDBM.Hibernate.executeQuery(session) {
+            JDBMConfig.Hibernate.executeQuery(session) {
                 if (hibernate.isUniquenessValid(securityMethods)) {
                     session.save(securityMethods)
                 }
@@ -66,7 +66,7 @@ class SqlSecurityMethodsDataSourceTest {
         )
 
         assertDoesNotThrow("securityMethods exception") {
-            JDBM.Hibernate.executeQuery(session) {
+            JDBMConfig.Hibernate.executeQuery(session) {
                 if (hibernate.isUniquenessValid(securityMethods)) {
                     session.save(securityMethods)
                 }
@@ -81,7 +81,7 @@ class SqlSecurityMethodsDataSourceTest {
         )
 
         assertDoesNotThrow("securityMethods exception") {
-            JDBM.Hibernate.executeQuery(session) {
+            JDBMConfig.Hibernate.executeQuery(session) {
                 if (hibernate.isUniquenessValid(securityMethods)) {
                     session.save(securityMethods)
                 }
@@ -96,7 +96,7 @@ class SqlSecurityMethodsDataSourceTest {
         )
 
         assertDoesNotThrow("securityMethods exception") {
-            JDBM.Hibernate.executeQuery(session) {
+            JDBMConfig.Hibernate.executeQuery(session) {
                 if (hibernate.isUniquenessValid(securityMethods)) {
                     session.save(securityMethods)
                 }
@@ -109,7 +109,7 @@ class SqlSecurityMethodsDataSourceTest {
         val securityMethods = SecurityMethods()
 
         assertDoesNotThrow("securityMethods exception") {
-            JDBM.Hibernate.executeQuery(session) {
+            JDBMConfig.Hibernate.executeQuery(session) {
                 if (hibernate.isUniquenessValid(securityMethods)) {
                     session.save(securityMethods)
                 }

@@ -1,4 +1,4 @@
-package app.mobius.data.dataAccess
+package app.mobius.data.dataAccess.spring
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
@@ -16,7 +16,6 @@ import org.springframework.transaction.PlatformTransactionManager
 import org.springframework.transaction.annotation.EnableTransactionManagement
 import java.util.*
 import javax.sql.DataSource
-
 
 /**
  * Source:

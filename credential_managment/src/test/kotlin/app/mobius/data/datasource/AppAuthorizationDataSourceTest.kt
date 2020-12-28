@@ -1,7 +1,7 @@
 package app.mobius.data.datasource
 
-import app.mobius.data.di.HibernateUtil
-import app.mobius.data.di.JDBM
+import app.mobius.data.dataAccess.hibernate.HibernateData
+import app.mobius.data.dataAccess.JDBMConfig
 import app.mobius.domain.entity.security.AppAuthorization
 import app.mobius.domain.entity.security.AppConsumer
 import app.mobius.domain.entity.security.Platform
@@ -11,24 +11,24 @@ import org.junit.jupiter.api.*
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class AppAuthorizationDataSourceTest {
 
-    private lateinit var hibernate : HibernateUtil
+    private lateinit var hibernate : HibernateData
     private lateinit var session : Session
 
     @BeforeAll
     fun before() {
-        hibernate = HibernateUtil()
+        hibernate = HibernateData()
     }
 
     @BeforeEach
     fun beforeEach() {
-        session = JDBM.Hibernate.openSession()
+        session = JDBMConfig.Hibernate.openSession()
     }
 
     @Test
     fun `when select platforms in db, then the Android Mobile platform exists`() {
         val androidMobile = Platform(name = "Android", ecosystem = "Mobile")
 
-        JDBM.Hibernate.executeQuery(session) {
+        JDBMConfig.Hibernate.executeQuery(session) {
             assert(
                     hibernate.allTheRows(Platform::class.java).any {
                         androidMobile.name == it.name && androidMobile.ecosystem == it.ecosystem
@@ -41,7 +41,7 @@ class AppAuthorizationDataSourceTest {
     fun `when select platforms in db, then the iOS Mobile platform exists`() {
         val iOSMobile = Platform(name = "iOS", ecosystem = "Mobile")
 
-        JDBM.Hibernate.executeQuery(session) {
+        JDBMConfig.Hibernate.executeQuery(session) {
             assert(
                     hibernate.allTheRows(Platform::class.java).any {
                         iOSMobile.name == it.name && iOSMobile.ecosystem == it.ecosystem
@@ -54,7 +54,7 @@ class AppAuthorizationDataSourceTest {
     fun `when select platforms in db, then the Web Mobile platform exists`() {
         val webMobile = Platform(name = "Web", ecosystem = "Mobile")
 
-        JDBM.Hibernate.executeQuery(session) {
+        JDBMConfig.Hibernate.executeQuery(session) {
             assert(
                     hibernate.allTheRows(Platform::class.java).any {
                         webMobile.name == it.name && webMobile.ecosystem == it.ecosystem
@@ -66,7 +66,7 @@ class AppAuthorizationDataSourceTest {
     @Test
     fun `when select all app consumer people in db, then it is not empty`() {
 
-        JDBM.Hibernate.executeQuery(session) {
+        JDBMConfig.Hibernate.executeQuery(session) {
             assert(
                     hibernate.allTheRows(Platform::class.java).isNotEmpty()
             )
@@ -93,7 +93,7 @@ class AppAuthorizationDataSourceTest {
     fun `when filter an app_authorization_people, then get it`() {
         val androidMobile = Platform(name = "Android", ecosystem = "Mobile")
 
-        JDBM.Hibernate.executeQuery(session) {
+        JDBMConfig.Hibernate.executeQuery(session) {
             val appConsumerPeopleWithAndroidMobile = hibernate.allTheRows(AppConsumer.AppConsumerPeople::class.java)
                     .first {
                         it.platform.name == androidMobile.name &&
@@ -116,7 +116,7 @@ class AppAuthorizationDataSourceTest {
     fun `when checks if is match hash pw of app authorization, then the match is false`() {
         val androidMobile = Platform(name = "Android", ecosystem = "Mobile")
 
-        JDBM.Hibernate.executeQuery(session) {
+        JDBMConfig.Hibernate.executeQuery(session) {
             val appConsumerPeopleWithAndroidMobile = hibernate.allTheRows(AppConsumer.AppConsumerPeople::class.java)
                     .first {
                         it.platform.name == androidMobile.name &&

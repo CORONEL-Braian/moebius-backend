@@ -32,6 +32,7 @@ These additional references should also help you:
 * [Data access with JDBC](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/data-access.html#jdbc)
 * [Profiles](https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-profiles)
 * [Spring Data Repositores](https://www.baeldung.com/spring-data-repositories)
+* [Spring Data Composable Repositores](https://www.baeldung.com/spring-data-composable-repositories)
 * [Request|Response Body](https://www.baeldung.com/spring-request-response-body)
 ___
 

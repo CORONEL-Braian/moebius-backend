@@ -1,6 +1,6 @@
 package app.mobius.service
 
-import app.mobius.data.dao.PersonRepository
+import app.mobius.data.dao.PersonJpaRepository
 import app.mobius.domain.entity.Person
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -13,10 +13,10 @@ class PersonService {
      * we will use it to handle the data
      */
     @Autowired
-    private lateinit var personRepository: PersonRepository
+    private lateinit var personJpaRepository: PersonJpaRepository
 
     fun getPeople() : List<Person> {
-        return personRepository.findAll()
+        return personJpaRepository.findAll()
     }
 
     fun getPersonById() : Person {
@@ -24,7 +24,7 @@ class PersonService {
     }
 
     fun createPerson(person: Person) : String {
-        personRepository.save(person)
+        personJpaRepository.save(person)
         return "Saved"
     }
 

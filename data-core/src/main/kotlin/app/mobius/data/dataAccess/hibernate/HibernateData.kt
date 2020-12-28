@@ -1,5 +1,6 @@
-package app.mobius.data.di
+package app.mobius.data.dataAccess.hibernate
 
+import app.mobius.data.dataAccess.JDBMConfig
 import app.mobius.data.util.propertyValue
 import app.mobius.domain.entity.role.Resource
 import org.hibernate.query.Query
@@ -11,9 +12,9 @@ import javax.persistence.criteria.Predicate
 import javax.persistence.criteria.Root
 import kotlin.jvm.Throws
 
-class HibernateUtil {
+class HibernateData {
 
-    private val session = JDBM.Hibernate.openSession()
+    private val session = JDBMConfig.Hibernate.openSession()
     private val builder = session.criteriaBuilder
 
     private var isSubEntity = false
