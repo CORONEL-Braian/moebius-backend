@@ -2,12 +2,11 @@ package app.mobius.data.datasource
 
 import app.mobius.data.di.HibernateUtil
 import app.mobius.data.di.JDBM
+import app.mobius.domain.entity.security.AppAuthorization
+import app.mobius.domain.entity.security.AppConsumer
 import app.mobius.domain.entity.security.Platform
 import org.hibernate.Session
-import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.TestInstance
+import org.junit.jupiter.api.*
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class AppAuthorizationDataSourceTest {
@@ -74,17 +73,70 @@ class AppAuthorizationDataSourceTest {
         }
     }
 
+//    Kotlin is broken with $$$a. The solution is put a \ before of $ if not exists
+    @Test
+    fun `print special characters when data type crypt is consumed`() {
+        println("\$2a\$08\$tgBY0UrkKNgMCbSGdMw9kOR5BEv9mIogQkcJvfoScyNCIepWG/z6C")
+//        println("$2a$08$tgBY0UrkKNgMCbSGdMw9kOR5BEv9mIogQkcJvfoScyNCIepWG/z6C")
+//        println("$$$a")
+    }
+
     @Test
     fun `when select db_mobius_is_match_hash_pw_app function, then it exists`() {
-        val query = session.createNativeQuery("SELECT ${Routines.IS_MATCH_HASH_PW_APP}()")
+        val query = session.createNativeQuery("SELECT ${Routines.IS_MATCH_HASH_PW_APP}('a920aec3-a58c-51f8-9228-a661a8a3cc71', '');")
         query.list().map {
             println("SQLQuery: $it")
         }
     }
 
     @Test
-    fun `when checks the app authorization people with valid pw, then the match is true`() {
-//    TODO
+    fun `when filter an app_authorization_people, then get it`() {
+        val androidMobile = Platform(name = "Android", ecosystem = "Mobile")
+
+        JDBM.Hibernate.executeQuery(session) {
+            val appConsumerPeopleWithAndroidMobile = hibernate.allTheRows(AppConsumer.AppConsumerPeople::class.java)
+                    .first {
+                        it.platform.name == androidMobile.name &&
+                        it.platform.ecosystem == androidMobile.ecosystem &&
+                        it.description == "store"
+            }
+
+            val appAuthorizationPeople = hibernate.allTheRows(AppAuthorization.AppAuthorizationPeople::class.java)
+                    .first {
+                        it.appConsumer.appConsumerUUID == appConsumerPeopleWithAndroidMobile.appConsumerUUID
+            }
+
+            Assertions.assertNotNull(appAuthorizationPeople.appAuthorizationUUID)
+
+            println("appAuthorizationPeople: " + appAuthorizationPeople.appAuthorizationUUID)
+        }
     }
 
+    @Test
+    fun `when checks if is match hash pw of app authorization, then the match is false`() {
+        val androidMobile = Platform(name = "Android", ecosystem = "Mobile")
+
+        JDBM.Hibernate.executeQuery(session) {
+            val appConsumerPeopleWithAndroidMobile = hibernate.allTheRows(AppConsumer.AppConsumerPeople::class.java)
+                    .first {
+                        it.platform.name == androidMobile.name &&
+                                it.platform.ecosystem == androidMobile.ecosystem &&
+                                it.description == "store"
+                    }
+
+            val appAuthorizationPeople = hibernate.allTheRows(AppAuthorization.AppAuthorizationPeople::class.java)
+                    .first {
+                        it.appConsumer.appConsumerUUID == appConsumerPeopleWithAndroidMobile.appConsumerUUID
+                    }
+            println("appAuthorizationPeople: " + appAuthorizationPeople.appAuthorizationUUID)
+
+             val query = session.createNativeQuery(
+                     "SELECT ${Routines.IS_MATCH_HASH_PW_APP}(" +
+                                "'${appAuthorizationPeople.appAuthorizationUUID}', " +
+                                "'incorrectPassword')"
+             )
+
+            Assertions.assertFalse(query.list().first() as Boolean)
+        }
+    }
 }

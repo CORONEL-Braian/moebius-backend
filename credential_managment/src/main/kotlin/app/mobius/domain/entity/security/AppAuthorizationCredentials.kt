@@ -6,20 +6,18 @@ import org.hibernate.annotations.TypeDef
 import java.util.*
 import javax.persistence.*
 
+// dbHashPw is not consumed because Kotlin can't consume crypt
 sealed class AppAuthorization(
         open val appAuthorizationUUID: UUID? = null,
         open val appConsumer: AppConsumer,
 
-        @Enumerated(EnumType.STRING) @Type(type = "pgsql_enum") private val environment: Environment,
-        @Column(name = "db_hash_pw") private val hashPassword: String,
-        @Column(name = "version") private val version: Double,
-        @Column(name = "session_token") private val sessionToken: String? = null,
+        @Enumerated(EnumType.STRING) @Type(type = "pgsql_enum") val environment: Environment,
+        @Column(name = "version") val version: Double,
 ) {
 
     constructor() : this(
             appConsumer = AppConsumer.AppConsumerPeople(),
             environment = Environment.DEV,
-            hashPassword = "",
             version = 0.0,
     )
 
@@ -88,8 +86,10 @@ sealed class AppConsumer(
             @OneToOne(cascade = [CascadeType.ALL])
             @JoinColumn(name = "platform_uuid", referencedColumnName = "platform_uuid", unique = true)
             override val platform: Platform,
+
+            val description: String
     ) : AppConsumer(platform = Platform()) {
-        constructor() : this(platform = Platform())
+        constructor() : this(platform = Platform(), description = "")
     }
 
 
