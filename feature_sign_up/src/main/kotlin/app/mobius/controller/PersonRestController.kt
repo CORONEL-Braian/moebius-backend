@@ -8,6 +8,7 @@ import app.mobius.domain.entity.setting.Setting
 import app.mobius.infrastructure.dto.PersonDto
 import app.mobius.infrastructure.model.request.JsonApiRequest
 import app.mobius.service.PersonService
+import app.mobius.service.ProfileService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
@@ -23,6 +24,9 @@ class PersonRestController {
 
     @Autowired
     private lateinit var personService: PersonService
+
+    @Autowired
+    private lateinit var profileService: ProfileService
 
     /**
      * PRE: Composite classes in JsonApiRequest have a default constructor
@@ -42,6 +46,18 @@ class PersonRestController {
                         username = randomString(), profile = Profile(), setting = Setting(), role = Role()
                 )
         )
+    }
+
+    @GetMapping("/profile/all")
+    @ResponseBody
+    fun getProfiles() : List<Profile> {
+        return profileService.getProfiles()
+    }
+
+    @GetMapping("/profile/isOpen")
+    @ResponseBody
+    fun isOpen() : Boolean {
+        return profileService.isOpen()
     }
 
     /**

@@ -2,6 +2,7 @@ package app.mobius.data.datasource
 
 import app.mobius.data.dataAccess.hibernate.HibernateData
 import app.mobius.data.dataAccess.JDBMConfig
+import app.mobius.data.util.randomString
 import app.mobius.domain.entity.Person
 import app.mobius.domain.entity.Profile
 import app.mobius.domain.entity.role.Role
@@ -28,8 +29,7 @@ class SqlPersonDataSourceTest {
     @Test
     fun `given a username and a person, when insert person, then create it`() {
         val person = Person(
-//                username = randomString(),
-                username = "Brenda",
+                username = randomString(),
                 profile = Profile(),
                 setting = Setting(),
                 role = Role()

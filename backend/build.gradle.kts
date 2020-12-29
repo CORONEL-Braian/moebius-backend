@@ -4,6 +4,7 @@ repositories {
 }
 
 dependencies {
+    implementation(project(":credential_managment", "default"))
     implementation(project(":feature_sign_up", "default"))
 }
 

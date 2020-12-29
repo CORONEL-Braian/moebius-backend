@@ -1,6 +1,6 @@
 package app.mobius.service
 
-import app.mobius.data.dao.PersonJpaRepository
+import app.mobius.data.repository.PersonJpaRepository
 import app.mobius.domain.entity.Person
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
