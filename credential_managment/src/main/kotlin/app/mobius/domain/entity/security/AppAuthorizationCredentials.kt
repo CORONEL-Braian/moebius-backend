@@ -16,7 +16,7 @@ sealed class AppAuthorization(
 ) {
 
     constructor() : this(
-            appConsumer = AppConsumer.AppConsumerPeople(),
+            appConsumer = AppConsumer.Developer(),
             environment = Environment.DEV,
             version = 0.0,
     )
@@ -24,41 +24,41 @@ sealed class AppAuthorization(
     @Entity
     @Table(name = "app_authorization_people")
     @TypeDef(name = "pgsql_enum", typeClass = PostgreSQLEnumType::class)
-    data class AppAuthorizationPeople(
+    data class Developer(
             @Id @GeneratedValue @Column(name = "app_authorization_people_uuid")
             override val appAuthorizationUUID: UUID? = null,
 
             @OneToOne(cascade = [CascadeType.ALL])
             @JoinColumn(name = "app_consumer_people_uuid", referencedColumnName = "app_consumer_people_uuid")
-            override val appConsumer: AppConsumer.AppConsumerPeople,
+            override val appConsumer: AppConsumer.Developer,
     ) : AppAuthorization() {
-        constructor() : this(appConsumer = AppConsumer.AppConsumerPeople())
+        constructor() : this(appConsumer = AppConsumer.Developer())
     }
 
     @Entity
     @Table(name = "app_authorization_partner")
-    data class AppAuthorizationPartner(
+    data class Partner(
             @Id @GeneratedValue @Column(name = "app_authorization_partner_uuid")
             override val appAuthorizationUUID: UUID? = null,
 
             @OneToOne(cascade = [CascadeType.ALL])
             @JoinColumn(name = "app_consumer_partner_uuid", referencedColumnName = "app_consumer_partner_uuid")
-            override val appConsumer: AppConsumer.AppConsumerPartner,
+            override val appConsumer: AppConsumer.Partner,
     ) : AppAuthorization() {
-        constructor() : this(appConsumer = AppConsumer.AppConsumerPartner())
+        constructor() : this(appConsumer = AppConsumer.Partner())
     }
 
     @Entity
     @Table(name = "app_authorization_team")
-    data class AppAuthorizationTeam(
+    data class Team(
             @Id @GeneratedValue @Column(name = "app_authorization_team_uuid")
             override val appAuthorizationUUID: UUID? = null,
 
             @OneToOne(cascade = [CascadeType.ALL])
             @JoinColumn(name = "app_consumer_team_uuid", referencedColumnName = "app_consumer_team_uuid")
-            override val appConsumer: AppConsumer.AppConsumerTeam,
+            override val appConsumer: AppConsumer.Team,
     ) : AppAuthorization() {
-        constructor() : this(appConsumer = AppConsumer.AppConsumerTeam())
+        constructor() : this(appConsumer = AppConsumer.Team())
     }
 
 }
@@ -80,23 +80,23 @@ sealed class AppConsumer(
 
     @Entity
     @Table(name = "app_consumer_people")
-    data class AppConsumerPeople(
+    data class Developer(
             @Id @GeneratedValue @Column(name = "app_consumer_people_uuid") override val appConsumerUUID: UUID? = null,
 
             @OneToOne(cascade = [CascadeType.ALL])
             @JoinColumn(name = "platform_uuid", referencedColumnName = "platform_uuid", unique = true)
             override val platform: Platform,
 
-            val description: String
+            val developer: String
     ) : AppConsumer(platform = Platform()) {
-        constructor() : this(platform = Platform(), description = "")
+        constructor() : this(platform = Platform(), developer = "")
     }
 
 
 //    A partner consumes a particular feature
     @Entity
     @Table(name = "app_consumer_partner")
-    data class AppConsumerPartner(
+    data class Partner(
             @Id @GeneratedValue @Column(name = "app_consumer_partner_uuid") override val appConsumerUUID: UUID? = null,
 
             val name: String,
@@ -111,7 +111,7 @@ sealed class AppConsumer(
 //      A team consumes a particular feature
     @Entity
     @Table(name = "app_consumer_team")
-    data class AppConsumerTeam(
+    data class Team(
             @Id @GeneratedValue @Column(name = "app_consumer_team_uuid") override val appConsumerUUID: UUID? = null,
             val name: String,
 

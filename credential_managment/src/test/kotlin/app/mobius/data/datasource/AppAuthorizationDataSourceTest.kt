@@ -94,14 +94,14 @@ class AppAuthorizationDataSourceTest {
         val androidMobile = Platform(name = "Android", ecosystem = "Mobile")
 
         JDBMConfig.Hibernate.executeQuery(session) {
-            val appConsumerPeopleWithAndroidMobile = hibernate.allTheRows(AppConsumer.AppConsumerPeople::class.java)
+            val appConsumerPeopleWithAndroidMobile = hibernate.allTheRows(AppConsumer.Developer::class.java)
                     .first {
                         it.platform.name == androidMobile.name &&
                         it.platform.ecosystem == androidMobile.ecosystem &&
-                        it.description == "store"
+                        it.developer == "Braian Coronel"
             }
 
-            val appAuthorizationPeople = hibernate.allTheRows(AppAuthorization.AppAuthorizationPeople::class.java)
+            val appAuthorizationPeople = hibernate.allTheRows(AppAuthorization.Developer::class.java)
                     .first {
                         it.appConsumer.appConsumerUUID == appConsumerPeopleWithAndroidMobile.appConsumerUUID
             }
@@ -117,14 +117,14 @@ class AppAuthorizationDataSourceTest {
         val androidMobile = Platform(name = "Android", ecosystem = "Mobile")
 
         JDBMConfig.Hibernate.executeQuery(session) {
-            val appConsumerPeopleWithAndroidMobile = hibernate.allTheRows(AppConsumer.AppConsumerPeople::class.java)
+            val appConsumerPeopleWithAndroidMobile = hibernate.allTheRows(AppConsumer.Developer::class.java)
                     .first {
                         it.platform.name == androidMobile.name &&
-                                it.platform.ecosystem == androidMobile.ecosystem &&
-                                it.description == "store"
+                        it.platform.ecosystem == androidMobile.ecosystem &&
+                        it.developer == "Braian Coronel"
                     }
 
-            val appAuthorizationPeople = hibernate.allTheRows(AppAuthorization.AppAuthorizationPeople::class.java)
+            val appAuthorizationPeople = hibernate.allTheRows(AppAuthorization.Developer::class.java)
                     .first {
                         it.appConsumer.appConsumerUUID == appConsumerPeopleWithAndroidMobile.appConsumerUUID
                     }

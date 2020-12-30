@@ -1,5 +1,8 @@
 package app.mobius.data.repository
 
+import app.mobius.data.dataAccess.spring.SpringDataJpa
+import app.mobius.domain.entity.security.AppAuthorization
+import app.mobius.domain.entity.security.AppConsumer
 import app.mobius.domain.entity.security.Platform
 import org.springframework.stereotype.Repository
 import javax.persistence.EntityManager
@@ -15,21 +18,19 @@ class AppAuthorizationJpaRepository: AppAuthorizationRepository {
     @PersistenceContext
     private lateinit var entityManager: EntityManager
 
-    /*@Autowired
-    private lateinit var platformJpaRepository: PlatformJpaRepository*/
+//    Use lazy because lateinit property entityManager has not been initialized
+    private val springDataJpa by lazy { SpringDataJpa(entityManager) }
 
-//    override fun isValidCredential(appConsumer: AppConsumer.AppConsumerPeople?, privateKey: String?): Boolean {
-    override fun isValidCredential(): Boolean {
+    override fun isEntityManagerOpen() = entityManager.isOpen
+
+    override fun isValidAppAuthorization(appConsumer: AppConsumer.Developer, privateKey: String): Boolean {
         val androidMobile = Platform(name = "Android", ecosystem = "Mobile")
 
         return entityManager.isOpen
     }
 
-    override fun isEntityManagerOpen() = entityManager.isOpen
+    override fun findAllDevelopers() : List<AppAuthorization.Developer> {
+        return springDataJpa.allTheRows(AppAuthorization.Developer::class.java)
+    }
 
 }
-
-/*
-@Repository
-interface PlatformJpaRepository: JpaRepository<Platform, String>
-*/

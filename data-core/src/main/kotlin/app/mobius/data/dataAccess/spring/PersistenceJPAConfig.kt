@@ -32,6 +32,11 @@ open class PersistenceJPAConfig {
     private lateinit var env: Environment
 
     /**
+     * TODO: Create @Bean for entityManager for use in tests or jpaRepositories
+     * https://stackoverflow.com/a/2421387/5279996
+     */
+
+    /**
      * Source:
      * https://stackoverflow.com/a/64531683/5279996
      */
