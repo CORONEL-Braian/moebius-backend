@@ -36,4 +36,10 @@ class ApplicationAuthorizationRestController {
         return appAuthorizationService.findAllAppConsumerDevelopers()
     }
 
+    @GetMapping("/findAppAuthorizationDeveloperUUID")
+    @ResponseBody
+    fun findAppAuthorizationDeveloperUUID() : String {
+        return appAuthorizationService.findAppAuthorizationDeveloperUUID()
+    }
+
 }

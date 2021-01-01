@@ -1,5 +1,10 @@
 TODO: Add name strategy
 
+
+## Sources
+
+ * https://www.baeldung.com/spring-data-jpa-query
+
 ## ERRORS:
 
 `alter table if exists role add column securityLevel int4 not null;`

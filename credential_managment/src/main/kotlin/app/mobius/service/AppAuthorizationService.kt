@@ -35,6 +35,9 @@ class AppAuthorizationService {
         return appConsumerRepository.findAllDevelopers()
     }
 
+    fun findAppAuthorizationDeveloperUUID() : String {
+        return appAuthorizationRepository.findAppAuthorizationDeveloperUUID()
+    }
 
 
 }

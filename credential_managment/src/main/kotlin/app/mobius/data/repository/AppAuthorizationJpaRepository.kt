@@ -7,6 +7,7 @@ import app.mobius.domain.entity.security.Platform
 import org.springframework.stereotype.Repository
 import javax.persistence.EntityManager
 import javax.persistence.PersistenceContext
+import javax.persistence.criteria.Predicate
 
 /**
  * . AUTO IMPLEMENTED by Spring into a Bean called personRepository
@@ -31,6 +32,33 @@ class AppAuthorizationJpaRepository: AppAuthorizationRepository {
 
     override fun findAllDevelopers() : List<AppAuthorization.Developer> {
         return springDataJpa.allTheRows(AppAuthorization.Developer::class.java)
+    }
+
+
+    /**
+     * https://stackoverflow.com/a/65520425/5279996
+     * https://stackoverflow.com/a/47604610/5279996
+     */
+    override fun findAppAuthorizationDeveloperUUID() : String {
+        val cb = entityManager.criteriaBuilder
+
+        val queryPlatform = cb.createQuery(Platform::class.java)
+        val platform = queryPlatform.from(Platform::class.java)
+
+        val queryAppConsumerDeveloper = cb.createQuery(AppConsumer.Developer::class.java)
+        val appConsumerDeveloper = queryAppConsumerDeveloper.from(AppConsumer.Developer::class.java)
+
+        val predicates: MutableList<Predicate> = mutableListOf()
+        predicates.add(cb.equal(platform.get<String>("name"), "Android"))
+        predicates.add(cb.equal(platform.get<String>("ecosystem"), "Mobile"))
+
+        queryPlatform.select(platform).where(
+                *predicates.map { it }.toTypedArray()
+        )
+
+        entityManager.createQuery(queryPlatform).resultList
+
+        return ""
     }
 
 }
