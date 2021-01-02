@@ -1,5 +1,6 @@
 package app.mobius.service
 
+import app.mobius.data.repository.AppAuthJpaRepositoryTest
 import app.mobius.data.repository.AppAuthorizationRepository
 import app.mobius.data.repository.AppConsumerRepository
 import app.mobius.domain.entity.security.AppAuthorization
@@ -12,6 +13,9 @@ class AppAuthorizationService {
 
     @Autowired
     private lateinit var appAuthorizationRepository: AppAuthorizationRepository
+
+    @Autowired
+    private lateinit var appAuthJpaRepositoryTest: AppAuthJpaRepositoryTest
 
     @Autowired
     private lateinit var appConsumerRepository: AppConsumerRepository
@@ -36,6 +40,7 @@ class AppAuthorizationService {
     }
 
     fun findAppAuthorizationDeveloperUUID() : String {
+        appAuthJpaRepositoryTest.findAllPlatforms()
         return appAuthorizationRepository.findAppAuthorizationDeveloperUUID()
     }
 

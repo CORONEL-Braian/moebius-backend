@@ -38,6 +38,8 @@ class AppAuthorizationJpaRepository: AppAuthorizationRepository {
     /**
      * https://stackoverflow.com/a/65520425/5279996
      * https://stackoverflow.com/a/47604610/5279996
+     *
+     * TODO: Use @Query
      */
     override fun findAppAuthorizationDeveloperUUID() : String {
         val cb = entityManager.criteriaBuilder
