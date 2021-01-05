@@ -18,8 +18,14 @@ interface AppAuthorizationJpaRepository: JpaRepository<Platform, UUID> {
             @Param("developer") developer: String
     ) : String
 
-//    fun isValidAppAuthorization(appAuthorizationDeveloper: UUID, privateKey: String) : Boolean
-//    fun isValidAppAuthorization() : Boolean
+
+    @Query(value = "SELECT db_mobius_is_match_hash_pw_app(:#{#appAuthorizationDeveloper}, :#{#privateKey})",
+            nativeQuery = true
+    )
+    fun isValidAppAuthorization(
+            @Param("appAuthorizationDeveloper") appAuthorizationDeveloper: UUID,
+            @Param("privateKey") privateKey: String
+    ) : Boolean
 
 }
 

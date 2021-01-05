@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
 
 // TODO: Migrate this controller to AppAuthorizationServiceTest
-
 @RestController
 @RequestMapping("/appAuthorization")
 class ApplicationAuthorizationRestController {
@@ -17,16 +16,14 @@ class ApplicationAuthorizationRestController {
     @Autowired
     private lateinit var appAuthorizationService: AppAuthorizationService
 
-    @GetMapping("/findAppAuthorizationDeveloperUUID")
+    @GetMapping("/isValidAppAuthorization")
     @ResponseBody
-    fun findAppAuthorizationDeveloperUUID() : String {
+    fun isValidAppAuthorization() : Boolean {
         val platform = Platform(name = "Android", ecosystem = "Mobile")
         val developer = "Braian Coronel"
-        val privateKey = "123"
+        val privateKey = "145"
 
-//        return appAuthorizationService.isValidAppAuthorization(platform, developer, privateKey)
-//        return appAuthorizationService.isValidAppAuthorization()
-        return appAuthorizationService.findAppAuthorizationDeveloperUUID(platform, developer)
+        return appAuthorizationService.isValidAppAuthorization(platform, developer, privateKey)
     }
 
 }

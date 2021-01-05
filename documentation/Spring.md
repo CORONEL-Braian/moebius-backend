@@ -5,6 +5,14 @@ TODO: Add name strategy
 
  * https://www.baeldung.com/spring-data-jpa-query
 
+
+### @QueryParams
+
+https://stackoverflow.com/a/28993810/5279996
+
+---
+---
+
 ## ERRORS:
 
 `alter table if exists role add column securityLevel int4 not null;`
