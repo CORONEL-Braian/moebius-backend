@@ -1,7 +1,6 @@
 package app.mobius.controller
 
-import app.mobius.domain.entity.security.AppAuthorization
-import app.mobius.domain.entity.security.AppConsumer
+import app.mobius.domain.entity.security.Platform
 import app.mobius.service.AppAuthorizationService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
@@ -18,28 +17,16 @@ class ApplicationAuthorizationRestController {
     @Autowired
     private lateinit var appAuthorizationService: AppAuthorizationService
 
-    @GetMapping("/isOpen")
-    @ResponseBody
-    fun isOpen() : Boolean {
-        return appAuthorizationService.isOpen()
-    }
-
-    @GetMapping("/findAllAppAuthorizationDevelopers")
-    @ResponseBody
-    fun findAllAppAuthorizationDevelopers() : List<AppAuthorization.Developer> {
-        return appAuthorizationService.findAllAppAuthorizationDevelopers()
-    }
-
-    @GetMapping("/findAllAppConsumerDevelopers")
-    @ResponseBody
-    fun findAllAppConsumerDevelopers() : List<AppConsumer.Developer> {
-        return appAuthorizationService.findAllAppConsumerDevelopers()
-    }
-
     @GetMapping("/findAppAuthorizationDeveloperUUID")
     @ResponseBody
     fun findAppAuthorizationDeveloperUUID() : String {
-        return appAuthorizationService.findAppAuthorizationDeveloperUUID()
+        val platform = Platform(name = "Android", ecosystem = "Mobile")
+        val developer = "Braian Coronel"
+        val privateKey = "123"
+
+//        return appAuthorizationService.isValidAppAuthorization(platform, developer, privateKey)
+//        return appAuthorizationService.isValidAppAuthorization()
+        return appAuthorizationService.findAppAuthorizationDeveloperUUID(platform, developer)
     }
 
 }

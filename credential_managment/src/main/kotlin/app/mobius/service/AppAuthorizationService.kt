@@ -1,48 +1,36 @@
 package app.mobius.service
 
-import app.mobius.data.repository.AppAuthJpaRepositoryTest
-import app.mobius.data.repository.AppAuthorizationRepository
-import app.mobius.data.repository.AppConsumerRepository
-import app.mobius.domain.entity.security.AppAuthorization
+import app.mobius.data.repository.AppAuthorizationJpaRepository
 import app.mobius.domain.entity.security.AppConsumer
+import app.mobius.domain.entity.security.Platform
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class AppAuthorizationService {
 
     @Autowired
-    private lateinit var appAuthorizationRepository: AppAuthorizationRepository
+    private lateinit var appAuthorizationJpaRepository: AppAuthorizationJpaRepository
 
-    @Autowired
-    private lateinit var appAuthJpaRepositoryTest: AppAuthJpaRepositoryTest
-
-    @Autowired
-    private lateinit var appConsumerRepository: AppConsumerRepository
-
-    fun isOpen() : Boolean {
-        return appAuthorizationRepository.isEntityManagerOpen()
+    fun findAppAuthorizationDeveloperUUID(platform: Platform, developer: String) : String {
+//        return appAuthorizationJpaRepository.findAppAuthorizationDeveloperUUID(platform, developer)
+        appAuthorizationJpaRepository.findAppAuthorizationDeveloperUUID(platform, developer)
+        return ""
     }
 
     /**
      * @param privateKey: Password to validate
      */
-    fun isValidAppAuthorization(appConsumer: AppConsumer.Developer, privateKey: String) : Boolean {
-        return appAuthorizationRepository.isValidAppAuthorization(appConsumer, privateKey)
-    }
+/*    fun isValidAppAuthorization(platform: Platform, developer: String, privateKey: String) : Boolean {
+        return appAuthorizationJpaRepository.isValidAppAuthorization(
+                findAppAuthorizationDeveloperUUID(platform, developer),
+                privateKey
+        )
+    }*/
 
-    fun findAllAppAuthorizationDevelopers(): List<AppAuthorization.Developer> {
-        return appAuthorizationRepository.findAllDevelopers()
-    }
-
-    fun findAllAppConsumerDevelopers() : List<AppConsumer.Developer> {
-        return appConsumerRepository.findAllDevelopers()
-    }
-
-    fun findAppAuthorizationDeveloperUUID() : String {
-        appAuthJpaRepositoryTest.findAllPlatforms()
-        return appAuthorizationRepository.findAppAuthorizationDeveloperUUID()
-    }
-
+     fun isValidAppAuthorization() : Boolean {
+         return true
+     }
 
 }

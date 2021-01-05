@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test
 
 // TODO: Add test in Spring
 
-class AppAuthorizationJpaRepositoryTest {
+class PlatformJpaRepositoryTest {
 
     @Test
     fun `is valid credential`() {

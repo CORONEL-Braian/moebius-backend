@@ -12,7 +12,7 @@ class AppConsumerJpaRepository : AppConsumerRepository {
     @PersistenceContext
     private lateinit var entityManager: EntityManager
 
-    //    Use lazy because lateinit property entityManager has not been initialized
+//    Use lazy because lateinit property entityManager has not been initialized
     private val springDataJpa by lazy { SpringDataJpa(entityManager) }
 
     override fun findAllDevelopers() : List<AppConsumer.Developer> {
