@@ -9,7 +9,7 @@ fun main(args: Array<String>) {
 }
 
 /**
- * PRE: A bean named 'entityManagerFactory' exists in the configuration for @EnableJpaRepositories
+ * PRE: A bean named 'entityManagerFactory' exists in the configuration for @Configuration
  */
 @SpringBootApplication
 open class MoebiusApplication : SpringBootServletInitializer()
