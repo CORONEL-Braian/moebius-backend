@@ -98,7 +98,7 @@ class AppAuthorizationDataSourceTest {
                     .first {
                         it.platform.name == androidMobile.name &&
                         it.platform.ecosystem == androidMobile.ecosystem &&
-                        it.developer == "Braian Coronel"
+                        it.name == "Braian Coronel"
             }
 
             val appAuthorizationPeople = hibernate.allTheRows(AppAuthorization.Developer::class.java)
@@ -121,7 +121,7 @@ class AppAuthorizationDataSourceTest {
                     .first {
                         it.platform.name == androidMobile.name &&
                         it.platform.ecosystem == androidMobile.ecosystem &&
-                        it.developer == "Braian Coronel"
+                        it.name == "Braian Coronel"
                     }
 
             val appAuthorizationPeople = hibernate.allTheRows(AppAuthorization.Developer::class.java)

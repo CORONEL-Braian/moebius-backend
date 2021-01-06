@@ -15,10 +15,10 @@ class AppAuthorizationService {
     /**
      * @param privateKey: Password to validate
      */
-    fun isValidAppAuthorization(platform: Platform, developer: String, privateKey: String) : Boolean {
+    fun isValidAppAuthorization(platform: Platform, developerName: String, privateKey: String) : Boolean {
         return appAuthorizationJpaRepository.isValidAppAuthorization(
                 UUID.fromString(
-                        findAppAuthorizationDeveloperUUID(platform, developer)
+                        findAppAuthorizationDeveloperUUID(platform, developerName)
                 ),
                 privateKey
         )

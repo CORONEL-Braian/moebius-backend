@@ -68,6 +68,9 @@ enum class Environment {
     DEV, INTEGRATION, TESTING, STAGING, PRODUCTION
 }
 
+// TODO: Use in AppConsumer.Developer
+//data class Developer(val name: String)
+
 sealed class AppConsumer(
         open val appConsumerUUID: UUID? = null,
 
@@ -87,9 +90,9 @@ sealed class AppConsumer(
             @JoinColumn(name = "platform_uuid", referencedColumnName = "platform_uuid", unique = true)
             override val platform: Platform,
 
-            val developer: String
+            @Column(name = "developer") val name: String    //TODO: Use data class
     ) : AppConsumer(platform = Platform()) {
-        constructor() : this(platform = Platform(), developer = "")
+        constructor() : this(platform = Platform(), name = "")
     }
 
 
