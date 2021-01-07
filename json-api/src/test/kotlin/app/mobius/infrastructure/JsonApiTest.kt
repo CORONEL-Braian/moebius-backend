@@ -6,7 +6,7 @@ import org.junit.jupiter.api.assertDoesNotThrow
 
 class JsonApiTest {
 
-    val canonicalFileName = "some2.json"
+    val canonicalFileName = "some3.json"
 
     data class SomeTest(val a: String, val b: String) {
         constructor() : this("1", "2")
@@ -49,32 +49,37 @@ class JsonApiTest {
     }
 
     @Test
-    fun `writeJsonAsKtFromFile`() {
+    fun `write Json As Kt From File`() {
 //        Given
         val some = SomeTest("4", "4")
-
         JsonApi.writeKtAsJsonToFile(canonicalFileName, some)
 
+        val someFromFile = JsonApi.writeJsonAsKtFromFile(canonicalFileName, SomeTest::class.java)
+
         Assertions.assertEquals(
-                JsonApi.writeJsonAsKtFromFile(canonicalFileName, SomeTest::class.java),
+                someFromFile,
                 some
         )
+        Assertions.assertEquals("4", someFromFile.a)
+
+//        --------------
+
+        val new = SomeTest()
+        Assertions.assertEquals("1", new.a)
     }
 
     @Test
     fun `write list of json as kt`() {
-        val listJson =  "{\n" +
-                        "    \"attributes\": {\n" +
-                        "      \"username\": \"itdev\"\n" +
-                        "    }\n" +
-                        "}"
+        val listJson = "{\n" +
+                "  \"attributes\": {\n" +
+                "    \"title\": \"JSON:API paints my bikeshed!\",\n" +
+                "    \"subtitle\": \"JSON:API paints my bikeshed!\"\n" +
+                "  }\n" +
+                "}"
 
         assertDoesNotThrow("read list of json exception") {
-            JsonApi.writeJsonAsKt(listJson, AttributesTest::class.java)
+            JsonApi.writeJsonAsKtFromFile("attributes.json", AttributesTest::class.java)
         }
     }
-
-
-
 
 }
