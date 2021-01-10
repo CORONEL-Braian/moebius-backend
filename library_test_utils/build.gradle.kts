@@ -1,5 +1,8 @@
+//apply(from = "${rootProject.projectDir}/common-feature-test-utils.gradle.kts")
+
 group = "app.möbius"
 version = "0.0.0"
+
 
 /**
  * Precondition: Run tests using Intellij IDEA in
@@ -16,13 +19,4 @@ dependencies {
     runtimeOnly("org.junit.jupiter", "junit-jupiter-engine", "5.6.0")
     runtimeOnly("org.mockito", "mockito-junit-jupiter", "3.2.4")
     runtimeOnly("org.springframework.boot", "spring-boot-starter-test", "2.4.1")
-
-/*    implementation("io.mockk:mockk:1.10.0")
-    implementation("org.junit.jupiter", "junit-jupiter-api", "5.6.0")
-    implementation("org.junit.jupiter", "junit-jupiter-engine", "5.6.0")
-    implementation("org.mockito", "mockito-junit-jupiter", "3.2.4")
-    implementation("org.springframework.boot", "spring-boot-starter-test", "2.4.1")*/
-
-//    implementation(project(":common-feature", "default"))
-    api(project(":data-core"))
 }

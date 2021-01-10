@@ -10,7 +10,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 
 @AutoConfigureMockMvc
 @SpringBootTest(classes = [MobiusFeatureIntegrationTest::class])
-class SomeUseCaseIntegrationTest {
+class AppAuthorizationUseCaseIntegrationTest {
 
 
     @Autowired
