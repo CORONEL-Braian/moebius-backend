@@ -36,16 +36,16 @@ class PersonRestController {
      */
     @PostMapping("/add")
     @ResponseBody
-        fun addPerson(@RequestBody person: JsonApiRequest) : String  {
+    fun addPerson(@RequestBody person: JsonApiRequest) : String  {
 
 //        TODO: Transform from JsonApiRequest to PersonDTO.
 //        TODO: Transform PersonDTO to Person
 
-        return personService.createPerson(
-                Person(
-                        username = randomString(), profile = Profile(), setting = Setting(), role = Role()
-                )
-        )
+    return personService.createPerson(
+            Person(
+                    username = randomString(), profile = Profile(), setting = Setting(), role = Role()
+            )
+    )
     }
 
     @GetMapping("/profile/all")

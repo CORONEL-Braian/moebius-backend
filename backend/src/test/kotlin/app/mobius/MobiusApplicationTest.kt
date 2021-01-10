@@ -1,19 +1,24 @@
 package app.mobius
 
-import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.runApplication
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.junit.jupiter.SpringExtension
+import org.springframework.context.annotation.ComponentScan
 
 fun main(args: Array<String>) {
     runApplication<MobiusApplicationTest>(*args)
 }
 
+/**
+ * TODO: Should exludeFilters in @ComponentScan as in @SpringBootApplication?
+ */
+@SpringBootTest(
+        properties = [
+            "spring.jpa.hibernate.ddl-auto=create-drop",
+            "spring.liquibase.enabled=false",
+            "spring.flyway.enabled=false"
+        ]
+)
 @EnableAutoConfiguration
-@ExtendWith(SpringExtension::class)
-@SpringBootTest(classes = [
-    MobiusApplication::class
-])
+@ComponentScan
 open class MobiusApplicationTest
-
