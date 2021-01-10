@@ -1,4 +1,4 @@
-package app.mobius
+package app.mobius.basicTest
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class TestController {
 
-    @GetMapping("/mobiusApplicationTest2")
+    @GetMapping(Endpoints.MOBIUS_APPLICATION_TEST)
     fun mobiusApplicationTest(): String {
         return "Hello world"
     }

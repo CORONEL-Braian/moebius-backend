@@ -15,4 +15,4 @@ import org.springframework.scheduling.annotation.EnableScheduling
         havingValue = "true",
         matchIfMissing = true
 )
-open class CredentialManagmentConfiguration
+open class CredentialManagmentFeatureModuleConfiguration

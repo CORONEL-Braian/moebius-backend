@@ -9,22 +9,21 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.Import
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 
-@ExtendWith(SpringExtension::class)
-@SpringBootTest(properties = ["app.mobius.CredentialManagment.enabled"])
 @AutoConfigureMockMvc
-@Import(PlatformJpaRepository::class)
-class AppAuthorizationUseCaseIntegrationTest {
+@SpringBootTest(classes = [MobiusApplicationTest::class])
+class SomeUseCaseIntegrationTest {
 
     @Autowired
     private lateinit var mockMvc: MockMvc
 
-    @Autowired(required = false)
-    private val schedulingConfiguration: CredentialManagmentConfiguration? = null
-
     @Test
     fun fisrtTest() {
-
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("http://localhost:8090/mobiusApplicationTest")
+        ).andExpect(MockMvcResultMatchers.status().isOk)
     }
 
 }

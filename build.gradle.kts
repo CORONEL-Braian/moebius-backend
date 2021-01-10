@@ -1,4 +1,3 @@
-import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.include
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 buildscript {
@@ -16,7 +15,6 @@ plugins {
 
 	id("org.springframework.boot") version "2.3.2.RELEASE"
 	id("io.spring.dependency-management") version "1.0.9.RELEASE"
-
 }
 
 version = "0.0.0"
@@ -33,7 +31,7 @@ subprojects {
 		plugin("io.spring.dependency-management")
 	}
 
-	group = "app.möbius"
+	group = "app.mobius"
 
 	repositories {
 		maven("https://dl.bintray.com/kotlin/kotlin-eap")
