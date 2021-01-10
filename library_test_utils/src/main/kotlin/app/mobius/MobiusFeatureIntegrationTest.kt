@@ -5,15 +5,13 @@ import org.springframework.boot.runApplication
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.ComponentScan
 
-/*
-fun main(args: Array<String>) {
-    runApplication<MobiusApplicationTest>(*args)
-}
-
-*/
 /**
- * TODO: Should exludeFilters in @ComponentScan as in @SpringBootApplication?
- *//*
+ * PRECONDITION: Use package app.mobius so that Root WebApplicationContext will be initialized.
+ * Same package of MobiusApplication.kt
+ */
+fun main(args: Array<String>) {
+    runApplication<MobiusFeatureIntegrationTest>(*args)
+}
 
 @SpringBootTest(
         properties = [
@@ -24,4 +22,4 @@ fun main(args: Array<String>) {
 )
 @EnableAutoConfiguration
 @ComponentScan
-open class MobiusApplicationTest*/
+open class MobiusFeatureIntegrationTest

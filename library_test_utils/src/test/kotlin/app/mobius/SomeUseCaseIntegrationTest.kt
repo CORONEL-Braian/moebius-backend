@@ -19,7 +19,7 @@ class SomeUseCaseIntegrationTest {
     @Test
     fun fisrtTest() {
         mockMvc.perform(
-                MockMvcRequestBuilders.get("http://localhost:8090/mobiusApplicationTest")
+                MockMvcRequestBuilders.get("http://localhost:8090/mobiusApplicationTest2")
         ).andExpect(MockMvcResultMatchers.status().isOk)
     }
 

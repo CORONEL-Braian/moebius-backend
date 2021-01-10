@@ -9,11 +9,20 @@ version = "0.0.0"
  *  https://docs.gradle.org/current/userguide/java_testing.html#using_junit5
  */
 dependencies {
-    implementation("org.springframework.boot", "spring-boot-starter-test", "2.4.1")
+    api("org.springframework.boot", "spring-boot-starter-test", "2.4.1")
 
     runtimeOnly("io.mockk:mockk:1.10.0")
     runtimeOnly("org.junit.jupiter", "junit-jupiter-api", "5.6.0")
     runtimeOnly("org.junit.jupiter", "junit-jupiter-engine", "5.6.0")
     runtimeOnly("org.mockito", "mockito-junit-jupiter", "3.2.4")
     runtimeOnly("org.springframework.boot", "spring-boot-starter-test", "2.4.1")
+
+/*    implementation("io.mockk:mockk:1.10.0")
+    implementation("org.junit.jupiter", "junit-jupiter-api", "5.6.0")
+    implementation("org.junit.jupiter", "junit-jupiter-engine", "5.6.0")
+    implementation("org.mockito", "mockito-junit-jupiter", "3.2.4")
+    implementation("org.springframework.boot", "spring-boot-starter-test", "2.4.1")*/
+
+//    implementation(project(":common-feature", "default"))
+    api(project(":data-core"))
 }
