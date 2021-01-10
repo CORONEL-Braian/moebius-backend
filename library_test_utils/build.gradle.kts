@@ -17,4 +17,3 @@ dependencies {
     runtimeOnly("org.mockito", "mockito-junit-jupiter", "3.2.4")
     runtimeOnly("org.springframework.boot", "spring-boot-starter-test", "2.4.1")
 }
-

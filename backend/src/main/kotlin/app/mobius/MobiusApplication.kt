@@ -6,7 +6,7 @@ import org.springframework.boot.runApplication
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 fun main(args: Array<String>) {
-    runApplication<MoebiusApplication>(*args)
+    runApplication<MobiusApplication>(*args)
 }
 
 /**
@@ -14,4 +14,4 @@ fun main(args: Array<String>) {
  */
 @SpringBootApplication
 @SpringBootConfiguration
-open class MoebiusApplication : SpringBootServletInitializer()
+open class MobiusApplication : SpringBootServletInitializer()

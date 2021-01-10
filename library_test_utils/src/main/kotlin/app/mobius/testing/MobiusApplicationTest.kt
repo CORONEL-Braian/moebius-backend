@@ -14,8 +14,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
             "spring.flyway.enabled=false"
         ])
 class MobiusApplicationTest {
+
     @Test
     fun applicationContextLoads() {
     }
+
 }
 
