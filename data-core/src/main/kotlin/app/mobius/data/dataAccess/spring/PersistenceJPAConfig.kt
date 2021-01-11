@@ -22,6 +22,7 @@ import javax.sql.DataSource
  * Source:
  *  . https://www.baeldung.com/the-persistence-layer-with-spring-and-jpa
  *  . https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-data-access
+ *  . https://docs.spring.io/spring-framework/docs/3.0.x/spring-framework-reference/html/orm.html#orm-jpa
  *
  *  . TODO: https://developer.okta.com/blog/2019/02/01/spring-hibernate-guide
  */
@@ -31,11 +32,6 @@ open class PersistenceJPAConfig {
 
     @Autowired
     private lateinit var env: Environment
-
-    /**
-     * TODO: Create @Bean for entityManager for use in tests or jpaRepositories
-     * https://stackoverflow.com/a/2421387/5279996
-     */
 
     /**
      * Source:
