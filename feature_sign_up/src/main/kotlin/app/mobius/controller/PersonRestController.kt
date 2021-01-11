@@ -8,6 +8,7 @@ import app.mobius.domain.entity.setting.Setting
 import app.mobius.infrastructure.dto.PersonDto
 import app.mobius.infrastructure.model.request.JsonApiRequest
 import app.mobius.service.PersonService
+import app.mobius.service.ProfileService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
@@ -24,6 +25,9 @@ class PersonRestController {
     @Autowired
     private lateinit var personService: PersonService
 
+    @Autowired
+    private lateinit var profileService: ProfileService
+
     /**
      * PRE: Composite classes in JsonApiRequest have a default constructor
      * OBS: For debugging, replace data type of @param JsonApiRequest with Any
@@ -32,16 +36,28 @@ class PersonRestController {
      */
     @PostMapping("/add")
     @ResponseBody
-        fun addPerson(@RequestBody person: JsonApiRequest) : String  {
+    fun addPerson(@RequestBody person: JsonApiRequest) : String  {
 
 //        TODO: Transform from JsonApiRequest to PersonDTO.
 //        TODO: Transform PersonDTO to Person
 
-        return personService.createPerson(
-                Person(
-                        username = randomString(), profile = Profile(), setting = Setting(), role = Role()
-                )
-        )
+    return personService.createPerson(
+            Person(
+                    username = randomString(), profile = Profile(), setting = Setting(), role = Role()
+            )
+    )
+    }
+
+    @GetMapping("/profile/all")
+    @ResponseBody
+    fun getProfiles() : List<Profile> {
+        return profileService.getProfiles()
+    }
+
+    @GetMapping("/profile/isOpen")
+    @ResponseBody
+    fun isOpen() : Boolean {
+        return profileService.isOpen()
     }
 
     /**

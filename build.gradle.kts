@@ -9,13 +9,12 @@ buildscript {
 plugins {
 
 //  	Dont remove, because Cannot resolve external dependency
-	kotlin("jvm") version "1.4.20-M1" apply false
-	kotlin("plugin.spring") version "1.4.20-M1"
+	kotlin("jvm") version "1.4.21" apply false
+	kotlin("plugin.spring") version "1.4.21"
 
 
 	id("org.springframework.boot") version "2.3.2.RELEASE"
 	id("io.spring.dependency-management") version "1.0.9.RELEASE"
-
 }
 
 version = "0.0.0"
@@ -32,7 +31,7 @@ subprojects {
 		plugin("io.spring.dependency-management")
 	}
 
-	group = "app.möbius"
+	group = "app.mobius"
 
 	repositories {
 		maven("https://dl.bintray.com/kotlin/kotlin-eap")

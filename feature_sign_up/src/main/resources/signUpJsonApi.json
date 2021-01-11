@@ -9,16 +9,23 @@
         "data": {
           "type": "profile",
           "attributes": {
-            "name": "Braian",
-            "surname": "Coronel",
             "avatarUrl": "http://",
-            "nickname": "nickname",
             "biography": "",
-            "birthdate": "1995-10-10",
+            "birthDate": "2020-11-13",
+            "birthTime": "00:18",
+            "name": "Braian",
+            "nickname": "nickname",
             "sex": "M",
-            "genderUUID": "03915d99-c1da-4584-93e9-680d572b5295"
+            "surname": "Coronel"
           },
           "relationships": {
+            "gender": {
+              "type": "gender",
+              "id": "03915d99-c1da-4584-93e9-680d572b5295",
+              "attributes": {
+                "type": "Heterosexual"
+              }
+            },
             "location": {
               "data": {
                 "type": "location",
@@ -153,41 +160,6 @@
                 }
               }
             },
-            "nationality": {
-              "data": {
-                "type": "country",
-                "attributes": {
-                  "name": "Argentina"
-                },
-                "relationships": {
-                  "locationLimits": {
-                    "data": {
-                      "type": "locationLimits",
-                      "relationships": {
-                        "northeast": {
-                          "data": {
-                            "type": "coordinate",
-                            "attributes": {
-                              "lat": 0.0,
-                              "lng": 0.0
-                            }
-                          }
-                        },
-                        "southwest": {
-                          "data": {
-                            "type": "coordinate",
-                            "attributes": {
-                              "lat": 0.0,
-                              "lng": 0.0
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            },
             "phone": {
               "data": {
                 "type": "phone",
@@ -195,6 +167,14 @@
                   "country": "+54",
                   "codeArea": "011",
                   "number": "1234512345"
+                }
+              }
+            },
+            "nationality": {
+              "data": {
+                "type": "country",
+                "attributes": {
+                  "name": "Argentina"
                 }
               }
             }

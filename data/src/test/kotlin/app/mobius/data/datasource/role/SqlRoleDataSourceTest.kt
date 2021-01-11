@@ -1,7 +1,7 @@
 package app.mobius.data.datasource.role
 
-import app.mobius.data.di.HibernateUtil
-import app.mobius.data.di.JDBM
+import app.mobius.data.dataAccess.hibernate.HibernateData
+import app.mobius.data.dataAccess.JDBMConfig
 import app.mobius.data.util.randomString
 import app.mobius.domain.entity.role.*
 import org.hibernate.Session
@@ -10,25 +10,25 @@ import org.junit.jupiter.api.*
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SqlRoleDataSourceTest {
 
-    private lateinit var hibernate : HibernateUtil
+    private lateinit var hibernate : HibernateData
     private lateinit var session : Session
 
     @BeforeAll
     fun before() {
-        hibernate = HibernateUtil()
+        hibernate = HibernateData()
     }
 
     @BeforeEach
     fun beforeEach() {
-        session = JDBM.Hibernate.openSession()
+        session = JDBMConfig.Hibernate.openSession()
     }
 
     @Test
     fun `create a role without permissions`() {
         val role = Role()
 
-        val session = JDBM.Hibernate.openSession()
-        JDBM.Hibernate.executeQuery(session) {
+        val session = JDBMConfig.Hibernate.openSession()
+        JDBMConfig.Hibernate.executeQuery(session) {
             session.save(role)
         }
     }
@@ -53,7 +53,7 @@ class SqlRoleDataSourceTest {
 
         assertDoesNotThrow("") {
             if (hibernate.isUniquenessValid(role)) {
-                JDBM.Hibernate.executeQuery(session) {
+                JDBMConfig.Hibernate.executeQuery(session) {
                     session.save(role)
                 }
             }

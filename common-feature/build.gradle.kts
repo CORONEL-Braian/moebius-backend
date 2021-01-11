@@ -4,7 +4,6 @@ version = "0.0.0"
 dependencies {
     api(project(":json-api"))
 
-
     implementation(project(":api"))
     implementation(project(":service"))
 
