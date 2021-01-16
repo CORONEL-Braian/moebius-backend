@@ -9,6 +9,11 @@ TODO: Add name strategy
 
 https://stackoverflow.com/a/28993810/5279996
 
+
+### Headers
+
+[Read HTTP Headers](https://www.baeldung.com/spring-rest-http-headers)
+
 ---
 ---
 

@@ -36,7 +36,14 @@ class PersonRestController {
      */
     @PostMapping("/add")
     @ResponseBody
-    fun addPerson(@RequestBody person: JsonApiRequest) : String  {
+    fun addPerson(
+            @RequestHeader("MOBIUS-KMM-authorization") mobiusKmmAuthorizationDeveloperKey: String,
+            @RequestHeader("MOBIUS-KMM-platform-name") platformName: String,
+            @RequestHeader("MOBIUS-KMM-platform-ecosystem") platformEcosystem: String,
+
+//            @RequestBody person: JsonApiRequest   TODO: Enable
+            @RequestBody person: Any
+    ) : String  {
 
 //        TODO: Transform from JsonApiRequest to PersonDTO.
 //        TODO: Transform PersonDTO to Person
