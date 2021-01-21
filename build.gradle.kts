@@ -20,7 +20,10 @@ plugins {
 version = "0.0.0"
 
 /**
- * https://stackoverflow.com/a/57069958/5279996
+ * Source:
+ *  . “Unresolved reference: implementation” by using subprojects in kotlin-gradle:
+ *  	. https://stackoverflow.com/a/63369119/5279996
+ *  	. https://stackoverflow.com/a/58671931/5279996
  */
 subprojects {
 
@@ -52,10 +55,10 @@ subprojects {
 		kotlinOptions.jvmTarget = "1.8"
 	}
 
+//	https://stackoverflow.com/a/57069958/5279996
 	tasks.getByName<BootJar>("bootJar") {
 		enabled = false
 	}
-
 	tasks.getByName<Jar>("jar") {
 		enabled = true
 	}
