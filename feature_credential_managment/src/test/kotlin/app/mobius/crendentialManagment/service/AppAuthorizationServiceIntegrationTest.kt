@@ -1,7 +1,8 @@
-package app.mobius.service
+package app.mobius.crendentialManagment.service
 
 import app.mobius.MobiusFeatureIntegrationTest
-import app.mobius.domain.entity.security.Platform
+import app.mobius.credentialManagment.service.AppAuthorizationService
+import app.mobius.credentialManagment.domain.entity.security.Platform
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

@@ -1,7 +1,7 @@
-package app.mobius.data.repository
+package app.mobius.credentialManagment.data.repository
 
 import app.mobius.data.dataAccess.spring.SpringDataJpa
-import app.mobius.domain.entity.security.AppConsumer
+import app.mobius.credentialManagment.domain.entity.security.AppConsumer
 import org.springframework.stereotype.Repository
 import javax.persistence.EntityManager
 import javax.persistence.PersistenceContext

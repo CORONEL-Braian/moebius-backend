@@ -1,11 +1,11 @@
-package app.mobius.data.datasource
+package app.mobius.crendentialManagment.data.datasource
 
+import app.mobius.credentialManagment.data.datasource.Routines
 import app.mobius.data.dataAccess.hibernate.HibernateData
 import app.mobius.data.dataAccess.JDBMConfig
-import app.mobius.domain.entity.security.AppAuthorization
-import app.mobius.domain.entity.security.AppConsumer
-import app.mobius.domain.entity.security.Environment
-import app.mobius.domain.entity.security.Platform
+import app.mobius.credentialManagment.domain.entity.security.AppAuthorization
+import app.mobius.credentialManagment.domain.entity.security.AppConsumer
+import app.mobius.credentialManagment.domain.entity.security.Platform
 import org.hibernate.Session
 import org.junit.jupiter.api.*
 

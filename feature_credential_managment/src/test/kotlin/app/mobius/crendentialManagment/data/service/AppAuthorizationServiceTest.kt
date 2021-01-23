@@ -1,8 +1,8 @@
-package app.mobius.data.service
+package app.mobius.crendentialManagment.data.service
 
-import app.mobius.data.repository.AppAuthorizationJpaRepository
-import app.mobius.domain.entity.security.Platform
-import app.mobius.service.AppAuthorizationService
+import app.mobius.credentialManagment.data.repository.AppAuthorizationJpaRepository
+import app.mobius.credentialManagment.domain.entity.security.Platform
+import app.mobius.credentialManagment.service.AppAuthorizationService
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith

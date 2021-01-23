@@ -1,6 +1,6 @@
-package app.mobius.data.repository
+package app.mobius.credentialManagment.data.repository
 
-import app.mobius.domain.entity.security.Platform
+import app.mobius.credentialManagment.domain.entity.security.Platform
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param

@@ -1,4 +1,4 @@
-package app.mobius.domain.entity.security
+package app.mobius.credentialManagment.domain.entity.security
 
 import app.mobius.util.PostgreSQLEnumType
 import org.hibernate.annotations.Type
@@ -100,11 +100,11 @@ sealed class AppConsumer(
     @Entity
     @Table(name = "app_consumer_partner")
     data class Partner(
-            @Id @GeneratedValue @Column(name = "app_consumer_partner_uuid") override val appConsumerUUID: UUID? = null,
+        @Id @GeneratedValue @Column(name = "app_consumer_partner_uuid") override val appConsumerUUID: UUID? = null,
 
-            val name: String,
+        val name: String,
 
-            @OneToOne(cascade = [CascadeType.ALL])
+        @OneToOne(cascade = [CascadeType.ALL])
             @JoinColumn(name = "feature_uuid", referencedColumnName = "feature_uuid")
             val feature: Feature,
     ) : AppConsumer() {

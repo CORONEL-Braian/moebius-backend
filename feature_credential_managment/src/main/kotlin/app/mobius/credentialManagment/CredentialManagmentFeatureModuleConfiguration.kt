@@ -1,11 +1,11 @@
-package app.mobius
+package app.mobius.credentialManagment
 
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 
-/**
- * https://reflectoring.io/spring-boot-test/
- */
 @Configuration
-@ComponentScan(basePackages = ["app.mobius.credentialManagment"])
+@ComponentScan(basePackages = [
+    "app.mobius",
+    "app.mobius.credentialManagment"
+])
 open class CredentialManagmentFeatureModuleConfiguration

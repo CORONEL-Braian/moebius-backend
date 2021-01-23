@@ -1,8 +1,9 @@
-package app.mobius.service
+package app.mobius.credentialManagment.service
 
-import app.mobius.data.repository.AppAuthorizationJpaRepository
-import app.mobius.domain.entity.security.Platform
+import app.mobius.credentialManagment.data.repository.AppAuthorizationJpaRepository
+import app.mobius.credentialManagment.domain.entity.security.Platform
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Component
 import org.springframework.stereotype.Service
 import java.util.*
 

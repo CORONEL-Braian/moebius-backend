@@ -1,5 +1,6 @@
 package app.mobius
 
+import app.mobius.credentialManagment.CredentialManagmentFeatureModuleConfiguration
 import org.springframework.context.annotation.Import
 
 @Import(value = [
