@@ -6,4 +6,4 @@ import org.springframework.context.annotation.Import
     SignUpFeatureModuleConfiguration::class,
     CredentialManagmentFeatureModuleConfiguration::class
 ])
-open class MobiusBusinessConfiguration
+open class MobiusBusinessModuleConfiguration

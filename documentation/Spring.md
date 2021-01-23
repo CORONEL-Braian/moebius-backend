@@ -1,18 +1,27 @@
 TODO: Add name strategy
 
-## Sources
+### Data Jpa Query
 
  * https://www.baeldung.com/spring-data-jpa-query
+ 
+ ___
+### Modules
 
+ * https://reflectoring.io/spring-boot-modules/
+ * https://www.baeldung.com/spring-boot-custom-auto-configuration
 
+___
 ### @QueryParams
 
-https://stackoverflow.com/a/28993810/5279996
+ * https://stackoverflow.com/a/28993810/5279996
 
-
+___
 ### Headers
 
 [Read HTTP Headers](https://www.baeldung.com/spring-rest-http-headers)
+
+
+
 
 ---
 ---
