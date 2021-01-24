@@ -25,6 +25,7 @@ class CustomDigestAuthenticationEntryPoint: DigestAuthenticationEntryPoint() {
         response.addHeader(
                 "WWW-Authenticate",
                 "Basic realm=\"$realmName\""
+                //TODO: Add key (?
         )
         response.status = HttpServletResponse.SC_UNAUTHORIZED;
 //        TODO Delete HTML
@@ -35,6 +36,7 @@ class CustomDigestAuthenticationEntryPoint: DigestAuthenticationEntryPoint() {
     @Throws(Exception::class)
     override fun afterPropertiesSet() {
         realmName = "Baeldung"
+        key = "secretKey"
         super.afterPropertiesSet()
     }
 
