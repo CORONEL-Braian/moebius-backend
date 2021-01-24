@@ -40,7 +40,10 @@ open class PersistenceJPAConfig {
     open fun entityManagerFactory() : LocalContainerEntityManagerFactoryBean {
         val em = LocalContainerEntityManagerFactoryBean()
         em.dataSource = dataSource()
-        em.setPackagesToScan("app.mobius.domain.entity")
+        em.setPackagesToScan(
+                "app.mobius.domain.entity",
+                "app.mobius.*.domain.entity"    // For the features
+        )
 
         val vendorAdapter: JpaVendorAdapter = HibernateJpaVendorAdapter()
         em.jpaVendorAdapter = vendorAdapter
