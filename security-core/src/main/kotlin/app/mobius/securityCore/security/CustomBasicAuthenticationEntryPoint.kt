@@ -1,6 +1,7 @@
 package app.mobius.securityCore.security
 
 import org.springframework.security.core.AuthenticationException
+import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint
 import org.springframework.security.web.authentication.www.DigestAuthenticationEntryPoint
 import org.springframework.stereotype.Component
 import java.io.IOException
@@ -14,7 +15,7 @@ import kotlin.jvm.Throws
  * Returns a full page for a 401 Unauthorized response back to the client
  */
 @Component
-class CustomDigestAuthenticationEntryPoint: DigestAuthenticationEntryPoint() {
+class CustomBasicAuthenticationEntryPoint: BasicAuthenticationEntryPoint() {
 
     /**
      * TODO: Renders a json representation of the error for a REST API
@@ -24,8 +25,7 @@ class CustomDigestAuthenticationEntryPoint: DigestAuthenticationEntryPoint() {
         super.commence(request, response, authException)
         response.addHeader(
                 "WWW-Authenticate",
-                "Basic realm=\"$realmName\""
-                //TODO: Add key (?
+                "Digest realm=\"$realmName\""
         )
         response.status = HttpServletResponse.SC_UNAUTHORIZED;
 //        TODO Delete HTML
@@ -36,7 +36,6 @@ class CustomDigestAuthenticationEntryPoint: DigestAuthenticationEntryPoint() {
     @Throws(Exception::class)
     override fun afterPropertiesSet() {
         realmName = "Baeldung"
-        key = "secretKey"
         super.afterPropertiesSet()
     }
 

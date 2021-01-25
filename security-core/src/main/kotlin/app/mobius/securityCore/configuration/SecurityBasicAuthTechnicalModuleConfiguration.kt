@@ -1,7 +1,7 @@
 package app.mobius.securityCore.configuration
 
 import app.mobius.credentialManagment.service.AppAuthorizationService
-import app.mobius.securityCore.security.CustomDigestAuthenticationEntryPoint
+import app.mobius.securityCore.security.CustomBasicAuthenticationEntryPoint
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.AutoConfigureOrder
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
@@ -15,13 +15,15 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.security.web.authentication.www.DigestAuthenticationFilter
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter
+
 
 /**
  * Load this module with Auto Configuration
  *
- * SecurityDigestTechnicalModuleConfiguration will only be loaded if the class AppAuthorizationService is present
+ * SecurityBasicAuthTechnicalModuleConfiguration will only be loaded if the class AppAuthorizationService is present
  *
+ *  . Basic vs Digest Auth: https://stackoverflow.com/a/34098797/5279996
  * https://reflectoring.io/spring-boot-modules/
  * https://www.baeldung.com/spring-boot-custom-auto-configuration
  */
@@ -33,13 +35,13 @@ import org.springframework.security.web.authentication.www.DigestAuthenticationF
     "app.mobius.credentialManagment"
 ])
 @AutoConfigureOrder(Ordered.HIGHEST_PRECEDENCE)
-open class SecurityDigestTechnicalModuleConfiguration: WebSecurityConfigurerAdapter() {
+open class SecurityBasicAuthTechnicalModuleConfiguration: WebSecurityConfigurerAdapter() {
 
     @Autowired
     private lateinit var appAuthorizationService: AppAuthorizationService
 
     @Autowired
-    private lateinit var digestAuthenticationEntryPoint: CustomDigestAuthenticationEntryPoint
+    private lateinit var basicAuthenticationEntryPoint: CustomBasicAuthenticationEntryPoint
 
     @Autowired
     @Throws(Exception::class)
@@ -52,14 +54,21 @@ open class SecurityDigestTechnicalModuleConfiguration: WebSecurityConfigurerAdap
 
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
-        http.authorizeRequests()
-                .antMatchers("/securityNone").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .httpBasic()
-                .authenticationEntryPoint(digestAuthenticationEntryPoint)
-        http.addFilterAfter(CustomFilter(),
-                DigestAuthenticationFilter::class.java)
+        http.addFilter(basicAuthenticationFilter()) // register basic entry point
+            .exceptionHandling().authenticationEntryPoint(basicAuthenticationEntryPoint) // on exception ask for basic authentication
+            .and()
+            .httpBasic() // it indicate basic authentication is requires
+            .and()
+            .authorizeRequests()
+            .antMatchers("/home").permitAll() // /home will be accessible directly, no need of any authentication
+            .anyRequest().authenticated()
+    }
+
+    private fun basicAuthenticationFilter(): BasicAuthenticationFilter {
+        val basicAuthenticationFilter = BasicAuthenticationFilter()
+        basicAuthenticationFilter.userDetailsService = userDetailsServiceBean()
+        basicAuthenticationFilter.setAuthenticationEntryPoint(basicAuthenticationEntryPoint)
+        return basicAuthenticationFilter
     }
 
     @Bean
