@@ -1,6 +1,7 @@
 package app.mobius.securityCore.configuration
 
 import app.mobius.credentialManagment.service.AppAuthorizationService
+import app.mobius.securityCore.SecurityCoreEndpoints
 import app.mobius.securityCore.security.CustomBasicAuthenticationEntryPoint
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.AutoConfigureOrder
@@ -46,29 +47,28 @@ open class SecurityBasicAuthTechnicalModuleConfiguration: WebSecurityConfigurerA
     @Autowired
     @Throws(Exception::class)
     open fun configureGlobal(auth: AuthenticationManagerBuilder) {
+//        TODO: Change login data
         auth.inMemoryAuthentication()
                 .withUser("user1")
                 .password(passwordEncoder().encode("user1Pass"))
                 .authorities("ROLE_USER")
     }
 
-    @Throws(Exception::class)
-    override fun configure(http: HttpSecurity) {
-        http.addFilter(basicAuthenticationFilter()) // register basic entry point
-            .exceptionHandling().authenticationEntryPoint(basicAuthenticationEntryPoint) // on exception ask for basic authentication
-            .and()
-            .httpBasic() // it indicate basic authentication is requires
-            .and()
-            .authorizeRequests()
-            .antMatchers("/home").permitAll() // /home will be accessible directly, no need of any authentication
-            .anyRequest().authenticated()
+    @Autowired
+    open fun checkAppAuthorization(appAuthorizationService: AppAuthorizationService) {
+//        TODO: Get basic auth and headers
     }
 
-    private fun basicAuthenticationFilter(): BasicAuthenticationFilter {
-        val basicAuthenticationFilter = BasicAuthenticationFilter()
-        basicAuthenticationFilter.userDetailsService = userDetailsServiceBean()
-        basicAuthenticationFilter.setAuthenticationEntryPoint(basicAuthenticationEntryPoint)
-        return basicAuthenticationFilter
+    @Throws(Exception::class)
+    override fun configure(http: HttpSecurity) {
+        http.authorizeRequests()
+                .antMatchers(SecurityCoreEndpoints.Keys.HOME).permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .httpBasic()
+                .authenticationEntryPoint(basicAuthenticationEntryPoint)
+
+        http.addFilterAfter(CustomFilter(), BasicAuthenticationFilter::class.java)
     }
 
     @Bean

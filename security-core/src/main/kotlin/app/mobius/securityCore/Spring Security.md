@@ -3,7 +3,11 @@ https://docs.spring.io/spring-security/site/docs/current/reference/html5/#servle
 https://www.baeldung.com/spring-security-basic-authentication
 https://www.baeldung.com/spring-security-custom-filter
 
+https://learning.postman.com/docs/sending-requests/authorization/#basic-auth
+https://www.techgeeknext.com/spring-boot-security/basic_authentication_web_security
 
 Samples: 
     . https://github.com/spring-projects/spring-security/tree/5.4.2/samples/boot/helloworld
     . https://github.com/sumit-samaddar/spring-rest-with-digest-authentication
+    
+TODO: Clean links

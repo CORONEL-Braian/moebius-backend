@@ -37,9 +37,9 @@ class SignUpRestController {
     @PostMapping("/add")
     @ResponseBody
     fun addPerson(
-            @RequestHeader("MOBIUS-KMM-authorization") mobiusKmmAuthorizationDeveloperKey: String,
-            @RequestHeader("MOBIUS-KMM-platform-name") platformName: String,
-            @RequestHeader("MOBIUS-KMM-platform-ecosystem") platformEcosystem: String,
+//            @RequestHeader("MOBIUS-KMM-authorization") mobiusKmmAuthorizationDeveloperKey: String,
+//            @RequestHeader("MOBIUS-KMM-platform-name") platformName: String,
+//            @RequestHeader("MOBIUS-KMM-platform-ecosystem") platformEcosystem: String,
 
 //            @RequestBody person: JsonApiRequest   TODO: Enable
             @RequestBody person: Any
