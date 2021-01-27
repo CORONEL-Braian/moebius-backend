@@ -21,7 +21,7 @@ class JsonApiTest {
 
 
     @Test
-    fun writeKtAsJson() {
+    fun `1A - writeKtAsJson`() {
         val some = SomeTest("2", "2")
         Assertions.assertEquals(
                 "{\"a\":\"2\",\"b\":\"2\"}",
@@ -30,13 +30,13 @@ class JsonApiTest {
     }
 
     @Test
-    fun writeKtAsJsonToFile() {
+    fun `2 - writeKtAsJsonToFile`() {
         val some = SomeTest("Gaston 2", "Ramiro 2")
         JsonApi.writeKtAsJsonToFile("some.json", some)
     }
 
     @Test
-    fun readJsonAskt() {
+    fun `3 - readJsonAskt`() {
 //        Given
         val jsonString = "{\"a\":\"4\",\"b\":\"5\"}"
         val expected = SomeTest("4", "5")
@@ -49,7 +49,7 @@ class JsonApiTest {
     }
 
     @Test
-    fun `write Json As Kt From File`() {
+    fun `4 - write Json As Kt From File`() {
 //        Given
         val some = SomeTest("4", "4")
         JsonApi.writeKtAsJsonToFile(canonicalFileName, some)
@@ -69,7 +69,7 @@ class JsonApiTest {
     }
 
     @Test
-    fun `write list of json as kt`() {
+    fun `5 - write list of json as kt`() {
         val listJson = "{\n" +
                 "  \"attributes\": {\n" +
                 "    \"title\": \"JSON:API paints my bikeshed!\",\n" +
