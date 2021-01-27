@@ -1,3 +1,8 @@
+#### Compiler
+
+[Update Kotlin compiler version to 1.4.21](https://stackoverflow.com/a/62374153/5279996) 
+
+
 #### Persistence
 
 Project Settings > Modules:
