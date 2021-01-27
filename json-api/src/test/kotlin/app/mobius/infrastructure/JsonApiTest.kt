@@ -21,7 +21,7 @@ class JsonApiTest {
 
 
     @Test
-    fun `1A - writeKtAsJson`() {
+    fun `1 - writeKtAsJson`() {
         val some = SomeTest("2", "2")
         Assertions.assertEquals(
                 "{\"a\":\"2\",\"b\":\"2\"}",
