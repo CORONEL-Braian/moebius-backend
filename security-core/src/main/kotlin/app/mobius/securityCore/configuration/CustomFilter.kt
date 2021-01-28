@@ -12,7 +12,9 @@ import kotlin.jvm.Throws
 /**
  * Custom filter for the Spring Security filter chain.
  *
- * https://www.baeldung.com/spring-security-custom-filter
+ * Sources:
+ *  . https://www.baeldung.com/spring-security-custom-filter
+ *  . Add a filter: https://stackoverflow.com/q/19825946/5279996
  */
 class CustomFilter : GenericFilterBean() {
 
