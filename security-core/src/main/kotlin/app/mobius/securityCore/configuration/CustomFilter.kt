@@ -11,7 +11,7 @@ import kotlin.jvm.Throws
 
 /**
  * Custom filter for the Spring Security filter chain.
- *
+ * Checks the request headers and the location for the Authorization header, starting with "Basic."
  * Sources:
  *  . https://www.baeldung.com/spring-security-custom-filter
  *  . Add a filter: https://stackoverflow.com/q/19825946/5279996

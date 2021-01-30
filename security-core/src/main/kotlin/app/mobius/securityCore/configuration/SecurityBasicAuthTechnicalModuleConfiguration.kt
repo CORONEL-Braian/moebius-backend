@@ -14,6 +14,7 @@ import org.springframework.core.Ordered
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.config.http.SessionCreationPolicy
@@ -39,9 +40,8 @@ import javax.servlet.http.HttpServletResponse
 @ConditionalOnClass(AppAuthorizationService::class)
 @EnableWebSecurity
 @ComponentScan(basePackages = [
-//    "app.mobius.securityCore",
-//    "app.mobius.credentialManagment",
-    "app.mobius"
+    "app.mobius.securityCore",
+    "app.mobius.credentialManagment",
 ])
 @AutoConfigureOrder(Ordered.HIGHEST_PRECEDENCE)
 open class SecurityBasicAuthTechnicalModuleConfiguration: WebSecurityConfigurerAdapter() {
@@ -49,22 +49,48 @@ open class SecurityBasicAuthTechnicalModuleConfiguration: WebSecurityConfigurerA
     @Autowired
     private lateinit var appAuthorizationService: AppAuthorizationService
 
-
     @Autowired
     private lateinit var basicAuthenticationEntryPoint: CustomBasicAuthenticationEntryPoint
 
+    /**
+     * Use JDBC, UserDetailsService or AuthenticationProvider
+     *
+     * AuthenticationManagerBuilder is used to create an {@link AuthenticationManager}. Allows for
+     * easily building:
+     *  . in memory authentication, X
+     *  . LDAP authentication, X
+     *  . JDBC based authentication,
+     *  . adding {@link UserDetailsService},
+     *  . and adding {@link AuthenticationProvider}'s.
+     */
     @Autowired
     @Throws(Exception::class)
     open fun configureGlobal(auth: AuthenticationManagerBuilder) {
-        /**
-         * TODO: Or add multiples users
-         */
-        auth.inMemoryAuthentication()
+       /* auth.inMemoryAuthentication()
                 .withUser("user1")
                 .password(passwordEncoder().encode("user1Pass"))
-                .authorities("ROLE_USER")
+                .authorities("ROLE_USER")*/
+        auth.eraseCredentials(false)
 
     }
+
+    override fun configure(auth: AuthenticationManagerBuilder?) {
+        super.configure(auth)
+    }
+
+    @Throws(Exception::class)
+    override fun configure(http: HttpSecurity) {
+        http.authorizeRequests()
+                .antMatchers(SecurityCoreEndpoints.Keys.HOME).permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .httpBasic()
+                .authenticationEntryPoint(basicAuthenticationEntryPoint)
+
+        http.addFilterBefore(CustomFilter(), BasicAuthenticationFilter::class.java)
+    }
+
+
 
     private fun customAuthFilter(): OncePerRequestFilter {
         return object : OncePerRequestFilter() {
@@ -80,17 +106,6 @@ open class SecurityBasicAuthTechnicalModuleConfiguration: WebSecurityConfigurerA
 //        TODO: Get basic auth and headers
     }
 
-    @Throws(Exception::class)
-    override fun configure(http: HttpSecurity) {
-        http.authorizeRequests()
-                .antMatchers(SecurityCoreEndpoints.Keys.HOME).permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .httpBasic()
-                .authenticationEntryPoint(basicAuthenticationEntryPoint)
-
-        http.addFilterBefore(CustomFilter(), BasicAuthenticationFilter::class.java)
-    }
 
 
 

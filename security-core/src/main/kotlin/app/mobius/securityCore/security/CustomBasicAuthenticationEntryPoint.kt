@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletResponse
 import kotlin.jvm.Throws
 
 /**
- * Returns a full page for a 401 Unauthorized response back to the client
+ *  Handle requests that do not contain the "Authorization" header
+ *      returning a full page for a 401 Unauthorized response back to the client.
  */
 @Component
 class CustomBasicAuthenticationEntryPoint: BasicAuthenticationEntryPoint() {
@@ -35,7 +36,7 @@ class CustomBasicAuthenticationEntryPoint: BasicAuthenticationEntryPoint() {
 
     @Throws(Exception::class)
     override fun afterPropertiesSet() {
-        realmName = "Baeldung"
+        realmName = "Mobius Backend"
         super.afterPropertiesSet()
     }
 
