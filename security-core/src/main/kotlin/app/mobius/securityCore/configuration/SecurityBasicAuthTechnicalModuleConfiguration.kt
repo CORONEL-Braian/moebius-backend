@@ -19,11 +19,6 @@ import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter
-import org.springframework.web.filter.OncePerRequestFilter
-import javax.servlet.FilterChain
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
-
 
 /**
  * Load this module with Auto Configuration
@@ -68,8 +63,6 @@ open class SecurityBasicAuthTechnicalModuleConfiguration: WebSecurityConfigurerA
         auth.userDetailsService(myUserDetailsService)
     }
 
-
-
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
         /**
@@ -89,23 +82,6 @@ open class SecurityBasicAuthTechnicalModuleConfiguration: WebSecurityConfigurerA
 //        http.addFilterBefore(CustomFilter(), BasicAuthenticationFilter::class.java)
         http.addFilterBefore(CustomOncePerRequestFilter(), BasicAuthenticationFilter::class.java)
     }
-
-
-
-    private fun customAuthFilter(): OncePerRequestFilter {
-        return object : OncePerRequestFilter() {
-            override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain) {
-                TODO("Not yet implemented")
-            }
-
-        }
-    }
-
-    @Autowired
-    open fun checkAppAuthorization(appAuthorizationService: AppAuthorizationService) {
-//        TODO: Get basic auth and headers
-    }
-
 
     @Bean
     open fun passwordEncoder(): PasswordEncoder {
