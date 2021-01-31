@@ -3,18 +3,16 @@ package app.mobius.securityCore.configuration
 import app.mobius.credentialManagment.service.AppAuthorizationService
 import app.mobius.securityCore.SecurityCoreEndpoints
 import app.mobius.securityCore.security.CustomBasicAuthenticationEntryPoint
+import app.mobius.securityCore.service.MyUserDetailsService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.AutoConfigureOrder
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
-import org.springframework.boot.web.servlet.ServletComponentScan
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.Ordered
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
-import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.config.http.SessionCreationPolicy
@@ -52,6 +50,9 @@ open class SecurityBasicAuthTechnicalModuleConfiguration: WebSecurityConfigurerA
     @Autowired
     private lateinit var basicAuthenticationEntryPoint: CustomBasicAuthenticationEntryPoint
 
+    @Autowired
+    private lateinit var myUserDetailsService: MyUserDetailsService
+
     /**
      * Use JDBC, UserDetailsService or AuthenticationProvider
      *
@@ -63,23 +64,17 @@ open class SecurityBasicAuthTechnicalModuleConfiguration: WebSecurityConfigurerA
      *  . adding {@link UserDetailsService},
      *  . and adding {@link AuthenticationProvider}'s.
      */
-    @Autowired
-    @Throws(Exception::class)
-    open fun configureGlobal(auth: AuthenticationManagerBuilder) {
-       /* auth.inMemoryAuthentication()
-                .withUser("user1")
-                .password(passwordEncoder().encode("user1Pass"))
-                .authorities("ROLE_USER")*/
-        auth.eraseCredentials(false)
-
+    override fun configure(auth: AuthenticationManagerBuilder) {
+        auth.userDetailsService(myUserDetailsService)
     }
 
-    override fun configure(auth: AuthenticationManagerBuilder?) {
-        super.configure(auth)
-    }
+
 
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
+        /**
+         * The most restrictive rules should be at the top.
+         */
         http.authorizeRequests()
                 .antMatchers(SecurityCoreEndpoints.Keys.HOME).permitAll()
                 .anyRequest().authenticated()
@@ -87,7 +82,12 @@ open class SecurityBasicAuthTechnicalModuleConfiguration: WebSecurityConfigurerA
                 .httpBasic()
                 .authenticationEntryPoint(basicAuthenticationEntryPoint)
 
-        http.addFilterBefore(CustomFilter(), BasicAuthenticationFilter::class.java)
+//        Verifying subsequent requests
+        http.sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+//        http.addFilterBefore(CustomFilter(), BasicAuthenticationFilter::class.java)
+        http.addFilterBefore(CustomOncePerRequestFilter(), BasicAuthenticationFilter::class.java)
     }
 
 
@@ -105,8 +105,6 @@ open class SecurityBasicAuthTechnicalModuleConfiguration: WebSecurityConfigurerA
     open fun checkAppAuthorization(appAuthorizationService: AppAuthorizationService) {
 //        TODO: Get basic auth and headers
     }
-
-
 
 
     @Bean
