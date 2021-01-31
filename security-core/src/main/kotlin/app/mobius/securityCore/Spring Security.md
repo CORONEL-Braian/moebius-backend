@@ -12,6 +12,10 @@ https://www.techgeeknext.com/spring-boot-security/basic_authentication_web_secur
  - [How Does HTTP Basic Authentication Work?](https://dzone.com/articles/how-does-http-basic-authentication-work-in-spring)
  - [Spring Security as a common module](https://stackoverflow.com/q/34805178/5279996)
 
+### Filter 
+
+ - [Using DelegatingFilterProxy](https://www.adictosaltrabajo.com/2016/05/09/gestiona-tus-filtros-con-spring-usando-delegatingfilterproxy/)
+
 ### AuthenticationManagerBuilder
 
  - [Exploring JDBC Authentication](https://www.baeldung.com/spring-security-jdbc-authentication)
