@@ -21,7 +21,8 @@ https://www.techgeeknext.com/spring-boot-security/basic_authentication_web_secur
  - [Exploring JDBC Authentication](https://www.baeldung.com/spring-security-jdbc-authentication)
  - [Authentication with a Database-backend UserDetailsService](https://www.baeldung.com/spring-security-authentication-with-a-database)
  - [Authentication Provider](https://www.baeldung.com/spring-security-authentication-provider)
-
+    - [Sample 1](https://stackoverflow.com/q/50422061/5279996)
+    - [Sample 2](https://stackoverflow.com/q/36515895/5279996)
 ___
 
 Samples: 

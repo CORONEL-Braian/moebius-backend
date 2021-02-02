@@ -3,7 +3,6 @@ package app.mobius.securityCore.configuration
 import app.mobius.credentialManagment.service.AppAuthorizationService
 import app.mobius.securityCore.SecurityCoreEndpoints
 import app.mobius.securityCore.security.CustomBasicAuthenticationEntryPoint
-import app.mobius.securityCore.service.MyUserDetailsService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.AutoConfigureOrder
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
@@ -33,20 +32,17 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 @ConditionalOnClass(AppAuthorizationService::class)
 @EnableWebSecurity
 @ComponentScan(basePackages = [
-    "app.mobius.securityCore",
-    "app.mobius.credentialManagment",
+    "app.mobius.securityCore"
 ])
 @AutoConfigureOrder(Ordered.HIGHEST_PRECEDENCE)
 open class SecurityBasicAuthTechnicalModuleConfiguration: WebSecurityConfigurerAdapter() {
 
-    @Autowired
-    private lateinit var appAuthorizationService: AppAuthorizationService
 
     @Autowired
     private lateinit var basicAuthenticationEntryPoint: CustomBasicAuthenticationEntryPoint
 
     @Autowired
-    private lateinit var myUserDetailsService: MyUserDetailsService
+    private lateinit var customAuthenticationProvider: CustomAuthenticationProvider
 
     /**
      * Use JDBC, UserDetailsService or AuthenticationProvider
@@ -60,7 +56,11 @@ open class SecurityBasicAuthTechnicalModuleConfiguration: WebSecurityConfigurerA
      *  . and adding {@link AuthenticationProvider}'s.
      */
     override fun configure(auth: AuthenticationManagerBuilder) {
-        auth.userDetailsService(myUserDetailsService)
+        /**
+         * Impl notes:
+         * AuthenticationProvider is used because we have our own service that performs the check in the db
+         */
+        auth.authenticationProvider(customAuthenticationProvider)
     }
 
     @Throws(Exception::class)

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class AppAuthorizationService {
+class   AppAuthorizationService {
 
     @Autowired
     private lateinit var appAuthorizationJpaRepository: AppAuthorizationJpaRepository
