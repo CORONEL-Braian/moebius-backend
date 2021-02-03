@@ -1,5 +1,6 @@
 package app.mobius.securityCore.configuration
 
+import app.mobius.credentialManagment.domain.entity.security.Platform
 import app.mobius.credentialManagment.service.AppAuthorizationService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.ComponentScan
@@ -26,7 +27,11 @@ class CustomAuthenticationProvider : AuthenticationProvider {
         val name = authentication.name
         val password = authentication.credentials.toString()
 
-        return if(true) {
+        return if(appAuthorizationService.isValidAppAuthorization(
+                        Platform(name = "Android", ecosystem = "Mobile"),
+                        name,
+                        password
+        )) {
             UsernamePasswordAuthenticationToken(name, password, arrayListOf())
         } else {
             null
@@ -39,8 +44,7 @@ class CustomAuthenticationProvider : AuthenticationProvider {
          *  . Use isAssignableFrom instead of equals: https://stackoverflow.com/a/44650177/5279996
      */
     override fun supports(authentication: Class<*>): Boolean {
-//        return UsernamePasswordAuthenticationToken::class.java.isAssignableFrom(authentication)
-        return true
+        return UsernamePasswordAuthenticationToken::class.java.isAssignableFrom(authentication)
     }
 
 }

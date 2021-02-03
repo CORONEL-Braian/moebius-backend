@@ -23,7 +23,7 @@ class AppAuthorizationServiceIntegrationTest {
     @Test
     fun `should return true when is valid authorization of service`() {
         val platform = Platform(name = "Android", ecosystem = "Mobile")
-        val developer = "Braian Coronel"
+        val developer = "braian.coronel"
         val privateKey = "145"
 
         assert(appAuthorizationService.isValidAppAuthorization(platform, developer, privateKey))
@@ -32,7 +32,7 @@ class AppAuthorizationServiceIntegrationTest {
     @Test
     fun `should return false when is invalid authorization of service`() {
         val platform = Platform(name = "Android", ecosystem = "Mobile")
-        val developer = "Braian Coronel"
+        val developer = "braian.coronel"
         val privateKey = "invalidKey"
 
         Assertions.assertFalse(appAuthorizationService.isValidAppAuthorization(platform, developer, privateKey))

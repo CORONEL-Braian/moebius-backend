@@ -79,8 +79,7 @@ open class SecurityBasicAuthTechnicalModuleConfiguration: WebSecurityConfigurerA
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-//        http.addFilterBefore(CustomFilter(), BasicAuthenticationFilter::class.java)
-        http.addFilterBefore(CustomOncePerRequestFilter(), BasicAuthenticationFilter::class.java)
+        http.addFilterBefore(XHeaderAuthenticationFilter(), BasicAuthenticationFilter::class.java)
     }
 
     @Bean
