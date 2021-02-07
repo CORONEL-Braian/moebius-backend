@@ -1,8 +1,10 @@
-package app.mobius.securityCore.configuration
+package app.mobius.securityCore.authentication.configuration
 
 import app.mobius.credentialManagment.service.AppAuthorizationService
-import app.mobius.securityCore.SecurityCoreEndpoints
-import app.mobius.securityCore.security.CustomBasicAuthenticationEntryPoint
+import app.mobius.securityCore.authentication.CustomAuthenticationProvider
+import app.mobius.securityCore.authentication.SecurityCoreEndpoints
+import app.mobius.securityCore.authentication.filter.XHeaderAuthenticationFilter
+import app.mobius.securityCore.authentication.www.CustomBasicAuthenticationEntryPoint
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.AutoConfigureOrder
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
@@ -17,7 +19,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
 /**
  * Load this module with Auto Configuration
@@ -79,7 +81,7 @@ open class SecurityBasicAuthTechnicalModuleConfiguration: WebSecurityConfigurerA
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.addFilterBefore(XHeaderAuthenticationFilter(), BasicAuthenticationFilter::class.java)
+        http.addFilterBefore(XHeaderAuthenticationFilter(), UsernamePasswordAuthenticationFilter::class.java)
     }
 
     @Bean

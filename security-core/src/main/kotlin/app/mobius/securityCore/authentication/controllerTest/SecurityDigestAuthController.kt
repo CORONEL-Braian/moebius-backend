@@ -1,4 +1,4 @@
-package app.mobius.securityCore.controllerTest
+package app.mobius.securityCore.authentication.controllerTest
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping

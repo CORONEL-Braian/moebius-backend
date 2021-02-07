@@ -1,4 +1,4 @@
-package app.mobius.securityCore.security
+package app.mobius.securityCore.authentication.www
 
 import org.springframework.security.core.AuthenticationException
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint
@@ -25,7 +25,7 @@ class CustomBasicAuthenticationEntryPoint: BasicAuthenticationEntryPoint() {
         super.commence(request, response, authException)
         response.addHeader(
                 "WWW-Authenticate",
-                "Digest realm=\"$realmName\""
+                "Basic realm=\"$realmName\""
         )
         response.status = HttpServletResponse.SC_UNAUTHORIZED;
 //        TODO Delete HTML
