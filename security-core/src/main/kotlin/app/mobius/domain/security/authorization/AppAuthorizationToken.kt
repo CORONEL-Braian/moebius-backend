@@ -6,28 +6,9 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.SpringSecurityCoreVersion
 
 /**
- * Custom authentication token para transportar los headers al AuthenticationProvider
+ * Custom authentication token to transport the headers to the AuthenticationProvider
+ * OBS: Similar impl to {@link org.springframework.security.authentication.UsernamePasswordAuthenticationToken}
  */
-//TODO: Review: https://gist.github.com/adatta02/1103f7a81a5e6c1931bf9a09b6131d59
-//TODO: Check impl in UsernamePasswordAuthenticationToken
-class AppAuthorizationToken2(
-        private val developer: String,
-        private val password: String,
-        val platform: Platform,
-        authorities: MutableCollection<out GrantedAuthority>? = null
-) : AbstractAuthenticationToken(authorities) {
-
-
-    override fun getCredentials(): Any {
-        return password
-    }
-
-    override fun getPrincipal(): Any {
-        return developer
-    }
-
-}
-
 open class AppAuthorizationToken : AbstractAuthenticationToken {
 
     private var developer: String

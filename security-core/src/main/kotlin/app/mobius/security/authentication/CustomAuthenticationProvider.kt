@@ -1,6 +1,5 @@
-package app.mobius.securityCore.authentication
+package app.mobius.security.authentication
 
-import app.mobius.credentialManagment.domain.entity.security.Platform
 import app.mobius.credentialManagment.service.AppAuthorizationService
 import app.mobius.domain.security.authorization.AppAuthorizationToken
 import org.springframework.beans.factory.annotation.Autowired
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Component
 
 /**
  * Access the full Authentication request to be able to perform the authentication process.
- * Review: https://shout.setfive.com/2015/11/02/spring-boot-authentication-with-custom-http-header/
  */
 @Component
 @ComponentScan(basePackages = [
@@ -25,11 +23,11 @@ class CustomAuthenticationProvider : AuthenticationProvider {
     @Autowired
     private lateinit var appAuthorizationService: AppAuthorizationService
 
+    /**
+     * OBS: @param authentication contains username and password but this is received from SecurityContextHolder
+     */
     @Throws(AuthenticationException::class)
     override fun authenticate(authentication: Authentication): Authentication? {
-//        val name = authentication.name
-//        val password = authentication.credentials.toString()
-
 //        A custom token is obtained which includes the headers
         val appAuthToken = SecurityContextHolder.getContext().authentication as AppAuthorizationToken
 
@@ -40,7 +38,7 @@ class CustomAuthenticationProvider : AuthenticationProvider {
         )
 
         return if(isValidAppAuth) {
-//              Se devuelve el tipo de autenticacion perteneciente a AuthenticationProvider
+//              The type of authentication belonging to AuthenticationProvider is returned
             UsernamePasswordAuthenticationToken("","", listOf())
         } else {
             null
@@ -53,8 +51,8 @@ class CustomAuthenticationProvider : AuthenticationProvider {
      */
     override fun supports(authentication: Class<*>): Boolean {
         /**
-         * El tipo de autenticacion de AuthenticationProvider siempre es UsernamePasswordAuthenticationToken, por eso
-         * checkeo ese tipo de dato y no AppAuthorizationToken que pertenece a SecurityContextHolder
+         * The authentication type of AuthenticationProvider is always UsernamePasswordAuthenticationToken,
+         * so that data type is checked and not AppAuthorizationToken that belongs to SecurityContextHolder
          */
         return UsernamePasswordAuthenticationToken::class.java.isAssignableFrom(authentication)
     }

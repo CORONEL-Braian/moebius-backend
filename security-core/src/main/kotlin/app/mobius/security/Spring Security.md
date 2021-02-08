@@ -23,6 +23,7 @@ https://www.techgeeknext.com/spring-boot-security/basic_authentication_web_secur
  - [Authentication Provider](https://www.baeldung.com/spring-security-authentication-provider)
     - [Sample 1](https://stackoverflow.com/q/50422061/5279996)
     - [Sample 2](https://stackoverflow.com/q/36515895/5279996)
+    - [Custom HTTP Header](https://shout.setfive.com/2015/11/02/spring-boot-authentication-with-custom-http-header/)
     - [Tests](https://www.baeldung.com/spring-security-multiple-auth-providers)
 ___
 

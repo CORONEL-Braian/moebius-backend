@@ -1,10 +1,10 @@
-package app.mobius.securityCore.authentication.configuration
+package app.mobius.security.authentication.configuration
 
 import app.mobius.credentialManagment.service.AppAuthorizationService
-import app.mobius.securityCore.authentication.CustomAuthenticationProvider
-import app.mobius.securityCore.authentication.SecurityCoreEndpoints
-import app.mobius.securityCore.authentication.filter.XHeaderAuthenticationFilter
-import app.mobius.securityCore.authentication.www.CustomBasicAuthenticationEntryPoint
+import app.mobius.security.authentication.CustomAuthenticationProvider
+import app.mobius.security.authentication.SecurityCoreEndpoints
+import app.mobius.web.filter.XHeaderAuthenticationFilter
+import app.mobius.security.authentication.www.CustomBasicAuthenticationEntryPoint
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.AutoConfigureOrder
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
@@ -34,7 +34,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @ConditionalOnClass(AppAuthorizationService::class)
 @EnableWebSecurity
 @ComponentScan(basePackages = [
-    "app.mobius.securityCore"
+    "app.mobius.security"
 ])
 @AutoConfigureOrder(Ordered.HIGHEST_PRECEDENCE)
 open class SecurityBasicAuthTechnicalModuleConfiguration: WebSecurityConfigurerAdapter() {

@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  app.mobius.securityCore.authentication.configuration.SecurityBasicAuthTechnicalModuleConfiguration
+  app.mobius.security.authentication.configuration.SecurityBasicAuthTechnicalModuleConfiguration

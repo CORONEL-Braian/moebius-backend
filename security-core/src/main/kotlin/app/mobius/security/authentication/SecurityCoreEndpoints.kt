@@ -1,4 +1,4 @@
-package app.mobius.securityCore.authentication
+package app.mobius.security.authentication
 
 object SecurityCoreEndpoints {
     object Keys {

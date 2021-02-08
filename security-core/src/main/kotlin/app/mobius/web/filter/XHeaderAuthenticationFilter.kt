@@ -1,4 +1,4 @@
-package app.mobius.securityCore.authentication.filter
+package app.mobius.web.filter
 
 import app.mobius.credentialManagment.domain.entity.security.Platform
 import app.mobius.domain.security.authorization.AppAuthorizationToken
@@ -17,14 +17,17 @@ import javax.servlet.http.HttpServletResponse
  * Sources:
  *  . https://www.baeldung.com/spring-security-custom-filter
  *  . Add a filter: https://stackoverflow.com/q/19825946/5279996
- *  . TODO: Add filter to the spring config: https://stackoverflow.com/a/57341317/5279996
  */
 class XHeaderAuthenticationFilter: OncePerRequestFilter() {
 
+    /**
+     * Source:
+     *  . Add filter to the spring config: https://stackoverflow.com/a/57341317/5279996
+     */
     override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain) {
-        val headerAuthorization = request.getHeader(HEADER_AUTHORIZATION)
-        val headerPlatformName = request.getHeader(HEADER_PLATFORM_NAME)
-        val headerPlatformEcosystem = request.getHeader(HEADER_PLATFORM_ECOSYSTEM)
+        val headerAuthorization: String = request.getHeader(HEADER_AUTHORIZATION)
+        val headerPlatformName: String = request.getHeader(HEADER_PLATFORM_NAME)
+        val headerPlatformEcosystem: String = request.getHeader(HEADER_PLATFORM_ECOSYSTEM)
 
         val authentication = AppAuthorizationToken(
                 developer = decoderDeveloperFromHeaderAuthorization(headerAuthorization),
@@ -32,9 +35,9 @@ class XHeaderAuthenticationFilter: OncePerRequestFilter() {
                 platform = Platform(name = headerPlatformName, ecosystem = headerPlatformEcosystem)
         )
 
-        if (false) {
+        /*if (false) {
             throw SecurityException()
-        }
+        }*/
 
         SecurityContextHolder.getContext().authentication = authentication
 
