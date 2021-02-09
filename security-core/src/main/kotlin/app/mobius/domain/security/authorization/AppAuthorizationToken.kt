@@ -17,7 +17,7 @@ open class AppAuthorizationToken : AbstractAuthenticationToken {
 
     /**
      * This constructor can be safely used by any code that wishes to create a
-     * `UsernamePasswordAuthenticationToken`, as the [.isAuthenticated]
+     * `AppAuthorizationToken`, as the [.isAuthenticated]
      * will return `false`.
      *
      */
@@ -33,10 +33,6 @@ open class AppAuthorizationToken : AbstractAuthenticationToken {
      * `AuthenticationProvider` implementations that are satisfied with
      * producing a trusted (i.e. [.isAuthenticated] = `true`)
      * authentication token.
-     *
-     * @param principal
-     * @param credentials
-     * @param authorities
      */
     constructor(developer: String, password: String, platform: Platform, authorities: Collection<GrantedAuthority?>?
     ) : super(authorities) {

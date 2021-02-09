@@ -29,20 +29,25 @@ class CustomAuthenticationProvider : AuthenticationProvider {
     @Throws(AuthenticationException::class)
     override fun authenticate(authentication: Authentication): Authentication? {
 //        A custom token is obtained which includes the headers
-        val appAuthToken = SecurityContextHolder.getContext().authentication as AppAuthorizationToken
+        val appAuthToken: AppAuthorizationToken? = SecurityContextHolder.getContext().authentication as AppAuthorizationToken?
 
-        val isValidAppAuth = appAuthorizationService.isValidAppAuthorization(
-                developerName = appAuthToken.principal,
-                privateKey = appAuthToken.credentials,
-                platform = appAuthToken.platform,
-        )
+        appAuthToken?.let {
 
-        return if(isValidAppAuth) {
+            val isValidAppAuth = appAuthorizationService.isValidAppAuthorization(
+                    developerName = appAuthToken.principal,
+                    privateKey = appAuthToken.credentials,
+                    platform = appAuthToken.platform,
+            )
+
+            return if(isValidAppAuth) {
 //              The type of authentication belonging to AuthenticationProvider is returned
-            UsernamePasswordAuthenticationToken("","", listOf())
-        } else {
-            null
+                UsernamePasswordAuthenticationToken("","", listOf())
+            } else {
+                null
+            }
         }
+
+        return null
     }
 
     /**
