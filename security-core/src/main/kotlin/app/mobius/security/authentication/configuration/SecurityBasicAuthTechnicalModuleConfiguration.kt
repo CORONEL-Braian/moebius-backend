@@ -51,11 +51,8 @@ open class SecurityBasicAuthTechnicalModuleConfiguration: WebSecurityConfigurerA
      *
      * AuthenticationManagerBuilder is used to create an {@link AuthenticationManager}. Allows for
      * easily building:
-     *  . in memory authentication, X
-     *  . LDAP authentication, X
-     *  . JDBC based authentication,
-     *  . adding {@link UserDetailsService},
-     *  . and adding {@link AuthenticationProvider}'s.
+     *  . adding {@link AuthenticationProvider}'s.
+     *  . others
      */
     override fun configure(auth: AuthenticationManagerBuilder) {
         /**
@@ -73,8 +70,7 @@ open class SecurityBasicAuthTechnicalModuleConfiguration: WebSecurityConfigurerA
         http.authorizeRequests()
                 .antMatchers(SecurityCoreEndpoints.Keys.HOME).permitAll()
                 .anyRequest().authenticated()
-                .and()
-                .httpBasic()
+                    .and().httpBasic()
                 .authenticationEntryPoint(basicAuthenticationEntryPoint)
 
 //        Verifying subsequent requests
