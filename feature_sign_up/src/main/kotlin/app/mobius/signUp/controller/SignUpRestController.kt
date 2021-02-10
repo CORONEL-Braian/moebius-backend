@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 /**
- * URL's start with /demo (after Application path)
+ * URL's start with /people (after Application path)
  *
  * TODO
  * https://www.baeldung.com/json-api-java-spring-web-app
@@ -37,10 +37,6 @@ class SignUpRestController {
     @PostMapping("/add")
     @ResponseBody
     fun addPerson(
-//            @RequestHeader("MOBIUS-KMM-authorization") mobiusKmmAuthorizationDeveloperKey: String,
-//            @RequestHeader("MOBIUS-KMM-platform-name") platformName: String,
-//            @RequestHeader("MOBIUS-KMM-platform-ecosystem") platformEcosystem: String,
-
 //            @RequestBody person: JsonApiRequest   TODO: Enable
             @RequestBody person: Any
     ) : String  {
@@ -54,6 +50,10 @@ class SignUpRestController {
             )
     )
     }
+
+    @PostMapping("/testSecurity")
+    @ResponseBody
+    fun testSecurity() = "It is works"
 
     @GetMapping("/profile/all")
     @ResponseBody

@@ -6,5 +6,5 @@ version = "0.1.0"
  */
 dependencies {
     implementation(project(":common-feature", "default"))
-    implementation(project(":security-core", "default"))
+    api(project(":security-core", "default"))
 }

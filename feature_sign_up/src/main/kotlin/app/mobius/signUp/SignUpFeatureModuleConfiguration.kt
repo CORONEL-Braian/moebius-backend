@@ -5,8 +5,7 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 @ComponentScan(basePackages = [
-    "app.mobius.signUp",
-    "app.mobius.security"
+    "app.mobius.signUp"
 ])
 open class SignUpFeatureModuleConfiguration {
 
