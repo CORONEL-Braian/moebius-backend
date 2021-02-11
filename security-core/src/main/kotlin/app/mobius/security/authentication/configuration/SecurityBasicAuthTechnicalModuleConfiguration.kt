@@ -8,6 +8,7 @@ import app.mobius.security.authentication.www.CustomBasicAuthenticationEntryPoin
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.AutoConfigureOrder
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
@@ -18,6 +19,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.crypto.password.NoOpPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
@@ -31,7 +33,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * https://www.baeldung.com/spring-boot-custom-auto-configuration
  */
 @Configuration
-@ConditionalOnClass(AppAuthorizationService::class)
 @EnableWebSecurity
 @ComponentScan(basePackages = [
     "app.mobius.security"

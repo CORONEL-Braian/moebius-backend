@@ -22,4 +22,4 @@ fun main(args: Array<String>) {
 )
 @EnableAutoConfiguration
 @ComponentScan
-open class MobiusFeatureIntegrationTest
+open class  MobiusFeatureIntegrationTest

@@ -8,6 +8,7 @@ https://learning.postman.com/docs/sending-requests/authorization/#basic-auth
 https://www.techgeeknext.com/spring-boot-security/basic_authentication_web_security
 
 
+ - [Security Auto-Configuration](https://www.baeldung.com/spring-boot-security-autoconfiguration)
  - [Spring security per request](https://stackoverflow.com/q/34639201/5279996)
  - [How Does HTTP Basic Authentication Work?](https://dzone.com/articles/how-does-http-basic-authentication-work-in-spring)
  - [Spring Security as a common module](https://stackoverflow.com/q/34805178/5279996)

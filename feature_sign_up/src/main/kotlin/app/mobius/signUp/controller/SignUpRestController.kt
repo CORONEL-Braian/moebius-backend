@@ -28,16 +28,26 @@ class SignUpRestController {
     @Autowired
     private lateinit var profileService: ProfileService
 
+//    TODO: Migrate to TEST
+    @PostMapping(value = ["/secureWithPost"])
+    @ResponseBody
+    fun secure() = "POST"
+
+    @GetMapping("/secureWithGet")
+    @ResponseBody
+    fun secureWithGet() = "GET"
+
     /**
      * PRE: Composite classes in JsonApiRequest have a default constructor
      * OBS: For debugging, replace data type of @param JsonApiRequest with Any
      *
      * signUpJsonApi.json -> JsonApiRequest -> PersonDTO
+     *
+     * @RequestBody person: JsonApiRequest   TODO: Enable
      */
-    @PostMapping("/add")
+    @GetMapping(value = ["/add"])
     @ResponseBody
     fun addPerson(
-//            @RequestBody person: JsonApiRequest   TODO: Enable
             @RequestBody person: Any
     ) : String  {
 
