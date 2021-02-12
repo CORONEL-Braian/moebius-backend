@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest
 /**
  * Source:
  *  . https://www.baeldung.com/spring-boot-security-autoconfiguration
+ *  . https://www.baeldung.com/spring-boot-custom-auto-configuration
  */
 @AutoConfigureMockMvc
 @SpringBootTest(classes = [MobiusFeatureIntegrationTest::class])
