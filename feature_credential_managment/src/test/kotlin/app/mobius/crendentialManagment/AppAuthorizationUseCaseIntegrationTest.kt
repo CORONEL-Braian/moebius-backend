@@ -18,7 +18,7 @@ class AppAuthorizationUseCaseIntegrationTest {
     private lateinit var mockMvc: MockMvc
 
     @Test
-    fun fisrtTest() {
+    fun `when run a test using spring boot test then success`() {
         mockMvc.perform(
                 MockMvcRequestBuilders.get("http://localhost:8090/mobiusApplicationTest")
         ).andExpect(MockMvcResultMatchers.status().isOk)

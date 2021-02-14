@@ -45,7 +45,7 @@ class SignUpRestController {
      *
      * @RequestBody person: JsonApiRequest   TODO: Enable
      */
-    @GetMapping(value = ["/add"])
+    @PostMapping(value = ["/add"])
     @ResponseBody
     fun addPerson(
             @RequestBody person: Any

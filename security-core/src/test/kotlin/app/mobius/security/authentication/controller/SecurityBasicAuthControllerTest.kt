@@ -1,4 +1,4 @@
-package app.mobius.security.authentication.controllerTest
+package app.mobius.security.authentication.controller
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/security")
-class SecurityBasicAuthController {
+class SecurityBasicAuthControllerTest {
 
     @GetMapping(value = ["/secure"])
     fun secure(): String {

@@ -1,7 +1,7 @@
 package app.mobius.security.authentication.configuration
 
 import app.mobius.security.authentication.CustomAuthenticationProvider
-import app.mobius.security.authentication.SecurityCoreEndpoints
+import app.mobius.security.SecurityCoreEndpoints
 import app.mobius.web.filter.XHeaderAuthenticationFilter
 import app.mobius.security.authentication.www.CustomBasicAuthenticationEntryPoint
 import org.springframework.beans.factory.annotation.Autowired

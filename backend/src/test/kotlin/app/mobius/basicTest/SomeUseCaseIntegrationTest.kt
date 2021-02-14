@@ -1,6 +1,7 @@
 package app.mobius.basicTest
 
 import app.mobius.MobiusApplicationTest
+import app.mobius.api.ApiEndpoints.URL_BASE
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -20,7 +21,7 @@ class SomeUseCaseIntegrationTest {
     @Test
     fun fisrtTest() {
         mockMvc.perform(
-                get("${Endpoints.URL_BASE}${Endpoints.MOBIUS_APPLICATION_TEST}")
+                get("${URL_BASE}${Endpoints.MOBIUS_APPLICATION_TEST}")
         ).andExpect(status().isOk)
     }
 
