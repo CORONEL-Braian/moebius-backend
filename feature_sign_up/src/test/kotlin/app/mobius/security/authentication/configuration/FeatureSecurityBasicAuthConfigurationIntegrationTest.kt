@@ -31,7 +31,7 @@ class FeatureSecurityBasicAuthConfigurationIntegrationTest {
     fun `when authenticated developer requests a secure endpoint, then success`() {
         val requestBuilder = MockMvcRequestBuilders
                 .get(provideFullUrl(FeatureSecurityCoreEndpointsTest.Keys.SECURE))
-                .with(httpBasic("userForTest", "321"))
+                .with(httpBasic("userForTest", "mobius123"))
                         .header("Platform-Name", "Android")
                         .header("Platform-Ecosystem", "Mobile")
 
@@ -57,7 +57,7 @@ class FeatureSecurityBasicAuthConfigurationIntegrationTest {
     fun `when developer with the absence of header platform-name then an exception is throwed`() {
         val requestBuilder = MockMvcRequestBuilders
                 .get(provideFullUrl(FeatureSecurityCoreEndpointsTest.Keys.SECURE))
-                .with(httpBasic("userForTest", "321"))
+                .with(httpBasic("userForTest", "mobius123"))
                 .header("Platform-Ecosystem", "Mobile")
 
         val resultMatcher = MockMvcResultMatchers.status().isOk
@@ -70,7 +70,7 @@ class FeatureSecurityBasicAuthConfigurationIntegrationTest {
     fun `when developer with the absence of header platform-ecosystem then an exception is throwed`() {
         val requestBuilder = MockMvcRequestBuilders
                 .get(provideFullUrl(FeatureSecurityCoreEndpointsTest.Keys.SECURE))
-                .with(httpBasic("userForTest", "321"))
+                .with(httpBasic("userForTest", "mobius123"))
                 .header("Platform-Name", "Android")
 
         val resultMatcher = MockMvcResultMatchers.status().isOk

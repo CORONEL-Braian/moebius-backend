@@ -24,7 +24,7 @@ class AppAuthorizationServiceIntegrationTest {
     fun `should return true when is valid authorization of service`() {
         val platform = Platform(name = "Android", ecosystem = "Mobile")
         val developer = "userForTest"
-        val privateKey = "321"
+        val privateKey = "mobius123"
 
         assert(appAuthorizationService.isValidAppAuthorization(platform, developer, privateKey))
     }

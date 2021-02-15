@@ -26,6 +26,11 @@ https://www.techgeeknext.com/spring-boot-security/basic_authentication_web_secur
     - [Sample 2](https://stackoverflow.com/q/36515895/5279996)
     - [Custom HTTP Header](https://shout.setfive.com/2015/11/02/spring-boot-authentication-with-custom-http-header/)
     - [Tests](https://www.baeldung.com/spring-security-multiple-auth-providers)
+
+### Secure secrets
+
+ - [Secure secrets and password](https://medium.com/@sun30nil/how-to-secure-secrets-and-passwords-in-springboot-90c952961d9)
+ - [With Spring Cloud Config and Vault](https://developer.okta.com/blog/2020/05/04/spring-vault)
 ___
 
 Samples: 
