@@ -2,8 +2,7 @@ package app.mobius.security.authentication.configuration
 
 import app.mobius.MobiusFeatureIntegrationTest
 import app.mobius.api.ApiEndpoints.URL_BASE
-import app.mobius.security.SecurityCoreEndpoints
-import app.mobius.security.authentication.controller.SecurityCoreEndpointsTest
+import app.mobius.security.authentication.controller.FeatureSecurityCoreEndpointsTest
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
@@ -14,25 +13,14 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 
-/**
- * Source:
- *  . https://www.baeldung.com/spring-boot-custom-auto-configuration
- */
 @AutoConfigureMockMvc
 @SpringBootTest(classes = [MobiusFeatureIntegrationTest::class])
-class SecurityBasicAuthConfigurationIntegrationTest {
+class FeatureSecurityBasicAuthConfigurationIntegrationTest {
 
     @Autowired
     private lateinit var mockMvc: MockMvc
 
     private fun provideFullUrl(endpoint: String) = URL_BASE + endpoint
-
-    @Test
-    fun `when someone requests a home endpoint, then success`() {
-        mockMvc.perform(
-                MockMvcRequestBuilders.get(provideFullUrl(SecurityCoreEndpoints.Keys.HOME))
-        ).andExpect(MockMvcResultMatchers.status().isOk)
-    }
 
     /**
      * OBS: if you forget to provide credentials (basic auth), your custom auth provider won't be called.
@@ -42,7 +30,7 @@ class SecurityBasicAuthConfigurationIntegrationTest {
     @Test
     fun `when authenticated developer requests a secure endpoint, then success`() {
         val requestBuilder = MockMvcRequestBuilders
-                .get(provideFullUrl(SecurityCoreEndpointsTest.Keys.SECURE))
+                .get(provideFullUrl(FeatureSecurityCoreEndpointsTest.Keys.SECURE))
                 .with(httpBasic("userForTest", "321"))
                         .header("Platform-Name", "Android")
                         .header("Platform-Ecosystem", "Mobile")
@@ -55,7 +43,7 @@ class SecurityBasicAuthConfigurationIntegrationTest {
     @Test
     fun `when developer with wrong password and headers then unauthorized response`() {
         val requestBuilder = MockMvcRequestBuilders
-                .get(provideFullUrl(SecurityCoreEndpointsTest.Keys.SECURE))
+                .get(provideFullUrl(FeatureSecurityCoreEndpointsTest.Keys.SECURE))
                 .with(httpBasic("userForTest", "wrongpassword"))
                 .header("Platform-Name", "Android")
                 .header("Platform-Ecosystem", "Mobile")
@@ -68,7 +56,7 @@ class SecurityBasicAuthConfigurationIntegrationTest {
     @Test
     fun `when developer with the absence of header platform-name then an exception is throwed`() {
         val requestBuilder = MockMvcRequestBuilders
-                .get(provideFullUrl(SecurityCoreEndpointsTest.Keys.SECURE))
+                .get(provideFullUrl(FeatureSecurityCoreEndpointsTest.Keys.SECURE))
                 .with(httpBasic("userForTest", "321"))
                 .header("Platform-Ecosystem", "Mobile")
 
@@ -81,7 +69,7 @@ class SecurityBasicAuthConfigurationIntegrationTest {
     @Test
     fun `when developer with the absence of header platform-ecosystem then an exception is throwed`() {
         val requestBuilder = MockMvcRequestBuilders
-                .get(provideFullUrl(SecurityCoreEndpointsTest.Keys.SECURE))
+                .get(provideFullUrl(FeatureSecurityCoreEndpointsTest.Keys.SECURE))
                 .with(httpBasic("userForTest", "321"))
                 .header("Platform-Name", "Android")
 

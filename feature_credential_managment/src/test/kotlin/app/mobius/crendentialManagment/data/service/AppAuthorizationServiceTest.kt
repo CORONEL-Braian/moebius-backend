@@ -26,7 +26,7 @@ open class AppAuthorizationServiceTest {
     fun `should return true when app authorization is valid app`() {
         val appAuthorizationDeveloper = "f60b447c-90c7-4edd-9399-cb7ebd9051a8"
         val androidMobile = Platform(name = "Android", ecosystem = "Mobile")
-        val developerName = "braian.coronel"
+        val developerName = "userForTest"
         val privateKey = "randomKey"
 
         Mockito
@@ -47,7 +47,7 @@ open class AppAuthorizationServiceTest {
     fun `should return false when app authorization is valid app`() {
         val appAuthorizationDeveloper = "f60b447c-90c7-4edd-9399-cb7ebd9051a8"
         val androidMobile = Platform(name = "Android", ecosystem = "Mobile")
-        val developerName = "braian.coronel"
+        val developerName = "userForTest"
         val privateKey = "randomKey"
 
         Mockito
