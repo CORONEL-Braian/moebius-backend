@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.env.Environment
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import org.springframework.jdbc.datasource.DriverManagerDataSource
 import org.springframework.orm.jpa.JpaTransactionManager
 import org.springframework.orm.jpa.JpaVendorAdapter
@@ -41,7 +40,10 @@ open class PersistenceJPAConfig {
     open fun entityManagerFactory() : LocalContainerEntityManagerFactoryBean {
         val em = LocalContainerEntityManagerFactoryBean()
         em.dataSource = dataSource()
-        em.setPackagesToScan("app.mobius.domain.entity")
+        em.setPackagesToScan(
+                "app.mobius.domain.entity",
+                "app.mobius.*.domain.entity"    // For the features
+        )
 
         val vendorAdapter: JpaVendorAdapter = HibernateJpaVendorAdapter()
         em.jpaVendorAdapter = vendorAdapter

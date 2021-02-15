@@ -10,6 +10,8 @@ dependencies {
     implementation(project(":library_base"))
     api(project(":library_test_utils"))
 
+//    Core
+    implementation(project(":security-core", "default"))
     implementation(project(":deceased-core"))
     implementation(project(":infrastructure-core"))
     implementation(project(":data"))

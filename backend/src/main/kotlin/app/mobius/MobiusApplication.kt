@@ -16,6 +16,6 @@ fun main(args: Array<String>) {
 @SpringBootApplication
 @SpringBootConfiguration
 @Import(value = [
-    MobiusBusinessConfiguration::class
+    MobiusBusinessModuleConfiguration::class
 ])
 open class MobiusApplication : SpringBootServletInitializer()
