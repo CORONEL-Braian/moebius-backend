@@ -8,7 +8,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @AutoConfigureMockMvc
@@ -21,7 +20,7 @@ class SomeUseCaseIntegrationTest {
     @Test
     fun fisrtTest() {
         mockMvc.perform(
-                get("${URL_BASE}${Endpoints.MOBIUS_APPLICATION_TEST}")
+                get("${URL_BASE}${BackendEndpoints.MOBIUS_APPLICATION_TEST}")
         ).andExpect(status().isOk)
     }
 

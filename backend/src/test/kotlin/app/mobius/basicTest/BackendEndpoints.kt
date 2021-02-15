@@ -1,5 +1,5 @@
 package app.mobius.basicTest
 
-object Endpoints {
+object BackendEndpoints {
     const val MOBIUS_APPLICATION_TEST = "/mobiusApplicationTest"
 }
