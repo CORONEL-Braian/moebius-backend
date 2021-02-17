@@ -59,10 +59,14 @@ class SignUpRestController {
         return profileService.getProfiles()
     }
 
-    @GetMapping("/profile/isOpen")
+    @GetMapping("/status")
     @ResponseBody
-    fun isOpen() : Boolean {
-        return profileService.isOpen()
+    fun featureStatus() : String {
+        return if (profileService.isOpen()) {
+            "No problem"
+        } else {
+            "Service interruption"
+        }
     }
 
     /**
