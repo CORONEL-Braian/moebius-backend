@@ -27,5 +27,5 @@
  * Open API Specification
  
 ##### API Support:
- * http://www.möbius.app/support/api
+ * http://www.mobius.app/support/api
  * Email: braian@itdevexpert.com / gaston@itdevexpert.com

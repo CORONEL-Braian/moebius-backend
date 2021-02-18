@@ -14,9 +14,8 @@ object ResourceUtils {
             moduleName: String,
             canonicalName: String,
     ): File {
-        val absolutePathCurrentModule = System.getProperty("user.dir")
-        val pathFromProjectRoot = absolutePathCurrentModule.dropLastWhile { it != '/' }
-        val absolutePathFromProjectRoot = "${pathFromProjectRoot}${moduleName}/src/main/resources/$canonicalName"
+        val absolutePathWithoutCurrentModule = System.getProperty("user.dir")
+        val absolutePathFromProjectRoot = "${absolutePathWithoutCurrentModule}/${moduleName}/src/main/resources/$canonicalName"
         println("Absolute Path of some.json: $absolutePathFromProjectRoot") //TODO: Use Logger
         return File(absolutePathFromProjectRoot)
     }

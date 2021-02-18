@@ -32,7 +32,7 @@ subprojects {
 		plugin("io.spring.dependency-management")
 	}
 
-	group = "app.möbius"
+	group = "app.mobius"
 
 	repositories {
 		maven("https://dl.bintray.com/kotlin/kotlin-eap")

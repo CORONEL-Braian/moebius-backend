@@ -13,7 +13,7 @@ class JDBMTest {
     @Test
     fun `get input stream for configuration of session factory`() {
         val currentWorkingDir = System.getProperty("user.dir")
-        val absoulutePath = "$currentWorkingDir/src/main/resources/secret-hibernate.cfg.xml"
+        val absoulutePath = "$currentWorkingDir/data-core/src/main/resources/secret-hibernate.cfg.xml"
         val targetStream: InputStream = FileInputStream(absoulutePath)
         Assertions.assertNotEquals(targetStream, null)
     }

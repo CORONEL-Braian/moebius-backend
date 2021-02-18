@@ -1,5 +1,6 @@
 package app.mobius.data.di
 
+import app.mobius.io.ResourceUtils.getFile
 import org.hibernate.HibernateException
 import org.hibernate.Session
 import org.hibernate.SessionFactory
@@ -80,23 +81,9 @@ class JDBM {
         @Throws(HibernateException::class)
         fun getSessionFactoryForOnly(annotatedClass: Class<*>, canonicalName: String) : SessionFactory {
             return Configuration()
-                    .configure(getFile(canonicalName))
+                    .configure(getFile("data-core", canonicalName))
                     .addAnnotatedClass(annotatedClass)
                     .buildSessionFactory()
-        }
-
-        /**
-         * Get absolute path of file of secret-hibernate
-         * PRE: File is in data-core module
-         * @param canonicalName: e.g: secret-hibernate.cfg.xml
-         * Source: https://stackoverflow.com/a/64084771/5279996
-         */
-        private fun getFile(canonicalName: String): File {
-            val absolutePathCurrentModule = System.getProperty("user.dir")
-            val pathFromProjectRoot = absolutePathCurrentModule.dropLastWhile { it != '/' }
-            val absolutePathFromProjectRoot = "${pathFromProjectRoot}data-core/src/main/resources/$canonicalName"
-            println("Absolute Path of secret-hibernate.cfg.xml: $absolutePathFromProjectRoot")
-            return File(absolutePathFromProjectRoot)
         }
 
         /**
@@ -110,7 +97,7 @@ class JDBM {
          */
         private fun autoScanEntities(canonicalName: String) : SessionFactory {
             val configuration = Configuration()
-                    .configure(getFile(canonicalName))
+                    .configure(getFile("data-core", canonicalName))
 
 //            Auto Scan Entities
             val reflections = Reflections(PACKAGE_ENTITIES)
