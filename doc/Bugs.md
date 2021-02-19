@@ -1,12 +1,17 @@
+#### Error:
+
 `org.junit.jupiter unresolve` reference
 
-Solution: 
- 1. Delete all cache folders: 
+#### Solution:
+ 
+1. Delete all cache folders including:
     .gradle
     .idea
-    output
- 2. $ ./gradlew clean
- 3. Invalidate Cache & restart
- 4. Then open anything gradle file (settings.gradle.kts) and click in the `Link Gradle Kotlin Script` button at the top-right
 
-Source: https://stackoverflow.com/q/47871181/5279996
+2. Then invalidate cache & restart.
+3. Finally open any gradle file (settings.gradle.kts) and if in the IDE at the top right a button 
+   appears that suggests `Link Gradle Kotlin Script` (or a similar message) to click it.
+
+[Source](https://stackoverflow.com/q/47871181/5279996)
+
+____
