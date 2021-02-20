@@ -11,11 +11,6 @@ class PersonDtoControllerTest {
     @GetMapping(path = ["/test"])
     fun testPerson() = "Test"
 
-    @Test
-    fun first() {
-
-    }
-
    /* @Test
     fun `deserialize signUpJsonApi to JsonApiRequest`() {
         Assertions.assertEquals(

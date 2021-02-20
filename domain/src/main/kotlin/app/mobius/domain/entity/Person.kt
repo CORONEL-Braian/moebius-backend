@@ -13,6 +13,7 @@ import javax.persistence.*
 data class Person(
         @Id @GeneratedValue @Column(name = "person_uuid") val personUUID: UUID? = null,
 
+        @Column(unique = true)
         val username: String,
 
 //              TODO: Add Metadata
