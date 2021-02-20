@@ -1,7 +1,7 @@
 package app.mobius.data.datasource.role
 
-import app.mobius.data.di.HibernateUtil
-import app.mobius.data.di.JDBM
+import app.mobius.data.dataAccess.hibernate.HibernateData
+import app.mobius.data.dataAccess.JDBMConfig
 import app.mobius.data.util.randomString
 import app.mobius.domain.entity.role.Operation
 import app.mobius.domain.entity.role.Permission
@@ -12,17 +12,17 @@ import org.junit.jupiter.api.*
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SqlPermissionsDataSourceTest {
 
-    private lateinit var hibernate : HibernateUtil
+    private lateinit var hibernate : HibernateData
     private lateinit var session : Session
 
     @BeforeAll
     fun before() {
-        hibernate = HibernateUtil()
+        hibernate = HibernateData()
     }
 
     @BeforeEach
     fun beforeEach() {
-        session = JDBM.Hibernate.openSession()
+        session = JDBMConfig.Hibernate.openSession()
     }
 
     @Test
@@ -34,7 +34,7 @@ class SqlPermissionsDataSourceTest {
 
         assertDoesNotThrow("") {
             if (hibernate.isUniquenessValid(permission)) {
-                JDBM.Hibernate.executeQuery(session) {
+                JDBMConfig.Hibernate.executeQuery(session) {
                     session.save(permission)
                 }
             }
@@ -54,7 +54,7 @@ class SqlPermissionsDataSourceTest {
 //        When
         assertDoesNotThrow("") {
             if (hibernate.isUniquenessValid(permission)) {
-                JDBM.Hibernate.executeQuery(session) {
+                JDBMConfig.Hibernate.executeQuery(session) {
                     session.save(permission)
                 }
             }

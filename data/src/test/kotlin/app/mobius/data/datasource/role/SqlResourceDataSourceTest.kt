@@ -1,7 +1,7 @@
 package app.mobius.data.datasource.role
 
-import app.mobius.data.di.HibernateUtil
-import app.mobius.data.di.JDBM
+import app.mobius.data.dataAccess.hibernate.HibernateData
+import app.mobius.data.dataAccess.JDBMConfig
 import app.mobius.data.util.randomString
 import app.mobius.domain.entity.role.Resource
 import org.hibernate.Session
@@ -10,17 +10,17 @@ import org.junit.jupiter.api.*
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SqlResourceDataSourceTest {
 
-    private lateinit var hibernate : HibernateUtil
+    private lateinit var hibernate : HibernateData
     private lateinit var session : Session
 
     @BeforeAll
     fun before() {
-        hibernate = HibernateUtil()
+        hibernate = HibernateData()
     }
 
     @BeforeEach
     fun beforeEach() {
-        session = JDBM.Hibernate.openSession()
+        session = JDBMConfig.Hibernate.openSession()
     }
 
     @Test
@@ -32,7 +32,7 @@ class SqlResourceDataSourceTest {
 
         assertDoesNotThrow("") {
             if (hibernate.isUniquenessValid(resource)) {
-                JDBM.Hibernate.executeQuery(session) {
+                JDBMConfig.Hibernate.executeQuery(session) {
                     session.save(resource)
                 }
             }
@@ -50,8 +50,8 @@ class SqlResourceDataSourceTest {
 
         assertDoesNotThrow {
             if (hibernate.isUniquenessValid(resource)) {
-                val session = JDBM.Hibernate.openSession()
-                JDBM.Hibernate.executeQuery(session) {
+                val session = JDBMConfig.Hibernate.openSession()
+                JDBMConfig.Hibernate.executeQuery(session) {
                     session.save(resource)
                 }
             }

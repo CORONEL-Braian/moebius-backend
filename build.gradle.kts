@@ -9,19 +9,21 @@ buildscript {
 plugins {
 
 //  	Dont remove, because Cannot resolve external dependency
-	kotlin("jvm") version "1.4.20-M1" apply false
-	kotlin("plugin.spring") version "1.4.20-M1"
+	kotlin("jvm") version "1.4.21" apply false
+	kotlin("plugin.spring") version "1.4.21"
 
 
 	id("org.springframework.boot") version "2.3.2.RELEASE"
 	id("io.spring.dependency-management") version "1.0.9.RELEASE"
-
 }
 
 version = "0.0.0"
 
 /**
- * https://stackoverflow.com/a/57069958/5279996
+ * Source:
+ *  . “Unresolved reference: implementation” by using subprojects in kotlin-gradle:
+ *  	. https://stackoverflow.com/a/63369119/5279996
+ *  	. https://stackoverflow.com/a/58671931/5279996
  */
 subprojects {
 
@@ -53,10 +55,10 @@ subprojects {
 		kotlinOptions.jvmTarget = "1.8"
 	}
 
+//	https://stackoverflow.com/a/57069958/5279996
 	tasks.getByName<BootJar>("bootJar") {
 		enabled = false
 	}
-
 	tasks.getByName<Jar>("jar") {
 		enabled = true
 	}

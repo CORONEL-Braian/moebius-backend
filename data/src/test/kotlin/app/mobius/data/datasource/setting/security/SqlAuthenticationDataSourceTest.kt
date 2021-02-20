@@ -1,7 +1,7 @@
 package app.mobius.data.datasource.setting.security
 
-import app.mobius.data.di.HibernateUtil
-import app.mobius.data.di.JDBM
+import app.mobius.data.dataAccess.hibernate.HibernateData
+import app.mobius.data.dataAccess.JDBMConfig
 import app.mobius.data.util.randomString
 import app.mobius.domain.entity.setting.security.Authentication
 import app.mobius.domain.entity.setting.security.BasicAuth
@@ -14,17 +14,17 @@ import org.junit.jupiter.api.*
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SqlAuthenticationDataSourceTest {
 
-    private lateinit var hibernate: HibernateUtil
+    private lateinit var hibernate: HibernateData
     private lateinit var session: Session
 
     @BeforeAll
     fun before() {
-        hibernate = HibernateUtil()
+        hibernate = HibernateData()
     }
 
     @BeforeEach
     fun beforeEach() {
-        session = JDBM.Hibernate.openSession()
+        session = JDBMConfig.Hibernate.openSession()
     }
 
     @Test
@@ -40,7 +40,7 @@ class SqlAuthenticationDataSourceTest {
         )
 
         assertDoesNotThrow("authentication exception") {
-            JDBM.Hibernate.executeQuery(session) {
+            JDBMConfig.Hibernate.executeQuery(session) {
                 if (hibernate.isUniquenessValid(authentication)) {
                     session.save(authentication)
                 }

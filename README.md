@@ -1,8 +1,9 @@
 # Moebius Backend
 
-
 ###### Immortalizes the essence and consciousness of people
 
+## Code of Conduct
+Please see our [code of conduct](https://github.com/Coronel-B/Moebius-backend/blob/master/documentation/CODE_OF_CONDUCT.md)
 
 ### Technologies
 

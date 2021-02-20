@@ -1,3 +1,5 @@
+//apply(from = "${rootProject.projectDir}/common-feature-test-utils.gradle.kts")    //TODO
+
 group = "app.mobius"
 version = "0.0.0"
 
@@ -9,9 +11,12 @@ version = "0.0.0"
  *  https://docs.gradle.org/current/userguide/java_testing.html#using_junit5
  */
 dependencies {
-    implementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
-    implementation("io.mockk:mockk:1.10.0")
+    api("org.springframework.boot", "spring-boot-starter-test", "2.4.1")
 
-    runtimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.0")
+    runtimeOnly("io.mockk:mockk:1.10.0")
+    runtimeOnly("org.junit.jupiter", "junit-jupiter-api", "5.6.0")
+    runtimeOnly("org.junit.jupiter", "junit-jupiter-engine", "5.6.0")
+    runtimeOnly("org.mockito", "mockito-junit-jupiter", "3.2.4")
+    runtimeOnly("org.springframework.boot", "spring-boot-starter-test", "2.4.1")
+    runtimeOnly("org.springframework.security", "spring-security-test", "5.4.2")
 }
-

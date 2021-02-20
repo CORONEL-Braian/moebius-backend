@@ -1,7 +1,7 @@
 package app.mobius.data.datasource.setting.security
 
-import app.mobius.data.di.HibernateUtil
-import app.mobius.data.di.JDBM
+import app.mobius.data.dataAccess.hibernate.HibernateData
+import app.mobius.data.dataAccess.JDBMConfig
 import app.mobius.domain.entity.setting.security.DocumentationVerification
 import app.mobius.domain.entity.setting.security.IdentityVerification
 import app.mobius.domain.entity.setting.security.Liveness
@@ -11,17 +11,17 @@ import org.junit.jupiter.api.*
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SqlIdentityVerificationDataSourceTest {
 
-    private lateinit var hibernate: HibernateUtil
+    private lateinit var hibernate: HibernateData
     private lateinit var session: Session
 
     @BeforeAll
     fun before() {
-        hibernate = HibernateUtil()
+        hibernate = HibernateData()
     }
 
     @BeforeEach
     fun beforeEach() {
-        session = JDBM.Hibernate.openSession()
+        session = JDBMConfig.Hibernate.openSession()
     }
 
     @Test
@@ -29,7 +29,7 @@ class SqlIdentityVerificationDataSourceTest {
         val liveness = Liveness()
 
         assertDoesNotThrow("liveness exception") {
-            JDBM.Hibernate.executeQuery(session) {
+            JDBMConfig.Hibernate.executeQuery(session) {
                 if (hibernate.isUniquenessValid(liveness)) {
                     session.save(liveness)
                 }
@@ -42,7 +42,7 @@ class SqlIdentityVerificationDataSourceTest {
         val documentationVerification = DocumentationVerification()
 
         assertDoesNotThrow("documentationVerification exception") {
-            JDBM.Hibernate.executeQuery(session) {
+            JDBMConfig.Hibernate.executeQuery(session) {
                 if (hibernate.isUniquenessValid(documentationVerification)) {
                     session.save(documentationVerification)
                 }
@@ -56,7 +56,7 @@ class SqlIdentityVerificationDataSourceTest {
         val identityVerification = IdentityVerification()
 
         assertDoesNotThrow("identityVerification exception") {
-            JDBM.Hibernate.executeQuery(session) {
+            JDBMConfig.Hibernate.executeQuery(session) {
                 if (hibernate.isUniquenessValid(identityVerification)) {
                     session.save(identityVerification)
                 }
