@@ -51,15 +51,19 @@ subprojects {
 		sourceCompatibility = JavaVersion.VERSION_1_8
 	}
 
-	tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-		kotlinOptions.jvmTarget = "1.8"
+	tasks {
+		withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+			kotlinOptions.jvmTarget = "1.8"
+		}
+
+//			https://stackoverflow.com/a/57069958/5279996
+		getByName<BootJar>("bootJar") {
+			enabled = false
+		}
+
+		getByName<Jar>("jar") {
+			enabled = true
+		}
 	}
 
-//	https://stackoverflow.com/a/57069958/5279996
-	tasks.getByName<BootJar>("bootJar") {
-		enabled = false
-	}
-	tasks.getByName<Jar>("jar") {
-		enabled = true
-	}
 }

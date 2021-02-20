@@ -2,17 +2,16 @@ group = "app.möbius"
 version = "0.0.0"
 
 dependencies {
-    api(project(":json-api"))
-
-    implementation(project(":api"))
-    implementation(project(":service"))
-
-    implementation(project(":library_base"))
-    api(project(":library_test_utils"))
 
 //    Core
-    implementation(project(":security-core", "default"))
+    implementation(project(":api"))
+    implementation(project(":service"))
     implementation(project(":deceased-core"))
     implementation(project(":infrastructure-core"))
     implementation(project(":data"))
+    implementation(project(":library_base"))
+    api(project(":library_test_utils"))
+
+    api(project(":json-api"))
+
 }
