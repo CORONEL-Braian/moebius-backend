@@ -9,9 +9,10 @@
     .idea
 
 2. Then invalidate cache & restart.
-3. Finally open any gradle file (settings.gradle.kts) and if in the IDE at the top right a button 
-   appears that suggests `Link Gradle Kotlin Script` (or a similar message) to click it.
+3. Open any gradle file (settings.gradle.kts)
+4. In the IDE at the top right click in `Link Gradle project`
+5. Finally, specifies that JUnit 5 should be used to execute the tests by gradle or from the IDE
 
-[Source](https://stackoverflow.com/q/47871181/5279996)
+[Source](https://stackoverflow.com/a/66286369/5279996)
 
 ____
