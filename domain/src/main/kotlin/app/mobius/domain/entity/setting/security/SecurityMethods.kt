@@ -48,6 +48,7 @@ data class TwoFactorAuth(
             emailVerification = EmailVerification())
 }
 
+//TODO: Update vs KMM
 @Entity
 @Table(name = "google_authentication")
 data class GoogleAuth(
@@ -58,6 +59,7 @@ data class GoogleAuth(
     constructor() : this(verificationCode = -1)
 }
 
+//TODO: Update vs KMM
 @Entity
 @Table(name = "sms_authentication")
 data class SMSAuthentication(
@@ -68,6 +70,7 @@ data class SMSAuthentication(
     constructor() : this(verificationCode = -1)
 }
 
+//TODO: Update vs KMM
 @Entity
 @Table(name = "email_verification")
 data class EmailVerification(

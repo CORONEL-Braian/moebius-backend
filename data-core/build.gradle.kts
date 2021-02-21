@@ -1,4 +1,3 @@
-group = "app.mobius"
 version = "0.0.0"
 
 /**
@@ -18,6 +17,7 @@ dependencies {
     implementation("org.springframework", "spring-jdbc", "5.2.9.RELEASE")
 
     implementation(project(":library_base"))
-    implementation(project(":library_test_utils"))
     implementation(kotlin("reflect"))
+
+    api(project(":library_test_utils"))
 }

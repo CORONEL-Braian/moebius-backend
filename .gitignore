@@ -27,5 +27,6 @@ build/
 *.iml
 *.ipr
 out/
+output/
 !**/src/main/**/out/
 !**/src/test/**/out/
