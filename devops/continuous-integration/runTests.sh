@@ -4,7 +4,7 @@
 cd ../..
 pwd
 
-./gradlew :api:test
+./gradlew :api-core:test
 ./gradlew :backend:test
 ./gradlew :common-feature:test
 ./gradlew :common-feature-test-utils:test
