@@ -37,4 +37,8 @@ class JDBMTest {
         JDBMConfig.Hibernate.openSession()
     }
 
+    @Test
+    fun some(){
+        assert(false)
+    }
 }
