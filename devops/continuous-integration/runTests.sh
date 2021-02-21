@@ -15,7 +15,7 @@ pwd
 ./gradlew :feature_credential_managment:test
 ./gradlew :feature_legal:test
 ./gradlew :feature_login:test
-#./gradlew :feature_sign_up:test TODO: Does not work
+./gradlew :feature_sign_up:test
 ./gradlew :feature_third_profile:test
 ./gradlew :infrastructure-core:test
 ./gradlew :json-api:test
