@@ -46,7 +46,7 @@ class XHeaderAuthenticationFilter: OncePerRequestFilter() {
             val authentication = AppAuthorizationToken(
                     developer = developer,
                     password = password,
-                    platform = Platform(name = headerPlatformName as String, ecosystem = headerPlatformEcosystem as String)
+                    platform = Platform(name = headerPlatformName, ecosystem = headerPlatformEcosystem)
             )
 
 
