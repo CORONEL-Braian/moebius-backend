@@ -30,9 +30,13 @@ class XHeaderAuthenticationFilter: OncePerRequestFilter() {
         val headerPlatformName = request.getHeader(HEADER_PLATFORM_NAME)
         val headerPlatformEcosystem = request.getHeader(HEADER_PLATFORM_ECOSYSTEM)
 
-        if ((headerAuthorization != null && headerAuthorization.toLowerCase().startsWith("basic"))||
-                headerPlatformName != null ||
-                headerPlatformEcosystem != null) {
+        if ((headerAuthorization == null || !headerAuthorization.toLowerCase().startsWith("basic")) ||
+                headerPlatformName == null ||
+                headerPlatformEcosystem == null) {
+
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED)
+
+        } else {
 
             val base64Credentials = headerAuthorization.split("Basic ").last()
             val credentialsDecoded = String(Base64.getDecoder().decode(base64Credentials), StandardCharsets.UTF_8)
@@ -42,14 +46,15 @@ class XHeaderAuthenticationFilter: OncePerRequestFilter() {
             val authentication = AppAuthorizationToken(
                     developer = developer,
                     password = password,
-                    platform = Platform(name = headerPlatformName, ecosystem = headerPlatformEcosystem)
+                    platform = Platform(name = headerPlatformName as String, ecosystem = headerPlatformEcosystem as String)
             )
 
 
             SecurityContextHolder.getContext().authentication = authentication
+
+            filterChain.doFilter(request, response)
         }
 
-        filterChain.doFilter(request, response)
     }
 
     companion object {
