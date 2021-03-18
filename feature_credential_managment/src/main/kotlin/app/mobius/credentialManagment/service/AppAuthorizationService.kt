@@ -1,6 +1,7 @@
 package app.mobius.credentialManagment.service
 
 import app.mobius.credentialManagment.data.repository.AppAuthorizationJpaRepository
+import app.mobius.credentialManagment.domain.entity.security.Environment
 import app.mobius.credentialManagment.domain.entity.security.Platform
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -21,12 +22,12 @@ class   AppAuthorizationService {
                 UUID.fromString(
                         findAppAuthorizationDeveloperUUID(platform, developerName)
                 ),
-                privateKey
+                privateKey, Environment.DEV  //TODO: Update
         )
     }
 
     private fun findAppAuthorizationDeveloperUUID(platform: Platform, developer: String) : String {
-        return appAuthorizationJpaRepository.findAppAuthorizationDeveloperUUID(platform, developer)
+        return appAuthorizationJpaRepository.findAppAuthorizationDeveloperUUID(platform, developer, Environment.DEV)  //TODO: Update
     }
 
 }
