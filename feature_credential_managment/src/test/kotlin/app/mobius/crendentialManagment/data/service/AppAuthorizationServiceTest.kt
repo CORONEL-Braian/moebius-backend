@@ -1,29 +1,24 @@
-package app.mobius.crendentialManagment.data.repository
+package app.mobius.crendentialManagment.data.service
 
-import app.mobius.MobiusFeatureIntegrationTest
 import app.mobius.credentialManagment.data.repository.AppAuthorizationJpaRepository
 import app.mobius.credentialManagment.domain.entity.security.Environment
 import app.mobius.credentialManagment.domain.entity.security.Platform
-import app.mobius.credentialManagment.service.AppAuthorizationService
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Test
+import org.junit.Test
+//import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.mockito.InjectMocks
 import org.mockito.Mockito
 import org.mockito.junit.jupiter.MockitoExtension
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import java.util.*
 
-@AutoConfigureMockMvc
-@SpringBootTest(classes = [MobiusFeatureIntegrationTest::class])
-open class AppAuthorizationRepositoryTest {
+/**
+ * https://www.baeldung.com/spring-beancreationexception
+ */
+@ExtendWith(value = [MockitoExtension::class, SpringExtension::class])
+open class AppAuthorizationServiceTest {
 
-    @Autowired
+    @MockBean
     private lateinit var appAuthorizationJpaRepository: AppAuthorizationJpaRepository
 
     @Test

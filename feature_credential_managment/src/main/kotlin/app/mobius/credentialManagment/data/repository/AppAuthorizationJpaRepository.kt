@@ -7,19 +7,24 @@ import org.hibernate.annotations.TypeDef
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
+import org.springframework.stereotype.Component
 import org.springframework.stereotype.Repository
 import java.util.*
 import javax.persistence.EnumType
 import javax.persistence.Enumerated
 
-@Repository
 interface AppAuthorizationJpaRepository: JpaRepository<Platform, UUID> {
 
     @Query(value =
             "SELECT CAST(app_authorization_people_uuid as varchar) app_authorization_people_uuid FROM app_consumer_people " +
                 "NATURAL JOIN platform " +
                 "NATURAL JOIN app_authorization_people " +
-            "WHERE name = :#{#platform.name} AND ecosystem = :#{#platform.ecosystem} AND developer = :#{#developer} AND environment = :#{#environment}" ,
+            "WHERE name = :#{#platform.name} " +
+                    "AND ecosystem = :#{#platform.ecosystem} " +
+                    "AND developer = :#{#developer} " +
+//                    "AND environment = :#{#environment}",
+//                    "AND environment = CAST(:#{#environment} as environment)",    //ERROR: cannot cast type bytea to environment
+                    "AND environment = CAST('TESTING' as environment)",
             nativeQuery = true)
     fun findAppAuthorizationDeveloperUUID(
             @Param("platform") platform: Platform,
