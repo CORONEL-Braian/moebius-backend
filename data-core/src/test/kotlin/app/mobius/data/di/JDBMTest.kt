@@ -4,9 +4,20 @@ import app.mobius.data.dataAccess.JDBMConfig
 import app.mobius.domain.entity.role.Resource
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
+import org.junit.runner.RunWith
+import org.springframework.test.context.junit4.SpringRunner
 import java.io.FileInputStream
 import java.io.InputStream
 
+/**
+ * PRECONDITION: Use A or B
+ *   A) Build, Execution & Deployment -> Build Tools -> Gradle
+ *      . Build and run using: Intellij Idea
+ *      . Run tests usging: Intellij Idea
+ *
+ *   B) useJUnitPlatform()
+ */
 class JDBMTest {
 
 //      ----- With Hibernate CFG  -----
@@ -37,8 +48,4 @@ class JDBMTest {
         JDBMConfig.Hibernate.openSession()
     }
 
-    @Test
-    fun some(){
-        assert(false)
-    }
 }

@@ -65,5 +65,4 @@ subprojects {
 			enabled = true
 		}
 	}
-
 }
