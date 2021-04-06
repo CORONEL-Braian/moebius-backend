@@ -3,6 +3,7 @@ package app.mobius.credentialManagment.data.repository
 import app.mobius.credentialManagment.domain.entity.security.Environment
 import app.mobius.credentialManagment.domain.entity.security.Platform
 import app.mobius.util.PostgreSQLEnumType
+import org.hibernate.annotations.Type
 import org.hibernate.annotations.TypeDef
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
@@ -23,8 +24,10 @@ interface AppAuthorizationJpaRepository: JpaRepository<Platform, UUID> {
                     "AND ecosystem = :#{#platform.ecosystem} " +
                     "AND developer = :#{#developer} " +
 //                    "AND environment = :#{#environment}",
+                    "AND environment = :#{#environment.name()}",    //TODO: Check possible solution: https://stackoverflow.com/a/59840623/5279996
+//                    "AND environment = 'TESTING",
 //                    "AND environment = CAST(:#{#environment} as environment)",    //ERROR: cannot cast type bytea to environment
-                    "AND environment = CAST('TESTING' as environment)",
+//                    "AND environment = CAST('TESTING' as environment)",
             nativeQuery = true)
     fun findAppAuthorizationDeveloperUUID(
             @Param("platform") platform: Platform,
@@ -33,7 +36,7 @@ interface AppAuthorizationJpaRepository: JpaRepository<Platform, UUID> {
     ) : String
 
 
-    @Query(value = "SELECT db_mobius_is_match_hash_pw_app(:#{#appAuthorizationDeveloper}, :#{#privateKey}, :#{#environment})",
+    @Query(value = "SELECT db_mobius_is_match_hash_pw_app(:#{#appAuthorizationDeveloper}, :#{#privateKey}, :#{#environment.name()})",
             nativeQuery = true
     )
     fun isValidAppAuthorization(
@@ -41,6 +44,15 @@ interface AppAuthorizationJpaRepository: JpaRepository<Platform, UUID> {
             @Param("privateKey") privateKey: String,
             @Param("environment") environment: Environment
     ) : Boolean
+
+    @Query(value = "SELECT db_mobius_is_match_hash_pw_app_2(:#{#appAuthorizationDeveloper}, :#{#privateKey})",
+            nativeQuery = true
+    )
+    fun isValidAppAuthorization2(
+            @Param("appAuthorizationDeveloper") appAuthorizationDeveloper: UUID,
+            @Param("privateKey") privateKey: String
+    ) : Boolean
+
 
 }
 

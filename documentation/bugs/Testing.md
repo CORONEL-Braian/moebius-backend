@@ -16,3 +16,12 @@
 [Source](https://stackoverflow.com/a/66286369/5279996)
 
 ____
+
+#### Error:
+
+`kotlin.UninitializedPropertyAccessException: lateinit property appAuthorizationJpaRepository has not been initialized`
+
+#### Solution:
+
+Replace from: `import org.junit.Test`
+To: `import org.junit.jupiter.api.Test`

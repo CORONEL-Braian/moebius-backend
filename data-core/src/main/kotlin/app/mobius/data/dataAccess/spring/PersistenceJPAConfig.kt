@@ -67,7 +67,12 @@ open class PersistenceJPAConfig {
         properties.setProperty("hibernate.physical_naming_strategy", SpringPhysicalNamingStrategy::class.java.name)
         properties.setProperty("hibernate.implicit_naming_strategy", SpringImplicitNamingStrategy::class.java.name)
 
+//        TODO: Set properties by environment
         properties.setProperty("hibernate.show_sql", "true")
+        properties.setProperty("spring.jpa.show-sql", "true")
+        properties.setProperty("logging.level.org.hibernate.SQL", "DEBUG")
+        properties.setProperty("logging.level.org.hibernate.type.descriptor.sql.BasicBinder", "TRACE")
+
         return properties
     }
 

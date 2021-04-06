@@ -1,24 +1,39 @@
 package app.mobius.crendentialManagment.data.service
 
+import app.mobius.MobiusFeatureIntegrationTest
 import app.mobius.credentialManagment.data.repository.AppAuthorizationJpaRepository
 import app.mobius.credentialManagment.domain.entity.security.Environment
 import app.mobius.credentialManagment.domain.entity.security.Platform
-import org.junit.Test
-import org.junit.jupiter.api.extension.ExtendWith
+import org.junit.jupiter.api.Test
 import org.mockito.Mockito
-import org.mockito.junit.jupiter.MockitoExtension
-import org.springframework.boot.test.mock.mockito.MockBean
-import org.springframework.test.context.junit.jupiter.SpringExtension
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
+import org.springframework.boot.test.context.SpringBootTest
 import java.util.*
 
 /**
+ * OBS: Not mock JpaRepository, you must use MobiusFeatureIntegrationTest and @Autowired
  * https://www.baeldung.com/spring-beancreationexception
  */
-@ExtendWith(value = [MockitoExtension::class, SpringExtension::class])
+@AutoConfigureMockMvc
+@SpringBootTest(classes = [MobiusFeatureIntegrationTest::class])
 open class AppAuthorizationServiceTest {
 
-    @MockBean
+//    @MockBean
+    @Autowired
     private lateinit var appAuthorizationJpaRepository: AppAuthorizationJpaRepository
+
+    @Test
+    fun `check if auth is valid`() {
+        val platform = Platform(name = "Android", ecosystem = "Mobile")
+        val developerName = "userForTest"
+        val privateKey = "123"
+        val environment = Environment.TESTING
+
+        assert(appAuthorizationJpaRepository.isValidAppAuthorization2(UUID.fromString("28933dbe-16d5-5578-8309-417418288635"), "123"))  //TODO: Always return false
+//        assert(appAuthorizationJpaRepository.isValidAppAuthorization(UUID.fromString("28933dbe-16d5-5578-8309-417418288635"), "123", Environment.TESTING))
+//        Assertions.assertNotNull(UUID.fromString(appAuthorizationJpaRepository.findAppAuthorizationDeveloperUUID(platform, developerName, environment)))
+    }
 
     @Test
     fun `should return true when an app authorization is valid`() {
@@ -31,9 +46,7 @@ open class AppAuthorizationServiceTest {
 //        Caused by: org.postgresql.util.PSQLException: ERROR: operator does not exist: environment = character varying
         Mockito
                 .`when`(appAuthorizationJpaRepository.isValidAppAuthorization(
-                            UUID.fromString(
-                                    appAuthorizationJpaRepository.findAppAuthorizationDeveloperUUID(platform, developerName, environment)   // Bug: always is null
-                            ),
+                            UUID.fromString(appAuthorizationJpaRepository.findAppAuthorizationDeveloperUUID(platform, developerName, environment)),   // Bug: always is null
                             privateKey,
                             environment)
                 )   // Bug: always is false
