@@ -16,6 +16,13 @@ import javax.persistence.Enumerated
 
 interface AppAuthorizationJpaRepository: JpaRepository<Platform, UUID> {
 
+    /**
+     * Only for checek that the routines working!
+     * OBS: This would have helped not to debug tests unnecessarily. When in reality what was not working was the class.
+     */
+    @Query(value = "SELECT db_mobius_simple_routine_for_testing()", nativeQuery = true)
+    fun simpleRoutineForTesting() : Boolean
+
     @Query(value =
             "SELECT CAST(app_authorization_people_uuid as varchar) app_authorization_people_uuid FROM app_consumer_people " +
                 "NATURAL JOIN platform " +
@@ -25,8 +32,7 @@ interface AppAuthorizationJpaRepository: JpaRepository<Platform, UUID> {
                     "AND developer = :#{#developer} " +
 //                    "AND environment = :#{#environment}",
                     "AND environment = :#{#environment.name()}",    //TODO: Check possible solution: https://stackoverflow.com/a/59840623/5279996
-//                    "AND environment = 'TESTING",
-//                    "AND environment = CAST(:#{#environment} as environment)",    //ERROR: cannot cast type bytea to environment
+//                    "AND environment = CAST(:#{#environment} as environment)",    //No function matches the given name and argument types. You might need to add explicit type casts.
 //                    "AND environment = CAST('TESTING' as environment)",
             nativeQuery = true)
     fun findAppAuthorizationDeveloperUUID(
@@ -44,15 +50,6 @@ interface AppAuthorizationJpaRepository: JpaRepository<Platform, UUID> {
             @Param("privateKey") privateKey: String,
             @Param("environment") environment: Environment
     ) : Boolean
-
-    @Query(value = "SELECT db_mobius_is_match_hash_pw_app_2(:#{#appAuthorizationDeveloper}, :#{#privateKey})",
-            nativeQuery = true
-    )
-    fun isValidAppAuthorization2(
-            @Param("appAuthorizationDeveloper") appAuthorizationDeveloper: UUID,
-            @Param("privateKey") privateKey: String
-    ) : Boolean
-
 
 }
 

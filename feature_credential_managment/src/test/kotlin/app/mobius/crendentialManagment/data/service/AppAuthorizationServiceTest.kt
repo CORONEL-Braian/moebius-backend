@@ -24,14 +24,18 @@ open class AppAuthorizationServiceTest {
     private lateinit var appAuthorizationJpaRepository: AppAuthorizationJpaRepository
 
     @Test
+    fun `test a simple routine`() {
+        assert(appAuthorizationJpaRepository.simpleRoutineForTesting())
+    }
+
+    @Test
     fun `check if auth is valid`() {
         val platform = Platform(name = "Android", ecosystem = "Mobile")
         val developerName = "userForTest"
         val privateKey = "123"
         val environment = Environment.TESTING
 
-        assert(appAuthorizationJpaRepository.isValidAppAuthorization2(UUID.fromString("28933dbe-16d5-5578-8309-417418288635"), "123"))  //TODO: Always return false
-//        assert(appAuthorizationJpaRepository.isValidAppAuthorization(UUID.fromString("28933dbe-16d5-5578-8309-417418288635"), "123", Environment.TESTING))
+        assert(appAuthorizationJpaRepository.isValidAppAuthorization(UUID.fromString("28933dbe-16d5-5578-8309-417418288635"), "123", Environment.TESTING))
 //        Assertions.assertNotNull(UUID.fromString(appAuthorizationJpaRepository.findAppAuthorizationDeveloperUUID(platform, developerName, environment)))
     }
 
