@@ -4,9 +4,6 @@ import app.mobius.data.dataAccess.JDBMConfig
 import app.mobius.domain.entity.role.Resource
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.TestInstance
-import org.junit.runner.RunWith
-import org.springframework.test.context.junit4.SpringRunner
 import java.io.FileInputStream
 import java.io.InputStream
 
@@ -21,12 +18,13 @@ import java.io.InputStream
 class JDBMTest {
 
 //      ----- With Hibernate CFG  -----
-
     @Test
     fun `get input stream for configuration of session factory`() {
-        val currentWorkingDir = System.getProperty("user.dir")
-        val absoulutePath = "$currentWorkingDir/data-core/src/main/resources/secret-hibernate.cfg.xml"
-        val targetStream: InputStream = FileInputStream(absoulutePath)
+        val absolutePathCurrentModule = System.getProperty("user.dir")
+        val absolutePathProjectRoot = absolutePathCurrentModule.dropLastWhile { it != '/' }
+
+        val absoulutePathOfFile = "$absolutePathProjectRoot/data-core/src/main/resources/secret-hibernate.cfg.xml"
+        val targetStream: InputStream = FileInputStream(absoulutePathOfFile)
         Assertions.assertNotEquals(targetStream, null)
     }
 
