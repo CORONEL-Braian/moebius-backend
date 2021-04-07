@@ -4,6 +4,7 @@ import app.mobius.MobiusFeatureIntegrationTest
 import app.mobius.credentialManagment.data.repository.AppAuthorizationJpaRepository
 import app.mobius.credentialManagment.domain.entity.security.Environment
 import app.mobius.credentialManagment.domain.entity.security.Platform
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
@@ -35,8 +36,8 @@ open class AppAuthorizationServiceTest {
         val privateKey = "123"
         val environment = Environment.TESTING
 
-        assert(appAuthorizationJpaRepository.isValidAppAuthorization(UUID.fromString("28933dbe-16d5-5578-8309-417418288635"), "123", Environment.TESTING))
-//        Assertions.assertNotNull(UUID.fromString(appAuthorizationJpaRepository.findAppAuthorizationDeveloperUUID(platform, developerName, environment)))
+        Assertions.assertNotNull(UUID.fromString(appAuthorizationJpaRepository.findAppAuthorizationDeveloperUUID(platform, developerName, environment)))
+//        assert(appAuthorizationJpaRepository.isValidAppAuthorization(UUID.fromString("28933dbe-16d5-5578-8309-417418288635"), "123", Environment.TESTING))
     }
 
     @Test

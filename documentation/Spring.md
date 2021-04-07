@@ -4,6 +4,22 @@ TODO: Add name strategy
 
  * https://www.baeldung.com/spring-data-jpa-query
  
+#### When an Enum is used in JpaRepository nativeQuery
+
+> You must to transform the value of the parameter to a String using .name() (or receive a String as a parameter) and cast that value of type String to the specific Enum that is needed.
+
+    @Query(
+        value = "SELECT some_routine(CAST(:#{#environmentNamedParam.name()} as environment))",
+        nativeQuery = true
+    )
+    fun yourFunction(
+        @Param("environmentNamedParam") environmentParam: Environment
+    ) : Boolean
+
+
+ 
+ 
+ 
  ___
 ### Modules
 
@@ -54,4 +70,7 @@ Solution:  `CAST(a_uuid as varchar) a_uuid` in query
 
 Source: https://stackoverflow.com/a/54017193/5279996
 
+___
 
+Error: When an Enum is used in JpaRepository nativeQuery
+Solution: https://stackoverflow.com/a/66979684/5279996
