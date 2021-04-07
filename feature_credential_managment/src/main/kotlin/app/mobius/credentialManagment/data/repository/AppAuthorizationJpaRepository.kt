@@ -2,17 +2,10 @@ package app.mobius.credentialManagment.data.repository
 
 import app.mobius.credentialManagment.domain.entity.security.Environment
 import app.mobius.credentialManagment.domain.entity.security.Platform
-import app.mobius.util.PostgreSQLEnumType
-import org.hibernate.annotations.Type
-import org.hibernate.annotations.TypeDef
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
-import org.springframework.stereotype.Component
-import org.springframework.stereotype.Repository
 import java.util.*
-import javax.persistence.EnumType
-import javax.persistence.Enumerated
 
 /**
  * Use Enum parameter into JpaRepository nativeQuery: https://stackoverflow.com/a/66979684/5279996
@@ -51,4 +44,3 @@ interface AppAuthorizationJpaRepository: JpaRepository<Platform, UUID> {
     ) : Boolean
 
 }
-
