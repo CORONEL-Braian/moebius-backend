@@ -5,6 +5,7 @@ src/main/resources/application-staging.properties
 src/main/resources/application-integration.properties
 src/main/resources/application-testing.properties
 
+# ------ BEGIN Common .gitignore ------
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
@@ -28,3 +29,4 @@ build/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+# ------ END Common .gitignore ------

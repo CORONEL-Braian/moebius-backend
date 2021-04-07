@@ -33,7 +33,7 @@ open class AppAuthorizationServiceTest {
 
     private fun provideEnvironment(environment: Environment = Environment.DEV) = environment
 
-    fun provideAppAuthorizationDeveloperUUID(
+    private fun provideAppAuthorizationDeveloperUUID(
             platform: Platform = providePlatform(),
             developerName: String = provideDeveloperName(),
             environment: Environment = provideEnvironment()
