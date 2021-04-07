@@ -37,7 +37,7 @@ open class AppAuthorizationServiceTest {
         val environment = Environment.TESTING
 
         Assertions.assertNotNull(UUID.fromString(appAuthorizationJpaRepository.findAppAuthorizationDeveloperUUID(platform, developerName, environment)))
-//        assert(appAuthorizationJpaRepository.isValidAppAuthorization(UUID.fromString("28933dbe-16d5-5578-8309-417418288635"), "123", Environment.TESTING))
+        assert(appAuthorizationJpaRepository.isValidAppAuthorization(UUID.fromString("28933dbe-16d5-5578-8309-417418288635"), "123", Environment.TESTING))
     }
 
     @Test

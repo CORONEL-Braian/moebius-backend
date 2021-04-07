@@ -14,10 +14,13 @@ import java.util.*
 import javax.persistence.EnumType
 import javax.persistence.Enumerated
 
+/**
+ * Use Enum parameter into JpaRepository nativeQuery: https://stackoverflow.com/a/66979684/5279996
+ */
 interface AppAuthorizationJpaRepository: JpaRepository<Platform, UUID> {
 
     /**
-     * Only for checek that the routines working!
+     * Only for check that the routines working!
      * OBS: This would have helped not to debug tests unnecessarily. When in reality what was not working was the class.
      */
     @Query(value = "SELECT db_mobius_simple_routine_for_testing()", nativeQuery = true)
@@ -31,14 +34,6 @@ interface AppAuthorizationJpaRepository: JpaRepository<Platform, UUID> {
                     "AND ecosystem = :#{#platform.ecosystem} " +
                     "AND developer = :#{#developer} " +
                     "AND environment = CAST(:#{#environmentNamedParam.name()} as environment)",
-//                    "AND environment = :#{#environment}",
-
-//                    "AND environment = :#{#environment.name()}",    //TODO: Check possible solution: https://stackoverflow.com/a/59840623/5279996
-//                  could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet
-
-//                    "AND environment = CAST(:#{#environment.name() as environment)}",    //TODO: Check possible solution: https://stackoverflow.com/a/59840623/5279996
-//                    "AND environment = CAST(:#{#environment} as environment)",    //No function matches the given name and argument types. You might need to add explicit type casts.
-//                    "AND environment = CAST('TESTING' as environment)",
             nativeQuery = true)
     fun findAppAuthorizationDeveloperUUID(
             @Param("platform") platform: Platform,
@@ -46,9 +41,6 @@ interface AppAuthorizationJpaRepository: JpaRepository<Platform, UUID> {
             @Param("environmentNamedParam") environmentParam: Environment
     ) : String
 
-    /**
-     * Use Enum parameter into JpaRepository nativeQuery: https://stackoverflow.com/a/66979684/5279996
-     */
     @Query(value = "SELECT db_mobius_is_match_hash_pw_app(:#{#appAuthorizationDeveloper}, :#{#privateKey}, CAST(:#{#environmentNamedParam.name()} as environment))",
             nativeQuery = true
     )
@@ -56,42 +48,6 @@ interface AppAuthorizationJpaRepository: JpaRepository<Platform, UUID> {
             @Param("appAuthorizationDeveloper") appAuthorizationDeveloper: UUID,
             @Param("privateKey") privateKey: String,
             @Param("environmentNamedParam") environmentParam: Environment
-    ) : Boolean
-
-
-
-
-
-
-//    @Query(value = "SELECT db_mobius_is_match_hash_pw_app(:#{#appAuthorizationDeveloper}, :#{#privateKey}, :#{#env.PRODUCTION})", //Failed to load ApplicationContext
-//    @Query(value = "SELECT db_mobius_is_match_hash_pw_app(:#{#appAuthorizationDeveloper}, :#{#privateKey}, :#{#env})",  // Failed to load ApplicationContext
-//    @Query(value = "SELECT db_mobius_is_match_hash_pw_app(:#{#appAuthorizationDeveloper}, :#{#privateKey}, :#{#env.name()})",  // Failed to load ApplicationContext
-//    @Query(value = "SELECT db_mobius_is_match_hash_pw_app(:#{#appAuthorizationDeveloper}, :#{#privateKey}, CAST(:#{#env.name()} as environment))",  // Failed to load ApplicationContext
-
-    @Query(value = "SELECT db_mobius_is_match_hash_pw_app(:#{#appAuthorizationDeveloper}, :#{#privateKey}, CAST(:#{#environmentNamedParam} as environment))",  // Failed to load ApplicationContext
-            nativeQuery = true
-    )
-    fun isValidAppAuthorization3(
-            @Param("appAuthorizationDeveloper") appAuthorizationDeveloper: UUID,
-            @Param("privateKey") privateKey: String,
-            @Param("environmentNamedParam") environmentParam: String
-    ) : Boolean
-
-    @Query(value = "SELECT db_mobius_is_match_hash_pw_app_2(:#{#appAuthorizationDeveloperParam}, :#{#privateKeyParam}, :#{#environmentParam})",
-            nativeQuery = true
-    )
-    fun isValidAppAuthorization2(
-            @Param("appAuthorizationDeveloperParam") appAuthorizationDeveloper: UUID,
-            @Param("privateKeyParam") privateKey: String,
-            @Param("environmentParam") environment: String
-    ) : Boolean
-
-    @Query(
-            value = "SELECT some_routine(CAST(:#{#environmentNamedParam} as environment))",
-            nativeQuery = true
-    )
-    fun yourFunction(
-            @Param("environmentNamedParam") environmentParam: String
     ) : Boolean
 
 }
