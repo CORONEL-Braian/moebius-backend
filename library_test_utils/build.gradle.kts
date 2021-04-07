@@ -16,7 +16,6 @@ dependencies {
     runtimeOnly("io.mockk:mockk:1.10.0")
     runtimeOnly("org.junit.jupiter", "junit-jupiter-api", "5.6.2")
     runtimeOnly("org.junit.jupiter", "junit-jupiter-engine", "5.6.2")
-    runtimeOnly("org.mockito", "mockito-junit-jupiter", "3.2.4")
     runtimeOnly("org.springframework.boot", "spring-boot-starter-test", "2.4.1")
 }
 
