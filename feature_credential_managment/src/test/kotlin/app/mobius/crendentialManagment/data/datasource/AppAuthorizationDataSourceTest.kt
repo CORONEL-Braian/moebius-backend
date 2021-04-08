@@ -84,7 +84,7 @@ class AppAuthorizationDataSourceTest {
 
     @Test
     fun `when select db_mobius_is_match_hash_pw_app function, then it exists`() {
-        val query = session.createNativeQuery("SELECT ${Routines.IS_MATCH_HASH_PW_APP}('a920aec3-a58c-51f8-9228-a661a8a3cc71', '');")
+        val query = session.createNativeQuery("SELECT ${Routines.IS_MATCH_HASH_PW_APP}('a920aec3-a58c-51f8-9228-a661a8a3cc71', '', 'TESTING');")
         query.list().map {
             println("SQLQuery: $it")
         }
@@ -134,7 +134,8 @@ class AppAuthorizationDataSourceTest {
              val query = session.createNativeQuery(
                      "SELECT ${Routines.IS_MATCH_HASH_PW_APP}(" +
                                 "'${appAuthorizationPeople.appAuthorizationUUID}', " +
-                                "'incorrectPassword')"
+                                "'incorrectPassword'," +
+                                "'TESTING')"
              )
 
             Assertions.assertFalse(query.list().first() as Boolean)
