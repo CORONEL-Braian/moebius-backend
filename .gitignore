@@ -1,9 +1,3 @@
-external/*
-external/Credentials.txt
-external/Environments.txt
-external/Temp.txt
-external/http-client.private.env.json
-
 # ------ BEGIN Common .gitignore ------
 .gradle
 build/

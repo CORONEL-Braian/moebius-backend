@@ -1,3 +1,6 @@
+# ------ BEGIN .gitignore ------
+src/test/resources/testPropertySource.properties
+
 # ------ BEGIN Common .gitignore ------
 .gradle
 build/

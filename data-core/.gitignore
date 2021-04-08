@@ -1,5 +1,8 @@
+# ------ BEGIN .gitignore ------
 src/main/resources/secret-hibernate.cfg.xml
 src/main/resources/META-INF/persistence.xml
+# ------ END .gitignore ------
+
 
 # ------ BEGIN Common .gitignore ------
 .gradle
