@@ -63,9 +63,18 @@ sealed class AppAuthorization(
 
 }
 
-
 enum class Environment {
     DEV, INTEGRATION, TESTING, STAGING, PRODUCTION
+}
+
+fun getEnvironmentFrom(environment: String): Environment {
+    return when(environment.toUpperCase()) {
+        "TESTING" -> Environment.TESTING
+        "INTEGRATION" -> Environment.INTEGRATION
+        "STAGING" -> Environment.STAGING
+        "PRODUCTION" -> Environment.PRODUCTION
+        else -> Environment.DEV
+    }
 }
 
 // TODO: Use in AppConsumer.Developer

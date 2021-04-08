@@ -17,17 +17,17 @@ class   AppAuthorizationService {
     /**
      * @param privateKey: Password to validate
      */
-    fun isValidAppAuthorization(platform: Platform, developerName: String, privateKey: String) : Boolean {
+    fun isValidAppAuthorization(platform: Platform, developerName: String, privateKey: String, environment: Environment) : Boolean {
         return appAuthorizationJpaRepository.isValidAppAuthorization(
                 UUID.fromString(
-                        findAppAuthorizationDeveloperUUID(platform, developerName)
+                        findAppAuthorizationDeveloperUUID(platform, developerName, environment)
                 ),
-                privateKey, Environment.DEV  //TODO: Update
+                privateKey, environment
         )
     }
 
-    private fun findAppAuthorizationDeveloperUUID(platform: Platform, developer: String) : String {
-        return appAuthorizationJpaRepository.findAppAuthorizationDeveloperUUID(platform, developer, Environment.DEV)  //TODO: Update
+    private fun findAppAuthorizationDeveloperUUID(platform: Platform, developer: String, environment: Environment) : String {
+        return appAuthorizationJpaRepository.findAppAuthorizationDeveloperUUID(platform, developer, environment)
     }
 
 }

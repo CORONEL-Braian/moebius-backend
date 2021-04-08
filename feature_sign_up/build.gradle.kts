@@ -11,3 +11,7 @@ dependencies {
 //    Does not use in library_test_utils as runtimeOnly because test build by command fail
     testImplementation("org.springframework.security", "spring-security-test", "5.4.5")
 }
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
