@@ -1,5 +1,6 @@
 package app.mobius.data.dataAccess.spring
 
+import app.mobius.data.dataAccess.PackagesToScan
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
 import org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
@@ -40,10 +41,8 @@ open class PersistenceJPAConfig {
     open fun entityManagerFactory() : LocalContainerEntityManagerFactoryBean {
         val em = LocalContainerEntityManagerFactoryBean()
         em.dataSource = dataSource()
-        em.setPackagesToScan(
-                "app.mobius.domain.entity",
-                "app.mobius.*.domain.entity"    // For the features
-        )
+
+        em.setPackagesToScan(*PackagesToScan.SUMMATION)
 
         val vendorAdapter: JpaVendorAdapter = HibernateJpaVendorAdapter()
         em.jpaVendorAdapter = vendorAdapter

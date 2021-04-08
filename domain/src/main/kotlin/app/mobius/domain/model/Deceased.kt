@@ -3,7 +3,7 @@ package app.mobius.domain.model
 import java.util.*
 import javax.persistence.*
 
-@Entity
+//@Entity
 @Table(name = "deceased")
 data class Deceased(
         @Id @GeneratedValue @Column(name = "deceased_uuid") val deceasedUUID: UUID? = null,

@@ -4,4 +4,5 @@
 cd ../..
 pwd
 
-./gradlew :feature_sign_up:test
+#./gradlew :feature_sign_up:test
+./gradlew :feature_credential_managment:test

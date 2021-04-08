@@ -9,7 +9,6 @@ import org.hibernate.cfg.Configuration
 import org.reflections.Reflections
 import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
 import org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
-import java.io.File
 import javax.persistence.*
 
 
@@ -23,7 +22,6 @@ class JDBMConfig {
     object Hibernate {
 
         private const val HIBERNATE_CONFIGURATION = "secret-hibernate.cfg.xml"
-        private const val PACKAGE_ENTITIES = "app.mobius.domain.entity"
 
        /* @Bean(name = ["entityManagerFactory"])
         fun sessionFactory(): LocalSessionFactoryBean? {
@@ -99,9 +97,19 @@ class JDBMConfig {
             val configuration = Configuration()
                     .configure(getFile("data-core", canonicalName))
 
-//            Auto Scan Entities
-            val reflections = Reflections(PACKAGE_ENTITIES)
+            /**
+             * Auto Scan Entities
+             *
+             * TODO: Should be the entities packages per features:
+             *  [
+             *    app.mobius.domain.entity.*,
+             *    app.mobius.xFeature.entity.*,
+             *    app.mobius.YFeature.entity.*,
+             *  ]
+             */
+            val reflections = Reflections(PackagesToScan.SUMMATION)
             val importantClasses: Set<Class<*>> = reflections.getTypesAnnotatedWith(Entity::class.java)
+
             var i = 0
             println("-------")
             for (clazz in importantClasses) {
