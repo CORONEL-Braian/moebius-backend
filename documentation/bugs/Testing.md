@@ -25,3 +25,15 @@ ____
 
 Replace from: `import org.junit.Test`
 To: `import org.junit.jupiter.api.Test`
+
+____
+
+#### Error:
+
+`Caused by: java.lang.IllegalArgumentException: 
+Could not resolve placeholder 'app.mobius.credentialManagment.testPropertySource.developerName' 
+in value "${app.mobius.credentialManagment.testPropertySource.developerName}"`
+
+#### Solution:
+
+`@TestPropertySource(locations = ["/testPropertySource.properties"])`

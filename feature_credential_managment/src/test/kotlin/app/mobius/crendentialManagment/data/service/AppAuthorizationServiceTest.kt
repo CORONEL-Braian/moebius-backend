@@ -4,6 +4,7 @@ import app.mobius.MobiusFeatureIntegrationTest
 import app.mobius.credentialManagment.data.repository.AppAuthorizationJpaRepository
 import app.mobius.credentialManagment.domain.entity.security.Environment
 import app.mobius.credentialManagment.domain.entity.security.Platform
+import app.mobius.crendentialManagment.CredentialManagmentFeatureTestConfiguration
 import app.mobius.crendentialManagment.data.CredentialManagmentTestPropertySource
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeAll
@@ -22,8 +23,7 @@ import javax.annotation.PostConstruct
  */
 @AutoConfigureMockMvc
 @SpringBootTest(classes = [MobiusFeatureIntegrationTest::class])
-@ContextConfiguration(classes = [CredentialManagmentTestPropertySource::class])
-@TestPropertySource(locations = ["/testPropertySource.properties"])
+@CredentialManagmentFeatureTestConfiguration
 open class AppAuthorizationServiceTest {
 
     @Autowired
