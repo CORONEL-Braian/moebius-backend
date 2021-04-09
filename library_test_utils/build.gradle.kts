@@ -18,13 +18,3 @@ dependencies {
     runtimeOnly("org.junit.jupiter", "junit-jupiter-engine", "5.6.2")
     runtimeOnly("org.springframework.boot", "spring-boot-starter-test", "2.4.1")
 }
-
-/**
- * TODO: Delete task in all submodules. For check this: build and run tests using Gradle in Build, Execution, Deployment -> Build Tools -> Gradle
- * https://stackoverflow.com/a/58125215/5279996
- */
-/*
-// Use this task OR from the IDE build and run tests using Intellij IDEA in Build, Execution, Deployment -> Build Tools -> Gradle
-tasks.test {
-    useJUnitPlatform()
-}*/

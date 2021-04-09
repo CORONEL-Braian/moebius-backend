@@ -18,7 +18,3 @@ dependencies {
 //    Testing
     testImplementation("org.springframework.security", "spring-security-test", "5.4.5")
 }
-
-tasks.test {
-    useJUnitPlatform()
-}

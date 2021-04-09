@@ -37,3 +37,15 @@ in value "${app.mobius.credentialManagment.testPropertySource.developerName}"`
 #### Solution:
 
 `@TestPropertySource(locations = ["/testPropertySource.properties"])`
+
+____
+
+#### Error:
+
+When Run tests in some module: `Test events were not received`
+
+Run tests using Intellij Idea:
+ - Or with **Build, Execution, Deployment -> Build Tools  -> Gradle ->  Build and Run: Intellij IDEA**
+ - Or with `tasks.test {
+       useJUnitPlatform()
+   }`

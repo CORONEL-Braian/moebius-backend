@@ -21,7 +21,3 @@ dependencies {
 
     api(project(":library_test_utils"))
 }
-
-tasks.test {
-    useJUnitPlatform()
-}

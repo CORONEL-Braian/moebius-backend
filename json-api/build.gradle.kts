@@ -9,7 +9,3 @@ dependencies {
 
     implementation("com.fasterxml.jackson.core", "jackson-databind", "2.6.7.4")
 }
-
-tasks.test {
-    useJUnitPlatform()
-}
