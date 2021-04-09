@@ -25,40 +25,46 @@ class XHeaderAuthenticationFilter: OncePerRequestFilter() {
      * Source:
      *  . Add filter to the spring config: https://stackoverflow.com/a/57341317/5279996
      *  . Get credentials from Basic Auth: https://stackoverflow.com/a/16000878/5279996
-     *  TODO: Should not enter in this method if the request  is /security/home
      */
     override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain) {
+
+        if (checkRequestHeaders(request)) {
+            SecurityContextHolder.getContext().authentication = getAppAuthenticationToken(request)
+        }
+
+//        Always use FilterChain#doFilter for then evaluate .antMatchers in SecurityBasicAuthTechnicalModuleConfiguration
+        filterChain.doFilter(request, response)
+    }
+
+    private fun checkRequestHeaders(request: HttpServletRequest) : Boolean {
         val headerAuthorization = request.getHeader(HEADER_AUTHORIZATION)
         val headerPlatformName = request.getHeader(HEADER_PLATFORM_NAME)
         val headerPlatformEcosystem = request.getHeader(HEADER_PLATFORM_ECOSYSTEM)
         val headerEnvironment = request.getHeader(HEADER_ENVIRONMENT)
 
-        if ((headerAuthorization == null || !headerAuthorization.toLowerCase().startsWith("basic")) ||
-                headerPlatformName == null ||
-                headerPlatformEcosystem == null ||
-                headerEnvironment == null) {
+        return (headerAuthorization != null && headerAuthorization.toLowerCase().startsWith("basic")) &&
+                headerPlatformName != null &&
+                headerPlatformEcosystem != null &&
+                headerEnvironment != null
+    }
 
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED)
+    private fun getAppAuthenticationToken(request: HttpServletRequest) : AppAuthorizationToken {
+        val headerAuthorization = request.getHeader(HEADER_AUTHORIZATION)
+        val headerPlatformName = request.getHeader(HEADER_PLATFORM_NAME)
+        val headerPlatformEcosystem = request.getHeader(HEADER_PLATFORM_ECOSYSTEM)
+        val headerEnvironment = request.getHeader(HEADER_ENVIRONMENT)
 
-        } else {
+        val base64Credentials = headerAuthorization.split("Basic ").last()
+        val credentialsDecoded = String(Base64.getDecoder().decode(base64Credentials), StandardCharsets.UTF_8)
+        val developer = credentialsDecoded.split(":").first()
+        val password = credentialsDecoded.split(":").last()
 
-            val base64Credentials = headerAuthorization.split("Basic ").last()
-            val credentialsDecoded = String(Base64.getDecoder().decode(base64Credentials), StandardCharsets.UTF_8)
-            val developer = credentialsDecoded.split(":").first()
-            val password = credentialsDecoded.split(":").last()
-
-            val authentication = AppAuthorizationToken(
-                    developer = developer,
-                    password = password,
-                    platform = Platform(name = headerPlatformName, ecosystem = headerPlatformEcosystem),
-                    environment = getEnvironmentFrom(headerEnvironment)
-            )
-
-            SecurityContextHolder.getContext().authentication = authentication
-
-            filterChain.doFilter(request, response)
-        }
-
+        return AppAuthorizationToken(
+                developer = developer,
+                password = password,
+                platform = Platform(name = headerPlatformName, ecosystem = headerPlatformEcosystem),
+                environment = getEnvironmentFrom(headerEnvironment)
+        )
     }
 
     companion object {
