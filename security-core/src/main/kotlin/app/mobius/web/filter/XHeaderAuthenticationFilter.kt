@@ -1,6 +1,5 @@
 package app.mobius.web.filter
 
-import app.mobius.credentialManagment.domain.entity.security.Environment
 import app.mobius.credentialManagment.domain.entity.security.Platform
 import app.mobius.credentialManagment.domain.entity.security.getEnvironmentFrom
 import app.mobius.domain.security.authorization.AppAuthorizationToken
@@ -26,6 +25,7 @@ class XHeaderAuthenticationFilter: OncePerRequestFilter() {
      * Source:
      *  . Add filter to the spring config: https://stackoverflow.com/a/57341317/5279996
      *  . Get credentials from Basic Auth: https://stackoverflow.com/a/16000878/5279996
+     *  TODO: Should not enter in this method if the request  is /security/home
      */
     override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain) {
         val headerAuthorization = request.getHeader(HEADER_AUTHORIZATION)

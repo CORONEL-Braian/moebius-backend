@@ -5,7 +5,6 @@ import app.mobius.api.ApiEndpoints.URL_BASE
 import app.mobius.security.SecurityCoreEndpoints
 import app.mobius.security.authentication.controller.SecurityCoreEndpointsTest
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
@@ -28,7 +27,7 @@ class SecurityBasicAuthConfigurationIntegrationTest {
     private fun provideFullUrl(endpoint: String) = URL_BASE + endpoint
 
     @Test
-    fun `when someone requests a home endpoint, then success`() {
+    fun `1 - when someone requests a home endpoint, then success`() {
         mockMvc.perform(
                 MockMvcRequestBuilders.get(provideFullUrl(SecurityCoreEndpoints.Keys.HOME))
         ).andExpect(MockMvcResultMatchers.status().isOk)
@@ -40,7 +39,7 @@ class SecurityBasicAuthConfigurationIntegrationTest {
      *  . Provide auth model without annotations: https://stackoverflow.com/a/66191368/5279996
      */
     @Test
-    fun `when authenticated developer requests a secure endpoint, then success`() {
+    fun `2A - when authenticated developer requests a secure endpoint, then success`() {
         val requestBuilder = MockMvcRequestBuilders
                 .get(provideFullUrl(SecurityCoreEndpointsTest.Keys.SECURE))
                 .with(httpBasic("userForTest", "123"))
@@ -54,7 +53,7 @@ class SecurityBasicAuthConfigurationIntegrationTest {
     }
 
     @Test
-    fun `when developer with wrong password and headers then unauthorized response`() {
+    fun `2B - when developer with wrong password and headers then unauthorized response`() {
         val requestBuilder = MockMvcRequestBuilders
                 .get(provideFullUrl(SecurityCoreEndpointsTest.Keys.SECURE))
                 .with(httpBasic("userForTest", "wrongpassword"))
@@ -68,31 +67,41 @@ class SecurityBasicAuthConfigurationIntegrationTest {
     }
 
     @Test
-    fun `when developer with the absence of header platform-name then an exception is throwed`() {
+    fun `3A - when developer with the absence of header platform-name then an 4xx client error is getted`() {
         val requestBuilder = MockMvcRequestBuilders
                 .get(provideFullUrl(SecurityCoreEndpointsTest.Keys.SECURE))
                 .with(httpBasic("userForTest", "123"))
                 .header("Platform-Ecosystem", "Mobile")
                 .header("Environment", "TESTING")
 
-        val resultMatcher = MockMvcResultMatchers.status().isOk
+        val resultMatcher = MockMvcResultMatchers.status().is4xxClientError
 
-        assertThrows<Exception> {
-            mockMvc.perform(requestBuilder).andExpect(resultMatcher)
-        }
+        mockMvc.perform(requestBuilder).andExpect(resultMatcher)
     }
     @Test
-    fun `when developer with the absence of header platform-ecosystem then an exception is throwed`() {
+    fun `3B - when developer with the absence of header platform-ecosystem then an 4xx client error is getted`() {
         val requestBuilder = MockMvcRequestBuilders
                 .get(provideFullUrl(SecurityCoreEndpointsTest.Keys.SECURE))
-                .with(httpBasic("userForTest", "mobius123"))
+                .with(httpBasic("userForTest", "123"))
                 .header("Platform-Name", "Android")
+                .header("Environment", "TESTING")
 
-        val resultMatcher = MockMvcResultMatchers.status().isOk
+        val resultMatcher = MockMvcResultMatchers.status().is4xxClientError
 
-        assertThrows<Exception> {
-            mockMvc.perform(requestBuilder).andExpect(resultMatcher)
-        }
+        mockMvc.perform(requestBuilder).andExpect(resultMatcher)
+    }
+
+    @Test
+    fun `3C - when developer with the absence of header environment then an 4xx client error is getted`() {
+        val requestBuilder = MockMvcRequestBuilders
+                .get(provideFullUrl(SecurityCoreEndpointsTest.Keys.SECURE))
+                .with(httpBasic("userForTest", "123"))
+                .header("Platform-Name", "Android")
+                .header("Platform-Ecosystem", "Mobile")
+
+        val resultMatcher = MockMvcResultMatchers.status().is4xxClientError
+
+        mockMvc.perform(requestBuilder).andExpect(resultMatcher)
     }
 
 }

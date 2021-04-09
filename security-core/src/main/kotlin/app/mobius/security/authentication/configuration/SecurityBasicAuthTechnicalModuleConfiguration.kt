@@ -75,7 +75,11 @@ open class SecurityBasicAuthTechnicalModuleConfiguration: WebSecurityConfigurerA
          * The most restrictive rules should be at the top.
          */
         http.authorizeRequests()
-                .antMatchers(SecurityCoreEndpoints.Keys.HOME).permitAll()
+//                .antMatchers(SecurityCoreEndpoints.Keys.HOME).permitAll()
+                .antMatchers("/security/home").permitAll()
+//                .and()
+
+        http.authorizeRequests()
                 .antMatchers(HttpMethod.POST).permitAll()
 
         /**
