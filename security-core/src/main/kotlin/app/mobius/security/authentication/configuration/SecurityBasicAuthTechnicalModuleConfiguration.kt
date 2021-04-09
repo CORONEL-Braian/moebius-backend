@@ -76,10 +76,7 @@ open class SecurityBasicAuthTechnicalModuleConfiguration: WebSecurityConfigurerA
          */
         http.authorizeRequests()
 //                .antMatchers(SecurityCoreEndpoints.Keys.HOME).permitAll()
-                .antMatchers("/security/home").permitAll()
-//                .and()
-
-        http.authorizeRequests()
+                .antMatchers("/security/**").permitAll()
                 .antMatchers(HttpMethod.POST).permitAll()
 
         /**
