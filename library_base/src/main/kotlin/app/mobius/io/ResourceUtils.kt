@@ -33,7 +33,7 @@ object ResourceUtils {
         val absolutePathCurrentModule = System.getProperty("user.dir")
         val absolutePathProjectRoot = absolutePathCurrentModule.dropLastWhile { it != '/' }
 
-        val absolutePathOfFile = "${absolutePathProjectRoot}${moduleName}/src${parentPath}/$relPath"
+        val absolutePathOfFile = "${absolutePathProjectRoot}${moduleName}/src${parentPath}$relPath"
         println("Absolute Path of file: $absolutePathOfFile") //TODO: Use Logger
         return File(absolutePathOfFile)
     }

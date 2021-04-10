@@ -6,16 +6,8 @@ data class Data(
         val type: String,
         val id: UUID? = null,
         val attributes: Map<String, Any>,
-        val relationships: List<Relationship>,
+        val relationships: Relationships,
         val links: Links? = null
 ) {
-    constructor() : this(type = "", attributes = mapOf(), relationships = listOf())
+    constructor() : this(type = "", attributes = mapOf(), relationships = Relationships())
 }
-
-data class Relationship(
-        val relationship: Map<String, RelationshipValue>
-)
-
-data class RelationshipValue(
-        val data: List<Data>
-)
