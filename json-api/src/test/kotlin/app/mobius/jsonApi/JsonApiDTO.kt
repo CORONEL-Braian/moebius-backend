@@ -1,4 +1,4 @@
-package app.mobius.infrastructure
+package app.mobius.jsonApi
 
 object JsonApiDTO {
 

@@ -1,4 +1,4 @@
-package app.mobius.infrastructure.model.response
+package app.mobius.jsonApi.model.response
 
 data class JsonApiResource(
         val links: Links,

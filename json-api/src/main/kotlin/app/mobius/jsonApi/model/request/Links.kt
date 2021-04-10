@@ -1,4 +1,4 @@
-package app.mobius.infrastructure.model.response
+package app.mobius.jsonApi.model.request
 
 data class Links(
         val self: String? = null,

@@ -79,7 +79,7 @@ class JDBMConfig {
         @Throws(HibernateException::class)
         fun getSessionFactoryForOnly(annotatedClass: Class<*>, canonicalName: String) : SessionFactory {
             return Configuration()
-                    .configure(getFile("data-core", canonicalName))
+                    .configure(getFile(moduleName = "data-core", relPathFile = canonicalName))
                     .addAnnotatedClass(annotatedClass)
                     .buildSessionFactory()
         }
@@ -95,7 +95,7 @@ class JDBMConfig {
          */
         private fun autoScanEntities(canonicalName: String) : SessionFactory {
             val configuration = Configuration()
-                    .configure(getFile("data-core", canonicalName))
+                    .configure(getFile(moduleName = "data-core", relPathFile = canonicalName))
 
             /**
              * Auto Scan Entities

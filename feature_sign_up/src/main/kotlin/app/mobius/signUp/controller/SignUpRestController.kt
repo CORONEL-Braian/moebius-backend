@@ -6,7 +6,7 @@ import app.mobius.domain.entity.Profile
 import app.mobius.domain.entity.role.Role
 import app.mobius.domain.entity.setting.Setting
 import app.mobius.signUp.infrastructure.dto.PersonDto
-import app.mobius.infrastructure.model.request.JsonApiRequest
+import app.mobius.jsonApi.model.request.JsonApiRequest
 import app.mobius.signUp.service.ProfileService
 import app.mobius.signUp.service.SignUpService
 import org.springframework.beans.factory.annotation.Autowired

@@ -1,4 +1,4 @@
-package app.mobius.infrastructure.model.request
+package app.mobius.jsonApi.model.request
 
 import java.util.*
 
