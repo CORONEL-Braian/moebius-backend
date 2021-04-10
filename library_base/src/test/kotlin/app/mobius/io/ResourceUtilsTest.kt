@@ -14,7 +14,7 @@ class ResourceUtilsTest {
         val absolutePathCurrentModule = System.getProperty("user.dir")
         val pathFromProjectRoot = absolutePathCurrentModule.dropLastWhile { it != '/' }
 
-        val actual = getFile(moduleName = "json-api", relPathFile = canonicalName)
+        val actual = getFile(moduleName = "json-api", relPath = canonicalName)
         val expected = File("${pathFromProjectRoot}json-api/src/main/resources/${canonicalName}")
 
         Assertions.assertEquals(actual, expected)

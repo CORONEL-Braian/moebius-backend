@@ -1,5 +1,6 @@
 package app.mobius.data.dataAccess
 
+import app.mobius.io.ParentPathFile
 import app.mobius.io.ResourceUtils.getFile
 import org.hibernate.HibernateException
 import org.hibernate.Session
@@ -79,7 +80,11 @@ class JDBMConfig {
         @Throws(HibernateException::class)
         fun getSessionFactoryForOnly(annotatedClass: Class<*>, canonicalName: String) : SessionFactory {
             return Configuration()
-                    .configure(getFile(moduleName = "data-core", relPathFile = canonicalName))
+                    .configure(getFile(
+                            moduleName = "data-core",
+                            parentPath = ParentPathFile.Main.RESOURCES,
+                            relPath = canonicalName
+                    ))
                     .addAnnotatedClass(annotatedClass)
                     .buildSessionFactory()
         }
@@ -95,7 +100,13 @@ class JDBMConfig {
          */
         private fun autoScanEntities(canonicalName: String) : SessionFactory {
             val configuration = Configuration()
-                    .configure(getFile(moduleName = "data-core", relPathFile = canonicalName))
+                    .configure(
+                            getFile(
+                                    moduleName = "data-core",
+                                    parentPath = ParentPathFile.Main.RESOURCES,
+                                    relPath = canonicalName
+                            )
+                    )
 
             /**
              * Auto Scan Entities

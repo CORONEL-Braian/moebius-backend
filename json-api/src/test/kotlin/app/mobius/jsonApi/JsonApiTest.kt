@@ -1,10 +1,11 @@
 package app.mobius.jsonApi
 
-import app.mobius.jsonApi.model.jvm.SomeList
-import app.mobius.io.SrcType
+import app.mobius.jsonApi.test.model.jvm.SomeList
+import app.mobius.io.ParentPathFile
 import app.mobius.jsonApi.JsonApi.MODULE_NAME_JSON_API
-import app.mobius.jsonApi.model.SomeTest
-import app.mobius.jsonApi.model.request.AttributesTest
+import app.mobius.jsonApi.test.model.SomeTest
+import app.mobius.jsonApi.test.model.request.AttributesMock
+import app.mobius.jsonApi.test.model.request.RelationshipValueWithStringMock
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
@@ -24,8 +25,12 @@ class JsonApiTest {
 
     @Test
     fun `2 - writeKtAsJsonToFile`() {
-        val some = SomeTest("Gaston 2", "Ramiro 2")
-        JsonApi.writeKtAsJsonToFile("some.json", some)
+        val some = SomeTest("3", "4")
+        JsonApi.writeKtAsJsonToFile(
+                moduleName = MODULE_NAME_JSON_API,
+                parentPathFile = ParentPathFile.Test.RESOURCES,
+                relPathFile = "/temp/some.json",
+                value = some)
     }
 
     @Test
@@ -44,18 +49,24 @@ class JsonApiTest {
     @Test
     fun `4 - write Json As Kt From File`() {
 //        Given
-        val some = SomeTest("4", "4")
-        JsonApi.writeKtAsJsonToFile(canonicalFileName, some)
+        val someClass = SomeTest("4", "4")
+        JsonApi.writeKtAsJsonToFile(
+                moduleName = MODULE_NAME_JSON_API,
+                parentPathFile = ParentPathFile.Main.RESOURCES,
+                relPathFile = canonicalFileName,
+                value = someClass
+        )
 
         val someFromFile = JsonApi.writeJsonAsKtFromFile(
                 moduleName = MODULE_NAME_JSON_API,
+                parentPathFile = ParentPathFile.Main.RESOURCES,
                 relPathFile = canonicalFileName,
                 valueType = SomeTest::class.java
         )
 
         Assertions.assertEquals(
                 someFromFile,
-                some
+                someClass
         )
         Assertions.assertEquals("4", someFromFile.a)
 
@@ -70,7 +81,7 @@ class JsonApiTest {
         assertDoesNotThrow {
             JsonApi.writeJsonAsKtFromFile(
                     moduleName = MODULE_NAME_JSON_API,
-                    srcType = SrcType.TEST,
+                    parentPathFile = ParentPathFile.Test.RESOURCES,
                     relPathFile = "jvm/someList.json",
                     valueType = SomeList::class.java
             )
@@ -82,9 +93,36 @@ class JsonApiTest {
         assertDoesNotThrow {
             JsonApi.writeJsonAsKtFromFile(
                     moduleName = MODULE_NAME_JSON_API,
-                    srcType = SrcType.TEST,
+                    parentPathFile = ParentPathFile.Test.RESOURCES,
                     relPathFile = "request/attributes.json",
-                    valueType = AttributesTest::class.java
+                    valueType = AttributesMock::class.java
+            )
+        }
+    }
+
+    @Test
+    fun `7 - Request - When write relationship value with string from KT to JSON, then shouldn't throw an exception`() {
+        val relationshipValueWithStringMock = RelationshipValueWithStringMock(
+            listOf("1", "2")
+        )
+        assertDoesNotThrow {
+            JsonApi.writeKtAsJsonToFile(
+                    moduleName = MODULE_NAME_JSON_API,
+                    parentPathFile = ParentPathFile.Test.RESOURCES,
+                    relPathFile = "/request/relationshipValueWithStringMock.json",
+                    value = relationshipValueWithStringMock
+            )
+        }
+    }
+
+    @Test
+    fun `8 - Request - When write the relationship value with string from JSON to KT, then shouldn't throw an exception`() {
+        assertDoesNotThrow {
+            JsonApi.writeJsonAsKtFromFile(
+                    moduleName = MODULE_NAME_JSON_API,
+                    parentPathFile = ParentPathFile.Test.RESOURCES,
+                    relPathFile = "/request/relationshipValueWithStringMock.json",
+                    valueType = RelationshipValueWithStringMock::class.java
             )
         }
     }

@@ -1,8 +1,7 @@
 package app.mobius.jsonApi
 
-import app.mobius.io.ResourceUtils
 import app.mobius.io.ResourceUtils.getFile
-import app.mobius.io.SrcType
+import app.mobius.io.ParentPathFile
 import com.fasterxml.jackson.databind.ObjectMapper
 
 object JsonApi {
@@ -15,11 +14,24 @@ object JsonApi {
     }
 
     /**
-     * @param canonicalFileName: some.json
+     * Write a kotlin class as json in file
+     * @param relPathFile: some.json
      */
-    fun writeKtAsJsonToFile(canonicalFileName: String, value: Any) {
+    fun writeKtAsJsonToFile(
+            moduleName: String,
+            parentPathFile: String,
+            relPathFile: String,
+            value: Any
+    ) {
         val objectMapper = ObjectMapper()
-        objectMapper.writeValue(getFile(moduleName = "json-api", relPathFile = canonicalFileName,), value)
+        objectMapper.writeValue(
+                getFile(
+                    moduleName = moduleName,
+                    parentPath = parentPathFile,
+                    relPath = relPathFile
+                ),
+                value
+        )
     }
 
     /**
@@ -35,12 +47,12 @@ object JsonApi {
      * Precondition: Entities have secondary constructor
      */
     fun <T> writeJsonAsKtFromFile(moduleName: String,
-                                  srcType: String = SrcType.MAIN,
+                                  parentPathFile: String,
                                   relPathFile: String,
                                   valueType: Class<T>
     ): T {
         return ObjectMapper().readValue(
-                getFile(moduleName = moduleName, srcType = srcType, relPathFile = relPathFile),
+                getFile(moduleName = moduleName, parentPath = parentPathFile, relPath = relPathFile),
                 valueType
         )
     }
