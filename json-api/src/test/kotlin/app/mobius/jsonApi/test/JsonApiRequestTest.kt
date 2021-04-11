@@ -82,11 +82,11 @@ class JsonApiRequestTest {
 
 //        When
         writeKtAsJsonToFile(
-                relPathFile = "/generated/request/relationship/relationshipWithoutDataAtomicMock.json",
+                relPathFile = "/generated/request/relationship/withoutDataAtomicMock.json",
                 value = expectedRelationshipWithoutDataAtomicMock
         )
         val actualRelationshipWithDataAtomicMock = writeJsonAsKtFromFile(
-                relPathFile = "/generated/request/relationship/relationshipWithoutDataAtomicMock.json",
+                relPathFile = "/generated/request/relationship/ithoutDataAtomicMock.json",
                 valueType = RelationshipMock::class.java
         )
 
@@ -104,11 +104,11 @@ class JsonApiRequestTest {
 
 //        When
         writeKtAsJsonToFile(
-                relPathFile = "/generated/request/relationship/relationshipWithDataAtomicMock.json",
+                relPathFile = "/generated/request/relationship/withDataAtomicMock.json",
                 value = expectedRelationshipWithDataAtomicMock
         )
         val actualRelationshipWithDataAtomicMock = writeJsonAsKtFromFile(
-                relPathFile = "/generated/request/relationship/relationshipWithDataAtomicMock.json",
+                relPathFile = "/generated/request/relationship/withDataAtomicMock.json",
                 valueType = RelationshipMock::class.java
         )
 
@@ -125,12 +125,12 @@ class JsonApiRequestTest {
 //        When
         assertDoesNotThrow {
             writeKtAsJsonToFile(
-                    relPathFile = "/generated/request/relationships/relationshipsWithDataAtomicMock.json",
+                    relPathFile = "/generated/request/relationships/withDataAtomicMock.json",
                     value = expectedRelationshipsWithDataAtomicMock
             )
         }
         val actualRelationshipsWithDataAtomicMock = writeJsonAsKtFromFile(
-                relPathFile = "/generated/request/relationships/relationshipsWithDataAtomicMock.json",
+                relPathFile = "/generated/request/relationships/withDataAtomicMock.json",
                 valueType = RelationshipsMock::class.java
         )
 
@@ -156,12 +156,12 @@ class JsonApiRequestTest {
 //        When
         assertDoesNotThrow {
             writeKtAsJsonToFile(
-                    relPathFile = "/generated/request/relationships/relationshipsWithDataAtomicMock.json",
+                    relPathFile = "/generated/request/relationships/withDataAtomicMock.json",
                     value = expectedRelationshipsWithDataAtomicMock
             )
         }
         val actualRelationshipsWithDataAtomicMock = writeJsonAsKtFromFile(
-                relPathFile = "/generated/request/relationships/relationshipsWithDataAtomicMock.json",
+                relPathFile = "/generated/request/relationships/withDataAtomicMock.json",
                 valueType = RelationshipsMock::class.java
         )
 

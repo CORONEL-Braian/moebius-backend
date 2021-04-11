@@ -4,6 +4,7 @@ import app.mobius.io.ParentPathFile
 import app.mobius.jsonApi.JsonApi
 import app.mobius.jsonApi.JsonApi.MODULE_NAME_JSON_API
 import app.mobius.jsonApi.test.model.SomeTest
+import app.mobius.jsonApi.test.model.jvm.OldPropertyName
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -71,6 +72,17 @@ class JsonApiTest {
 
         val new = SomeTest()
         Assertions.assertEquals("1", new.a)
+    }
+
+    @Test
+    fun `When change property name from KT to JSON, Then the json file shoul show the new property name`() {
+        val propertyName = OldPropertyName("")
+        JsonApi.writeKtAsJsonToFile(
+                moduleName = MODULE_NAME_JSON_API,
+                parentPathFile = ParentPathFile.Test.RESOURCES,
+                relPathFile = "/generated/jvm/newPropertyName.json",
+                value = propertyName
+        )
     }
 
 }
