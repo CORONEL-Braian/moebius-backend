@@ -11,8 +11,8 @@ data class RelationshipsMock(val relationships: List<RelationshipMock>) {
 
 //TODO: Change property name in runtime
 data class RelationshipMock(
-//        val anyRelationship: Map<String, DataAtomicMock>
-        @JsonProperty(value = "otherName") val anyRelationship: Map<String, DataAtomicMock>
+        val anyRelationship: Map<String, DataAtomicMock>
+//        @JsonProperty(value = "otherName") val anyRelationship: Map<String, DataAtomicMock>
 ) {
     constructor() : this(anyRelationship = mapOf())
 }
