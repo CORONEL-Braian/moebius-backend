@@ -27,7 +27,7 @@ object ResourceUtils {
      */
     fun getFile(
             moduleName: String,
-            parentPath: String = ParentPathFile.Main.KOTLIN,
+            parentPath: String,
             relPath: String
     ): File {
         val absolutePathCurrentModule = System.getProperty("user.dir")

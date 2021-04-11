@@ -9,13 +9,13 @@ class ResourceUtilsTest {
 
     @Test
     fun `create or update a file`() {
-        val canonicalName = "some2.json"
+        val relPathFile = "/some2.json"
 
         val absolutePathCurrentModule = System.getProperty("user.dir")
         val pathFromProjectRoot = absolutePathCurrentModule.dropLastWhile { it != '/' }
 
-        val actual = getFile(moduleName = "json-api", relPath = canonicalName)
-        val expected = File("${pathFromProjectRoot}json-api/src/main/resources/${canonicalName}")
+        val actual = getFile(moduleName = "json-api", parentPath = ParentPathFile.Test.RESOURCES, relPath = relPathFile)
+        val expected = File("${pathFromProjectRoot}json-api/src${ParentPathFile.Test.RESOURCES}${relPathFile}")
 
         Assertions.assertEquals(actual, expected)
     }

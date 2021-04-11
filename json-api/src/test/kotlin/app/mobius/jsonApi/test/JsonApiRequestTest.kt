@@ -44,6 +44,7 @@ class JsonApiRequestTest {
         }
     }
 
+//    TODO: relationship without data atomic
     @Test
     fun `2 - When write relationship with a data atomic mock from KT to JSON, Then the expected is equal to the actual from JSON as KT`() {
 //       Given
@@ -68,7 +69,10 @@ class JsonApiRequestTest {
 //        Then
         Assertions.assertEquals(expectedRelationshipWithDataAtomicMock, actualRelationshipWithDataAtomicMock)
     }
+    //    TODO: relationship without data
+    //    TODO: relationship with data
 
+    //    TODO: relationship without data atomic
     @Test
     fun `3 - When write some relationships with a data atomic mock from KT as JSON, Then the expected is equal to the actual from JSON as KT`() {
 //        Given
@@ -88,20 +92,22 @@ class JsonApiRequestTest {
             JsonApi.writeKtAsJsonToFile(
                     moduleName = JsonApi.MODULE_NAME_JSON_API,
                     parentPathFile = ParentPathFile.Test.RESOURCES,
-                    relPathFile = "/generated/request/relationship/relationshipsWithDataAtomicMock.json",
+                    relPathFile = "/generated/request/relationships/relationshipsWithDataAtomicMock.json",
                     value = actualRelationshipsWithDataAtomicMock
             )
         }
         val expectedRelationshipsWithDataAtomicMock = JsonApi.writeJsonAsKtFromFile(
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
                 parentPathFile = ParentPathFile.Test.RESOURCES,
-                relPathFile = "/generated/request/relationship/relationshipsWithDataAtomicMock.json",
+                relPathFile = "/generated/request/relationships/relationshipsWithDataAtomicMock.json",
                 valueType = RelationshipsMock::class.java
         )
 
 //        Then
         Assertions.assertEquals(expectedRelationshipsWithDataAtomicMock, actualRelationshipsWithDataAtomicMock)
     }
+    //    TODO: relationships without data
+    //    TODO: relationships with data
 
     @Test
     fun `4 - When write some links from KT as JSON, Then the expected is equal to the actual from JSON as KT`() {
@@ -149,7 +155,7 @@ class JsonApiRequestTest {
     }
 
     @Test
-    fun `5B - When write a data with relationships from KT as JSON, Then the expected is equal to the actual from JSON as KT and relations is not empty`() {
+    fun `6 - When write a data with relationships from KT as JSON, Then the expected is equal to the actual from JSON as KT and relations is not empty`() {
         val expectedData = provideData(
                 relationships = listOf(
                         provideRelationship(),
@@ -178,7 +184,7 @@ class JsonApiRequestTest {
     }
 
     @Test
-    fun `6 - When write a jsonApiRequest without data from KT to JSON, Then data of JSON is empty`() {
+    fun `7 - When write a jsonApiRequest without data from KT to JSON, Then data of JSON is empty`() {
 //        Given
         val jsonApiRequest = provideJsonApiRequest()
 
@@ -202,7 +208,7 @@ class JsonApiRequestTest {
     }
 
     @Test
-    fun `7 - When write a jsonApiRequest with a data from KT to JSON, Then data of JSON is not empty`() {
+    fun `8 - When write a jsonApiRequest with a data from KT to JSON, Then data of JSON is not empty`() {
 //        Given
         val jsonApiRequest = provideJsonApiRequest(data = listOf(Data()))
 
@@ -226,7 +232,7 @@ class JsonApiRequestTest {
     }
 
     @Test
-    fun `8 - When write a jsonApiRequest with a data and relationships from KT to JSON, Then data and relationships of JSON is not empty`() {
+    fun `9 - When write a jsonApiRequest with a data and relationships from KT to JSON, Then data and relationships of JSON is not empty`() {
 //        Given
         val expectedJsonApiRequest = provideJsonApiRequest(
                 data = listOf(

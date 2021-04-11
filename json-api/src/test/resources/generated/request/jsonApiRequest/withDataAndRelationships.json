@@ -1,9 +1,1 @@
-{"data":[
-  {"type":"",
-    "id":null,
-    "attributes":{},
-    "relationships":[
-        {"anyRelationship":{}},
-        {"anyRelationship":{}}
-    ],"links":null}
-]}
+{"data":[{"type":"","id":null,"attributes":{},"relationships":[{"anyRelationship":{}},{"anyRelationship":{}}],"links":null}]}

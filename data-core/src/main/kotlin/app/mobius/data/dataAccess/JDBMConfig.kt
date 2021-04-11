@@ -22,7 +22,7 @@ class JDBMConfig {
 
     object Hibernate {
 
-        private const val HIBERNATE_CONFIGURATION = "secret-hibernate.cfg.xml"
+        private const val HIBERNATE_CONFIGURATION = "/secret-hibernate.cfg.xml"
 
        /* @Bean(name = ["entityManagerFactory"])
         fun sessionFactory(): LocalSessionFactoryBean? {
@@ -54,10 +54,10 @@ class JDBMConfig {
 
         /**
          * Open the session using hibernate cfg for only mapped entity
-         * @param canonicalName: e.g: secret-hibernate.cfg.xml
+         * @param relPathFile: e.g: /secret-hibernate.cfg.xml
          */
-        fun openSessionForOnly(annotatedClass: Class<*>, canonicalName: String = HIBERNATE_CONFIGURATION) : Session {
-            val sessionFactory = getSessionFactoryForOnly(annotatedClass, canonicalName)
+        fun openSessionForOnly(annotatedClass: Class<*>, relPathFile: String = HIBERNATE_CONFIGURATION) : Session {
+            val sessionFactory = getSessionFactoryForOnly(annotatedClass, relPathFile)
             return sessionFactory.openSession()
         }
 
@@ -75,15 +75,15 @@ class JDBMConfig {
          * PRE: Configure entity mapping in open-persistence.xml necessary for the class hierarchy
          * OBS: Session Factory puede tener varias sesiones abiertas.
          * @param annotatedClass The class containing annotations
-         * @param canonicalName: e.g: secret-hibernate.cfg.xml
+         * @param relPathFile: e.g: secret-hibernate.cfg.xml
          */
         @Throws(HibernateException::class)
-        fun getSessionFactoryForOnly(annotatedClass: Class<*>, canonicalName: String) : SessionFactory {
+        fun getSessionFactoryForOnly(annotatedClass: Class<*>, relPathFile: String) : SessionFactory {
             return Configuration()
                     .configure(getFile(
                             moduleName = "data-core",
                             parentPath = ParentPathFile.Main.RESOURCES,
-                            relPath = canonicalName
+                            relPath = relPathFile
                     ))
                     .addAnnotatedClass(annotatedClass)
                     .buildSessionFactory()
@@ -101,7 +101,7 @@ class JDBMConfig {
         private fun autoScanEntities(canonicalName: String) : SessionFactory {
             val configuration = Configuration()
                     .configure(
-                            getFile(
+                                getFile(
                                     moduleName = "data-core",
                                     parentPath = ParentPathFile.Main.RESOURCES,
                                     relPath = canonicalName
