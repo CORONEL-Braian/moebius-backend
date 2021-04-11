@@ -1,7 +1,7 @@
 package app.mobius.jsonApi.model.request
 
 data class JsonApiRequest(
-        val data: List<Data>,   // TODO: Check if use ArrayList exactly when deserialize
+        val data: List<Data>,
 ) {
     constructor() : this(data = listOf())
 }
