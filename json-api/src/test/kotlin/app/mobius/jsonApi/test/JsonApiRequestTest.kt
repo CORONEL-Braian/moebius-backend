@@ -17,6 +17,32 @@ import java.util.*
 
 class JsonApiRequestTest {
 
+    private fun writeKtAsJsonToFile(
+            moduleName: String = JsonApi.MODULE_NAME_JSON_API,
+            parentPathFile: String = ParentPathFile.Test.RESOURCES,
+            relPathFile: String,
+            value: Any
+    ) {
+        JsonApi.writeKtAsJsonToFile(
+                moduleName = moduleName,
+                parentPathFile = parentPathFile,
+                relPathFile = relPathFile,
+                value = value
+        )
+    }
+
+    private fun <T> writeJsonAsKtFromFile(
+            moduleName: String = JsonApi.MODULE_NAME_JSON_API,
+            parentPathFile: String = ParentPathFile.Test.RESOURCES,
+            relPathFile: String,
+            valueType: Class<T>
+    ) = JsonApi.writeJsonAsKtFromFile(
+            moduleName = moduleName,
+            parentPathFile = parentPathFile,
+            relPathFile = relPathFile,
+            valueType = valueType
+    )
+
     private fun provideData(type: String = "",
                             id: UUID? = null,
                             attributes: Map<String, Any> = mapOf(),
@@ -31,52 +57,92 @@ class JsonApiRequestTest {
             relationship: Map<String, Data> = mapOf()
     ) = Relationship(relationship)
 
+    private fun provideRelationshipMock(
+            anyRelationship: Map<String, DataAtomicMock> = mapOf()
+    ) = RelationshipMock(anyRelationship = anyRelationship)
+
+    private fun provideRelationshipsMock(
+            relationships: List<RelationshipMock> = listOf()
+    ) = RelationshipsMock(relationships = relationships)
 
     @Test
     fun `1 - When write the attributes from json to kt, then shouldn't throw an exception`() {
         assertDoesNotThrow {
-            JsonApi.writeJsonAsKtFromFile(
-                    moduleName = JsonApi.MODULE_NAME_JSON_API,
-                    parentPathFile = ParentPathFile.Test.RESOURCES,
-                    relPathFile = "/generated/request/attributes.json",
+            writeJsonAsKtFromFile(
+                    relPathFile = "/generated/request/attributes/attributes.json",
                     valueType = AttributesMock::class.java
             )
         }
     }
 
-//    TODO: relationship without data atomic
     @Test
-    fun `2 - When write relationship with a data atomic mock from KT to JSON, Then the expected is equal to the actual from JSON as KT`() {
+    fun `2 - When write relationship mock without a data atomic mock from KT to JSON, Then the expected == actual from JSON as KT and relationship mock is empty`() {
 //       Given
-        val expectedRelationshipWithDataAtomicMock = RelationshipMock(
+        val expectedRelationshipWithoutDataAtomicMock = provideRelationshipMock()
+
+//        When
+        writeKtAsJsonToFile(
+                relPathFile = "/generated/request/relationship/relationshipWithoutDataAtomicMock.json",
+                value = expectedRelationshipWithoutDataAtomicMock
+        )
+        val actualRelationshipWithDataAtomicMock = writeJsonAsKtFromFile(
+                relPathFile = "/generated/request/relationship/relationshipWithoutDataAtomicMock.json",
+                valueType = RelationshipMock::class.java
+        )
+
+//        Then
+        Assertions.assertEquals(expectedRelationshipWithoutDataAtomicMock, actualRelationshipWithDataAtomicMock)
+        assert(actualRelationshipWithDataAtomicMock.anyRelationship.isEmpty())
+    }
+
+    @Test
+    fun `2B - When write relationship mock with a data atomic mock from KT to JSON, Then the expected == actual from JSON as KT and relationship mock is not empty`() {
+//       Given
+        val expectedRelationshipWithDataAtomicMock = provideRelationshipMock(
                 mapOf("data" to DataAtomicMock("profile"))
         )
 
 //        When
-        JsonApi.writeKtAsJsonToFile(
-                moduleName = JsonApi.MODULE_NAME_JSON_API,
-                parentPathFile = ParentPathFile.Test.RESOURCES,
+        writeKtAsJsonToFile(
                 relPathFile = "/generated/request/relationship/relationshipWithDataAtomicMock.json",
                 value = expectedRelationshipWithDataAtomicMock
         )
-        val actualRelationshipWithDataAtomicMock = JsonApi.writeJsonAsKtFromFile(
-                moduleName = JsonApi.MODULE_NAME_JSON_API,
-                parentPathFile = ParentPathFile.Test.RESOURCES,
+        val actualRelationshipWithDataAtomicMock = writeJsonAsKtFromFile(
                 relPathFile = "/generated/request/relationship/relationshipWithDataAtomicMock.json",
                 valueType = RelationshipMock::class.java
         )
 
 //        Then
         Assertions.assertEquals(expectedRelationshipWithDataAtomicMock, actualRelationshipWithDataAtomicMock)
+        assert(actualRelationshipWithDataAtomicMock.anyRelationship.isNotEmpty())
     }
-    //    TODO: relationship without data
-    //    TODO: relationship with data
 
-    //    TODO: relationship without data atomic
     @Test
-    fun `3 - When write some relationships with a data atomic mock from KT as JSON, Then the expected is equal to the actual from JSON as KT`() {
+    fun `3A - When write some relationships without a data atomic mock from KT as JSON, Then the expected == actual from JSON as KT and relationships is empty`() {
 //        Given
-        val actualRelationshipsWithDataAtomicMock = RelationshipsMock(
+        val expectedRelationshipsWithDataAtomicMock = provideRelationshipsMock()
+
+//        When
+        assertDoesNotThrow {
+            writeKtAsJsonToFile(
+                    relPathFile = "/generated/request/relationships/relationshipsWithDataAtomicMock.json",
+                    value = expectedRelationshipsWithDataAtomicMock
+            )
+        }
+        val actualRelationshipsWithDataAtomicMock = writeJsonAsKtFromFile(
+                relPathFile = "/generated/request/relationships/relationshipsWithDataAtomicMock.json",
+                valueType = RelationshipsMock::class.java
+        )
+
+//        Then
+        Assertions.assertEquals(expectedRelationshipsWithDataAtomicMock, actualRelationshipsWithDataAtomicMock)
+        assert(actualRelationshipsWithDataAtomicMock.relationships.isEmpty())
+    }
+
+    @Test
+    fun `3B - When write some relationships with a data atomic mock from KT as JSON, Then the expected == actual from JSON as KT and relationships is not empty`() {
+//        Given
+        val expectedRelationshipsWithDataAtomicMock = RelationshipsMock(
                 relationships = listOf(
                         RelationshipMock(
                                 mapOf("data" to DataAtomicMock("profile"))
@@ -89,40 +155,31 @@ class JsonApiRequestTest {
 
 //        When
         assertDoesNotThrow {
-            JsonApi.writeKtAsJsonToFile(
-                    moduleName = JsonApi.MODULE_NAME_JSON_API,
-                    parentPathFile = ParentPathFile.Test.RESOURCES,
+            writeKtAsJsonToFile(
                     relPathFile = "/generated/request/relationships/relationshipsWithDataAtomicMock.json",
-                    value = actualRelationshipsWithDataAtomicMock
+                    value = expectedRelationshipsWithDataAtomicMock
             )
         }
-        val expectedRelationshipsWithDataAtomicMock = JsonApi.writeJsonAsKtFromFile(
-                moduleName = JsonApi.MODULE_NAME_JSON_API,
-                parentPathFile = ParentPathFile.Test.RESOURCES,
+        val actualRelationshipsWithDataAtomicMock = writeJsonAsKtFromFile(
                 relPathFile = "/generated/request/relationships/relationshipsWithDataAtomicMock.json",
                 valueType = RelationshipsMock::class.java
         )
 
 //        Then
         Assertions.assertEquals(expectedRelationshipsWithDataAtomicMock, actualRelationshipsWithDataAtomicMock)
+        assert(expectedRelationshipsWithDataAtomicMock.relationships.isNotEmpty())
     }
-    //    TODO: relationships without data
-    //    TODO: relationships with data
 
     @Test
-    fun `4 - When write some links from KT as JSON, Then the expected is equal to the actual from JSON as KT`() {
+    fun `4 - When write some links from KT as JSON, Then the expected == actual from JSON as KT`() {
         val expectedLinks = Links()
 
-        JsonApi.writeKtAsJsonToFile(
-                moduleName = JsonApi.MODULE_NAME_JSON_API,
-                parentPathFile = ParentPathFile.Test.RESOURCES,
-                relPathFile = "/generated/request/links.json",
+        writeKtAsJsonToFile(
+                relPathFile = "/generated/request/links/links.json",
                 value = expectedLinks
         )
-        val actualLinks = JsonApi.writeJsonAsKtFromFile(
-                moduleName = JsonApi.MODULE_NAME_JSON_API,
-                parentPathFile = ParentPathFile.Test.RESOURCES,
-                relPathFile = "/generated/request/links.json",
+        val actualLinks = writeJsonAsKtFromFile(
+                relPathFile = "/generated/request/links/links.json",
                 valueType = Links::class.java
         )
 
@@ -131,20 +188,16 @@ class JsonApiRequestTest {
     }
 
     @Test
-    fun `5 - When write a data without relationships from KT as JSON, Then the expected is equal to the actual from JSON as KT `() {
+    fun `5 - When write a data without relationships from KT as JSON, Then the expected == actual from JSON as KT `() {
         val expectedData = provideData()
 
         assertDoesNotThrow {
-            JsonApi.writeKtAsJsonToFile(
-                    moduleName = JsonApi.MODULE_NAME_JSON_API,
-                    parentPathFile = ParentPathFile.Test.RESOURCES,
+            writeKtAsJsonToFile(
                     relPathFile = "/generated/request/data/dataWithoutRelationships.json",
                     value = expectedData
             )
         }
-        val actualData = JsonApi.writeJsonAsKtFromFile(
-                moduleName = JsonApi.MODULE_NAME_JSON_API,
-                parentPathFile = ParentPathFile.Test.RESOURCES,
+        val actualData = writeJsonAsKtFromFile(
                 relPathFile = "/generated/request/data/dataWithoutRelationships.json",
                 valueType = Data::class.java
         )
@@ -155,7 +208,7 @@ class JsonApiRequestTest {
     }
 
     @Test
-    fun `6 - When write a data with relationships from KT as JSON, Then the expected is equal to the actual from JSON as KT and relations is not empty`() {
+    fun `6 - When write a data with relationships from KT as JSON, Then the expected == actual from JSON as KT and relations is not empty`() {
         val expectedData = provideData(
                 relationships = listOf(
                         provideRelationship(),
@@ -164,16 +217,12 @@ class JsonApiRequestTest {
         )
 
         assertDoesNotThrow {
-            JsonApi.writeKtAsJsonToFile(
-                    moduleName = JsonApi.MODULE_NAME_JSON_API,
-                    parentPathFile = ParentPathFile.Test.RESOURCES,
+            writeKtAsJsonToFile(
                     relPathFile = "/generated/request/data/dataWithRelationships.json",
                     value = expectedData
             )
         }
-        val actualData = JsonApi.writeJsonAsKtFromFile(
-                moduleName = JsonApi.MODULE_NAME_JSON_API,
-                parentPathFile = ParentPathFile.Test.RESOURCES,
+        val actualData = writeJsonAsKtFromFile(
                 relPathFile = "/generated/request/data/dataWithRelationships.json",
                 valueType = Data::class.java
         )
@@ -189,15 +238,11 @@ class JsonApiRequestTest {
         val jsonApiRequest = provideJsonApiRequest()
 
 //        When
-        JsonApi.writeKtAsJsonToFile(
-                moduleName = JsonApi.MODULE_NAME_JSON_API,
-                parentPathFile = ParentPathFile.Test.RESOURCES,
+        writeKtAsJsonToFile(
                 relPathFile = "/generated/request/jsonApiRequest/emptyData.json",
                 value = jsonApiRequest
         )
-        val jsonApiRequestActual = JsonApi.writeJsonAsKtFromFile(
-                moduleName = JsonApi.MODULE_NAME_JSON_API,
-                parentPathFile = ParentPathFile.Test.RESOURCES,
+        val jsonApiRequestActual = writeJsonAsKtFromFile(
                 relPathFile = "/generated/request/jsonApiRequest/emptyData.json",
                 valueType = JsonApiRequest::class.java
         )
@@ -208,27 +253,24 @@ class JsonApiRequestTest {
     }
 
     @Test
-    fun `8 - When write a jsonApiRequest with a data from KT to JSON, Then data of JSON is not empty`() {
+    fun `8 - When write a jsonApiRequest with a data and without relationships from KT to JSON, Then data of JSON is not empty and has not relationships`() {
 //        Given
-        val jsonApiRequest = provideJsonApiRequest(data = listOf(Data()))
+        val expectedJsonApiRequest = provideJsonApiRequest(data = listOf(provideData()))
 
 //        When
-        JsonApi.writeKtAsJsonToFile(
-                moduleName = JsonApi.MODULE_NAME_JSON_API,
-                parentPathFile = ParentPathFile.Test.RESOURCES,
+        writeKtAsJsonToFile(
                 relPathFile = "/generated/request/jsonApiRequest/withData.json",
-                value = jsonApiRequest
+                value = expectedJsonApiRequest
         )
-        val jsonApiRequestActual = JsonApi.writeJsonAsKtFromFile(
-                moduleName = JsonApi.MODULE_NAME_JSON_API,
-                parentPathFile = ParentPathFile.Test.RESOURCES,
+        val actualJsonApiRequest = writeJsonAsKtFromFile(
                 relPathFile = "/generated/request/jsonApiRequest/withData.json",
                 valueType = JsonApiRequest::class.java
         )
 
 //        Then
-        assert(jsonApiRequestActual.data.isNotEmpty())
-        Assertions.assertEquals(jsonApiRequest, jsonApiRequestActual)
+        Assertions.assertEquals(expectedJsonApiRequest, actualJsonApiRequest)
+        assert(actualJsonApiRequest.data.isNotEmpty())
+        assert(actualJsonApiRequest.data.first().relationships.isEmpty())
     }
 
     @Test
@@ -246,23 +288,54 @@ class JsonApiRequestTest {
         )
 
 //        When
-        JsonApi.writeKtAsJsonToFile(
-                moduleName = JsonApi.MODULE_NAME_JSON_API,
-                parentPathFile = ParentPathFile.Test.RESOURCES,
+        writeKtAsJsonToFile(
                 relPathFile = "/generated/request/jsonApiRequest/withDataAndRelationships.json",
                 value = expectedJsonApiRequest
         )
-        val jsonApiRequestActual = JsonApi.writeJsonAsKtFromFile(
-                moduleName = JsonApi.MODULE_NAME_JSON_API,
-                parentPathFile = ParentPathFile.Test.RESOURCES,
+        val actualJsonApiRequest = writeJsonAsKtFromFile(
                 relPathFile = "/generated/request/jsonApiRequest/withDataAndRelationships.json",
                 valueType = JsonApiRequest::class.java
         )
 
+        Assertions.assertEquals(expectedJsonApiRequest, actualJsonApiRequest)
 //        Then
-        assert(jsonApiRequestActual.data.isNotEmpty())
-        assert(jsonApiRequestActual.data.isNotEmpty())
-        Assertions.assertEquals(expectedJsonApiRequest, jsonApiRequestActual)
+        assert(actualJsonApiRequest.data.isNotEmpty())
+        assert(actualJsonApiRequest.data.first().relationships.isNotEmpty())
+    }
+
+    @Test
+    fun `10 - When write a jsonApiRequest with data in any relationship from KT to JSON, Then any relationship data of JSON is not empty`() {
+//        Given
+        val expectedJsonApiRequest = provideJsonApiRequest(
+                data = listOf(
+                        provideData(
+                                relationships = listOf(
+                                        provideRelationship(
+                                                relationship = mapOf("data" to provideData(type = "profile"))
+                                        ),
+                                        provideRelationship(
+                                                relationship = mapOf("data" to provideData(type = "settings"))
+                                        ),
+                                )
+                        )
+                )
+        )
+
+//        When
+        writeKtAsJsonToFile(
+                relPathFile = "/generated/request/jsonApiRequest/withDataInAnyRelationship.json",
+                value = expectedJsonApiRequest
+        )
+        val actualJsonApiRequest = writeJsonAsKtFromFile(
+                relPathFile = "/generated/request/jsonApiRequest/withDataInAnyRelationship.json",
+                valueType = JsonApiRequest::class.java
+        )
+
+//        Then
+        Assertions.assertEquals(expectedJsonApiRequest, actualJsonApiRequest)
+        assert(actualJsonApiRequest.data.isNotEmpty())
+        assert(actualJsonApiRequest.data.first().relationships.isNotEmpty())
+        assert(actualJsonApiRequest.data.first().relationships.first().anyRelationship.isNotEmpty())
     }
 
 }
