@@ -67,12 +67,17 @@ class JsonApiRequestTest {
 
     @Test
     fun `1 - When write the attributes from json to kt, then shouldn't throw an exception`() {
-        assertDoesNotThrow {
-            writeJsonAsKtFromFile(
-                    relPathFile = "/generated/request/attributes/attributes.json",
-                    valueType = AttributesMock::class.java
-            )
-        }
+        val attributesMock = AttributesMock(attributes = mapOf("a" to 1))
+        JsonApi.writeKtAsJsonToFile(
+                moduleName = JsonApi.MODULE_NAME_JSON_API,
+                parentPathFile = ParentPathFile.Test.RESOURCES,
+                relPathFile = "/generated/request/attributes/attributes.json",
+                value = attributesMock
+        )
+        writeJsonAsKtFromFile(
+                relPathFile = "/generated/request/attributes/attributes.json",
+                valueType = AttributesMock::class.java
+        )
     }
 
     @Test
@@ -118,31 +123,59 @@ class JsonApiRequestTest {
     }
 
     @Test
-    fun `3A - When write some relationships without a data atomic mock from KT as JSON, Then the expected == actual from JSON as KT and relationships is empty`() {
+    fun `3A - When write relationships without content from KT as JSON, Then the expected == actual from JSON as KT and relationships is empty`() {
 //        Given
-        val expectedRelationshipsWithDataAtomicMock = provideRelationshipsMock()
+        val expectedWithoutRelationships = provideRelationshipsMock()
 
 //        When
         assertDoesNotThrow {
             writeKtAsJsonToFile(
-                    relPathFile = "/generated/request/relationships/withDataAtomicMock.json",
-                    value = expectedRelationshipsWithDataAtomicMock
+                    relPathFile = "/generated/request/relationships/withoutContent.json",
+                    value = expectedWithoutRelationships
             )
         }
-        val actualRelationshipsWithDataAtomicMock = writeJsonAsKtFromFile(
-                relPathFile = "/generated/request/relationships/withDataAtomicMock.json",
+        val actualRelationshipsWithoutDataAtomicMock = writeJsonAsKtFromFile(
+                relPathFile = "/generated/request/relationships/withoutContent.json",
                 valueType = RelationshipsMock::class.java
         )
 
 //        Then
-        Assertions.assertEquals(expectedRelationshipsWithDataAtomicMock, actualRelationshipsWithDataAtomicMock)
-        assert(actualRelationshipsWithDataAtomicMock.relationships.isEmpty())
+        Assertions.assertEquals(expectedWithoutRelationships, actualRelationshipsWithoutDataAtomicMock)
+        assert(actualRelationshipsWithoutDataAtomicMock.relationships.isEmpty())
     }
 
     @Test
-    fun `3B - When write some relationships with a data atomic mock from KT as JSON, Then the expected == actual from JSON as KT and relationships is not empty`() {
+    fun `3B - When write relationships with each content is empty from KT as JSON, Then the expected == actual from JSON as KT and each content is empty`() {
 //        Given
-        val expectedRelationshipsWithDataAtomicMock = RelationshipsMock(
+        val expectedRelationshipsWithEachEmptyContent = RelationshipsMock(
+                relationships = listOf(
+                        RelationshipMock(),
+                        RelationshipMock()
+                )
+        )
+
+//        When
+        assertDoesNotThrow {
+            writeKtAsJsonToFile(
+                    relPathFile = "/generated/request/relationships/withEachEmptyContent.json",
+                    value = expectedRelationshipsWithEachEmptyContent
+            )
+        }
+        val actualRelationshipsWithEachEmptyContent = writeJsonAsKtFromFile(
+                relPathFile = "/generated/request/relationships/withEachEmptyContent.json",
+                valueType = RelationshipsMock::class.java
+        )
+
+//        Then
+        Assertions.assertEquals(expectedRelationshipsWithEachEmptyContent, actualRelationshipsWithEachEmptyContent)
+        assert(expectedRelationshipsWithEachEmptyContent.relationships.first().anyRelationship.isEmpty())
+    }
+
+    @Test
+    fun `3C - When write relationships with each content from KT as JSON, Then the expected == actual from JSON as KT and each content is not empty`() {
+
+//        Given
+        val expectedRelationshipsWithEachNotEmptyContent = RelationshipsMock(
                 relationships = listOf(
                         RelationshipMock(
                                 mapOf("data" to DataAtomicMock("profile"))
@@ -156,18 +189,18 @@ class JsonApiRequestTest {
 //        When
         assertDoesNotThrow {
             writeKtAsJsonToFile(
-                    relPathFile = "/generated/request/relationships/withDataAtomicMock.json",
-                    value = expectedRelationshipsWithDataAtomicMock
+                    relPathFile = "/generated/request/relationships/withEachNotEmptyContent.json",
+                    value = expectedRelationshipsWithEachNotEmptyContent
             )
         }
-        val actualRelationshipsWithDataAtomicMock = writeJsonAsKtFromFile(
-                relPathFile = "/generated/request/relationships/withDataAtomicMock.json",
+        val actualRelationshipsWithEachNotEmptyContent = writeJsonAsKtFromFile(
+                relPathFile = "/generated/request/relationships/withEachNotEmptyContent.json",
                 valueType = RelationshipsMock::class.java
         )
 
 //        Then
-        Assertions.assertEquals(expectedRelationshipsWithDataAtomicMock, actualRelationshipsWithDataAtomicMock)
-        assert(expectedRelationshipsWithDataAtomicMock.relationships.isNotEmpty())
+        Assertions.assertEquals(expectedRelationshipsWithEachNotEmptyContent, actualRelationshipsWithEachNotEmptyContent)
+        assert(expectedRelationshipsWithEachNotEmptyContent.relationships.first().anyRelationship.isNotEmpty())
     }
 
     @Test
