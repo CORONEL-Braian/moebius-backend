@@ -1,8 +1,10 @@
 package app.mobius.jsonApi.model.request
 
-import com.fasterxml.jackson.annotation.JsonProperty
-
-//TODO: Change property name in runtime
-data class Relationship(val anyRelationship: Map<String, Data>) {
-    constructor() : this(anyRelationship = mapOf())
+/**
+ * Represents the relationships with a custom name for each one
+ * OBS: Does not split data type (from List<Map<X>> to List<Y>)
+ * for avoid using generics for define custom property names in each relationship
+ */
+data class Relationships(val relationships: Map<String, Data>) {
+    constructor() : this(relationships = mapOf())
 }

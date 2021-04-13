@@ -2,10 +2,7 @@ package app.mobius.jsonApi.test
 
 import app.mobius.io.ParentPathFile
 import app.mobius.jsonApi.JsonApi
-import app.mobius.jsonApi.model.request.Data
-import app.mobius.jsonApi.model.request.JsonApiRequest
-import app.mobius.jsonApi.model.request.Links
-import app.mobius.jsonApi.model.request.Relationship
+import app.mobius.jsonApi.model.request.*
 import app.mobius.jsonApi.test.model.request.AttributesMock
 import app.mobius.jsonApi.test.model.request.DataAtomicMock
 import app.mobius.jsonApi.test.model.request.RelationshipMock
@@ -155,12 +152,10 @@ class JsonApiRequestTest {
         )
 
 //        When
-        assertDoesNotThrow {
-            writeKtAsJsonToFile(
-                    relPathFile = "/generated/request/relationships/withEachEmptyContent.json",
-                    value = expectedRelationshipsWithEachEmptyContent
-            )
-        }
+        writeKtAsJsonToFile(
+            relPathFile = "/generated/request/relationships/withEachEmptyContent.json",
+            value = expectedRelationshipsWithEachEmptyContent
+        )
         val actualRelationshipsWithEachEmptyContent = writeJsonAsKtFromFile(
                 relPathFile = "/generated/request/relationships/withEachEmptyContent.json",
                 valueType = RelationshipsMock::class.java
@@ -169,6 +164,22 @@ class JsonApiRequestTest {
 //        Then
         Assertions.assertEquals(expectedRelationshipsWithEachEmptyContent, actualRelationshipsWithEachEmptyContent)
         assert(expectedRelationshipsWithEachEmptyContent.relationships.first().anyRelationship.isEmpty())
+    }
+
+    @Test
+    fun `3B2 - When add a relationship with data, Then has a custom name`() {
+        val withoutGeneric = RelationshipsMock(
+                relationships = listOf(
+                        mapOf("profile" to DataAtomicMock()),
+                        mapOf("settings" to DataAtomicMock()),
+                        mapOf("other" to DataAtomicMock()),
+                )
+        )
+
+        writeKtAsJsonToFile(
+                relPathFile = "/generated/request/relationships/withoutGeneric.json",
+                value = withoutGeneric
+        )
     }
 
     @Test
