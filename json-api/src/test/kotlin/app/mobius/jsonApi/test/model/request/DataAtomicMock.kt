@@ -1,10 +1,11 @@
 package app.mobius.jsonApi.test.model.request
 
 /**
- * For cut the circular dependency
+ * Cut the circular dependency
+ * For not mock replace String by Data
  */
 data class DataAtomicMock(
-        val type: String
+        val data: String = ""
 ) {
-    constructor() : this(type = "")
+    constructor() : this(data = "")
 }

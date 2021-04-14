@@ -43,7 +43,7 @@ class JsonApiRequestTest {
     private fun provideData(type: String = "",
                             id: UUID? = null,
                             attributes: Map<String, Any> = mapOf(),
-                            relationships: List<Relationship> = listOf(),
+                            relationships: List<Map<String, Data>> = listOf(),
                             links: Links? = null
     ) = Data(type,id, attributes, relationships, links)
 
@@ -52,15 +52,19 @@ class JsonApiRequestTest {
 
     private fun provideRelationship(
             relationship: Map<String, Data> = mapOf()
-    ) = Relationship(relationship)
+    ) = relationship
 
     private fun provideRelationshipMock(
             anyRelationship: Map<String, DataAtomicMock> = mapOf()
     ) = RelationshipMock(anyRelationship = anyRelationship)
 
     private fun provideRelationshipsMock(
-            relationships: List<RelationshipMock> = listOf()
+            relationships: List<Map<String, DataAtomicMock>> = listOf()
     ) = RelationshipsMock(relationships = relationships)
+
+    private fun provideRelationships(
+            relationships:  List<Map<String, Data>> = listOf()
+    ) : List<Map<String, Data>> = relationships
 
     @Test
     fun `1 - When write the attributes from json to kt, then shouldn't throw an exception`() {
@@ -101,7 +105,7 @@ class JsonApiRequestTest {
     fun `2B - When write relationship mock with a data atomic mock from KT to JSON, Then the expected == actual from JSON as KT and relationship mock is not empty`() {
 //       Given
         val expectedRelationshipWithDataAtomicMock = provideRelationshipMock(
-                mapOf("data" to DataAtomicMock("profile"))
+                mapOf("profile" to DataAtomicMock())
         )
 
 //        When
@@ -144,11 +148,11 @@ class JsonApiRequestTest {
     @Test
     fun `3B - When write relationships with each content is empty from KT as JSON, Then the expected == actual from JSON as KT and each content is empty`() {
 //        Given
-        val expectedRelationshipsWithEachEmptyContent = RelationshipsMock(
-                relationships = listOf(
-                        RelationshipMock(),
-                        RelationshipMock()
-                )
+        val expectedRelationshipsWithEachEmptyContent = provideRelationshipsMock(
+            relationships = listOf(
+                    mapOf(),
+                    mapOf(),
+            )
         )
 
 //        When
@@ -163,11 +167,11 @@ class JsonApiRequestTest {
 
 //        Then
         Assertions.assertEquals(expectedRelationshipsWithEachEmptyContent, actualRelationshipsWithEachEmptyContent)
-        assert(expectedRelationshipsWithEachEmptyContent.relationships.first().anyRelationship.isEmpty())
+        assert(expectedRelationshipsWithEachEmptyContent.relationships.first().isEmpty())
     }
 
     @Test
-    fun `3B2 - When add a relationship with data, Then has a custom name`() {
+    fun `3C - When add a relationship with data, Then has a custom name`() {
         val withoutGeneric = RelationshipsMock(
                 relationships = listOf(
                         mapOf("profile" to DataAtomicMock()),
@@ -183,17 +187,12 @@ class JsonApiRequestTest {
     }
 
     @Test
-    fun `3C - When write relationships with each content from KT as JSON, Then the expected == actual from JSON as KT and each content is not empty`() {
-
+    fun `3D - When write relationships with each content from KT as JSON, Then the expected == actual from JSON as KT and each content is not empty`() {
 //        Given
         val expectedRelationshipsWithEachNotEmptyContent = RelationshipsMock(
                 relationships = listOf(
-                        RelationshipMock(
-                                mapOf("data" to DataAtomicMock("profile"))
-                        ),
-                        RelationshipMock(
-                                mapOf("data" to DataAtomicMock("setting"))
-                        )
+                        mapOf("profile" to DataAtomicMock()),
+                        mapOf("settings" to DataAtomicMock())
                 )
         )
 
@@ -211,8 +210,9 @@ class JsonApiRequestTest {
 
 //        Then
         Assertions.assertEquals(expectedRelationshipsWithEachNotEmptyContent, actualRelationshipsWithEachNotEmptyContent)
-        assert(expectedRelationshipsWithEachNotEmptyContent.relationships.first().anyRelationship.isNotEmpty())
+        assert(expectedRelationshipsWithEachNotEmptyContent.relationships.first().isNotEmpty())
     }
+
 
     @Test
     fun `4 - When write some links from KT as JSON, Then the expected == actual from JSON as KT`() {
@@ -227,7 +227,7 @@ class JsonApiRequestTest {
                 valueType = Links::class.java
         )
 
-//        Then
+    //        Then
         Assertions.assertEquals(expectedLinks, actualLinks)
     }
 
@@ -246,7 +246,7 @@ class JsonApiRequestTest {
                 valueType = Data::class.java
         )
 
-//        Then
+    //        Then
         Assertions.assertEquals(expectedData, actualData)
         assert(actualData.relationships.isEmpty())
     }
@@ -271,17 +271,17 @@ class JsonApiRequestTest {
                 valueType = Data::class.java
         )
 
-//        Then
+    //        Then
         Assertions.assertEquals(expectedData, actualData)
         assert(actualData.relationships.isNotEmpty())
     }
 
     @Test
     fun `7 - When write a jsonApiRequest without data from KT to JSON, Then data of JSON is empty`() {
-//        Given
+    //        Given
         val jsonApiRequest = provideJsonApiRequest()
 
-//        When
+    //        When
         writeKtAsJsonToFile(
                 relPathFile = "/generated/request/jsonApiRequest/emptyData.json",
                 value = jsonApiRequest
@@ -291,17 +291,18 @@ class JsonApiRequestTest {
                 valueType = JsonApiRequest::class.java
         )
 
-//        Then
+    //        Then
         assert(jsonApiRequestActual.data.isEmpty())
         Assertions.assertEquals(jsonApiRequest, jsonApiRequestActual)
     }
 
+
     @Test
     fun `8 - When write a jsonApiRequest with a data and without relationships from KT to JSON, Then data of JSON is not empty and has not relationships`() {
-//        Given
+    //        Given
         val expectedJsonApiRequest = provideJsonApiRequest(data = listOf(provideData()))
 
-//        When
+    //        When
         writeKtAsJsonToFile(
                 relPathFile = "/generated/request/jsonApiRequest/withData.json",
                 value = expectedJsonApiRequest
@@ -311,7 +312,7 @@ class JsonApiRequestTest {
                 valueType = JsonApiRequest::class.java
         )
 
-//        Then
+    //        Then
         Assertions.assertEquals(expectedJsonApiRequest, actualJsonApiRequest)
         assert(actualJsonApiRequest.data.isNotEmpty())
         assert(actualJsonApiRequest.data.first().relationships.isEmpty())
@@ -319,19 +320,21 @@ class JsonApiRequestTest {
 
     @Test
     fun `9 - When write a jsonApiRequest with a data and relationships from KT to JSON, Then data and relationships of JSON is not empty`() {
-//        Given
+    //        Given
         val expectedJsonApiRequest = provideJsonApiRequest(
                 data = listOf(
                         provideData(
-                                relationships = listOf(
-                                        provideRelationship(),
-                                        provideRelationship(),
+                                relationships = provideRelationships(
+                                        listOf(
+                                                provideRelationship(),
+                                                provideRelationship(),
+                                        )
                                 )
                         )
                 )
         )
 
-//        When
+    //        When
         writeKtAsJsonToFile(
                 relPathFile = "/generated/request/jsonApiRequest/withDataAndRelationships.json",
                 value = expectedJsonApiRequest
@@ -341,15 +344,15 @@ class JsonApiRequestTest {
                 valueType = JsonApiRequest::class.java
         )
 
-        Assertions.assertEquals(expectedJsonApiRequest, actualJsonApiRequest)
 //        Then
+        Assertions.assertEquals(expectedJsonApiRequest, actualJsonApiRequest)
         assert(actualJsonApiRequest.data.isNotEmpty())
         assert(actualJsonApiRequest.data.first().relationships.isNotEmpty())
     }
 
     @Test
     fun `10 - When write a jsonApiRequest with data in any relationship from KT to JSON, Then any relationship data of JSON is not empty`() {
-//        Given
+    //        Given
         val expectedJsonApiRequest = provideJsonApiRequest(
                 data = listOf(
                         provideData(
@@ -365,7 +368,7 @@ class JsonApiRequestTest {
                 )
         )
 
-//        When
+    //        When
         writeKtAsJsonToFile(
                 relPathFile = "/generated/request/jsonApiRequest/withDataInAnyRelationship.json",
                 value = expectedJsonApiRequest
@@ -375,11 +378,10 @@ class JsonApiRequestTest {
                 valueType = JsonApiRequest::class.java
         )
 
-//        Then
+    //        Then
         Assertions.assertEquals(expectedJsonApiRequest, actualJsonApiRequest)
         assert(actualJsonApiRequest.data.isNotEmpty())
         assert(actualJsonApiRequest.data.first().relationships.isNotEmpty())
-        assert(actualJsonApiRequest.data.first().relationships.first().anyRelationship.isNotEmpty())
+        assert(actualJsonApiRequest.data.first().relationships.first().isNotEmpty())
     }
-
 }

@@ -1,1 +1,1 @@
-{"data":[{"type":"","id":null,"attributes":{},"relationships":[{"anyRelationship":{"data":{"type":"profile","id":null,"attributes":{},"relationships":[],"links":null}}},{"anyRelationship":{"data":{"type":"settings","id":null,"attributes":{},"relationships":[],"links":null}}}],"links":null}]}
+{"data":[{"type":"","id":null,"attributes":{},"relationships":[{"data":{"type":"profile","id":null,"attributes":{},"relationships":[],"links":null}},{"data":{"type":"settings","id":null,"attributes":{},"relationships":[],"links":null}}],"links":null}]}
