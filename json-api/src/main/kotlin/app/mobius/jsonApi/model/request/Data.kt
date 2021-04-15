@@ -11,9 +11,12 @@ data class Data(
         val type: String,
         val id: UUID? = null,
         val attributes: Map<String, Any>,
-        val relationships: List<Map<String, Data>>,
-
+        val relationships: List<Map<String, RelationshipData>>,
         val links: Links? = null
 ) {
     constructor() : this(type = "", attributes = mapOf(), relationships = listOf())
+}
+
+data class RelationshipData(val data: Data) {
+    constructor() : this(data = Data())
 }

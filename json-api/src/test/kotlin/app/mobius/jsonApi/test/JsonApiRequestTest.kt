@@ -40,10 +40,10 @@ class JsonApiRequestTest {
             valueType = valueType
     )
 
-    private fun provideData(type: String = "",
+    private fun provideData(type: String = "aType",
                             id: UUID? = null,
                             attributes: Map<String, Any> = mapOf(),
-                            relationships: List<Map<String, Data>> = listOf(),
+                            relationships: List<Map<String, RelationshipData>> = listOf(),
                             links: Links? = null
     ) = Data(type,id, attributes, relationships, links)
 
@@ -51,7 +51,7 @@ class JsonApiRequestTest {
             JsonApiRequest(data = data)
 
     private fun provideRelationship(
-            relationship: Map<String, Data> = mapOf()
+            relationship: Map<String, RelationshipData> = mapOf()
     ) = relationship
 
     private fun provideRelationshipMock(
@@ -63,8 +63,10 @@ class JsonApiRequestTest {
     ) = RelationshipsMock(relationships = relationships)
 
     private fun provideRelationships(
-            relationships:  List<Map<String, Data>> = listOf()
-    ) : List<Map<String, Data>> = relationships
+            relationships:  List<Map<String, RelationshipData>> = listOf()
+    ) : List<Map<String, RelationshipData>> = relationships
+
+    private fun provideRelationshipData(data: Data = Data()) = RelationshipData(data)
 
     @Test
     fun `1 - When write the attributes from json to kt, then shouldn't throw an exception`() {
@@ -253,17 +255,17 @@ class JsonApiRequestTest {
 
     @Test
     fun `6 - When write a data with relationships from KT as JSON, Then the expected == actual from JSON as KT and relations is not empty`() {
-        val expectedData = provideData(
+        val expectedDataWithRelationships = provideData(
                 relationships = listOf(
-                        provideRelationship(),
-                        provideRelationship()
+                        mapOf("profile" to provideRelationshipData()),
+                        mapOf("settings" to provideRelationshipData()),
                 )
         )
 
         assertDoesNotThrow {
             writeKtAsJsonToFile(
                     relPathFile = "/generated/request/data/dataWithRelationships.json",
-                    value = expectedData
+                    value = expectedDataWithRelationships
             )
         }
         val actualData = writeJsonAsKtFromFile(
@@ -272,7 +274,7 @@ class JsonApiRequestTest {
         )
 
     //        Then
-        Assertions.assertEquals(expectedData, actualData)
+        Assertions.assertEquals(expectedDataWithRelationships, actualData)
         assert(actualData.relationships.isNotEmpty())
     }
 
@@ -336,11 +338,11 @@ class JsonApiRequestTest {
 
     //        When
         writeKtAsJsonToFile(
-                relPathFile = "/generated/request/jsonApiRequest/withDataAndRelationships.json",
+                relPathFile = "/generated/request/jsonApiRequest/withDataAndEmptyRelationships.json",
                 value = expectedJsonApiRequest
         )
         val actualJsonApiRequest = writeJsonAsKtFromFile(
-                relPathFile = "/generated/request/jsonApiRequest/withDataAndRelationships.json",
+                relPathFile = "/generated/request/jsonApiRequest/withDataAndEmptyRelationships.json",
                 valueType = JsonApiRequest::class.java
         )
 
@@ -357,12 +359,8 @@ class JsonApiRequestTest {
                 data = listOf(
                         provideData(
                                 relationships = listOf(
-                                        provideRelationship(
-                                                relationship = mapOf("data" to provideData(type = "profile"))
-                                        ),
-                                        provideRelationship(
-                                                relationship = mapOf("data" to provideData(type = "settings"))
-                                        ),
+                                        mapOf("profile" to provideRelationshipData()),
+                                        mapOf("settings" to provideRelationshipData()),
                                 )
                         )
                 )
@@ -370,11 +368,11 @@ class JsonApiRequestTest {
 
     //        When
         writeKtAsJsonToFile(
-                relPathFile = "/generated/request/jsonApiRequest/withDataInAnyRelationship.json",
+                relPathFile = "/generated/request/jsonApiRequest/withDataAndNotEmptyRelationships.json",
                 value = expectedJsonApiRequest
         )
         val actualJsonApiRequest = writeJsonAsKtFromFile(
-                relPathFile = "/generated/request/jsonApiRequest/withDataInAnyRelationship.json",
+                relPathFile = "/generated/request/jsonApiRequest/withDataAndNotEmptyRelationships.json",
                 valueType = JsonApiRequest::class.java
         )
 
