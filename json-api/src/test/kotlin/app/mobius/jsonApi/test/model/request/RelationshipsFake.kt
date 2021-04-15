@@ -5,10 +5,20 @@ package app.mobius.jsonApi.test.model.request
  * OBS: Does not split data type (from List<Map<X>> to List<Y>)
  * for avoid using generics for define custom property names in each relationship
  */
-data class RelationshipsMock(val relationships: List<Map<String, DataAtomicMock>>) {
+data class RelationshipsFake(val relationships: List<Map<String, RelationshipDataFake>>) {
     constructor() : this(relationships = listOf())
 }
 
-data class RelationshipMock(val anyRelationship: Map<String, DataAtomicMock>) {
+data class RelationshipFake(val anyRelationship: Map<String, RelationshipDataFake>) {
     constructor() : this(anyRelationship = mapOf())
+}
+
+/**
+ * Cut the circular dependency
+ * For not mock replace String by Data
+ */
+data class RelationshipDataFake(
+        val data: String = ""
+) {
+    constructor() : this(data = "")
 }

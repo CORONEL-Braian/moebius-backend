@@ -7,7 +7,7 @@ import java.util.*
  *  - OBS: Does not split data type (from List<Map<X>> to List<Y>) for avoid using generics
  *         for define custom property names in each relationship.
  */
-data class Data(
+data class RequestData(
         val type: String,
         val id: UUID? = null,
         val attributes: Map<String, Any>,
@@ -17,6 +17,6 @@ data class Data(
     constructor() : this(type = "", attributes = mapOf(), relationships = listOf())
 }
 
-data class RelationshipData(val data: Data) {
-    constructor() : this(data = Data())
+data class RelationshipData(val requestData: RequestData) {
+    constructor() : this(requestData = RequestData())
 }
