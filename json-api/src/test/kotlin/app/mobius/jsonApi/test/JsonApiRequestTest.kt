@@ -382,4 +382,5 @@ class JsonApiRequestTest {
         assert(actualJsonApiRequest.data.first().relationships.isNotEmpty())
         assert(actualJsonApiRequest.data.first().relationships.first().isNotEmpty())
     }
+
 }
