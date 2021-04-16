@@ -78,152 +78,182 @@ class JsonApiRequestTest {
     ) : List<Map<String, RelationshipData>> = relationships
 
     @Test
-    fun `1 - When write the attributes mock from ktAsJson, Then the expected == actual from jsonAsKt and isNotEmpty`() {
+    fun `1 - When write the attributes mock from ktAsJson and jsonAsKt, Then attributes mock == jsonAsKt and isNotEmpty`() {
+//        Given
         val expectedAttributesMock = AttributesMock(attributes = mapOf("a" to 1))
+        val fileName = "/generated/request/attributes/notEmpty.json"
+
+//        When
         JsonApi.writeKtAsJsonToFile(
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
                 parentPathFile = ParentPathFile.Test.RESOURCES,
-                relPathFile = "/generated/request/attributes/notEmpty.json",
+                relPathFile = fileName,
                 value = expectedAttributesMock
         )
         val actualAttributesMock = writeJsonAsKtFromFile(
-                relPathFile = "/generated/request/attributes/notEmpty.json",
+                relPathFile = fileName,
                 valueType = AttributesMock::class.java
         )
+
+//        Then
         Assertions.assertEquals(expectedAttributesMock, actualAttributesMock)
         assert(expectedAttributesMock.attributes.isNotEmpty())
     }
 
     @Test
-    fun `2 - When write relationship mock without a data atomic mock from KT to JSON, Then the expected == actual from JSON as KT and relationship mock is empty`() {
+    fun `2 - When write relationshipFake without a dataFake from ktAsJson and jsonAsKt, Then relationshipFake == jsonAsKt and anyRelationship isEmpty`() {
 //       Given
-        val expectedRelationshipWithoutDataFake = provideRelationshipFake()
+        val expectedRelationshipFakeWithoutDataFake = provideRelationshipFake()
+        val fileName = "/generated/request/relationship/fakeWithoutDataFake.json"
 
 //        When
         writeKtAsJsonToFile(
-                relPathFile = "/generated/request/relationship/withoutDataFake.json",
-                value = expectedRelationshipWithoutDataFake
+                relPathFile = fileName,
+                value = expectedRelationshipFakeWithoutDataFake
         )
-        val actualRelationshipWithDataFake = writeJsonAsKtFromFile(
-                relPathFile = "/generated/request/relationship/withoutDataFake.json",
+        val actualRelationshipFakeWithDataFake = writeJsonAsKtFromFile(
+                relPathFile = fileName,
                 valueType = RelationshipFake::class.java
         )
 
 //        Then
-        Assertions.assertEquals(expectedRelationshipWithoutDataFake, actualRelationshipWithDataFake)
-        assert(actualRelationshipWithDataFake.anyRelationship.isEmpty())
+        Assertions.assertEquals(expectedRelationshipFakeWithoutDataFake, actualRelationshipFakeWithDataFake)
+        assert(actualRelationshipFakeWithDataFake.anyRelationship.isEmpty())
     }
 
     @Test
-    fun `2B - When write relationship mock with a data atomic mock from KT to JSON, Then the expected == actual from JSON as KT and relationship mock is not empty`() {
+    fun `2B - When write relationshipFake with a dataFake from ktAsJson and jsonAsKt, Then the relationshipFake == jsonAsKt and anyRelationship isNotEmpty`() {
 //       Given
-        val expectedRelationshipWithDataFake = provideRelationshipFake(
+        val expectedRelationshipFakeWithDataFake = provideRelationshipFake(
                 mapOf("profile" to RelationshipDataFake())
         )
+        val fileName = "/generated/request/relationship/fakeWithDataFake.json"
 
 //        When
         writeKtAsJsonToFile(
-                relPathFile = "/generated/request/relationship/withDataFake.json",
-                value = expectedRelationshipWithDataFake
+                relPathFile = fileName,
+                value = expectedRelationshipFakeWithDataFake
         )
-        val actualRelationshipWithDataFake = writeJsonAsKtFromFile(
-                relPathFile = "/generated/request/relationship/withDataFake.json",
+        val actualRelationshipFakeWithDataFake = writeJsonAsKtFromFile(
+                relPathFile = fileName,
                 valueType = RelationshipFake::class.java
         )
 
 //        Then
-        Assertions.assertEquals(expectedRelationshipWithDataFake, actualRelationshipWithDataFake)
-        assert(actualRelationshipWithDataFake.anyRelationship.isNotEmpty())
+        Assertions.assertEquals(expectedRelationshipFakeWithDataFake, actualRelationshipFakeWithDataFake)
+        assert(actualRelationshipFakeWithDataFake.anyRelationship.isNotEmpty())
     }
 
     @Test
-    fun `3A - When write relationships without content from KT as JSON, Then the expected == actual from JSON as KT and relationships is empty`() {
+    fun `3A - When write relationshipsFake without relationships from ktAsJson and jsonToKt, Then relationshipsFakeWithoutRelationships == jsonToKt and relationships isEmpty`() {
 //        Given
-        val expectedWithoutRelationships = provideRelationshipsFake()
+        val expectedRelationshipsFakeWithoutRelationships = provideRelationshipsFake()
+        val fileName = "/generated/request/relationships/fakeWithoutRelationships.json"
 
 //        When
         assertDoesNotThrow {
             writeKtAsJsonToFile(
-                    relPathFile = "/generated/request/relationships/withoutContent.json",
-                    value = expectedWithoutRelationships
+                    relPathFile = fileName,
+                    value = expectedRelationshipsFakeWithoutRelationships
             )
         }
         val actualRelationshipsWithoutDataFake = writeJsonAsKtFromFile(
-                relPathFile = "/generated/request/relationships/withoutContent.json",
+                relPathFile = fileName,
                 valueType = RelationshipsFake::class.java
         )
 
 //        Then
-        Assertions.assertEquals(expectedWithoutRelationships, actualRelationshipsWithoutDataFake)
+        Assertions.assertEquals(expectedRelationshipsFakeWithoutRelationships, actualRelationshipsWithoutDataFake)
         assert(actualRelationshipsWithoutDataFake.relationships.isEmpty())
     }
 
     @Test
-    fun `3B - When write relationships with each content is empty from KT as JSON, Then the expected == actual from JSON as KT and each content is empty`() {
+    fun `3B - When write relationshipsFake with each empty relationship from ktAsJson and jsonAsKt, Then the relationshipsFakeWithEachEmptyRelationship == jsonAsKt and each relationship isEmpty`() {
 //        Given
-        val expectedRelationshipsWithEachEmptyContent = provideRelationshipsFake(
+        val expectedRelationshipsWithEachEmptyRelationship = provideRelationshipsFake(
             relationships = listOf(
                     mapOf(),
                     mapOf(),
             )
         )
+        val relPathFile = "/generated/request/relationships/fakeWithEachEmptyRelationship.json"
 
 //        When
         writeKtAsJsonToFile(
-            relPathFile = "/generated/request/relationships/withEachEmptyContent.json",
-            value = expectedRelationshipsWithEachEmptyContent
+            relPathFile = relPathFile,
+            value = expectedRelationshipsWithEachEmptyRelationship
         )
         val actualRelationshipsWithEachEmptyContent = writeJsonAsKtFromFile(
-                relPathFile = "/generated/request/relationships/withEachEmptyContent.json",
+                relPathFile = relPathFile,
                 valueType = RelationshipsFake::class.java
         )
 
 //        Then
-        Assertions.assertEquals(expectedRelationshipsWithEachEmptyContent, actualRelationshipsWithEachEmptyContent)
-        assert(expectedRelationshipsWithEachEmptyContent.relationships.first().isEmpty())
+        Assertions.assertEquals(expectedRelationshipsWithEachEmptyRelationship, actualRelationshipsWithEachEmptyContent)
+        actualRelationshipsWithEachEmptyContent.relationships.map {
+            assert(it.isEmpty())
+        }
     }
 
     @Test
-    fun `3C - When add a relationship with data, Then has a custom name`() {
-        val withoutGeneric = RelationshipsFake(
+    fun `3C - When write relationshipsFake with custom names of relationships from ktAsJson and jsonAsKt, Then relationshipsFake == jsonAsKt and any custom name exists in relationships`() {
+//        Given
+        val customNameOfProfile = "profile"
+        val expectedWithoutGenerics = RelationshipsFake(
+
                 relationships = listOf(
-                        mapOf("profile" to RelationshipDataFake()),
+                        mapOf(customNameOfProfile to RelationshipDataFake()),
                         mapOf("settings" to RelationshipDataFake()),
                         mapOf("other" to RelationshipDataFake()),
                 )
         )
+        val relPathFile = "/generated/request/relationships/fakeWithoutGenerics.json"
 
+//        When
         writeKtAsJsonToFile(
-                relPathFile = "/generated/request/relationships/withoutGeneric.json",
-                value = withoutGeneric
+                relPathFile = relPathFile,
+                value = expectedWithoutGenerics
         )
+        val actualWithoutGenerics = writeJsonAsKtFromFile(
+                relPathFile = relPathFile,
+                valueType = RelationshipsFake::class.java
+        )
+
+//        Then
+        Assertions.assertEquals(expectedWithoutGenerics, actualWithoutGenerics)
+        assert(actualWithoutGenerics.relationships.any {
+            it.containsKey(customNameOfProfile)
+        })
     }
 
     @Test
-    fun `3D - When write relationships with each content from KT as JSON, Then the expected == actual from JSON as KT and each content is not empty`() {
+    fun `3D - When write relationshipsFake with each relationship from ktAsJson and jsonAsKt, Then relationshipsFakeWithEachNotEmptyRelationship == jsonAsKt and each relationship isNotEmpty`() {
 //        Given
-        val expectedRelationshipsWithEachNotEmptyContent = RelationshipsFake(
+        val expectedRelationshipsFakeWithEachNotEmptyRelationship = RelationshipsFake(
                 relationships = listOf(
                         mapOf("profile" to RelationshipDataFake()),
                         mapOf("settings" to RelationshipDataFake())
                 )
         )
+        val relPathFile = "/generated/request/relationships/fakeWithEachNotEmptyContent.json"
 
 //        When
         assertDoesNotThrow {
             writeKtAsJsonToFile(
-                    relPathFile = "/generated/request/relationships/withEachNotEmptyContent.json",
-                    value = expectedRelationshipsWithEachNotEmptyContent
+                    relPathFile = relPathFile,
+                    value = expectedRelationshipsFakeWithEachNotEmptyRelationship
             )
         }
         val actualRelationshipsWithEachNotEmptyContent = writeJsonAsKtFromFile(
-                relPathFile = "/generated/request/relationships/withEachNotEmptyContent.json",
+                relPathFile = relPathFile,
                 valueType = RelationshipsFake::class.java
         )
 
 //        Then
-        Assertions.assertEquals(expectedRelationshipsWithEachNotEmptyContent, actualRelationshipsWithEachNotEmptyContent)
-        assert(expectedRelationshipsWithEachNotEmptyContent.relationships.first().isNotEmpty())
+        Assertions.assertEquals(expectedRelationshipsFakeWithEachNotEmptyRelationship, actualRelationshipsWithEachNotEmptyContent)
+        actualRelationshipsWithEachNotEmptyContent.relationships.map {
+            assert(it.isNotEmpty())
+        }
     }
 
     @Test
@@ -289,7 +319,7 @@ class JsonApiRequestTest {
     }
 
     @Test
-    fun `7 - When write a jsonApiRequest without data from KT to JSON, Then data of JSON is empty`() {
+    fun `7 - When write a jsonApiRequest without data from KT to JSON, Then data of JSON isEmpty`() {
     //        Given
         val jsonApiRequest = provideJsonApiRequest()
 

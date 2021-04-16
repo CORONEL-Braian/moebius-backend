@@ -10,7 +10,7 @@ https://askubuntu.com/a/377442/676466
 DIR="$(pwd)/generated"
 if [ -d "$DIR" ]; then
   cd generated || exit
-  echo "The following files will be deleted of ${DIR}"
+  echo "The following files (not directories) will be deleted of ${DIR}"
 
 #  Show files to delete
   find . -name "*.json" -type f
