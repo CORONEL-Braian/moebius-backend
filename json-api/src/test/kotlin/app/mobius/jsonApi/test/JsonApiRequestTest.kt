@@ -11,7 +11,9 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import java.util.*
+import  kotlin.io.path.*
 
+@ExperimentalPathApi
 class JsonApiRequestTest {
 
     private fun writeKtAsJsonToFile(
@@ -257,59 +259,71 @@ class JsonApiRequestTest {
     }
 
     @Test
-    fun `4 - When write some links from KT as JSON, Then the expected == actual from JSON as KT`() {
+    fun `4 - When write Links from ktAsJson and jsonAsKt, Then links == jsonAsKt and the properties are nulls`() {
+//        Given
         val expectedLinks = Links()
+        val relPathFile = "/generated/request/links/propertiesNulls.json"
 
+//        When
         writeKtAsJsonToFile(
-                relPathFile = "/generated/request/links/links.json",
+                relPathFile = relPathFile,
                 value = expectedLinks
         )
         val actualLinks = writeJsonAsKtFromFile(
-                relPathFile = "/generated/request/links/links.json",
+                relPathFile = relPathFile,
                 valueType = Links::class.java
         )
 
-    //        Then
+//        Then
         Assertions.assertEquals(expectedLinks, actualLinks)
+        assert(actualLinks.self.isNullOrEmpty())
+        assert(actualLinks.next.isNullOrEmpty())
+        assert(actualLinks.last.isNullOrEmpty())
+        assert(actualLinks.related.isNullOrEmpty())
     }
 
     @Test
-    fun `5 - When write a data without relationships from KT as JSON, Then the expected == actual from JSON as KT `() {
-        val expectedData = provideRequestData()
+    fun `5 - When write a requestData without relationships from ktAsJson and jsonAsKt, Then requestData == jsonAsKt and relationships isEmpty `() {
+//       Given
+        val expectedRequestDataWithoutRelationships = provideRequestData()
+        val relPathFile = "/generated/request/data/dataWithoutRelationships.json"
 
+//        When
         assertDoesNotThrow {
             writeKtAsJsonToFile(
-                    relPathFile = "/generated/request/data/dataWithoutRelationships.json",
-                    value = expectedData
+                    relPathFile = relPathFile,
+                    value = expectedRequestDataWithoutRelationships
             )
         }
-        val actualData = writeJsonAsKtFromFile(
-                relPathFile = "/generated/request/data/dataWithoutRelationships.json",
+        val actualRequestDataWithoutRelationships = writeJsonAsKtFromFile(
+                relPathFile = relPathFile,
                 valueType = RequestData::class.java
         )
 
     //        Then
-        Assertions.assertEquals(expectedData, actualData)
-        assert(actualData.relationships.isEmpty())
+        Assertions.assertEquals(expectedRequestDataWithoutRelationships, actualRequestDataWithoutRelationships)
+        assert(actualRequestDataWithoutRelationships.relationships.isEmpty())
     }
 
     @Test
-    fun `6 - When write a data with relationships from KT as JSON, Then the expected == actual from JSON as KT and relations is not empty`() {
+    fun `6 - When write a requestData with relationships from ktAsJson and jsonAsKt, Then requestData == jsonAsKt and relationships isNotEmpty`() {
+//        Given
         val expectedDataWithRelationships = provideRequestData(
                 relationships = listOf(
                         mapOf("profile" to provideRelationshipData()),
                         mapOf("settings" to provideRelationshipData()),
                 )
         )
+        val relPathFile = "/generated/request/data/dataWithRelationships.json"
 
         assertDoesNotThrow {
             writeKtAsJsonToFile(
-                    relPathFile = "/generated/request/data/dataWithRelationships.json",
+                    relPathFile = relPathFile,
                     value = expectedDataWithRelationships
             )
         }
         val actualData = writeJsonAsKtFromFile(
-                relPathFile = "/generated/request/data/dataWithRelationships.json",
+                relPathFile = relPathFile,
                 valueType = RequestData::class.java
         )
 
@@ -319,31 +333,32 @@ class JsonApiRequestTest {
     }
 
     @Test
-    fun `7 - When write a jsonApiRequest without data from KT to JSON, Then data of JSON isEmpty`() {
-    //        Given
-        val jsonApiRequest = provideJsonApiRequest()
+    fun `7 - When write a jsonApiRequest without data from ktAsJson and jsonAsKt, Then jsonApiRequest == jsonAsKt and data isEmpty`() {
+//        Given
+        val expectedJsonApiRequest = provideJsonApiRequest()
+        val relPathFile = "/generated/request/jsonApiRequest/emptyData.json"
 
-    //        When
+//        When
         writeKtAsJsonToFile(
-                relPathFile = "/generated/request/jsonApiRequest/emptyData.json",
-                value = jsonApiRequest
+                relPathFile = relPathFile,
+                value = expectedJsonApiRequest
         )
-        val jsonApiRequestActual = writeJsonAsKtFromFile(
-                relPathFile = "/generated/request/jsonApiRequest/emptyData.json",
+        val actualJsonApiRequest = writeJsonAsKtFromFile(
+                relPathFile = relPathFile,
                 valueType = JsonApiRequest::class.java
         )
 
-    //        Then
-        assert(jsonApiRequestActual.data.isEmpty())
-        Assertions.assertEquals(jsonApiRequest, jsonApiRequestActual)
+//        Then
+        Assertions.assertEquals(expectedJsonApiRequest, actualJsonApiRequest)
+        assert(actualJsonApiRequest.data.isEmpty())
     }
 
     @Test
-    fun `8 - When write a jsonApiRequest with a data and without relationships from KT to JSON, Then data of JSON is not empty and has not relationships`() {
-    //        Given
+    fun `8 - When write a jsonApiRequest with a data and without relationships from ktAsJson and jsonAsKt, Then jsonApiRequest == jsonAsKt, data isNotEmpty and hasNot relationships`() {
+//        Given
         val expectedJsonApiRequest = provideJsonApiRequest(data = listOf(provideRequestData()))
 
-    //        When
+//        When
         writeKtAsJsonToFile(
                 relPathFile = "/generated/request/jsonApiRequest/withData.json",
                 value = expectedJsonApiRequest
@@ -353,14 +368,16 @@ class JsonApiRequestTest {
                 valueType = JsonApiRequest::class.java
         )
 
-    //        Then
+//        Then
         Assertions.assertEquals(expectedJsonApiRequest, actualJsonApiRequest)
         assert(actualJsonApiRequest.data.isNotEmpty())
-        assert(actualJsonApiRequest.data.first().relationships.isEmpty())
+        actualJsonApiRequest.data.map {
+            assert(it.relationships.isEmpty())
+        }
     }
 
     @Test
-    fun `9 - When write a jsonApiRequest with a data and relationships from KT to JSON, Then data and relationships of JSON is not empty`() {
+    fun `9 - When write a jsonApiRequest with a data and relationships from ktAsJson and jsonAsKt, Then jsonApiRequest == jsonAsKt, data isNotEmpty and relationships isNotEmpty`() {
     //        Given
         val expectedJsonApiRequest = provideJsonApiRequest(
                 data = listOf(
@@ -374,26 +391,30 @@ class JsonApiRequestTest {
                         )
                 )
         )
+        val relPathFile = "/generated/request/jsonApiRequest/withDataAndEmptyRelationships.json"
 
-    //        When
+
+//        When
         writeKtAsJsonToFile(
-                relPathFile = "/generated/request/jsonApiRequest/withDataAndEmptyRelationships.json",
+                relPathFile = relPathFile,
                 value = expectedJsonApiRequest
         )
         val actualJsonApiRequest = writeJsonAsKtFromFile(
-                relPathFile = "/generated/request/jsonApiRequest/withDataAndEmptyRelationships.json",
+                relPathFile = relPathFile,
                 valueType = JsonApiRequest::class.java
         )
 
 //        Then
         Assertions.assertEquals(expectedJsonApiRequest, actualJsonApiRequest)
         assert(actualJsonApiRequest.data.isNotEmpty())
-        assert(actualJsonApiRequest.data.first().relationships.isNotEmpty())
+        actualJsonApiRequest.data.map {
+            assert(it.relationships.isNotEmpty())
+        }
     }
 
     @Test
-    fun `10 - When write a jsonApiRequest with data in any relationship from KT to JSON, Then any relationship data of JSON is not empty`() {
-    //        Given
+    fun `10 - When write a jsonApiRequest with data in any relationship from ktAsJson and jsonAsKt, Then jsonApiRequest == jsonAsKt and all relationship data isNotEmpty`() {
+//        Given
         val expectedJsonApiRequest = provideJsonApiRequest(
                 data = listOf(
                         provideRequestData(
@@ -405,7 +426,7 @@ class JsonApiRequestTest {
                 )
         )
 
-    //        When
+//        When
         writeKtAsJsonToFile(
                 relPathFile = "/generated/request/jsonApiRequest/withDataAndNotEmptyRelationships.json",
                 value = expectedJsonApiRequest
@@ -415,11 +436,17 @@ class JsonApiRequestTest {
                 valueType = JsonApiRequest::class.java
         )
 
-    //        Then
+//        Then
         Assertions.assertEquals(expectedJsonApiRequest, actualJsonApiRequest)
         assert(actualJsonApiRequest.data.isNotEmpty())
-        assert(actualJsonApiRequest.data.first().relationships.isNotEmpty())
-        assert(actualJsonApiRequest.data.first().relationships.first().isNotEmpty())
+
+        actualJsonApiRequest.data.map {
+            assert(it.relationships.isNotEmpty())
+
+            it.relationships.map { relationship ->
+                assert(relationship.isNotEmpty())
+            }
+        }
     }
 
 }

@@ -5,7 +5,9 @@ import app.mobius.data.dataAccess.JDBMConfig
 import app.mobius.domain.entity.setting.security.*
 import org.hibernate.Session
 import org.junit.jupiter.api.*
+import kotlin.io.path.ExperimentalPathApi
 
+@ExperimentalPathApi
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SqlSecurityDataSourceTest {
 

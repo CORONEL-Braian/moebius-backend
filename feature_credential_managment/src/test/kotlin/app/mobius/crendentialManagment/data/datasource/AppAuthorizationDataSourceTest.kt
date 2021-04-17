@@ -8,7 +8,9 @@ import app.mobius.credentialManagment.domain.entity.security.AppConsumer
 import app.mobius.credentialManagment.domain.entity.security.Platform
 import org.hibernate.Session
 import org.junit.jupiter.api.*
+import kotlin.io.path.ExperimentalPathApi
 
+@ExperimentalPathApi
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class AppAuthorizationDataSourceTest {
 

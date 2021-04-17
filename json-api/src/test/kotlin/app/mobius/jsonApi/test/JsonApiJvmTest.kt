@@ -4,7 +4,9 @@ import app.mobius.io.ParentPathFile
 import app.mobius.jsonApi.JsonApi
 import app.mobius.jsonApi.test.model.jvm.SomeList
 import org.junit.jupiter.api.Test
+import kotlin.io.path.ExperimentalPathApi
 
+@ExperimentalPathApi
 class JsonApiJvmTest {
 
     @Test

@@ -1,6 +1,8 @@
 package app.mobius.io
 
 import java.io.File
+import kotlin.io.path.ExperimentalPathApi
+import kotlin.io.path.Path
 
 object ParentPathFile {
     private const val COMMON_KOTLIN = "/kotlin"
@@ -17,10 +19,11 @@ object ParentPathFile {
     }
 }
 
+@ExperimentalPathApi
 object ResourceUtils {
 
     /**
-     * Create or update a file
+     * Create or update a file for differents OS
      * PRE: File is in data-core module
      * @param relPath: Relative to ${moduleName}/src/${srcType}/resources/
      * Source: https://stackoverflow.com/a/64084771/5279996
@@ -30,11 +33,25 @@ object ResourceUtils {
             parentPath: String,
             relPath: String
     ): File {
-        val absolutePathCurrentModule = System.getProperty("user.dir")
+//        val absolutePathCurrentModule = System.getProperty("user.dir")
+        val absolutePathCurrentModule = (Path("").toAbsolutePath() as Any).toString()
         val absolutePathProjectRoot = absolutePathCurrentModule.dropLastWhile { it != '/' }
 
-        val absolutePathOfFile = "${absolutePathProjectRoot}${moduleName}/src${parentPath}$relPath"
-        println("Absolute Path of file: $absolutePathOfFile") //TODO: Use Logger
-        return File(absolutePathOfFile)
+        var absolutePath = "${absolutePathProjectRoot}${moduleName}/src${parentPath}$relPath"
+
+//        Normalice path for OS
+        when (System.getProperty("os.name")) {
+            "Linux" -> {
+                absolutePath = absolutePath.replace("\\", "/")
+            }
+            "Windows" -> {
+                absolutePath = absolutePath.replace("/", "\\")
+            }
+            else -> { }
+        }
+
+        println("Absolute Path: $absolutePath") //TODO: Use Logger
+        return File(absolutePath)
     }
+
 }

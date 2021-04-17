@@ -6,7 +6,9 @@ import app.mobius.jsonApi.JsonApi.MODULE_NAME_JSON_API
 import app.mobius.jsonApi.test.model.SomeTest
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
+import kotlin.io.path.ExperimentalPathApi
 
+@ExperimentalPathApi
 class JsonApiTest {
 
     private val canonicalFileName = "/some3.json"

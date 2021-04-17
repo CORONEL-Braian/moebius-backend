@@ -11,6 +11,7 @@ import org.reflections.Reflections
 import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
 import org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
 import javax.persistence.*
+import kotlin.io.path.ExperimentalPathApi
 
 
 /**
@@ -20,6 +21,7 @@ import javax.persistence.*
  */
 class JDBMConfig {
 
+    @ExperimentalPathApi
     object Hibernate {
 
         private const val HIBERNATE_CONFIGURATION = "/secret-hibernate.cfg.xml"

@@ -3,7 +3,9 @@ package app.mobius.jsonApi
 import app.mobius.io.ResourceUtils.getFile
 import app.mobius.io.ParentPathFile
 import com.fasterxml.jackson.databind.ObjectMapper
+import kotlin.io.path.ExperimentalPathApi
 
+@ExperimentalPathApi
 object JsonApi {
 
     const val MODULE_NAME_JSON_API = "json-api"

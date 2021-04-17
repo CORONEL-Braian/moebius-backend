@@ -4,7 +4,9 @@ import app.mobius.io.ResourceUtils.getFile
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import java.io.File
+import kotlin.io.path.ExperimentalPathApi
 
+@ExperimentalPathApi
 class ResourceUtilsTest {
 
     @Test

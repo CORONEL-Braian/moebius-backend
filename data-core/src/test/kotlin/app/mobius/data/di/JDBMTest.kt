@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import java.io.FileInputStream
 import java.io.InputStream
+import kotlin.io.path.ExperimentalPathApi
 
 /**
  * PRECONDITION: Use A or B
@@ -15,6 +16,7 @@ import java.io.InputStream
  *
  *   B) useJUnitPlatform()
  */
+@ExperimentalPathApi
 class JDBMTest {
 
 //      ----- With Hibernate CFG  -----
