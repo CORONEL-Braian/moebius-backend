@@ -1,39 +1,54 @@
 package app.mobius.jsonApi
 
+import app.mobius.io.ResourceUtils
 import app.mobius.io.ResourceUtils.getFile
-import app.mobius.io.ParentPathFile
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonElement
 import kotlin.io.path.ExperimentalPathApi
+import kotlin.io.path.Path
+import kotlin.io.path.readText
+import kotlin.io.path.writeText
 
 @ExperimentalPathApi
 object JsonApi {
 
     const val MODULE_NAME_JSON_API = "json-api"
 
+    private val prettyGson: Gson = GsonBuilder().setPrettyPrinting().serializeNulls().disableHtmlEscaping().create()
+
+    /**
+     * Write class kotlin as pretty json
+     */
     fun writeKtAsJson(value: Any) : String {
         val objectMapper = ObjectMapper()
-        return objectMapper.writeValueAsString(value)
+        val json = objectMapper.writeValueAsString(value)
+
+        val jsonElement = prettyGson.fromJson(json, JsonElement::class.java)
+        return prettyGson.toJson(jsonElement)
     }
 
     /**
      * Write a kotlin class as json in file
-     * @param relPathFile: some.json
+     * @param relPath: some.json
      */
     fun writeKtAsJsonToFile(
             moduleName: String,
-            parentPathFile: String,
-            relPathFile: String,
+            parentPath: String,
+            relPath: String,
             value: Any
     ) {
-        val objectMapper = ObjectMapper()
-        objectMapper.writeValue(
-                getFile(
-                    moduleName = moduleName,
-                    parentPath = parentPathFile,
-                    relPath = relPathFile
-                ),
-                value
+        Path(
+                ResourceUtils.buildAbsolutePath(
+                        moduleName = moduleName,
+                        parentPath = parentPath,
+                        relPath = relPath
+                )
         )
+                .writeText(
+                        writeKtAsJson(value)
+                )
     }
 
     /**
@@ -49,14 +64,26 @@ object JsonApi {
      * Precondition: Entities have secondary constructor
      */
     fun <T> writeJsonAsKtFromFile(moduleName: String,
-                                  parentPathFile: String,
-                                  relPathFile: String,
+                                  parentPath: String,
+                                  relPath: String,
                                   valueType: Class<T>
     ): T {
         return ObjectMapper().readValue(
-                getFile(moduleName = moduleName, parentPath = parentPathFile, relPath = relPathFile),
+                getFile(moduleName = moduleName, parentPath = parentPath, relPath = relPath),
                 valueType
         )
+    }
+
+    fun readText(
+            moduleName: String,
+            parentPath: String,
+            relPath: String,
+    ): String {
+        return Path( ResourceUtils.buildAbsolutePath(
+                moduleName = moduleName,
+                parentPath = parentPath,
+                relPath = relPath
+        )).readText()
     }
 
 }

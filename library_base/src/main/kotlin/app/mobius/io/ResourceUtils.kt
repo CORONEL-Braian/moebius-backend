@@ -4,7 +4,7 @@ import java.io.File
 import kotlin.io.path.ExperimentalPathApi
 import kotlin.io.path.Path
 
-object ParentPathFile {
+object ParentPath {
     private const val COMMON_KOTLIN = "/kotlin"
     private const val COMMON_RESOURCES = "/resources"
     object Main {
@@ -24,16 +24,14 @@ object ResourceUtils {
 
     /**
      * Create or update a file for differents OS
-     * PRE: File is in data-core module
      * @param relPath: Relative to ${moduleName}/src/${srcType}/resources/
      * Source: https://stackoverflow.com/a/64084771/5279996
      */
-    fun getFile(
+    fun buildAbsolutePath(
             moduleName: String,
             parentPath: String,
             relPath: String
-    ): File {
-//        val absolutePathCurrentModule = System.getProperty("user.dir")
+    ): String {
         val absolutePathCurrentModule = (Path("").toAbsolutePath() as Any).toString()
         val absolutePathProjectRoot = absolutePathCurrentModule.dropLastWhile { it != '/' }
 
@@ -51,7 +49,27 @@ object ResourceUtils {
         }
 
         println("Absolute Path: $absolutePath") //TODO: Use Logger
-        return File(absolutePath)
+        return absolutePath
     }
+
+    /**
+     * Create or update a file for differents OS
+     * @param relPath: Relative to ${moduleName}/src/${srcType}/resources/
+     */
+    fun getFile(
+            moduleName: String,
+            parentPath: String,
+            relPath: String
+    ): File {
+        return File(
+                buildAbsolutePath(
+                        moduleName = moduleName,
+                        parentPath = parentPath,
+                        relPath = relPath
+                )
+        )
+    }
+
+
 
 }

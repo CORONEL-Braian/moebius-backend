@@ -1,6 +1,6 @@
 package app.mobius.jsonApi.test
 
-import app.mobius.io.ParentPathFile
+import app.mobius.io.ParentPath
 import app.mobius.jsonApi.JsonApi
 import app.mobius.jsonApi.model.request.*
 import app.mobius.jsonApi.test.model.request.AttributesMock
@@ -18,27 +18,27 @@ class JsonApiRequestTest {
 
     private fun writeKtAsJsonToFile(
             moduleName: String = JsonApi.MODULE_NAME_JSON_API,
-            parentPathFile: String = ParentPathFile.Test.RESOURCES,
-            relPathFile: String,
+            parentPath: String = ParentPath.Test.RESOURCES,
+            relPath: String,
             value: Any
     ) {
         JsonApi.writeKtAsJsonToFile(
                 moduleName = moduleName,
-                parentPathFile = parentPathFile,
-                relPathFile = relPathFile,
+                parentPath = parentPath,
+                relPath = relPath,
                 value = value
         )
     }
 
     private fun <T> writeJsonAsKtFromFile(
             moduleName: String = JsonApi.MODULE_NAME_JSON_API,
-            parentPathFile: String = ParentPathFile.Test.RESOURCES,
-            relPathFile: String,
+            parentPath: String = ParentPath.Test.RESOURCES,
+            relPath: String,
             valueType: Class<T>
     ) = JsonApi.writeJsonAsKtFromFile(
             moduleName = moduleName,
-            parentPathFile = parentPathFile,
-            relPathFile = relPathFile,
+            parentPath = parentPath,
+            relPath = relPath,
             valueType = valueType
     )
 
@@ -88,12 +88,12 @@ class JsonApiRequestTest {
 //        When
         JsonApi.writeKtAsJsonToFile(
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
-                parentPathFile = ParentPathFile.Test.RESOURCES,
-                relPathFile = fileName,
+                parentPath = ParentPath.Test.RESOURCES,
+                relPath = fileName,
                 value = expectedAttributesMock
         )
         val actualAttributesMock = writeJsonAsKtFromFile(
-                relPathFile = fileName,
+                relPath = fileName,
                 valueType = AttributesMock::class.java
         )
 
@@ -110,11 +110,11 @@ class JsonApiRequestTest {
 
 //        When
         writeKtAsJsonToFile(
-                relPathFile = fileName,
+                relPath = fileName,
                 value = expectedRelationshipFakeWithoutDataFake
         )
         val actualRelationshipFakeWithDataFake = writeJsonAsKtFromFile(
-                relPathFile = fileName,
+                relPath = fileName,
                 valueType = RelationshipFake::class.java
         )
 
@@ -133,11 +133,11 @@ class JsonApiRequestTest {
 
 //        When
         writeKtAsJsonToFile(
-                relPathFile = fileName,
+                relPath = fileName,
                 value = expectedRelationshipFakeWithDataFake
         )
         val actualRelationshipFakeWithDataFake = writeJsonAsKtFromFile(
-                relPathFile = fileName,
+                relPath = fileName,
                 valueType = RelationshipFake::class.java
         )
 
@@ -155,12 +155,12 @@ class JsonApiRequestTest {
 //        When
         assertDoesNotThrow {
             writeKtAsJsonToFile(
-                    relPathFile = fileName,
+                    relPath = fileName,
                     value = expectedRelationshipsFakeWithoutRelationships
             )
         }
         val actualRelationshipsWithoutDataFake = writeJsonAsKtFromFile(
-                relPathFile = fileName,
+                relPath = fileName,
                 valueType = RelationshipsFake::class.java
         )
 
@@ -178,15 +178,15 @@ class JsonApiRequestTest {
                     mapOf(),
             )
         )
-        val relPathFile = "/generated/request/relationships/fakeWithEachEmptyRelationship.json"
+        val relPath = "/generated/request/relationships/fakeWithEachEmptyRelationship.json"
 
 //        When
         writeKtAsJsonToFile(
-            relPathFile = relPathFile,
+            relPath = relPath,
             value = expectedRelationshipsWithEachEmptyRelationship
         )
         val actualRelationshipsWithEachEmptyContent = writeJsonAsKtFromFile(
-                relPathFile = relPathFile,
+                relPath = relPath,
                 valueType = RelationshipsFake::class.java
         )
 
@@ -209,15 +209,15 @@ class JsonApiRequestTest {
                         mapOf("other" to RelationshipDataFake()),
                 )
         )
-        val relPathFile = "/generated/request/relationships/fakeWithoutGenerics.json"
+        val relPath = "/generated/request/relationships/fakeWithoutGenerics.json"
 
 //        When
         writeKtAsJsonToFile(
-                relPathFile = relPathFile,
+                relPath = relPath,
                 value = expectedWithoutGenerics
         )
         val actualWithoutGenerics = writeJsonAsKtFromFile(
-                relPathFile = relPathFile,
+                relPath = relPath,
                 valueType = RelationshipsFake::class.java
         )
 
@@ -237,17 +237,17 @@ class JsonApiRequestTest {
                         mapOf("settings" to RelationshipDataFake())
                 )
         )
-        val relPathFile = "/generated/request/relationships/fakeWithEachNotEmptyContent.json"
+        val relPath = "/generated/request/relationships/fakeWithEachNotEmptyContent.json"
 
 //        When
         assertDoesNotThrow {
             writeKtAsJsonToFile(
-                    relPathFile = relPathFile,
+                    relPath = relPath,
                     value = expectedRelationshipsFakeWithEachNotEmptyRelationship
             )
         }
         val actualRelationshipsWithEachNotEmptyContent = writeJsonAsKtFromFile(
-                relPathFile = relPathFile,
+                relPath = relPath,
                 valueType = RelationshipsFake::class.java
         )
 
@@ -262,15 +262,15 @@ class JsonApiRequestTest {
     fun `4 - When write Links from ktAsJson and jsonAsKt, Then links == jsonAsKt and the properties are nulls`() {
 //        Given
         val expectedLinks = Links()
-        val relPathFile = "/generated/request/links/propertiesNulls.json"
+        val relPath = "/generated/request/links/propertiesNulls.json"
 
 //        When
         writeKtAsJsonToFile(
-                relPathFile = relPathFile,
+                relPath = relPath,
                 value = expectedLinks
         )
         val actualLinks = writeJsonAsKtFromFile(
-                relPathFile = relPathFile,
+                relPath = relPath,
                 valueType = Links::class.java
         )
 
@@ -286,17 +286,17 @@ class JsonApiRequestTest {
     fun `5 - When write a requestData without relationships from ktAsJson and jsonAsKt, Then requestData == jsonAsKt and relationships isEmpty `() {
 //       Given
         val expectedRequestDataWithoutRelationships = provideRequestData()
-        val relPathFile = "/generated/request/data/dataWithoutRelationships.json"
+        val relPath = "/generated/request/data/dataWithoutRelationships.json"
 
 //        When
         assertDoesNotThrow {
             writeKtAsJsonToFile(
-                    relPathFile = relPathFile,
+                    relPath = relPath,
                     value = expectedRequestDataWithoutRelationships
             )
         }
         val actualRequestDataWithoutRelationships = writeJsonAsKtFromFile(
-                relPathFile = relPathFile,
+                relPath = relPath,
                 valueType = RequestData::class.java
         )
 
@@ -314,16 +314,16 @@ class JsonApiRequestTest {
                         mapOf("settings" to provideRelationshipData()),
                 )
         )
-        val relPathFile = "/generated/request/data/dataWithRelationships.json"
+        val relPath = "/generated/request/data/dataWithRelationships.json"
 
         assertDoesNotThrow {
             writeKtAsJsonToFile(
-                    relPathFile = relPathFile,
+                    relPath = relPath,
                     value = expectedDataWithRelationships
             )
         }
         val actualData = writeJsonAsKtFromFile(
-                relPathFile = relPathFile,
+                relPath = relPath,
                 valueType = RequestData::class.java
         )
 
@@ -336,15 +336,15 @@ class JsonApiRequestTest {
     fun `7 - When write a jsonApiRequest without data from ktAsJson and jsonAsKt, Then jsonApiRequest == jsonAsKt and data isEmpty`() {
 //        Given
         val expectedJsonApiRequest = provideJsonApiRequest()
-        val relPathFile = "/generated/request/jsonApiRequest/emptyData.json"
+        val relPath = "/generated/request/jsonApiRequest/emptyData.json"
 
 //        When
         writeKtAsJsonToFile(
-                relPathFile = relPathFile,
+                relPath = relPath,
                 value = expectedJsonApiRequest
         )
         val actualJsonApiRequest = writeJsonAsKtFromFile(
-                relPathFile = relPathFile,
+                relPath = relPath,
                 valueType = JsonApiRequest::class.java
         )
 
@@ -360,11 +360,11 @@ class JsonApiRequestTest {
 
 //        When
         writeKtAsJsonToFile(
-                relPathFile = "/generated/request/jsonApiRequest/withData.json",
+                relPath = "/generated/request/jsonApiRequest/withData.json",
                 value = expectedJsonApiRequest
         )
         val actualJsonApiRequest = writeJsonAsKtFromFile(
-                relPathFile = "/generated/request/jsonApiRequest/withData.json",
+                relPath = "/generated/request/jsonApiRequest/withData.json",
                 valueType = JsonApiRequest::class.java
         )
 
@@ -391,16 +391,16 @@ class JsonApiRequestTest {
                         )
                 )
         )
-        val relPathFile = "/generated/request/jsonApiRequest/withDataAndEmptyRelationships.json"
+        val relPath = "/generated/request/jsonApiRequest/withDataAndEmptyRelationships.json"
 
 
 //        When
         writeKtAsJsonToFile(
-                relPathFile = relPathFile,
+                relPath = relPath,
                 value = expectedJsonApiRequest
         )
         val actualJsonApiRequest = writeJsonAsKtFromFile(
-                relPathFile = relPathFile,
+                relPath = relPath,
                 valueType = JsonApiRequest::class.java
         )
 
@@ -428,11 +428,11 @@ class JsonApiRequestTest {
 
 //        When
         writeKtAsJsonToFile(
-                relPathFile = "/generated/request/jsonApiRequest/withDataAndNotEmptyRelationships.json",
+                relPath = "/generated/request/jsonApiRequest/withDataAndNotEmptyRelationships.json",
                 value = expectedJsonApiRequest
         )
         val actualJsonApiRequest = writeJsonAsKtFromFile(
-                relPathFile = "/generated/request/jsonApiRequest/withDataAndNotEmptyRelationships.json",
+                relPath = "/generated/request/jsonApiRequest/withDataAndNotEmptyRelationships.json",
                 valueType = JsonApiRequest::class.java
         )
 

@@ -1,1 +1,14 @@
-{"relationships":[{"profile":{"data":""}},{"settings":{"data":""}}]}
+{
+  "relationships": [
+    {
+      "profile": {
+        "data": ""
+      }
+    },
+    {
+      "settings": {
+        "data": ""
+      }
+    }
+  ]
+}

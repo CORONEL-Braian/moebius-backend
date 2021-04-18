@@ -17,6 +17,6 @@ data class RequestData(
     constructor() : this(type = "", attributes = mapOf(), relationships = listOf())
 }
 
-data class RelationshipData(val requestData: RequestData) {
-    constructor() : this(requestData = RequestData())
+data class RelationshipData(val data: RequestData) {
+    constructor() : this(data = RequestData())
 }

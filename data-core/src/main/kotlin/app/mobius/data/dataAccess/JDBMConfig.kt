@@ -1,6 +1,6 @@
 package app.mobius.data.dataAccess
 
-import app.mobius.io.ParentPathFile
+import app.mobius.io.ParentPath
 import app.mobius.io.ResourceUtils.getFile
 import org.hibernate.HibernateException
 import org.hibernate.Session
@@ -56,10 +56,10 @@ class JDBMConfig {
 
         /**
          * Open the session using hibernate cfg for only mapped entity
-         * @param relPathFile: e.g: /secret-hibernate.cfg.xml
+         * @param relPath: e.g: /secret-hibernate.cfg.xml
          */
-        fun openSessionForOnly(annotatedClass: Class<*>, relPathFile: String = HIBERNATE_CONFIGURATION) : Session {
-            val sessionFactory = getSessionFactoryForOnly(annotatedClass, relPathFile)
+        fun openSessionForOnly(annotatedClass: Class<*>, relPath: String = HIBERNATE_CONFIGURATION) : Session {
+            val sessionFactory = getSessionFactoryForOnly(annotatedClass, relPath)
             return sessionFactory.openSession()
         }
 
@@ -77,15 +77,15 @@ class JDBMConfig {
          * PRE: Configure entity mapping in open-persistence.xml necessary for the class hierarchy
          * OBS: Session Factory puede tener varias sesiones abiertas.
          * @param annotatedClass The class containing annotations
-         * @param relPathFile: e.g: secret-hibernate.cfg.xml
+         * @param relPath: e.g: secret-hibernate.cfg.xml
          */
         @Throws(HibernateException::class)
-        fun getSessionFactoryForOnly(annotatedClass: Class<*>, relPathFile: String) : SessionFactory {
+        fun getSessionFactoryForOnly(annotatedClass: Class<*>, relPath: String) : SessionFactory {
             return Configuration()
                     .configure(getFile(
                             moduleName = "data-core",
-                            parentPath = ParentPathFile.Main.RESOURCES,
-                            relPath = relPathFile
+                            parentPath = ParentPath.Main.RESOURCES,
+                            relPath = relPath
                     ))
                     .addAnnotatedClass(annotatedClass)
                     .buildSessionFactory()
@@ -105,7 +105,7 @@ class JDBMConfig {
                     .configure(
                                 getFile(
                                     moduleName = "data-core",
-                                    parentPath = ParentPathFile.Main.RESOURCES,
+                                    parentPath = ParentPath.Main.RESOURCES,
                                     relPath = canonicalName
                             )
                     )

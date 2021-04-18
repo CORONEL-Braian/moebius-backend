@@ -8,4 +8,5 @@ dependencies {
     implementation(project(":library_test_utils"))
 
     implementation("com.fasterxml.jackson.core", "jackson-databind", "2.6.7.4")
+    implementation("com.google.code.gson:gson:2.8.6")
 }
