@@ -5,7 +5,7 @@ import app.mobius.domain.entity.setting.Setting
 import java.util.*
 import javax.persistence.*
 
-data class PersonDto(
+data class PersonRequestDto(
         val username: String,
         /*val profile: Profile,
         val setting: Setting,*/

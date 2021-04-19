@@ -1,4 +1,4 @@
-package app.mobius.jsonApi.test.model.request
+package app.mobius.jsonApi.model.request
 
 /**
  * Represents the relationships with a custom name for each one

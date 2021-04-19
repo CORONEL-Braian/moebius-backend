@@ -1,6 +1,6 @@
 #### Error:
 
-Unexpected exception thrown: com.fasterxml.jackson.databind.JsonMappingException: No suitable constructor found for type [simple type, class app.mobius.jsonApi.test.model.request.RelationshipDataFake]
+Unexpected exception thrown: com.fasterxml.jackson.databind.JsonMappingException: No suitable constructor found for type [simple type, class app.mobius.jsonApi.model.request.RelationshipDataFake]
 
 #### Solution:
 

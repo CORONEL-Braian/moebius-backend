@@ -1,14 +1,16 @@
 https://www.baeldung.com/jackson
 https://www.baeldung.com/jackson-object-mapper-tutorial
 
-___
+## Conversions:
 
- - json <-> kt
+ - json <-> jsonApi (NOT YET)
+ - json <-> kt (from json to kt & from kt to json)
  - jsonApi <-> JsonApiRequest.kt
 
- - JsonApiRequest.kt -> ModelRequestDto.kt (NOT YET)
-    1. create ModelRequestDto.kt structure manually or with script
-    2. inject data by code
+ - JsonApiRequest.kt -> ModelRequestDto.kt (IN PROGRESS)
+    1. For create ModelRequestDto.kt structure should be manually or with JsonToKotlinClass plugin (Seal)
+    2. Inject data by code
+    
  - json, kt <-> jsonApi, JsonApiRequest.kt (NOT YET)
  
 ___

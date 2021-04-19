@@ -1,8 +1,8 @@
-package app.mobius.jsonApi.test
+package app.mobius.jsonApi.jvm
 
 import app.mobius.io.ParentPath
 import app.mobius.jsonApi.JsonApi
-import app.mobius.jsonApi.test.model.jvm.SomeList
+import app.mobius.jsonApi.model.jvm.SomeList
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import kotlin.io.path.ExperimentalPathApi

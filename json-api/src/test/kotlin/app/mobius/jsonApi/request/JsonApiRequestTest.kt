@@ -1,12 +1,12 @@
-package app.mobius.jsonApi.test
+package app.mobius.jsonApi.request
 
 import app.mobius.io.ParentPath
 import app.mobius.jsonApi.JsonApi
 import app.mobius.jsonApi.model.request.*
-import app.mobius.jsonApi.test.model.request.AttributesMock
-import app.mobius.jsonApi.test.model.request.RelationshipDataFake
-import app.mobius.jsonApi.test.model.request.RelationshipFake
-import app.mobius.jsonApi.test.model.request.RelationshipsFake
+import app.mobius.jsonApi.model.request.AttributesMock
+import app.mobius.jsonApi.model.request.RelationshipDataFake
+import app.mobius.jsonApi.model.request.RelationshipFake
+import app.mobius.jsonApi.model.request.RelationshipsFake
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow

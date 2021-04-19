@@ -5,7 +5,7 @@ import app.mobius.domain.entity.Person
 import app.mobius.domain.entity.Profile
 import app.mobius.domain.entity.role.Role
 import app.mobius.domain.entity.setting.Setting
-import app.mobius.signUp.infrastructure.dto.PersonDto
+import app.mobius.signUp.infrastructure.dto.PersonRequestDto
 import app.mobius.jsonApi.model.request.JsonApiRequest
 import app.mobius.signUp.service.ProfileService
 import app.mobius.signUp.service.SignUpService
@@ -74,7 +74,7 @@ class SignUpRestController {
      */
     @GetMapping("/all")
     @ResponseBody
-    fun getPeople() : List<PersonDto> {
+    fun getPeople() : List<PersonRequestDto> {
         val people = signUpService.getPeople()
 //        TODO: Return transform from PersonDTO to JsonApiRequest
         return people.map { convertFromEntityToDto(it) }
@@ -83,15 +83,15 @@ class SignUpRestController {
     /*@GetMapping("/person")
     fun getPerson(): Person = TODO()*/
 
-    private fun convertFromEntityToDto(person: Person) : PersonDto {
-        return PersonDto(
+    private fun convertFromEntityToDto(person: Person) : PersonRequestDto {
+        return PersonRequestDto(
                 username = person.username,
                 /*profile = person.profile,
                 setting = person.setting*/
         )
     }
 
-    private fun convertFromDtoToEntity(personDto: PersonDto): Person {
+    private fun convertFromDtoToEntity(personRequestDto: PersonRequestDto): Person {
         var person: Person = Person()
 //               TODO:
 
@@ -99,12 +99,12 @@ class SignUpRestController {
     }
 
 //     TODO: Return T
-    private  fun <T> convertJsonApiRequestToDTO(jsonApiRequest: JsonApiRequest, instance: T) : Any {
+    private  fun <T> convertJsonApiRequestToDTO(jsonApiRequest: JsonApiRequest, instanceRequestDTO: T) : Any {
         var username = ""
         jsonApiRequest.data.map {
             username = it.attributes["username"] as String
         }
-        return PersonDto(
+        return PersonRequestDto(
                 username = username
         )
     }
