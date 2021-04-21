@@ -8,8 +8,8 @@ https://www.baeldung.com/jackson-object-mapper-tutorial
  - jsonApi <-> JsonApiRequest.kt
 
  - JsonApiRequest.kt -> ModelRequestDto.kt (IN PROGRESS)
-    1. For create ModelRequestDto.kt structure should be manually or with JsonToKotlinClass plugin (Seal)
-    2. Inject data by code
+    1. For create ModelRequestDto.kt structure should be manually or with JsonToKotlinClass plugin of Seal Author
+    2. Inject data by code (IN PROGRESS)
     
  - json, kt <-> jsonApi, JsonApiRequest.kt (NOT YET)
  

@@ -5,8 +5,8 @@ package app.mobius.jsonApi.model.request
  * OBS: Does not split data type (from List<Map<X>> to List<Y>)
  * for avoid using generics for define custom property names in each relationship
  */
-data class RelationshipsFake(val relationships: List<Map<String, RelationshipDataFake>>) {
-    constructor() : this(relationships = listOf())
+data class RelationshipsFake(val relationships: Map<String, RelationshipDataFake>) {
+    constructor() : this(relationships = mapOf())
 }
 
 data class RelationshipFake(val anyRelationship: Map<String, RelationshipDataFake>) {

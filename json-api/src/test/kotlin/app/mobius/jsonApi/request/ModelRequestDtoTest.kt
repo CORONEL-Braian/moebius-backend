@@ -45,5 +45,18 @@ class ModelRequestDtoTest {
         assert(sampleJsonApi.data.first().attributes.isNotEmpty())
     }
 
+    @Test
+    fun `4 - When write jsonApi as kt from file a sample, then relationships isNotEmpty`() {
+        val sampleJsonApi = JsonApi.writeJsonAsKtFromFile(
+                moduleName = JsonApi.MODULE_NAME_JSON_API,
+                parentPath = ParentPath.Test.RESOURCES,
+                relPath = "/request/sample/withRelationships.json",
+                valueType = JsonApiRequest::class.java
+        )
+
+//        assert(sampleJsonApi.data.first().relationships.isNotEmpty())
+    }
+
+
 
 }
