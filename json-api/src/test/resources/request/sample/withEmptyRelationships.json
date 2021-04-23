@@ -5,9 +5,6 @@
       "title": "Ember Hamster",
       "src": "http://example.com/images/productivity.png"
     },
-    "relationships": {
-      "profile": { },
-      "settings": { }
-    }
+    "relationships": { }
   }]
 }

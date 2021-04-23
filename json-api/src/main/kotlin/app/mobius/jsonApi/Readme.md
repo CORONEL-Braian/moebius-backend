@@ -13,7 +13,9 @@ https://www.baeldung.com/jackson-object-mapper-tutorial
     
  - json, kt <-> jsonApi, JsonApiRequest.kt (NOT YET)
  
-___
+ - ModelDtoRequest.kt to @Entity
+_____________
+
 
  - ModelDTO.kt -> JsonApiResponse.kt (NOT YET)  
  - jsonApi <-> JsonApiResponse.kt (NOT YET)

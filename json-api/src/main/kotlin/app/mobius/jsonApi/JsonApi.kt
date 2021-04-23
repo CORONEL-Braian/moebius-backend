@@ -55,9 +55,9 @@ object JsonApi {
      * Databind from json to KT
      * Precondition: Entities have secondary constructor
      */
-    fun <T> writeJsonAsKt(jsonString: String, t: Class<T>): T {
+    fun <T> writeJsonAsKt(jsonString: String, valueType: Class<T>): T {
         val objectMapper = ObjectMapper()
-        return objectMapper.readValue(jsonString, t)
+        return objectMapper.readValue(jsonString, valueType)
     }
 
     /**
