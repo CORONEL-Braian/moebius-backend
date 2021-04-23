@@ -1,6 +1,7 @@
 {
-  "relationships": [
-    {},
-    {}
-  ]
+  "relationships": {
+    "": {
+      "data": ""
+    }
+  }
 }

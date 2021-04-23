@@ -2,7 +2,7 @@ package app.mobius.jsonApi.model.request
 
 /**
  * Represents the relationships with a custom name for each one
- * OBS: Does not split data type (from List<Map<X>> to List<Y>)
+ * OBS: Does not split data type (from Map<String, RelationshipData> to Map<Relationship>)
  * for avoid using generics for define custom property names in each relationship
  */
 data class RelationshipsFake(val relationships: Map<String, RelationshipDataFake>) {
@@ -18,7 +18,7 @@ data class RelationshipFake(val anyRelationship: Map<String, RelationshipDataFak
  * For not mock replace String by Data
  */
 data class RelationshipDataFake(
-        val data: String = ""
+        val data: String
 ) {
     constructor() : this(data = "")
 }

@@ -51,7 +51,7 @@ class JsonApiRequestTest {
     private fun provideRequestData(type: String = "",
                                    id: UUID? = null,
                                    attributes: Map<String, Any> = mapOf(),
-                                   relationships: List<Map<String, RelationshipData>> = listOf(),
+                                   relationships: Map<String, RelationshipData> = mapOf(),
                                    links: Links? = null
     ) = RequestData(
             type = type,
@@ -76,8 +76,8 @@ class JsonApiRequestTest {
     private fun provideRelationshipData(requestData: RequestData = RequestData()) = RelationshipData(requestData)
 
     private fun provideRelationships(
-            relationships:  List<Map<String, RelationshipData>> = listOf()
-    ) : List<Map<String, RelationshipData>> = relationships
+            relationships:  Map<String, RelationshipData> = mapOf()
+    ) : Map<String, RelationshipData> = relationships
 
     @Test
     fun `1 - When write the attributes mock from ktAsJson and jsonAsKt, Then attributes mock == jsonAsKt and isNotEmpty`() {
@@ -193,8 +193,8 @@ class JsonApiRequestTest {
 
 //        Then
         Assertions.assertEquals(expectedRelationshipsWithEachEmptyRelationship, actualRelationshipsWithEachEmptyContent)
-        actualRelationshipsWithEachEmptyContent.relationships.map {
-//            assert(it.isEmpty())  //TODO:
+        actualRelationshipsWithEachEmptyContent.relationships.forEach {
+            assert(it.key.isEmpty())
         }
     }
 
@@ -224,9 +224,7 @@ class JsonApiRequestTest {
 
 //        Then
         Assertions.assertEquals(expectedWithoutGenerics, actualWithoutGenerics)
-        /*assert(actualWithoutGenerics.relationships.any {
-            it.containsKey(customNameOfProfile)
-        })*///TODO:
+        assert(actualWithoutGenerics.relationships[customNameOfProfile] != null)
     }
 
     @Test
@@ -254,10 +252,10 @@ class JsonApiRequestTest {
 
 //        Then
         Assertions.assertEquals(expectedRelationshipsFakeWithEachNotEmptyRelationship, actualRelationshipsWithEachNotEmptyContent)
-        /*actualRelationshipsWithEachNotEmptyContent.relationships.map {
-            assert(it.isNotEmpty())
-        }*/
-        //TODO()
+        assert(actualRelationshipsWithEachNotEmptyContent.relationships.isNotEmpty())
+        actualRelationshipsWithEachNotEmptyContent.relationships.forEach {
+            assert(it.key.isNotEmpty())
+        }
     }
 
     @Test
@@ -310,11 +308,14 @@ class JsonApiRequestTest {
     @Test
     fun `6 - When write a requestData with relationships from ktAsJson and jsonAsKt, Then requestData == jsonAsKt and relationships isNotEmpty`() {
 //        Given
-        val expectedDataWithRelationships = provideRequestData(
-                relationships = listOf(
-                        mapOf("profile" to provideRelationshipData()),
-                        mapOf("settings" to provideRelationshipData()),
+        val relationships = provideRelationships(
+                relationships = mapOf(
+                        "profile" to provideRelationshipData(),
+                        "settings" to provideRelationshipData(),
                 )
+        )
+        val expectedDataWithRelationships = provideRequestData(
+                relationships = relationships
         )
         val relPath = "/generated/request/data/dataWithRelationships.json"
 
@@ -381,15 +382,16 @@ class JsonApiRequestTest {
     @Test
     fun `9 - When write a jsonApiRequest with a data and relationships from ktAsJson and jsonAsKt, Then jsonApiRequest == jsonAsKt, data isNotEmpty and relationships isNotEmpty`() {
     //        Given
+        val relationships = provideRelationships(
+                relationships = mapOf(
+                        "profile" to provideRelationshipData(),
+                        "settings" to provideRelationshipData(),
+                )
+        )
         val expectedJsonApiRequest = provideJsonApiRequest(
                 data = listOf(
                         provideRequestData(
-                                relationships = provideRelationships(
-                                        listOf(
-                                                provideRelationshipMock(),
-                                                provideRelationshipMock(),
-                                        )
-                                )
+                                relationships = relationships
                         )
                 )
         )
@@ -420,9 +422,9 @@ class JsonApiRequestTest {
         val expectedJsonApiRequest = provideJsonApiRequest(
                 data = listOf(
                         provideRequestData(
-                                relationships = listOf(
-                                        mapOf("profile" to provideRelationshipData()),
-                                        mapOf("settings" to provideRelationshipData()),
+                                relationships = mapOf(
+                                        "profile" to provideRelationshipData(),
+                                        "settings" to provideRelationshipData(),
                                 )
                         )
                 )
@@ -446,7 +448,7 @@ class JsonApiRequestTest {
             assert(it.relationships.isNotEmpty())
 
             it.relationships.map { relationship ->
-                assert(relationship.isNotEmpty())
+                assert(relationship.key.isNotEmpty())
             }
         }
     }

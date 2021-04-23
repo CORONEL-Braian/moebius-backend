@@ -4,10 +4,26 @@
       "type": "",
       "id": null,
       "attributes": {},
-      "relationships": [
-        {},
-        {}
-      ],
+      "relationships": {
+        "profile": {
+          "data": {
+            "type": "",
+            "id": null,
+            "attributes": {},
+            "relationships": {},
+            "links": null
+          }
+        },
+        "settings": {
+          "data": {
+            "type": "",
+            "id": null,
+            "attributes": {},
+            "relationships": {},
+            "links": null
+          }
+        }
+      },
       "links": null
     }
   ]

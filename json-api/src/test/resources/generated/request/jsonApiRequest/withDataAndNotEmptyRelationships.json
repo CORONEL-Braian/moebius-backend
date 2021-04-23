@@ -4,30 +4,26 @@
       "type": "",
       "id": null,
       "attributes": {},
-      "relationships": [
-        {
-          "profile": {
-            "data": {
-              "type": "",
-              "id": null,
-              "attributes": {},
-              "relationships": [],
-              "links": null
-            }
+      "relationships": {
+        "profile": {
+          "data": {
+            "type": "",
+            "id": null,
+            "attributes": {},
+            "relationships": {},
+            "links": null
           }
         },
-        {
-          "settings": {
-            "data": {
-              "type": "",
-              "id": null,
-              "attributes": {},
-              "relationships": [],
-              "links": null
-            }
+        "settings": {
+          "data": {
+            "type": "",
+            "id": null,
+            "attributes": {},
+            "relationships": {},
+            "links": null
           }
         }
-      ],
+      },
       "links": null
     }
   ]
