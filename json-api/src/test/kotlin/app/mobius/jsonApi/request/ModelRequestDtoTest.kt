@@ -41,7 +41,7 @@ class ModelRequestDtoTest {
         val sampleJsonApi = JsonApi.writeJsonAsKtFromFile(
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
                 parentPath = ParentPath.Test.RESOURCES,
-                relPath = "/request/sample/withAttributes.json",
+                relPath = "/request/sample/attributes/withTitleAndSrc.json",
                 valueType = JsonApiRequest::class.java
         )
 
@@ -61,7 +61,7 @@ class ModelRequestDtoTest {
     }
 
     @Test
-    fun `5 - When write jsonApi as kt from file a sample, then relationships isNotEmpty`() {
+    fun `5 - When write a sample of jsonApi as kt from file, then relationships isNotEmpty`() {
         val sampleJsonApi = JsonApi.writeJsonAsKtFromFile(
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
                 parentPath = ParentPath.Test.RESOURCES,
@@ -73,13 +73,30 @@ class ModelRequestDtoTest {
     }
 
     @Test
-    fun `6 - When map a empty JsonApiRequest, Then a DTO instance is returned`() {
-        JsonApiMapper.mapperGenericToModelDtoRequest(JsonApiRequest(), SomeList::class.java)
+    fun `6 - When map a empty JsonApiRequest, Then any class instance is returned`() {
+        JsonApiMapper.mapGenericToDtoRequest(JsonApiRequest(), SomeList::class.java)
     }
 
     @Test
     fun `7 - When map a JsonApiRequest with emptyData , Then a instance of SampleRequestDTO is returned`() {
-        JsonApiMapper.mapperGenericToModelDtoRequest(JsonApiRequest(), SampleRequestDto::class.java)
+        JsonApiMapper.mapGenericToDtoRequest(JsonApiRequest(), SampleRequestDto::class.java)
+    }
+
+    @Test
+    fun `8 - When map a JsonApiRequest with title as attribute from file, Then a instance of SampleRequestDTO has a not null title`() {
+//        Given
+        val sampleJsonApi = JsonApi.writeJsonAsKtFromFile(
+                moduleName = JsonApi.MODULE_NAME_JSON_API,
+                parentPath = ParentPath.Test.RESOURCES,
+                relPath = "/request/sample/attributes/withTitle.json",
+                valueType = JsonApiRequest::class.java
+        )
+
+//        When
+        val sampleRequestDto = JsonApiMapper.mapGenericToDtoRequest(JsonApiRequest(), SampleRequestDto::class.java)
+
+//        Then
+        assert(sampleRequestDto.title.isNotEmpty())
     }
 
 

@@ -8,8 +8,11 @@ object JsonApiMapper {
     /**
      * Map a generic of JsonApiRequest to some model DTO Request
      * PRE: @param valueType has default values
+     *
+     * Source:
+     *  . set field: https://www.baeldung.com/java-set-private-field-value
      */
-    fun <T> mapperGenericToModelDtoRequest(
+    fun <T> mapGenericToDtoRequest(
             jsonApiRequest: JsonApiRequest,
             valueType: Class<T>
     ) : T {
@@ -18,7 +21,7 @@ object JsonApiMapper {
          */
         val instance: T = valueType.newInstance()
 
-
+//        TODO: Add fields to instance
 
         return instance
     }
