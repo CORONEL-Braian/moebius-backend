@@ -65,7 +65,7 @@ class ModelRequestDtoTest {
         val sampleJsonApi = JsonApi.writeJsonAsKtFromFile(
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
                 parentPath = ParentPath.Test.RESOURCES,
-                relPath = "/request/sample/withRelationships.json",
+                relPath = "/request/sample/relationships/withEmptyPhotographer.json",
                 valueType = JsonApiRequest::class.java
         )
 
@@ -74,16 +74,16 @@ class ModelRequestDtoTest {
 
     @Test
     fun `6 - When map a empty JsonApiRequest, Then any class instance is returned`() {
-        JsonApiMapper.mapGenericToDtoRequest(JsonApiRequest(), SomeList::class.java)
+        JsonApiMapper.mapJsonApiToDtoRequest(JsonApiRequest(), SomeList::class.java)
     }
 
     @Test
     fun `7 - When map a JsonApiRequest with emptyData , Then a instance of SampleRequestDTO is returned`() {
-        JsonApiMapper.mapGenericToDtoRequest(JsonApiRequest(), SampleRequestDto::class.java)
+        JsonApiMapper.mapJsonApiToDtoRequest(JsonApiRequest(), SampleRequestDto::class.java)
     }
 
     @Test
-    fun `8 - When map a JsonApiRequest with title as attribute from file, Then a instance of SampleRequestDTO has a not null title`() {
+    fun `8 - When map a JsonApiRequest with title as attribute from file, Then a instance of SampleRequestDTO has not a empty title`() {
 //        Given
         val sampleJsonApi = JsonApi.writeJsonAsKtFromFile(
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
@@ -93,13 +93,47 @@ class ModelRequestDtoTest {
         )
 
 //        When
-        val sampleRequestDto = JsonApiMapper.mapGenericToDtoRequest(JsonApiRequest(), SampleRequestDto::class.java)
+        val sampleRequestDto = JsonApiMapper.mapJsonApiToDtoRequest(sampleJsonApi, SampleRequestDto::class.java)
 
 //        Then
         assert(sampleRequestDto.title.isNotEmpty())
     }
 
+    @Test
+    fun `9 - When map a JsonApiRequest with title and src as attribute from file, Then a instance of SampleRequestDTO has not a empty title nor empty src`() {
+//        Given
+        val sampleJsonApi = JsonApi.writeJsonAsKtFromFile(
+                moduleName = JsonApi.MODULE_NAME_JSON_API,
+                parentPath = ParentPath.Test.RESOURCES,
+                relPath = "/request/sample/attributes/withTitleAndSrc.json",
+                valueType = JsonApiRequest::class.java
+        )
 
+//        When
+        val sampleRequestDto = JsonApiMapper.mapJsonApiToDtoRequest(sampleJsonApi, SampleRequestDto::class.java)
+
+//        Then
+        assert(sampleRequestDto.title.isNotEmpty())
+        assert(sampleRequestDto.src.isNotEmpty())
+    }
+
+    @Test
+    fun `10 - When map a JsonApiRequest with relationships from file, Then a instance of SampleRequestDTO has a photographer with type and id in relationships`() {
+//        Given
+        val sampleJsonApi = JsonApi.writeJsonAsKtFromFile(
+                moduleName = JsonApi.MODULE_NAME_JSON_API,
+                parentPath = ParentPath.Test.RESOURCES,
+                relPath = "/request/sample/relationships/withPhotographer.json",
+                valueType = JsonApiRequest::class.java
+        )
+
+//        When
+        val sampleRequestDto = JsonApiMapper.mapJsonApiToDtoRequest(sampleJsonApi, SampleRequestDto::class.java)
+
+//        Then
+        assert(sampleRequestDto.photographer.type.isNotEmpty())
+        assert(sampleRequestDto.photographer.id.isNotEmpty())
+    }
 
     @Test
     fun `X - When map a full JsonApiRequest, Then an instance of SampleRequestDTO is returned`() {

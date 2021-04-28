@@ -6,8 +6,15 @@
       "src": "http://example.com/images/productivity.png"
     },
     "relationships": {
-      "profile": { },
-      "settings": { }
+      "photographer": {
+        "data": {
+          "type": "photographer",
+          "attributes": {
+            "type": "aType",
+            "id": "anId"
+          }
+        }
+      }
     }
   }]
 }
