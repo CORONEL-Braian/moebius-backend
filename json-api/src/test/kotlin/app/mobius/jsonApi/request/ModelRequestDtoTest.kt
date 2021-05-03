@@ -3,6 +3,7 @@ package app.mobius.jsonApi.request
 import app.mobius.io.ParentPath
 import app.mobius.jsonApi.JsonApi
 import app.mobius.jsonApi.model.jvm.SomeList
+import app.mobius.jsonApi.model.jvm.SomeListWithoutConstructor
 import app.mobius.jsonApi.model.request.JsonApiMapper
 import app.mobius.jsonApi.model.request.JsonApiRequest
 import app.mobius.jsonApi.model.request.SampleRequestDto
@@ -73,8 +74,16 @@ class ModelRequestDtoTest {
     }
 
     @Test
-    fun `6 - When map a empty JsonApiRequest, Then any class instance is returned`() {
+    fun `6A - When map a empty JsonApiRequest without default constructor, Then any class instance is returned`() {
+        JsonApiMapper.mapJsonApiToDtoRequest(JsonApiRequest(), SomeListWithoutConstructor::class.java)
+    }
+
+    @Test
+    fun `6B - When map a empty JsonApiRequest, Then any class instance is returned and map isEmpty`() {
+        val someList = SomeList()
         JsonApiMapper.mapJsonApiToDtoRequest(JsonApiRequest(), SomeList::class.java)
+
+        assert(someList.map.isEmpty())
     }
 
     @Test

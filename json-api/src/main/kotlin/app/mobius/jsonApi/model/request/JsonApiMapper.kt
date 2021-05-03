@@ -1,5 +1,7 @@
 package app.mobius.jsonApi.model.request
 
+import org.objenesis.Objenesis
+import org.objenesis.ObjenesisStd
 import kotlin.io.path.ExperimentalPathApi
 
 @ExperimentalPathApi
@@ -7,27 +9,33 @@ object JsonApiMapper {
 
     /**
      * Map a generic of JsonApiRequest to some model DTO Request
-     * PRE: @param valueType has default values //TODO: Delete
      *
      * Source:
      *  . set field value: https://www.baeldung.com/java-set-private-field-value
+     *  . instantiate classes without default constructors:
+     *      . https://stackoverflow.com/q/4133709/5279996
+     *      . http://objenesis.org/tutorial.html
      */
     fun <T> mapJsonApiToDtoRequest(
             jsonApiRequest: JsonApiRequest,
             dtoType: Class<T>
     ) : T {
-        /**
-         * If dtoType has not default values, do not use #newInstance() //TODO: Delete
-         */
-        var dtoInstance: T = dtoType.newInstance()
+
+        var dtoInstance: T = try {
+            dtoType.newInstance()
+        } catch (e: InstantiationException) {
+//            Use Objenesis because the dtoType class has not a default constructor
+            val objenesis: Objenesis = ObjenesisStd()
+            objenesis.newInstance(dtoType)
+        }
 
         if (jsonApiRequest.data.isNotEmpty()) {
             jsonApiRequest.data.first().let { data ->
                 dtoInstance = mapDataToDtoRequest(
                         data = data,
-                        dtoType = dtoType,
-                        dtoInstance = dtoInstance
-                )
+                        dtoType = dtoType as Class<Any>,
+                        dtoInstance = dtoInstance as Any
+                ) as T
             }
         }
 
@@ -37,29 +45,24 @@ object JsonApiMapper {
     /**
      * Add fields values from RequestData to dtoInstance
      */
-    private fun <T> mapDataToDtoRequest(
+    private fun mapDataToDtoRequest(
             data: RequestData,
-            dtoType: Class<T>,
-            dtoInstance: T,
-    ) : T {
-        var newDtoInstance = dtoInstance
-        newDtoInstance = mapAttributesToDtoRequest(attributes = data.attributes, dtoType = dtoType, dtoInstance = newDtoInstance)
+            dtoType: Class<Any>,
+            dtoInstance: Any,
+    ) : Any {
+        var newDtoInstance: Any = dtoInstance
+        newDtoInstance = mapAttributesToDtoRequest(attributes = data.attributes, dtoType = dtoType, dtoInstance = newDtoInstance) as Any
         newDtoInstance = mapRelationshipsToDtoRequest(relationships = data.relationships, dtoType = dtoType, dtoInstance = newDtoInstance)
         return newDtoInstance
     }
 
-    private fun <T> mapRelationshipsToDtoRequest(
+    private fun mapRelationshipsToDtoRequest(
             relationships: Map<String, RelationshipData>,
-            dtoType: Class<T>,
-            dtoInstance: T,
-    ) : T {
+            dtoType: Class<Any>,
+            dtoInstance: Any,
+    ) : Any {
 
-        val newDtoInstance = dtoInstance
-
-//        TODO: Check circular dependency
         relationships.map { relationship ->
-
-//            jsonRelationship.value.data.attributes
 
             dtoType.declaredFields.first { dtoRelationship ->
                 relationship.key == dtoRelationship.name
@@ -68,24 +71,27 @@ object JsonApiMapper {
 
                 val relationshipDtoInstance = dtoRelationship.type.newInstance()
 
+                /**
+                 * https://stackoverflow.com/a/62324236/5279996
+                 */
                 dtoRelationship.set(
-                        newDtoInstance,
+                        dtoInstance,
                         mapDataToDtoRequest(    // GENERATES SOME CIRCULAR DEPENDENCY
                                 data = relationship.value.data,
-                                dtoType = dtoRelationship.type,
+                                dtoType = dtoRelationship.type as Class<Any>,
                                 dtoInstance = relationshipDtoInstance
                         )
                 )
             }
         }
-        return newDtoInstance
+        return dtoInstance
     }
 
-    private fun <T> mapAttributesToDtoRequest(
+    private fun mapAttributesToDtoRequest(
             attributes: Map<String, Any>,
-            dtoType: Class<T>,
-            dtoInstance: T
-    ) : T {
+            dtoType: Class<Any>,
+            dtoInstance: Any
+    ) : Any {
         attributes.map { jsonAttribute ->
             dtoType.declaredFields.first { dtoAttribute ->
                 jsonAttribute.key == dtoAttribute.name
@@ -96,7 +102,6 @@ object JsonApiMapper {
         }
         return dtoInstance
     }
-
 
     fun mapperModelDtoRequestToEntity() {
 
