@@ -6,7 +6,7 @@ import app.mobius.jsonApi.model.jvm.SomeList
 import app.mobius.jsonApi.model.jvm.SomeListWithoutConstructor
 import app.mobius.jsonApi.model.request.JsonApiMapper
 import app.mobius.jsonApi.model.request.JsonApiRequest
-import app.mobius.jsonApi.model.request.SampleRequestDto
+import app.mobius.jsonApi.model.request.MockPhotograperRequestDto
 import org.junit.jupiter.api.Test
 import kotlin.io.path.ExperimentalPathApi
 
@@ -87,12 +87,12 @@ class ModelRequestDtoTest {
     }
 
     @Test
-    fun `7 - When map a JsonApiRequest with emptyData , Then a instance of SampleRequestDTO is returned`() {
-        JsonApiMapper.mapJsonApiToDtoRequest(JsonApiRequest(), SampleRequestDto::class.java)
+    fun `7 - When map a JsonApiRequest with emptyData , Then a instance of MockPhotograperRequestDto is returned`() {
+        JsonApiMapper.mapJsonApiToDtoRequest(JsonApiRequest(), MockPhotograperRequestDto::class.java)
     }
 
     @Test
-    fun `8 - When map a JsonApiRequest with title as attribute from file, Then a instance of SampleRequestDTO has not a empty title`() {
+    fun `8 - When map a JsonApiRequest with title as attribute from file, Then a instance of MockPhotograperRequestDto has not a empty title`() {
 //        Given
         val sampleJsonApi = JsonApi.writeJsonAsKtFromFile(
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
@@ -102,14 +102,14 @@ class ModelRequestDtoTest {
         )
 
 //        When
-        val sampleRequestDto = JsonApiMapper.mapJsonApiToDtoRequest(sampleJsonApi, SampleRequestDto::class.java)
+        val mockPhotograperRequestDto = JsonApiMapper.mapJsonApiToDtoRequest(sampleJsonApi, MockPhotograperRequestDto::class.java)
 
 //        Then
-        assert(sampleRequestDto.title.isNotEmpty())
+        assert(mockPhotograperRequestDto.title.isNotEmpty())
     }
 
     @Test
-    fun `9 - When map a JsonApiRequest with title and src as attribute from file, Then a instance of SampleRequestDTO has not a empty title nor empty src`() {
+    fun `9 - When map a JsonApiRequest with title and src as attribute from file, Then a instance of MockPhotograperRequestDto has not a empty title nor empty src`() {
 //        Given
         val sampleJsonApi = JsonApi.writeJsonAsKtFromFile(
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
@@ -119,15 +119,15 @@ class ModelRequestDtoTest {
         )
 
 //        When
-        val sampleRequestDto = JsonApiMapper.mapJsonApiToDtoRequest(sampleJsonApi, SampleRequestDto::class.java)
+        val mockPhotograperRequestDto = JsonApiMapper.mapJsonApiToDtoRequest(sampleJsonApi, MockPhotograperRequestDto::class.java)
 
 //        Then
-        assert(sampleRequestDto.title.isNotEmpty())
-        assert(sampleRequestDto.src.isNotEmpty())
+        assert(mockPhotograperRequestDto.title.isNotEmpty())
+        assert(mockPhotograperRequestDto.src.isNotEmpty())
     }
 
     @Test
-    fun `10 - When map a JsonApiRequest with relationships from file, Then a instance of SampleRequestDTO has a photographer with type and id in relationships`() {
+    fun `10 - When map a JsonApiRequest with relationships from file, Then a instance of MockPhotograperRequestDto has a photographer with type and id in relationships`() {
 //        Given
         val sampleJsonApi = JsonApi.writeJsonAsKtFromFile(
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
@@ -137,16 +137,32 @@ class ModelRequestDtoTest {
         )
 
 //        When
-        val sampleRequestDto = JsonApiMapper.mapJsonApiToDtoRequest(sampleJsonApi, SampleRequestDto::class.java)
+        val mockPhotograperRequestDto = JsonApiMapper.mapJsonApiToDtoRequest(sampleJsonApi, MockPhotograperRequestDto::class.java)
 
 //        Then
-        assert(sampleRequestDto.photographer.type.isNotEmpty())
-        assert(sampleRequestDto.photographer.id.isNotEmpty())
+        assert(mockPhotograperRequestDto.photographer.type.isNotEmpty())
+        assert(mockPhotograperRequestDto.photographer.id.isNotEmpty())
     }
 
     @Test
-    fun `X - When map a full JsonApiRequest, Then an instance of SampleRequestDTO is returned`() {
+    fun `11 - When map a full JsonApiRequest, Then an instance of MockPhotograperRequestDto is returned`() {
+//        Given
+        val sampleJsonApi = JsonApi.writeJsonAsKtFromFile(
+                moduleName = JsonApi.MODULE_NAME_JSON_API,
+                parentPath = ParentPath.Test.RESOURCES,
+                relPath = "/request/sample/relationships/withPhotographer.json",
+                valueType = JsonApiRequest::class.java
+        )
 
+//        When
+        val mockPhotograperRequestDto = JsonApiMapper.mapJsonApiToDtoRequest(sampleJsonApi, MockPhotograperRequestDto::class.java)
+
+//        Then
+        assert(mockPhotograperRequestDto.title.isNotEmpty())
+        assert(mockPhotograperRequestDto.title.isNotEmpty())
+        assert(mockPhotograperRequestDto.src.isNotEmpty())
+        assert(mockPhotograperRequestDto.photographer.type.isNotEmpty())
+        assert(mockPhotograperRequestDto.photographer.id.isNotEmpty())
     }
 
 }

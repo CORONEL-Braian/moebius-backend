@@ -1,6 +1,6 @@
 package app.mobius.jsonApi.model.request
 
-data class SampleRequestDto(
+data class MockPhotograperRequestDto(
         val title: String,
         val src: String,
         val photographer: Photographer
