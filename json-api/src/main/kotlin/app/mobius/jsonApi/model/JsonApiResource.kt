@@ -5,7 +5,7 @@ package app.mobius.jsonApi.model
  */
 data class JsonApiResource(
         val links: Links? = null,
-        val data: List<RequestData>
+        val data: List<ResourceData>
 ) {
     constructor() : this(links = Links(), data = listOf())
 }

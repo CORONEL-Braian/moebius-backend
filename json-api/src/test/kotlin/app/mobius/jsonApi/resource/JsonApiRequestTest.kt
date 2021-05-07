@@ -5,7 +5,7 @@ import app.mobius.jsonApi.JsonApi
 import app.mobius.jsonApi.model.JsonApiResource
 import app.mobius.jsonApi.model.Links
 import app.mobius.jsonApi.model.RelationshipData
-import app.mobius.jsonApi.model.RequestData
+import app.mobius.jsonApi.model.ResourceData
 import app.mobius.jsonApi.model.resource.AttributesMock
 import app.mobius.jsonApi.model.resource.RelationshipDataFake
 import app.mobius.jsonApi.model.resource.RelationshipFake
@@ -46,7 +46,7 @@ class JsonApiRequestTest {
     )
 
     private fun provideJsonApiRequest(
-            data: List<RequestData> = listOf()
+            data: List<ResourceData> = listOf()
     ) = JsonApiResource(
             data = data
     )
@@ -56,7 +56,7 @@ class JsonApiRequestTest {
                                    attributes: Map<String, Any> = mapOf(),
                                    relationships: Map<String, RelationshipData> = mapOf(),
                                    links: Links? = null
-    ) = RequestData(
+    ) = ResourceData(
             type = type,
             id = id,
             attributes = attributes,
@@ -86,8 +86,8 @@ class JsonApiRequestTest {
 
     private fun provideRelationshipData(
             links: Links = provideLinks(),
-            requestData: RequestData = RequestData()
-    ) = RelationshipData(links, requestData)
+            resourceData: ResourceData = ResourceData()
+    ) = RelationshipData(links, resourceData)
 
     private fun provideRelationships(
             relationships:  Map<String, RelationshipData> = mapOf()
@@ -297,7 +297,7 @@ class JsonApiRequestTest {
     }
 
     @Test
-    fun `5 - When write a requestData without relationships from ktAsJson and jsonAsKt, Then requestData == jsonAsKt and relationships isEmpty `() {
+    fun `5 - When write a resourceData without relationships from ktAsJson and jsonAsKt, Then resourceData == jsonAsKt and relationships isEmpty `() {
 //       Given
         val expectedRequestDataWithoutRelationships = provideRequestData()
         val relPath = "/generated/resource/data/dataWithoutRelationships.json"
@@ -311,7 +311,7 @@ class JsonApiRequestTest {
         }
         val actualRequestDataWithoutRelationships = writeJsonAsKtFromFile(
                 relPath = relPath,
-                valueType = RequestData::class.java
+                valueType = ResourceData::class.java
         )
 
     //        Then
@@ -320,7 +320,7 @@ class JsonApiRequestTest {
     }
 
     @Test
-    fun `6 - When write a requestData with relationships from ktAsJson and jsonAsKt, Then requestData == jsonAsKt and relationships isNotEmpty`() {
+    fun `6 - When write a resourceData with relationships from ktAsJson and jsonAsKt, Then resourceData == jsonAsKt and relationships isNotEmpty`() {
 //        Given
         val relationships = provideRelationships(
                 relationships = mapOf(
@@ -341,7 +341,7 @@ class JsonApiRequestTest {
         }
         val actualData = writeJsonAsKtFromFile(
                 relPath = relPath,
-                valueType = RequestData::class.java
+                valueType = ResourceData::class.java
         )
 
     //        Then

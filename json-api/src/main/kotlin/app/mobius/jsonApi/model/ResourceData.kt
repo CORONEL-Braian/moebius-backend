@@ -7,7 +7,7 @@ import java.util.*
  *  - OBS: Does not split data type (from Map<String, RelationshipData> to Map<Relationship>)
  *         for avoid using generics and define custom property names in each relationship.
  */
-data class RequestData(
+data class ResourceData(
         val type: String,
         val id: UUID? = null,
         val attributes: Map<String, Any>,
@@ -19,7 +19,7 @@ data class RequestData(
 
 data class RelationshipData(
         val links: Links? = null,
-        val data: RequestData
+        val data: ResourceData
 ) {
-    constructor() : this(links = Links(), data = RequestData())
+    constructor() : this(links = Links(), data = ResourceData())
 }

@@ -46,7 +46,7 @@ object JsonApiMapper {
      * Add fields values from RequestData to dtoInstance
      */
     private fun mapDataToDtoRequest(
-            data: RequestData,
+            data: ResourceData,
             dtoType: Class<Any>,
             dtoInstance: Any,
     ) : Any {
