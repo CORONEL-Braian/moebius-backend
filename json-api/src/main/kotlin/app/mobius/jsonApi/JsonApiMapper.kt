@@ -1,5 +1,8 @@
-package app.mobius.jsonApi.model
+package app.mobius.jsonApi
 
+import app.mobius.jsonApi.model.JsonApiResource
+import app.mobius.jsonApi.model.RelationshipData
+import app.mobius.jsonApi.model.ResourceData
 import org.objenesis.Objenesis
 import org.objenesis.ObjenesisStd
 import kotlin.io.path.ExperimentalPathApi
@@ -7,8 +10,12 @@ import kotlin.io.path.ExperimentalPathApi
 @ExperimentalPathApi
 object JsonApiMapper {
 
+    fun mapDtoResourceToEntity() {
+
+    }
+
     /**
-     * Map a generic of JsonApiRequest to some model DTO Request
+     * Map a generic of JsonApiResource to some model DTO Resource
      *
      * Source:
      *  . set field value: https://www.baeldung.com/java-set-private-field-value
@@ -16,7 +23,7 @@ object JsonApiMapper {
      *      . https://stackoverflow.com/q/4133709/5279996
      *      . http://objenesis.org/tutorial.html
      */
-    fun <T> mapJsonApiToDtoRequest(
+    fun <T> mapJsonApiToDtoResource(
             jsonApiResource: JsonApiResource,
             dtoType: Class<T>
     ) : T {
@@ -31,7 +38,7 @@ object JsonApiMapper {
 
         if (jsonApiResource.data.isNotEmpty()) {
             jsonApiResource.data.first().let { data ->
-                dtoInstance = mapDataToDtoRequest(
+                dtoInstance = mapDataToDtoResource(
                         data = data,
                         dtoType = dtoType as Class<Any>,
                         dtoInstance = dtoInstance as Any
@@ -43,20 +50,20 @@ object JsonApiMapper {
     }
 
     /**
-     * Add fields values from RequestData to dtoInstance
+     * Add fields values from ResourceData to dtoInstance
      */
-    private fun mapDataToDtoRequest(
+    private fun mapDataToDtoResource(
             data: ResourceData,
             dtoType: Class<Any>,
             dtoInstance: Any,
     ) : Any {
         var newDtoInstance: Any = dtoInstance
-        newDtoInstance = mapAttributesToDtoRequest(attributes = data.attributes, dtoType = dtoType, dtoInstance = newDtoInstance) as Any
-        newDtoInstance = mapRelationshipsToDtoRequest(relationships = data.relationships, dtoType = dtoType, dtoInstance = newDtoInstance)
+        newDtoInstance = mapAttributesToDtoResource(attributes = data.attributes, dtoType = dtoType, dtoInstance = newDtoInstance) as Any
+        newDtoInstance = mapRelationshipsToDtoResource(relationships = data.relationships, dtoType = dtoType, dtoInstance = newDtoInstance)
         return newDtoInstance
     }
 
-    private fun mapRelationshipsToDtoRequest(
+    private fun mapRelationshipsToDtoResource(
             relationships: Map<String, RelationshipData>,
             dtoType: Class<Any>,
             dtoInstance: Any,
@@ -76,7 +83,7 @@ object JsonApiMapper {
                  */
                 dtoRelationship.set(
                         dtoInstance,
-                        mapDataToDtoRequest(    // GENERATES SOME CIRCULAR DEPENDENCY
+                        mapDataToDtoResource(    // GENERATES SOME CIRCULAR DEPENDENCY
                                 data = relationship.value.data,
                                 dtoType = dtoRelationship.type as Class<Any>,
                                 dtoInstance = relationshipDtoInstance
@@ -87,7 +94,7 @@ object JsonApiMapper {
         return dtoInstance
     }
 
-    private fun mapAttributesToDtoRequest(
+    private fun mapAttributesToDtoResource(
             attributes: Map<String, Any>,
             dtoType: Class<Any>,
             dtoInstance: Any
@@ -101,10 +108,6 @@ object JsonApiMapper {
             }
         }
         return dtoInstance
-    }
-
-    fun mapperModelDtoRequestToEntity() {
-
     }
 
 }

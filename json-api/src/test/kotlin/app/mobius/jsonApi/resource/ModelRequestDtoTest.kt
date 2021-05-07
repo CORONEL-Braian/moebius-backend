@@ -4,7 +4,7 @@ import app.mobius.io.ParentPath
 import app.mobius.jsonApi.JsonApi
 import app.mobius.jsonApi.model.jvm.SomeList
 import app.mobius.jsonApi.model.jvm.SomeListWithoutConstructor
-import app.mobius.jsonApi.model.JsonApiMapper
+import app.mobius.jsonApi.JsonApiMapper
 import app.mobius.jsonApi.model.JsonApiResource
 import app.mobius.jsonApi.model.resource.MockPhotograperRequestDto
 import org.junit.jupiter.api.Test
@@ -75,20 +75,20 @@ class ModelRequestDtoTest {
 
     @Test
     fun `6A - When map a empty JsonApiRequest without default constructor, Then any class instance is returned`() {
-        JsonApiMapper.mapJsonApiToDtoRequest(JsonApiResource(), SomeListWithoutConstructor::class.java)
+        JsonApiMapper.mapJsonApiToDtoResource(JsonApiResource(), SomeListWithoutConstructor::class.java)
     }
 
     @Test
     fun `6B - When map a empty JsonApiRequest, Then any class instance is returned and map isEmpty`() {
         val someList = SomeList()
-        JsonApiMapper.mapJsonApiToDtoRequest(JsonApiResource(), SomeList::class.java)
+        JsonApiMapper.mapJsonApiToDtoResource(JsonApiResource(), SomeList::class.java)
 
         assert(someList.map.isEmpty())
     }
 
     @Test
     fun `7 - When map a JsonApiRequest with emptyData , Then a instance of MockPhotograperRequestDto is returned`() {
-        JsonApiMapper.mapJsonApiToDtoRequest(JsonApiResource(), MockPhotograperRequestDto::class.java)
+        JsonApiMapper.mapJsonApiToDtoResource(JsonApiResource(), MockPhotograperRequestDto::class.java)
     }
 
     @Test
@@ -102,7 +102,7 @@ class ModelRequestDtoTest {
         )
 
 //        When
-        val mockPhotograperRequestDto = JsonApiMapper.mapJsonApiToDtoRequest(sampleJsonApi, MockPhotograperRequestDto::class.java)
+        val mockPhotograperRequestDto = JsonApiMapper.mapJsonApiToDtoResource(sampleJsonApi, MockPhotograperRequestDto::class.java)
 
 //        Then
         assert(mockPhotograperRequestDto.title.isNotEmpty())
@@ -119,7 +119,7 @@ class ModelRequestDtoTest {
         )
 
 //        When
-        val mockPhotograperRequestDto = JsonApiMapper.mapJsonApiToDtoRequest(sampleJsonApi, MockPhotograperRequestDto::class.java)
+        val mockPhotograperRequestDto = JsonApiMapper.mapJsonApiToDtoResource(sampleJsonApi, MockPhotograperRequestDto::class.java)
 
 //        Then
         assert(mockPhotograperRequestDto.title.isNotEmpty())
@@ -137,7 +137,7 @@ class ModelRequestDtoTest {
         )
 
 //        When
-        val mockPhotograperRequestDto = JsonApiMapper.mapJsonApiToDtoRequest(sampleJsonApi, MockPhotograperRequestDto::class.java)
+        val mockPhotograperRequestDto = JsonApiMapper.mapJsonApiToDtoResource(sampleJsonApi, MockPhotograperRequestDto::class.java)
 
 //        Then
         assert(mockPhotograperRequestDto.photographer.type.isNotEmpty())
@@ -155,7 +155,7 @@ class ModelRequestDtoTest {
         )
 
 //        When
-        val mockPhotograperRequestDto = JsonApiMapper.mapJsonApiToDtoRequest(sampleJsonApi, MockPhotograperRequestDto::class.java)
+        val mockPhotograperRequestDto = JsonApiMapper.mapJsonApiToDtoResource(sampleJsonApi, MockPhotograperRequestDto::class.java)
 
 //        Then
         assert(mockPhotograperRequestDto.title.isNotEmpty())
