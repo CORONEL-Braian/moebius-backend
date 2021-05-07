@@ -1,4 +1,4 @@
-package app.mobius.jsonApi.model.request
+package app.mobius.jsonApi.model
 
 import org.objenesis.Objenesis
 import org.objenesis.ObjenesisStd
@@ -17,7 +17,7 @@ object JsonApiMapper {
      *      . http://objenesis.org/tutorial.html
      */
     fun <T> mapJsonApiToDtoRequest(
-            jsonApiRequest: JsonApiRequest,
+            jsonApiResource: JsonApiResource,
             dtoType: Class<T>
     ) : T {
 
@@ -29,8 +29,8 @@ object JsonApiMapper {
             objenesis.newInstance(dtoType)
         }
 
-        if (jsonApiRequest.data.isNotEmpty()) {
-            jsonApiRequest.data.first().let { data ->
+        if (jsonApiResource.data.isNotEmpty()) {
+            jsonApiResource.data.first().let { data ->
                 dtoInstance = mapDataToDtoRequest(
                         data = data,
                         dtoType = dtoType as Class<Any>,

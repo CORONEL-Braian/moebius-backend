@@ -3,6 +3,8 @@ https://www.baeldung.com/jackson-object-mapper-tutorial
 
 ## Conversions:
 
+### Request
+
  - json <-> jsonApi (NOT YET)
  - json <-> kt (from json to kt & from kt to json)
  - jsonApi <-> JsonApiRequest.kt
@@ -14,8 +16,8 @@ https://www.baeldung.com/jackson-object-mapper-tutorial
  - json, kt <-> jsonApi, JsonApiRequest.kt (NOT YET)
  
  - ModelDtoRequest.kt to @Entity
-_____________
 
+### Response
 
  - ModelDTO.kt -> JsonApiResponse.kt (NOT YET)  
  - jsonApi <-> JsonApiResponse.kt (NOT YET)

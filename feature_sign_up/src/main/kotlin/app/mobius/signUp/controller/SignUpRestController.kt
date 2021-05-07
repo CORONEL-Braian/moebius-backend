@@ -6,7 +6,7 @@ import app.mobius.domain.entity.Profile
 import app.mobius.domain.entity.role.Role
 import app.mobius.domain.entity.setting.Setting
 import app.mobius.signUp.infrastructure.dto.PersonRequestDto
-import app.mobius.jsonApi.model.request.JsonApiRequest
+import app.mobius.jsonApi.model.JsonApiResource
 import app.mobius.signUp.service.ProfileService
 import app.mobius.signUp.service.SignUpService
 import org.springframework.beans.factory.annotation.Autowired
@@ -99,9 +99,9 @@ class SignUpRestController {
     }
 
 //     TODO: Return T
-    private  fun <T> convertJsonApiRequestToDTO(jsonApiRequest: JsonApiRequest, instanceRequestDTO: T) : Any {
+    private  fun <T> convertJsonApiRequestToDTO(jsonApiResource: JsonApiResource, instanceRequestDTO: T) : Any {
         var username = ""
-        jsonApiRequest.data.map {
+        jsonApiResource.data.map {
             username = it.attributes["username"] as String
         }
         return PersonRequestDto(

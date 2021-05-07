@@ -2,7 +2,10 @@ package app.mobius.jsonApi.request
 
 import app.mobius.io.ParentPath
 import app.mobius.jsonApi.JsonApi
-import app.mobius.jsonApi.model.request.*
+import app.mobius.jsonApi.model.JsonApiResource
+import app.mobius.jsonApi.model.Links
+import app.mobius.jsonApi.model.RelationshipData
+import app.mobius.jsonApi.model.RequestData
 import app.mobius.jsonApi.model.request.AttributesMock
 import app.mobius.jsonApi.model.request.RelationshipDataFake
 import app.mobius.jsonApi.model.request.RelationshipFake
@@ -44,7 +47,7 @@ class JsonApiRequestTest {
 
     private fun provideJsonApiRequest(
             data: List<RequestData> = listOf()
-    ) = JsonApiRequest(
+    ) = JsonApiResource(
             data = data
     )
 
@@ -61,9 +64,17 @@ class JsonApiRequestTest {
             links = links
     )
 
-    private fun provideRelationshipMock(
-            relationship: Map<String, RelationshipData> = mapOf()
-    ): Map<String, RelationshipData> = relationship
+    private fun provideLinks(
+            self: String? = null,
+            next: String? = null,
+            last: String? = null,
+            related: String? = null
+    ) = Links(
+            self = self,
+            next = next,
+            last = last,
+            related = related
+    )
 
     private fun provideRelationshipFake(
             anyRelationship: Map<String, RelationshipDataFake> = mapOf()
@@ -73,7 +84,10 @@ class JsonApiRequestTest {
             relationships: Map<String, RelationshipDataFake> = mapOf()
     ) = RelationshipsFake(relationships = relationships)
 
-    private fun provideRelationshipData(requestData: RequestData = RequestData()) = RelationshipData(requestData)
+    private fun provideRelationshipData(
+            links: Links = provideLinks(),
+            requestData: RequestData = RequestData()
+    ) = RelationshipData(links, requestData)
 
     private fun provideRelationships(
             relationships:  Map<String, RelationshipData> = mapOf()
@@ -259,9 +273,9 @@ class JsonApiRequestTest {
     }
 
     @Test
-    fun `4 - When write Links from ktAsJson and jsonAsKt, Then links == jsonAsKt and the properties are nulls`() {
+    fun `4A - When write Links from ktAsJson and jsonAsKt", Then the properties are nulls`() {
 //        Given
-        val expectedLinks = Links()
+        val expectedLinks = provideLinks()
         val relPath = "/generated/request/links/propertiesNulls.json"
 
 //        When
@@ -276,10 +290,10 @@ class JsonApiRequestTest {
 
 //        Then
         Assertions.assertEquals(expectedLinks, actualLinks)
-        assert(actualLinks.self.isNullOrEmpty())
-        assert(actualLinks.next.isNullOrEmpty())
-        assert(actualLinks.last.isNullOrEmpty())
-        assert(actualLinks.related.isNullOrEmpty())
+        assert(actualLinks.self == null)
+        assert(actualLinks.next == null)
+        assert(actualLinks.last == null)
+        assert(actualLinks.related == null)
     }
 
     @Test
@@ -348,7 +362,7 @@ class JsonApiRequestTest {
         )
         val actualJsonApiRequest = writeJsonAsKtFromFile(
                 relPath = relPath,
-                valueType = JsonApiRequest::class.java
+                valueType = JsonApiResource::class.java
         )
 
 //        Then
@@ -368,7 +382,7 @@ class JsonApiRequestTest {
         )
         val actualJsonApiRequest = writeJsonAsKtFromFile(
                 relPath = "/generated/request/jsonApiRequest/withData.json",
-                valueType = JsonApiRequest::class.java
+                valueType = JsonApiResource::class.java
         )
 
 //        Then
@@ -405,7 +419,7 @@ class JsonApiRequestTest {
         )
         val actualJsonApiRequest = writeJsonAsKtFromFile(
                 relPath = relPath,
-                valueType = JsonApiRequest::class.java
+                valueType = JsonApiResource::class.java
         )
 
 //        Then
@@ -437,7 +451,7 @@ class JsonApiRequestTest {
         )
         val actualJsonApiRequest = writeJsonAsKtFromFile(
                 relPath = "/generated/request/jsonApiRequest/withDataAndNotEmptyRelationships.json",
-                valueType = JsonApiRequest::class.java
+                valueType = JsonApiResource::class.java
         )
 
 //        Then

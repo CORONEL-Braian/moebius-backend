@@ -1,4 +1,4 @@
-package app.mobius.jsonApi.model.request
+package app.mobius.jsonApi.model
 
 import java.util.*
 
@@ -17,6 +17,9 @@ data class RequestData(
     constructor() : this(type = "", attributes = mapOf(), relationships = mapOf())
 }
 
-data class RelationshipData(val data: RequestData) {
-    constructor() : this(data = RequestData())
+data class RelationshipData(
+        val links: Links? = null,
+        val data: RequestData
+) {
+    constructor() : this(links = Links(), data = RequestData())
 }

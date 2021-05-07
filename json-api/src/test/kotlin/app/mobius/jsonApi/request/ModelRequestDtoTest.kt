@@ -4,8 +4,8 @@ import app.mobius.io.ParentPath
 import app.mobius.jsonApi.JsonApi
 import app.mobius.jsonApi.model.jvm.SomeList
 import app.mobius.jsonApi.model.jvm.SomeListWithoutConstructor
-import app.mobius.jsonApi.model.request.JsonApiMapper
-import app.mobius.jsonApi.model.request.JsonApiRequest
+import app.mobius.jsonApi.model.JsonApiMapper
+import app.mobius.jsonApi.model.JsonApiResource
 import app.mobius.jsonApi.model.request.MockPhotograperRequestDto
 import org.junit.jupiter.api.Test
 import kotlin.io.path.ExperimentalPathApi
@@ -19,7 +19,7 @@ class ModelRequestDtoTest {
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
                 parentPath = ParentPath.Test.RESOURCES,
                 relPath = "/request/sample/emptyData.json",
-                valueType = JsonApiRequest::class.java
+                valueType = JsonApiResource::class.java
         )
 
         assert(sampleJsonApi.data.isEmpty())
@@ -31,7 +31,7 @@ class ModelRequestDtoTest {
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
                 parentPath = ParentPath.Test.RESOURCES,
                 relPath = "/request/sample/withType.json",
-                valueType = JsonApiRequest::class.java
+                valueType = JsonApiResource::class.java
         )
 
         assert(sampleJsonApi.data.first().type.isNotEmpty())
@@ -43,7 +43,7 @@ class ModelRequestDtoTest {
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
                 parentPath = ParentPath.Test.RESOURCES,
                 relPath = "/request/sample/attributes/withTitleAndSrc.json",
-                valueType = JsonApiRequest::class.java
+                valueType = JsonApiResource::class.java
         )
 
         assert(sampleJsonApi.data.first().attributes.isNotEmpty())
@@ -55,7 +55,7 @@ class ModelRequestDtoTest {
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
                 parentPath = ParentPath.Test.RESOURCES,
                 relPath = "/request/sample/withEmptyRelationships.json",
-                valueType = JsonApiRequest::class.java
+                valueType = JsonApiResource::class.java
         )
 
         assert(sampleJsonApi.data.first().relationships.isEmpty())
@@ -67,7 +67,7 @@ class ModelRequestDtoTest {
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
                 parentPath = ParentPath.Test.RESOURCES,
                 relPath = "/request/sample/relationships/withEmptyPhotographer.json",
-                valueType = JsonApiRequest::class.java
+                valueType = JsonApiResource::class.java
         )
 
         assert(sampleJsonApi.data.first().relationships.isNotEmpty())
@@ -75,20 +75,20 @@ class ModelRequestDtoTest {
 
     @Test
     fun `6A - When map a empty JsonApiRequest without default constructor, Then any class instance is returned`() {
-        JsonApiMapper.mapJsonApiToDtoRequest(JsonApiRequest(), SomeListWithoutConstructor::class.java)
+        JsonApiMapper.mapJsonApiToDtoRequest(JsonApiResource(), SomeListWithoutConstructor::class.java)
     }
 
     @Test
     fun `6B - When map a empty JsonApiRequest, Then any class instance is returned and map isEmpty`() {
         val someList = SomeList()
-        JsonApiMapper.mapJsonApiToDtoRequest(JsonApiRequest(), SomeList::class.java)
+        JsonApiMapper.mapJsonApiToDtoRequest(JsonApiResource(), SomeList::class.java)
 
         assert(someList.map.isEmpty())
     }
 
     @Test
     fun `7 - When map a JsonApiRequest with emptyData , Then a instance of MockPhotograperRequestDto is returned`() {
-        JsonApiMapper.mapJsonApiToDtoRequest(JsonApiRequest(), MockPhotograperRequestDto::class.java)
+        JsonApiMapper.mapJsonApiToDtoRequest(JsonApiResource(), MockPhotograperRequestDto::class.java)
     }
 
     @Test
@@ -98,7 +98,7 @@ class ModelRequestDtoTest {
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
                 parentPath = ParentPath.Test.RESOURCES,
                 relPath = "/request/sample/attributes/withTitle.json",
-                valueType = JsonApiRequest::class.java
+                valueType = JsonApiResource::class.java
         )
 
 //        When
@@ -115,7 +115,7 @@ class ModelRequestDtoTest {
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
                 parentPath = ParentPath.Test.RESOURCES,
                 relPath = "/request/sample/attributes/withTitleAndSrc.json",
-                valueType = JsonApiRequest::class.java
+                valueType = JsonApiResource::class.java
         )
 
 //        When
@@ -133,7 +133,7 @@ class ModelRequestDtoTest {
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
                 parentPath = ParentPath.Test.RESOURCES,
                 relPath = "/request/sample/relationships/withPhotographer.json",
-                valueType = JsonApiRequest::class.java
+                valueType = JsonApiResource::class.java
         )
 
 //        When
@@ -151,7 +151,7 @@ class ModelRequestDtoTest {
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
                 parentPath = ParentPath.Test.RESOURCES,
                 relPath = "/request/sample/relationships/withPhotographer.json",
-                valueType = JsonApiRequest::class.java
+                valueType = JsonApiResource::class.java
         )
 
 //        When

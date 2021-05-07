@@ -1,4 +1,5 @@
 {
+  "links": null,
   "data": [
     {
       "type": "",
@@ -6,6 +7,12 @@
       "attributes": {},
       "relationships": {
         "profile": {
+          "links": {
+            "self": null,
+            "next": null,
+            "last": null,
+            "related": null
+          },
           "data": {
             "type": "",
             "id": null,
@@ -15,6 +22,12 @@
           }
         },
         "settings": {
+          "links": {
+            "self": null,
+            "next": null,
+            "last": null,
+            "related": null
+          },
           "data": {
             "type": "",
             "id": null,
