@@ -1,4 +1,4 @@
-package app.mobius.jsonApi.request
+package app.mobius.jsonApi.resource
 
 import app.mobius.io.ParentPath
 import app.mobius.jsonApi.JsonApi
@@ -6,7 +6,7 @@ import app.mobius.jsonApi.model.jvm.SomeList
 import app.mobius.jsonApi.model.jvm.SomeListWithoutConstructor
 import app.mobius.jsonApi.model.JsonApiMapper
 import app.mobius.jsonApi.model.JsonApiResource
-import app.mobius.jsonApi.model.request.MockPhotograperRequestDto
+import app.mobius.jsonApi.model.resource.MockPhotograperRequestDto
 import org.junit.jupiter.api.Test
 import kotlin.io.path.ExperimentalPathApi
 
@@ -18,7 +18,7 @@ class ModelRequestDtoTest {
         val sampleJsonApi = JsonApi.writeJsonAsKtFromFile(
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
                 parentPath = ParentPath.Test.RESOURCES,
-                relPath = "/request/sample/emptyData.json",
+                relPath = "/resource/sample/emptyData.json",
                 valueType = JsonApiResource::class.java
         )
 
@@ -30,7 +30,7 @@ class ModelRequestDtoTest {
         val sampleJsonApi = JsonApi.writeJsonAsKtFromFile(
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
                 parentPath = ParentPath.Test.RESOURCES,
-                relPath = "/request/sample/withType.json",
+                relPath = "/resource/sample/withType.json",
                 valueType = JsonApiResource::class.java
         )
 
@@ -42,7 +42,7 @@ class ModelRequestDtoTest {
         val sampleJsonApi = JsonApi.writeJsonAsKtFromFile(
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
                 parentPath = ParentPath.Test.RESOURCES,
-                relPath = "/request/sample/attributes/withTitleAndSrc.json",
+                relPath = "/resource/sample/attributes/withTitleAndSrc.json",
                 valueType = JsonApiResource::class.java
         )
 
@@ -54,7 +54,7 @@ class ModelRequestDtoTest {
         val sampleJsonApi = JsonApi.writeJsonAsKtFromFile(
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
                 parentPath = ParentPath.Test.RESOURCES,
-                relPath = "/request/sample/withEmptyRelationships.json",
+                relPath = "/resource/sample/withEmptyRelationships.json",
                 valueType = JsonApiResource::class.java
         )
 
@@ -66,7 +66,7 @@ class ModelRequestDtoTest {
         val sampleJsonApi = JsonApi.writeJsonAsKtFromFile(
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
                 parentPath = ParentPath.Test.RESOURCES,
-                relPath = "/request/sample/relationships/withEmptyPhotographer.json",
+                relPath = "/resource/sample/relationships/withEmptyPhotographer.json",
                 valueType = JsonApiResource::class.java
         )
 
@@ -97,7 +97,7 @@ class ModelRequestDtoTest {
         val sampleJsonApi = JsonApi.writeJsonAsKtFromFile(
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
                 parentPath = ParentPath.Test.RESOURCES,
-                relPath = "/request/sample/attributes/withTitle.json",
+                relPath = "/resource/sample/attributes/withTitle.json",
                 valueType = JsonApiResource::class.java
         )
 
@@ -114,7 +114,7 @@ class ModelRequestDtoTest {
         val sampleJsonApi = JsonApi.writeJsonAsKtFromFile(
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
                 parentPath = ParentPath.Test.RESOURCES,
-                relPath = "/request/sample/attributes/withTitleAndSrc.json",
+                relPath = "/resource/sample/attributes/withTitleAndSrc.json",
                 valueType = JsonApiResource::class.java
         )
 
@@ -132,7 +132,7 @@ class ModelRequestDtoTest {
         val sampleJsonApi = JsonApi.writeJsonAsKtFromFile(
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
                 parentPath = ParentPath.Test.RESOURCES,
-                relPath = "/request/sample/relationships/withPhotographer.json",
+                relPath = "/resource/sample/relationships/withPhotographer.json",
                 valueType = JsonApiResource::class.java
         )
 
@@ -150,7 +150,7 @@ class ModelRequestDtoTest {
         val sampleJsonApi = JsonApi.writeJsonAsKtFromFile(
                 moduleName = JsonApi.MODULE_NAME_JSON_API,
                 parentPath = ParentPath.Test.RESOURCES,
-                relPath = "/request/sample/relationships/withPhotographer.json",
+                relPath = "/resource/sample/relationships/withPhotographer.json",
                 valueType = JsonApiResource::class.java
         )
 

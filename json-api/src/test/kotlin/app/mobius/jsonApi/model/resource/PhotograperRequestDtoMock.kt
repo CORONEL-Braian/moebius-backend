@@ -1,4 +1,4 @@
-package app.mobius.jsonApi.model.request
+package app.mobius.jsonApi.model.resource
 
 data class MockPhotograperRequestDto(
         val title: String,
