@@ -10,20 +10,28 @@ import kotlin.io.path.ExperimentalPathApi
 @ExperimentalPathApi
 object JsonApiMapper {
 
-    fun mapDtoResourceToEntity() {
-
+    /**
+     * Map some ModelDto to some JsonApiResource
+     *
+     * OBS: Used for GET requests
+     */
+    fun <T> mapDtoToJsonApiResource(
+            modelDto: T
+    ) : JsonApiResource {
+        return JsonApiResource()    //TODO: Impl
     }
 
     /**
-     * Map a generic of JsonApiResource to some model DTO Resource
+     * Map a JsonApiResource to some ModelDto
      *
+     * OBS: Used for POST requests
      * Source:
      *  . set field value: https://www.baeldung.com/java-set-private-field-value
      *  . instantiate classes without default constructors:
      *      . https://stackoverflow.com/q/4133709/5279996
      *      . http://objenesis.org/tutorial.html
      */
-    fun <T> mapJsonApiToDtoResource(
+    fun <T> mapJsonApiResourceToDto(
             jsonApiResource: JsonApiResource,
             dtoType: Class<T>
     ) : T {
