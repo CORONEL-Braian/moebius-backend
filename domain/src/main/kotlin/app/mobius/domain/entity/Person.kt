@@ -1,5 +1,6 @@
 package app.mobius.domain.entity
 
+import app.mobius.domain.entity.profile.Profile
 import app.mobius.domain.entity.role.Role
 import app.mobius.domain.entity.setting.Setting
 import java.util.*
@@ -33,5 +34,16 @@ data class Person(
 //        val identities: List<Identity>  //TODO | Next version
 ) {
         constructor() : this(username = "", profile = Profile(), setting = Setting(), role = Role())
+
+        constructor(
+                username: String,
+                profile: Profile,
+                setting: Setting
+        ) : this(
+                username = username,
+                profile = Profile(),
+                setting = Setting(),
+                role = Role()
+        )
 }
 

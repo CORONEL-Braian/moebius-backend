@@ -7,5 +7,5 @@ data class JsonApiResource(
         val links: Links? = null,
         val data: List<ResourceData>
 ) {
-    constructor() : this(links = Links(), data = listOf())
+    constructor() : this(data = listOf())
 }

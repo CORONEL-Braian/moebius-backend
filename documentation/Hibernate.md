@@ -66,3 +66,7 @@ Insert default value using DBMS and optional using Hibernate
 ##### @MappedSuperclass
 
 * [Source](https://thorben-janssen.com/hibernate-tips-map-multiple-entities-same-table/#:~:text=Yes%2C%20you%20can%20map%20two,better%20use%20a%20DTO%20projection.)
+
+##### Date | Time
+
+* [Mapping Date and Time](https://www.baeldung.com/hibernate-date-time)

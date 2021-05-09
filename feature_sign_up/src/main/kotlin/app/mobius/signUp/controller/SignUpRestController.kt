@@ -1,16 +1,13 @@
 package app.mobius.signUp.controller
 
-import app.mobius.data.util.randomString
-import app.mobius.domain.entity.Person
-import app.mobius.domain.entity.Profile
-import app.mobius.domain.entity.role.Role
-import app.mobius.domain.entity.setting.Setting
-import app.mobius.signUp.infrastructure.dto.PersonRequestDto
+import app.mobius.domain.entity.profile.Profile
+import app.mobius.signUp.infrastructure.dto.PersonDto
 import app.mobius.jsonApi.model.JsonApiResource
 import app.mobius.signUp.service.ProfileService
 import app.mobius.signUp.service.SignUpService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
+import kotlin.io.path.ExperimentalPathApi
 
 /**
  * URL's start with /people (after Application path)
@@ -18,6 +15,7 @@ import org.springframework.web.bind.annotation.*
  * TODO
  * https://www.baeldung.com/json-api-java-spring-web-app
  */
+@ExperimentalPathApi
 @RestController
 @RequestMapping("/people")
 class SignUpRestController {
@@ -39,18 +37,19 @@ class SignUpRestController {
     @PostMapping("/add")
     @ResponseBody
     fun addPerson(
-//            @RequestBody person: JsonApiRequest
-            @RequestBody person: Any
+            @RequestBody personResource: JsonApiResource
+//            @RequestBody personResource: Any
     ) : String  {
 
 //        TODO: Transform from JsonApiRequest to PersonDTO.
 //        TODO: Transform PersonDTO to Person
 
-    return signUpService.createPerson(
+   /* return signUpService.createPerson(
             Person(
                     username = randomString(), profile = Profile(), setting = Setting(), role = Role()
             )
-    )
+    )*/
+        return signUpService.createPerson(personResource)
     }
 
     @GetMapping("/profile/all")
@@ -74,39 +73,13 @@ class SignUpRestController {
      */
     @GetMapping("/all")
     @ResponseBody
-    fun getPeople() : List<PersonRequestDto> {
+    fun getPeople() : List<PersonDto> {
         val people = signUpService.getPeople()
 //        TODO: Return transform from PersonDTO to JsonApiRequest
-        return people.map { convertFromEntityToDto(it) }
+        return people.map { signUpService.convertFromEntityToDto(it) }
     }
 
     /*@GetMapping("/person")
     fun getPerson(): Person = TODO()*/
-
-    private fun convertFromEntityToDto(person: Person) : PersonRequestDto {
-        return PersonRequestDto(
-                username = person.username,
-                /*profile = person.profile,
-                setting = person.setting*/
-        )
-    }
-
-    private fun convertFromDtoToEntity(personRequestDto: PersonRequestDto): Person {
-        var person: Person = Person()
-//               TODO:
-
-        return person
-    }
-
-//     TODO: Return T
-    private  fun <T> convertJsonApiRequestToDTO(jsonApiResource: JsonApiResource, instanceRequestDTO: T) : Any {
-        var username = ""
-        jsonApiResource.data.map {
-            username = it.attributes["username"] as String
-        }
-        return PersonRequestDto(
-                username = username
-        )
-    }
 
 }

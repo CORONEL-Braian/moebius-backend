@@ -1,7 +1,12 @@
-package app.mobius.domain.entity
+package app.mobius.domain.entity.profile
 
+import app.mobius.domain.entity.Country
+import app.mobius.domain.entity.Gender
+import app.mobius.domain.entity.Location
 import app.mobius.util.PostgreSQLEnumType
 import org.hibernate.annotations.*
+import java.sql.Time
+import java.sql.Timestamp
 import java.util.*
 import javax.persistence.*
 import javax.persistence.CascadeType
@@ -33,7 +38,13 @@ data class Profile(
         @JoinColumn(name = "phone_uuid", referencedColumnName = "phone_uuid")
         var phone: Phone,
 
-        var birthdate: Date,
+        @Temporal(TemporalType.DATE)
+        @Column(name = "birth_date")
+        var birthDate: Date,
+
+        @Temporal(TemporalType.TIME)
+        @Column(name = "birth_time")
+        var birthTime: Date,
 
         @Enumerated(EnumType.STRING) @Type(type = "pgsql_enum")
         var sex: Sex,
@@ -52,23 +63,8 @@ data class Profile(
                 nickname = null,
                 biography = null,
                 phone = Phone(),
-                birthdate = Date(),
+                birthDate = Date(),
+                birthTime = Date(),
                 sex = Sex.F,
         )
 }
-
-@Entity
-@Table(name = "phone")
-data class Phone(
-        @Id @GeneratedValue @Column(name = "phone_uuid") val phoneUUID: UUID? = null,
-        @Column(name = "code_country") var codeCountry: String,
-        @Column(name = "code_area") var codeArea: String,
-        @Column(name = "number") var number: Long
-) {
-        constructor() : this(codeCountry = "", codeArea = "", number = -1)
-}
-
-enum class Sex {
-    F, M
-}
-

@@ -1,9 +1,9 @@
-package app.mobius.data.datasource
+package app.mobius.data.datasource.profile
 
 import app.mobius.data.dataAccess.hibernate.HibernateData
 import app.mobius.data.dataAccess.JDBMConfig
 import app.mobius.domain.entity.Gender
-import app.mobius.domain.entity.Profile as PersonProfile
+import app.mobius.domain.entity.profile.Profile as PersonProfile
 import org.hibernate.Session
 import org.junit.jupiter.api.*
 import org.springframework.util.Assert

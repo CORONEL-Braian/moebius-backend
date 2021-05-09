@@ -1,6 +1,6 @@
 package app.mobius.signUp.data.repository
 
-import app.mobius.domain.entity.Profile
+import app.mobius.domain.entity.profile.Profile
 
 interface ProfileRepository {
     fun findAllProfiles(): List<Profile>

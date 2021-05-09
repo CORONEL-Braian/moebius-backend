@@ -79,9 +79,9 @@ object JsonApiMapper {
 
         relationships.map { relationship ->
 
-            dtoType.declaredFields.first { dtoRelationship ->
+            dtoType.declaredFields.firstOrNull { dtoRelationship ->
                 relationship.key == dtoRelationship.name
-            }.let { dtoRelationship ->
+            }?.let { dtoRelationship ->
                 dtoRelationship.isAccessible = true
 
                 val relationshipDtoInstance = dtoRelationship.type.newInstance()
@@ -108,9 +108,9 @@ object JsonApiMapper {
             dtoInstance: Any
     ) : Any {
         attributes.map { jsonAttribute ->
-            dtoType.declaredFields.first { dtoAttribute ->
+            dtoType.declaredFields.firstOrNull() { dtoAttribute ->
                 jsonAttribute.key == dtoAttribute.name
-            }.let { dtoAttribute ->
+            }?.let { dtoAttribute ->
                 dtoAttribute.isAccessible = true
                 dtoAttribute.set(dtoInstance, jsonAttribute.value)
             }

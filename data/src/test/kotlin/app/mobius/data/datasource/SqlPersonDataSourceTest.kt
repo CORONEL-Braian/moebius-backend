@@ -4,7 +4,7 @@ import app.mobius.data.dataAccess.hibernate.HibernateData
 import app.mobius.data.dataAccess.JDBMConfig
 import app.mobius.data.util.randomString
 import app.mobius.domain.entity.Person
-import app.mobius.domain.entity.Profile
+import app.mobius.domain.entity.profile.Profile
 import app.mobius.domain.entity.role.Role
 import app.mobius.domain.entity.setting.Setting
 import org.hibernate.Session
