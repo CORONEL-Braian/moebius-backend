@@ -6,16 +6,27 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import java.io.FileInputStream
 import java.io.InputStream
+import kotlin.io.path.ExperimentalPathApi
 
+/**
+ * PRECONDITION: Use A or B
+ *   A) Build, Execution & Deployment -> Build Tools -> Gradle
+ *      . Build and run using: Intellij Idea
+ *      . Run tests usging: Intellij Idea
+ *
+ *   B) useJUnitPlatform()
+ */
+@ExperimentalPathApi
 class JDBMTest {
 
 //      ----- With Hibernate CFG  -----
-
     @Test
     fun `get input stream for configuration of session factory`() {
-        val currentWorkingDir = System.getProperty("user.dir")
-        val absoulutePath = "$currentWorkingDir/src/main/resources/secret-hibernate.cfg.xml"
-        val targetStream: InputStream = FileInputStream(absoulutePath)
+        val absolutePathCurrentModule = System.getProperty("user.dir")
+        val absolutePathProjectRoot = absolutePathCurrentModule.dropLastWhile { it != '/' }
+
+        val absoulutePathOfFile = "$absolutePathProjectRoot/data-core/src/main/resources/secret-hibernate.cfg.xml"
+        val targetStream: InputStream = FileInputStream(absoulutePathOfFile)
         Assertions.assertNotEquals(targetStream, null)
     }
 
@@ -37,8 +48,4 @@ class JDBMTest {
         JDBMConfig.Hibernate.openSession()
     }
 
-    @Test
-    fun some(){
-        assert(false)
-    }
 }

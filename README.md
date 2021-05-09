@@ -28,5 +28,5 @@ Please see our [code of conduct](https://github.com/Coronel-B/Moebius-backend/bl
  * Open API Specification
  
 ##### API Support:
- * http://www.möbius.app/support/api
+ * http://www.mobius.app/support/api
  * Email: braian@itdevexpert.com / gaston@itdevexpert.com

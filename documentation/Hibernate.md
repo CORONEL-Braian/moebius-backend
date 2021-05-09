@@ -34,6 +34,7 @@ The entity class may have other constructors as well. The no-arg constructor mus
 
 ##### @Enum:
 [Source](https://stackoverflow.com/a/64021041/5279996)
+[The best way to map an Enum Type with JPA and Hibernate](https://vladmihalcea.com/the-best-way-to-map-an-enum-type-with-jpa-and-hibernate/)
 
 
 ##### @ManyToMany:

@@ -9,8 +9,9 @@ import app.mobius.domain.entity.setting.security.Password
 import org.hibernate.Session
 import app.mobius.domain.entity.setting.security.Session as SecuritySession
 import org.junit.jupiter.api.*
+import kotlin.io.path.ExperimentalPathApi
 
-
+@ExperimentalPathApi
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SqlAuthenticationDataSourceTest {
 

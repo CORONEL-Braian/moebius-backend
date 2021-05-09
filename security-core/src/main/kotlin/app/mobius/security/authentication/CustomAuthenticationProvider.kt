@@ -37,6 +37,7 @@ class CustomAuthenticationProvider : AuthenticationProvider {
                     developerName = appAuthToken.principal,
                     privateKey = appAuthToken.credentials,
                     platform = appAuthToken.platform,
+                    environment = appAuthToken.environment
             )
 
             return if(isValidAppAuth) {

@@ -9,9 +9,6 @@ fun main(args: Array<String>) {
     runApplication<MobiusApplicationTest>(*args)
 }
 
-/**
- * TODO: Should exludeFilters in @ComponentScan as in @SpringBootApplication?
- */
 @SpringBootTest(
         properties = [
             "spring.jpa.hibernate.ddl-auto=create-drop",

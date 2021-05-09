@@ -1,6 +1,7 @@
 package app.mobius.web.filter
 
 import app.mobius.credentialManagment.domain.entity.security.Platform
+import app.mobius.credentialManagment.domain.entity.security.getEnvironmentFrom
 import app.mobius.domain.security.authorization.AppAuthorizationToken
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.filter.OncePerRequestFilter
@@ -26,36 +27,51 @@ class XHeaderAuthenticationFilter: OncePerRequestFilter() {
      *  . Get credentials from Basic Auth: https://stackoverflow.com/a/16000878/5279996
      */
     override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain) {
-        val headerAuthorization = request.getHeader(HEADER_AUTHORIZATION)
-        val headerPlatformName = request.getHeader(HEADER_PLATFORM_NAME)
-        val headerPlatformEcosystem = request.getHeader(HEADER_PLATFORM_ECOSYSTEM)
 
-        if ((headerAuthorization != null && headerAuthorization.toLowerCase().startsWith("basic"))||
-                headerPlatformName != null ||
-                headerPlatformEcosystem != null) {
-
-            val base64Credentials = headerAuthorization.split("Basic ").last()
-            val credentialsDecoded = String(Base64.getDecoder().decode(base64Credentials), StandardCharsets.UTF_8)
-            val developer = credentialsDecoded.split(":").first()
-            val password = credentialsDecoded.split(":").last()
-
-            val authentication = AppAuthorizationToken(
-                    developer = developer,
-                    password = password,
-                    platform = Platform(name = headerPlatformName, ecosystem = headerPlatformEcosystem)
-            )
-
-
-            SecurityContextHolder.getContext().authentication = authentication
+        if (checkRequestHeaders(request)) {
+            SecurityContextHolder.getContext().authentication = getAppAuthenticationToken(request)
         }
 
+//        Always use FilterChain#doFilter for then evaluate .antMatchers in SecurityBasicAuthTechnicalModuleConfiguration
         filterChain.doFilter(request, response)
     }
 
+    private fun checkRequestHeaders(request: HttpServletRequest) : Boolean {
+        val headerAuthorization = request.getHeader(HEADER_AUTHORIZATION)
+        val headerPlatformName = request.getHeader(HEADER_PLATFORM_NAME)
+        val headerPlatformEcosystem = request.getHeader(HEADER_PLATFORM_ECOSYSTEM)
+        val headerEnvironment = request.getHeader(HEADER_ENVIRONMENT)
+
+        return (headerAuthorization != null && headerAuthorization.toLowerCase().startsWith("basic")) &&
+                headerPlatformName != null &&
+                headerPlatformEcosystem != null &&
+                headerEnvironment != null
+    }
+
+    private fun getAppAuthenticationToken(request: HttpServletRequest) : AppAuthorizationToken {
+        val headerAuthorization = request.getHeader(HEADER_AUTHORIZATION)
+        val headerPlatformName = request.getHeader(HEADER_PLATFORM_NAME)
+        val headerPlatformEcosystem = request.getHeader(HEADER_PLATFORM_ECOSYSTEM)
+        val headerEnvironment = request.getHeader(HEADER_ENVIRONMENT)
+
+        val base64Credentials = headerAuthorization.split("Basic ").last()
+        val credentialsDecoded = String(Base64.getDecoder().decode(base64Credentials), StandardCharsets.UTF_8)
+        val developer = credentialsDecoded.split(":").first()
+        val password = credentialsDecoded.split(":").last()
+
+        return AppAuthorizationToken(
+                developer = developer,
+                password = password,
+                platform = Platform(name = headerPlatformName, ecosystem = headerPlatformEcosystem),
+                environment = getEnvironmentFrom(headerEnvironment)
+        )
+    }
+
     companion object {
-        private const val HEADER_AUTHORIZATION = "Authorization"
-        private const val HEADER_PLATFORM_NAME = "Platform-Name"
-        private const val HEADER_PLATFORM_ECOSYSTEM = "Platform-Ecosystem"
+        const val HEADER_AUTHORIZATION = "Authorization"
+        const val HEADER_PLATFORM_NAME = "Platform-Name"
+        const val HEADER_PLATFORM_ECOSYSTEM = "Platform-Ecosystem"
+        const val HEADER_ENVIRONMENT = "Environment"
     }
 
 }

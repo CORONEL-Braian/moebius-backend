@@ -1,10 +1,10 @@
-group = "app.möbius"
+group = "app.mobius"
 version = "0.0.0"
 
 dependencies {
 
 //    Core
-    implementation(project(":api"))
+    implementation(project(":api-core"))
     implementation(project(":service"))
     implementation(project(":deceased-core"))
     implementation(project(":infrastructure-core"))

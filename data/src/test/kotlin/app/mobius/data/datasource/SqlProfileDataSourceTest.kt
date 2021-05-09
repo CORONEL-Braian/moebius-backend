@@ -8,7 +8,9 @@ import org.hibernate.Session
 import org.junit.jupiter.api.*
 import org.springframework.util.Assert
 import java.util.*
+import kotlin.io.path.ExperimentalPathApi
 
+@ExperimentalPathApi
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SqlProfileDataSourceTest {
 

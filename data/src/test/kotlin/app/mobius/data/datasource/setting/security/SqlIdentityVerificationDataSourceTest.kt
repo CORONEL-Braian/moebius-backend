@@ -7,7 +7,9 @@ import app.mobius.domain.entity.setting.security.IdentityVerification
 import app.mobius.domain.entity.setting.security.Liveness
 import org.hibernate.Session
 import org.junit.jupiter.api.*
+import kotlin.io.path.ExperimentalPathApi
 
+@ExperimentalPathApi
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SqlIdentityVerificationDataSourceTest {
 

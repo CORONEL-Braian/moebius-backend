@@ -10,8 +10,10 @@ import javax.persistence.*
 import javax.persistence.criteria.CriteriaQuery
 import javax.persistence.criteria.Predicate
 import javax.persistence.criteria.Root
+import kotlin.io.path.ExperimentalPathApi
 import kotlin.jvm.Throws
 
+@ExperimentalPathApi
 class HibernateData {
 
     private val session = JDBMConfig.Hibernate.openSession()

@@ -1,6 +1,10 @@
+# ------ BEGIN .gitignore ------
 src/main/resources/secret-hibernate.cfg.xml
 src/main/resources/META-INF/persistence.xml
+# ------ END .gitignore ------
 
+
+# ------ BEGIN Common .gitignore ------
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
@@ -24,3 +28,4 @@ build/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+# ------ END Common .gitignore ------

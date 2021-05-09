@@ -4,7 +4,11 @@ import app.mobius.data.dataAccess.JDBMConfig
 import app.mobius.domain.entity.role.SubscriptionStatus
 import app.mobius.domain.entity.role.Subscription
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestInstance
+import kotlin.io.path.ExperimentalPathApi
 
+@ExperimentalPathApi
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SqlSubscriptionDataSourceTest {
 
     @Test

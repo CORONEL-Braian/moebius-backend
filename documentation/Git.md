@@ -1,4 +1,6 @@
-master <- staging <- integration <- testing <- development
+master <- staging <- integration <- testing <- development <- releases MVP  <- features x <- sub-features
+master <- staging <- integration <- testing <- development <- releases MVP 2 <- features y <- sub-features
+master <- staging <- integration <- testing <- development <- releases 3 <- features z <- sub-features
 
 -------------
 

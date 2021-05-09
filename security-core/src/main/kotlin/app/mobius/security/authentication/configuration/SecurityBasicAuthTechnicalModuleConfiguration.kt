@@ -76,6 +76,7 @@ open class SecurityBasicAuthTechnicalModuleConfiguration: WebSecurityConfigurerA
          */
         http.authorizeRequests()
                 .antMatchers(SecurityCoreEndpoints.Keys.HOME).permitAll()
+                .antMatchers(SecurityCoreEndpoints.Keys.MOBIUS_APPLICATION_TEST).permitAll()
                 .antMatchers(HttpMethod.POST).permitAll()
 
         /**
