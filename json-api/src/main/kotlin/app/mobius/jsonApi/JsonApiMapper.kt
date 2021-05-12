@@ -3,8 +3,6 @@ package app.mobius.jsonApi
 import app.mobius.jsonApi.model.JsonApiResource
 import app.mobius.jsonApi.model.RelationshipData
 import app.mobius.jsonApi.model.ResourceData
-import kotlinx.datetime.LocalDate
-import kotlinx.datetime.toLocalDate
 import org.objenesis.Objenesis
 import org.objenesis.ObjenesisStd
 import java.sql.Date
@@ -140,9 +138,14 @@ object JsonApiMapper {
                 Date::class.java -> setDate(attributeValue.toString())
                 Time::class.java -> setTime(attributeValue.toString())
                 else -> {
-                    attributeValue
+                    if (dtoInstanceType.isEnum) {
+                        setEnum(attributeValue.toString())
+                    } else {
+                        attributeValue
+                    }
                 }
             }
+
         } catch (e: IllegalArgumentException)  {
             e.printStackTrace()
             attributeValue
@@ -171,6 +174,19 @@ object JsonApiMapper {
      */
     private fun setTime(time: String) : Time {
         return Time.valueOf(time)
+    }
+
+    /**
+     *
+     * Precondition: @param enum exists in T
+     *
+     * Source: https://stackoverflow.com/a/59293236/5279996
+     *
+     * @param enum: "M"
+     * @return T
+     */
+    private inline fun <reified T : Enum<T>> setEnum(enum: String) : T {
+        return enumValues<T>().firstOrNull { it.name == enum }!!
     }
 
 }
