@@ -31,7 +31,7 @@ class SignUpService {
     fun createPerson(personResource: JsonApiResource) : String {
         val personDto = JsonApiMapper.mapJsonApiResourceToDto(
                 jsonApiResource = personResource,
-                dtoType = PersonDto::class.java
+                    dtoType = PersonDto::class.java
         )
 
         val person = mapDtoToEntity(personDto)

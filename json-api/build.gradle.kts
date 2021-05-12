@@ -11,4 +11,5 @@ dependencies {
     implementation("com.fasterxml.jackson.core", "jackson-databind", "2.6.7.4")
     implementation("com.google.code.gson:gson:2.8.6")
     implementation("org.objenesis","objenesis", "3.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.0")
 }

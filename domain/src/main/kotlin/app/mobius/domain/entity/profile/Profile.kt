@@ -5,8 +5,8 @@ import app.mobius.domain.entity.Gender
 import app.mobius.domain.entity.Location
 import app.mobius.util.PostgreSQLEnumType
 import org.hibernate.annotations.*
+import java.sql.Date
 import java.sql.Time
-import java.sql.Timestamp
 import java.util.*
 import javax.persistence.*
 import javax.persistence.CascadeType
@@ -38,13 +38,11 @@ data class Profile(
         @JoinColumn(name = "phone_uuid", referencedColumnName = "phone_uuid")
         var phone: Phone,
 
-        @Temporal(TemporalType.DATE)
         @Column(name = "birth_date")
         var birthDate: Date,
 
-        @Temporal(TemporalType.TIME)
         @Column(name = "birth_time")
-        var birthTime: Date,
+        var birthTime: Time,
 
         @Enumerated(EnumType.STRING) @Type(type = "pgsql_enum")
         var sex: Sex,
@@ -63,8 +61,8 @@ data class Profile(
                 nickname = null,
                 biography = null,
                 phone = Phone(),
-                birthDate = Date(),
-                birthTime = Date(),
+                birthDate = Date(-1),
+                birthTime = Time(-1),
                 sex = Sex.F,
         )
 }

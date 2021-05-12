@@ -3,8 +3,12 @@ package app.mobius.jsonApi
 import app.mobius.jsonApi.model.JsonApiResource
 import app.mobius.jsonApi.model.RelationshipData
 import app.mobius.jsonApi.model.ResourceData
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.toLocalDate
 import org.objenesis.Objenesis
 import org.objenesis.ObjenesisStd
+import java.sql.Date
+import java.sql.Time
 import kotlin.io.path.ExperimentalPathApi
 
 @ExperimentalPathApi
@@ -112,10 +116,61 @@ object JsonApiMapper {
                 jsonAttribute.key == dtoAttribute.name
             }?.let { dtoAttribute ->
                 dtoAttribute.isAccessible = true
-                dtoAttribute.set(dtoInstance, jsonAttribute.value)
+                dtoAttribute.set(
+                        dtoInstance,
+                        setAttributeValue(
+                                dtoInstanceType = dtoAttribute.type,
+                                attributeValue = jsonAttribute.value
+                        )
+                )
             }
         }
         return dtoInstance
+    }
+
+    /**
+     * Checks the value type for set it as an attribute
+     */
+    private fun <T> setAttributeValue(
+            dtoInstanceType: Class<T>,
+            attributeValue: Any
+    ) : T {
+        return (try {
+            when (dtoInstanceType) {
+                Date::class.java -> setDate(attributeValue.toString())
+                Time::class.java -> setTime(attributeValue.toString())
+                else -> {
+                    attributeValue
+                }
+            }
+        } catch (e: IllegalArgumentException)  {
+            e.printStackTrace()
+            attributeValue
+        }) as T
+    }
+
+    /**
+     * Map from string date to sql date
+     * Precondition: Format of @param date
+     *
+     * Source: https://stackoverflow.com/a/29168526/5279996
+     *
+     * @param date: "2021-05-12"
+     * @return java.sql.Date
+     */
+    private fun setDate(date: String) : Date {
+        return Date.valueOf(date)
+    }
+
+    /**
+     * Map from string date to sql date
+     * Precondition: Format of @param time
+     *
+     * @param time: "10:34:00"
+     * @return java.sql.Time
+     */
+    private fun setTime(time: String) : Time {
+        return Time.valueOf(time)
     }
 
 }
