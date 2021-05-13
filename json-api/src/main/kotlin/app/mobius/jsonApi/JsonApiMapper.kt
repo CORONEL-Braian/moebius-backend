@@ -117,8 +117,8 @@ object JsonApiMapper {
                 dtoAttribute.set(
                         dtoInstance,
                         setAttributeValue(
-                                dtoInstanceType = dtoAttribute.type,
-                                attributeValue = jsonAttribute.value
+                                type = dtoAttribute.type,
+                                value = jsonAttribute.value
                         )
                 )
             }
@@ -130,25 +130,26 @@ object JsonApiMapper {
      * Checks the value type for set it as an attribute
      */
     private fun <T> setAttributeValue(
-            dtoInstanceType: Class<T>,
-            attributeValue: Any
+            type: Class<T>,
+            value: Any
     ) : T {
         return (try {
-            when (dtoInstanceType) {
-                Date::class.java -> setDate(attributeValue.toString())
-                Time::class.java -> setTime(attributeValue.toString())
+            when (type) {
+                String::class.java  -> value.toString()
+                Date::class.java -> dateValueOf(value.toString())
+                Time::class.java -> timeValueOf(value.toString())
+                Long::class.java -> value.toString().toLong()
+                Double::class.java  -> value.toString().toDouble()
+                Boolean::class.java  -> value.toString().toBoolean()
                 else -> {
-                    if (dtoInstanceType.isEnum) {
-                        setEnum(attributeValue.toString())
-                    } else {
-                        attributeValue
-                    }
+                    if (type.isEnum) enumValueOf(type, value as String)
+                    else value
                 }
             }
 
         } catch (e: IllegalArgumentException)  {
             e.printStackTrace()
-            attributeValue
+            value
         }) as T
     }
 
@@ -161,7 +162,7 @@ object JsonApiMapper {
      * @param date: "2021-05-12"
      * @return java.sql.Date
      */
-    private fun setDate(date: String) : Date {
+    private fun dateValueOf(date: String) : Date {
         return Date.valueOf(date)
     }
 
@@ -172,21 +173,21 @@ object JsonApiMapper {
      * @param time: "10:34:00"
      * @return java.sql.Time
      */
-    private fun setTime(time: String) : Time {
+    private fun timeValueOf(time: String) : Time {
         return Time.valueOf(time)
     }
 
     /**
-     *
+     * Map from string enum to enum
      * Precondition: @param enum exists in T
      *
-     * Source: https://stackoverflow.com/a/59293236/5279996
+     * Source: https://stackoverflow.com/a/67514228/5279996
      *
      * @param enum: "M"
      * @return T
      */
-    private inline fun <reified T : Enum<T>> setEnum(enum: String) : T {
-        return enumValues<T>().firstOrNull { it.name == enum }!!
+    private fun <T> enumValueOf(type: Class<T>, enum: String) : T {
+        return type.enumConstants.first { it.toString() == enum }
     }
 
 }
