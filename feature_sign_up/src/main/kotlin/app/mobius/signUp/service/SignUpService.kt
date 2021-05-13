@@ -28,9 +28,10 @@ class SignUpService {
         return Person() //TODO
     }
 
-    fun createPerson(personResource: JsonApiResource) : String {
+    fun createPerson(personJsonApi: JsonApiResource) : String {
+
         val personDto = JsonApiMapper.mapJsonApiResourceToDto(
-                jsonApiResource = personResource,
+                jsonApiResource = personJsonApi,
                     dtoType = PersonDto::class.java
         )
 
@@ -38,7 +39,7 @@ class SignUpService {
 
         return try {
             personJpaRepository.save(person)
-            "Saved"
+            "Success"
         } catch (e: IllegalArgumentException) {
             e.printStackTrace()
             "ERROR: when person is saved"

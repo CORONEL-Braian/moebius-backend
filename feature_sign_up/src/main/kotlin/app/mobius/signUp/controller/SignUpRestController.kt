@@ -31,24 +31,12 @@ class SignUpRestController {
      * OBS: For debugging, replace data type of @param JsonApiRequest with Any
      *
      * signUpJsonApi.json -> JsonApiRequest -> PersonDTO
-     *
-     * @RequestBody person: JsonApiRequest   TODO: Enable
      */
     @PostMapping("/add")
     @ResponseBody
     fun addPerson(
             @RequestBody personResource: JsonApiResource
-//            @RequestBody personResource: Any
     ) : String  {
-
-//        TODO: Transform from JsonApiRequest to PersonDTO.
-//        TODO: Transform PersonDTO to Person
-
-   /* return signUpService.createPerson(
-            Person(
-                    username = randomString(), profile = Profile(), setting = Setting(), role = Role()
-            )
-    )*/
         return signUpService.createPerson(personResource)
     }
 
