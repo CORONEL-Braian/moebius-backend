@@ -11,9 +11,6 @@ import kotlin.io.path.ExperimentalPathApi
 
 /**
  * URL's start with /people (after Application path)
- *
- * TODO
- * https://www.baeldung.com/json-api-java-spring-web-app
  */
 @ExperimentalPathApi
 @RestController
@@ -25,6 +22,16 @@ class SignUpRestController {
 
     @Autowired
     private lateinit var profileService: ProfileService
+
+    @GetMapping("/status")
+    @ResponseBody
+    fun featureStatus() : String {
+        return if (profileService.isOpen()) {
+            "No problem"
+        } else {
+            "Service interruption"
+        }
+    }
 
     /**
      * PRE: Composite classes in JsonApiRequest have a default constructor
@@ -44,16 +51,6 @@ class SignUpRestController {
     @ResponseBody
     fun getProfiles() : List<Profile> {
         return profileService.getProfiles()
-    }
-
-    @GetMapping("/status")
-    @ResponseBody
-    fun featureStatus() : String {
-        return if (profileService.isOpen()) {
-            "No problem"
-        } else {
-            "Service interruption"
-        }
     }
 
     /**

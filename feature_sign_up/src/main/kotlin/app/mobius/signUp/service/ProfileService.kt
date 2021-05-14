@@ -19,5 +19,4 @@ class ProfileService {
         return profileRepository.isEntityManagerOpen()
     }
 
-
 }

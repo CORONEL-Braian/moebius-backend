@@ -4,7 +4,9 @@ import app.mobius.signUp.data.repository.PersonJpaRepository
 import app.mobius.domain.entity.Person
 import app.mobius.jsonApi.JsonApiMapper
 import app.mobius.jsonApi.model.JsonApiResource
+import app.mobius.loggerFor
 import app.mobius.signUp.infrastructure.dto.PersonDto
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import kotlin.io.path.ExperimentalPathApi
@@ -20,6 +22,8 @@ class SignUpService {
     @Autowired
     private lateinit var personJpaRepository: PersonJpaRepository
 
+    private val LOG = loggerFor(SignUpService::class.java)
+
     fun getPeople() : List<Person> {
         return personJpaRepository.findAll()
     }
@@ -29,6 +33,7 @@ class SignUpService {
     }
 
     fun createPerson(personJsonApi: JsonApiResource) : String {
+        LOG.info("feature-sign-up | Create Person")
 
         val personDto = JsonApiMapper.mapJsonApiResourceToDto(
                 jsonApiResource = personJsonApi,
@@ -56,9 +61,10 @@ class SignUpService {
     fun convertFromEntityToDto(person: Person) : PersonDto {
         return PersonDto(
                 username = person.username,
-                profile = person.profile,
+                profile = person.profile,   
                 setting = person.setting
         )
     }
+
 
 }
