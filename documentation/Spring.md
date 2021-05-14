@@ -40,3 +40,8 @@ ___
 ### Headers
 
 [Read HTTP Headers](https://www.baeldung.com/spring-rest-http-headers)
+
+___
+### Exception Handling
+
+ * [Exception Handling in MVC](https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc)

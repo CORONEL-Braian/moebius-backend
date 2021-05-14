@@ -1,12 +1,17 @@
 package app.mobius.signUp.controller
 
 import app.mobius.domain.entity.profile.Profile
-import app.mobius.signUp.infrastructure.dto.PersonDto
 import app.mobius.jsonApi.model.JsonApiResource
+import app.mobius.loggerFor
+import app.mobius.signUp.domain.PersonNotRegisteredException
+import app.mobius.signUp.infrastructure.dto.PersonDto
 import app.mobius.signUp.service.ProfileService
 import app.mobius.signUp.service.SignUpService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
+import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.server.ResponseStatusException
 import kotlin.io.path.ExperimentalPathApi
 
 /**
@@ -42,9 +47,13 @@ class SignUpRestController {
     @PostMapping("/add")
     @ResponseBody
     fun addPerson(
-            @RequestBody personResource: JsonApiResource
+            @RequestBody personResource: JsonApiResource,
     ) : String  {
-        return signUpService.createPerson(personResource)
+        return try {
+            signUpService.createPerson(personResource)
+        } catch (e: Exception) {
+            throw PersonNotRegisteredException()
+        }
     }
 
     @GetMapping("/profile/all")

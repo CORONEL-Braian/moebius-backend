@@ -6,7 +6,6 @@ import app.mobius.jsonApi.JsonApiMapper
 import app.mobius.jsonApi.model.JsonApiResource
 import app.mobius.loggerFor
 import app.mobius.signUp.infrastructure.dto.PersonDto
-import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import kotlin.io.path.ExperimentalPathApi
@@ -44,10 +43,11 @@ class SignUpService {
 
         return try {
             personJpaRepository.save(person)
-            "Success"
-        } catch (e: IllegalArgumentException) {
+            "Success when person is saved"
+        } catch (e: Exception) {
             e.printStackTrace()
-            "ERROR: when person is saved"
+            LOG.info("feature-sign-up | ERROR-0 | ${e.message}")
+            throw Exception()
         }
     }
 
