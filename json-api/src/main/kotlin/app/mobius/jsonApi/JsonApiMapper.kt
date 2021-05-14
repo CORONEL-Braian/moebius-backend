@@ -39,7 +39,7 @@ object JsonApiMapper {
     ) : T {
 
         var dtoInstance: T = try {
-            dtoType.newInstance()
+            dtoType.newInstance()   //TODO: Deprecated: Use:  dtoType.getDeclaredConstructor().newInstance()
         } catch (e: InstantiationException) {
 //            Use Objenesis because the dtoType class has not a default constructor
             val objenesis: Objenesis = ObjenesisStd()
@@ -68,7 +68,7 @@ object JsonApiMapper {
             dtoInstance: Any,
     ) : Any {
         var newDtoInstance: Any = dtoInstance
-        newDtoInstance = mapAttributesToDtoResource(attributes = data.attributes, dtoType = dtoType, dtoInstance = newDtoInstance) as Any
+        newDtoInstance = mapAttributesToDtoResource(attributes = data.attributes, dtoType = dtoType, dtoInstance = newDtoInstance)
         newDtoInstance = mapRelationshipsToDtoResource(relationships = data.relationships, dtoType = dtoType, dtoInstance = newDtoInstance)
         return newDtoInstance
     }
