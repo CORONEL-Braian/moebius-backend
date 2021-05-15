@@ -110,16 +110,7 @@ class JDBMConfig {
                             )
                     )
 
-            /**
-             * Auto Scan Entities
-             *
-             * TODO: Should be the entities packages per features:
-             *  [
-             *    app.mobius.domain.entity.*,
-             *    app.mobius.xFeature.entity.*,
-             *    app.mobius.YFeature.entity.*,
-             *  ]
-             */
+//            Auto Scan Entities packages per features
             val reflections = Reflections(PackagesToScan.SUMMATION)
             val importantClasses: Set<Class<*>> = reflections.getTypesAnnotatedWith(Entity::class.java)
 
