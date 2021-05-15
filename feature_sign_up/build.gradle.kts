@@ -1,5 +1,5 @@
 group = "app.mobius.backend.feature.signUp"
-version = "0.1.0"
+version = "0.1.1"
 
 /**
  * Source: https://stackoverflow.com/a/57710092/5279996
