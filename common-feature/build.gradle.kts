@@ -1,4 +1,4 @@
-group = "app.mobius"
+group = "app.mobius.backend.common.feature"
 version = "0.0.0"
 
 dependencies {

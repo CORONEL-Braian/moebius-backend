@@ -1,4 +1,4 @@
-group = "app.mobius"
+group = "app.mobius.backend.feature.signUp"
 version = "0.1.0"
 
 /**

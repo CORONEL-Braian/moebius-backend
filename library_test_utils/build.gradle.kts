@@ -1,6 +1,6 @@
 //apply(from = "${rootProject.projectDir}/common-feature-test-utils.gradle.kts")    //TODO
 
-group = "app.mobius"
+group = "app.mobius.backend.library.test.utils"
 version = "0.0.0"
 
 /**

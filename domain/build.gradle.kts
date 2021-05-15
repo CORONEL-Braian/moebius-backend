@@ -1,4 +1,4 @@
-group = "app.mobius"
+group = "app.mobius.backend.domain"
 version = "0.0.0"
 
 /**

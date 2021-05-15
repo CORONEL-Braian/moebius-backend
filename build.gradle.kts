@@ -34,8 +34,6 @@ subprojects {
 		plugin("io.spring.dependency-management")
 	}
 
-	group = "app.mobius"
-
 	repositories {
 		maven("https://dl.bintray.com/kotlin/kotlin-eap")
 		mavenCentral()
