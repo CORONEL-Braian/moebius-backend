@@ -1,3 +1,4 @@
+group = "org.itdevexpert.jsonApi"
 version = "0.0.0"
 
 /**
@@ -12,4 +13,9 @@ dependencies {
     implementation("com.google.code.gson:gson:2.8.6")
     implementation("org.objenesis","objenesis", "3.2")
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.0")
+}
+
+// For library
+tasks.test {
+    useJUnitPlatform()
 }
