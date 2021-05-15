@@ -1,5 +1,5 @@
 group = "org.itdevexpert.jsonApi"
-version = "0.0.0"
+version = "0.0.1"
 
 /**
  * Jackson: https://search.maven.org/classic/#search%7Cgav%7C1%7Cg%3A%22com.fasterxml.jackson.core%22%20AND%20a%3A%22jackson-databind%22
