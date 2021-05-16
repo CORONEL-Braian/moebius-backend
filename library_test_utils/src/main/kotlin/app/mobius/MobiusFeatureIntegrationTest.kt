@@ -19,7 +19,6 @@ fun main(args: Array<String>) {
             "spring.jpa.hibernate.ddl-auto=create-drop",
             "spring.liquibase.enabled=false",
             "spring.flyway.enabled=false",
-//            "spring.main.allow-bean-definition-overriding=true"
         ]
 )
 @EnableAutoConfiguration

@@ -9,8 +9,11 @@ import kotlin.io.path.ExperimentalPathApi
 @Configuration
 open class SignUpRestControllerTestConfiguration {
 
+    /**
+     * OBS: Use 'Mock' as sufix in value Bean for not duplicate beans
+     */
     @ExperimentalPathApi
-    @Bean
+    @Bean("signUpServiceMock")
     open fun signUpService(): SignUpService {
         return Mockito.mock(SignUpService::class.java)
     }

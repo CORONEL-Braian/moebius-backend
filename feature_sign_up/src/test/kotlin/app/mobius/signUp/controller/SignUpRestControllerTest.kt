@@ -28,7 +28,6 @@ import kotlin.io.path.ExperimentalPathApi
 @AutoConfigureMockMvc
 @SpringBootTest(classes = [
     MobiusFeatureIntegrationTest::class,
-//    SignUpRestControllerTestConfiguration::class
 ])
 class SignUpRestControllerIntegrationTest {
 
@@ -37,7 +36,7 @@ class SignUpRestControllerIntegrationTest {
 
     @ExperimentalPathApi
     @Autowired
-    private lateinit var signUpService: SignUpService   //TODO: Use this
+    private lateinit var signUpService: SignUpService
 
     private fun provideFullUrl(endpoint: String) = ApiEndpoints.URL_BASE + endpoint
 
@@ -51,8 +50,6 @@ class SignUpRestControllerIntegrationTest {
 
     @Test
     fun `0 - when person requests a signUp endpoint, then success`() {
-        val signUpService = mock(SignUpService::class.java)
-
         `when`(signUpService.createPerson(JsonApiResource())).thenReturn("Success test")
 
         val result = signUpService.createPerson(JsonApiResource())
