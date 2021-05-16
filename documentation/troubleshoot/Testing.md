@@ -49,3 +49,21 @@ Run tests using Intellij Idea:
  - Or with `tasks.test {
        useJUnitPlatform()
    }`
+   
+----
+
+#### Error
+
+`Caused by: org.mockito.exceptions.base.MockitoException: 
+ Cannot mock/spy class app.mobius.signUp.configuration.SignUpRestControllerTestConfiguration$Some
+ Mockito cannot mock/spy because :`
+`  - final class`
+
+#### Solution
+
+`testImplementation 'org.mockito:mockito-inline:2.13.0'`
+
+[Source](https://stackoverflow.com/a/14292888/5279996)
+
+----
+

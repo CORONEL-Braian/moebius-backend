@@ -18,3 +18,8 @@ ___
 ### Services
 
  - [Test Service Layer in Spring Boot](https://youtu.be/gIb_m06XeQE)
+ 
+### Mockito
+
+- [Mockito Series](https://www.baeldung.com/mockito-series)
+- [Injecting Mocks in Spring](https://www.baeldung.com/injecting-mocks-in-spring)
