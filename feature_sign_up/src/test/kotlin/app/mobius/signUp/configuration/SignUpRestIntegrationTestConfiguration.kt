@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration
 import kotlin.io.path.ExperimentalPathApi
 
 @Configuration
-open class SignUpRestControllerTestConfiguration {
+open class SignUpRestIntegrationTestConfiguration {
 
     /**
      * OBS: Use 'Mock' as sufix in value Bean for not duplicate beans

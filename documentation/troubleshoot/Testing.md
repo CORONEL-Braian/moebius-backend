@@ -64,6 +64,3 @@ Run tests using Intellij Idea:
 `testImplementation 'org.mockito:mockito-inline:2.13.0'`
 
 [Source](https://stackoverflow.com/a/14292888/5279996)
-
-----
-

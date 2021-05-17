@@ -2,16 +2,12 @@ package app.mobius.signUp.controller
 
 import app.mobius.domain.entity.profile.Profile
 import app.mobius.jsonApi.model.JsonApiResource
-import app.mobius.loggerFor
 import app.mobius.signUp.domain.PersonNotRegisteredException
 import app.mobius.signUp.infrastructure.dto.PersonDto
 import app.mobius.signUp.service.ProfileService
 import app.mobius.signUp.service.SignUpService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpStatus
-import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.server.ResponseStatusException
 import kotlin.io.path.ExperimentalPathApi
 
 /**

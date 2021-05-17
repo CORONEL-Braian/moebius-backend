@@ -2,7 +2,7 @@
   "data": [{
     "type": "person",
     "attributes": {
-      "username": "username"
+      "username": "aUsername"
     },
     "relationships": {
       "profile": {
@@ -20,10 +20,12 @@
           },
           "relationships": {
             "gender": {
-              "type": "gender",
-              "id": "03915d99-c1da-4584-93e9-680d572b5295",
-              "attributes": {
-                "type": "Heterosexual"
+              "data": {
+                "type": "gender",
+                "id": "03915d99-c1da-4584-93e9-680d572b5295",
+                "attributes": {
+                  "type": "Heterosexual"
+                }
               }
             },
             "location": {
@@ -220,16 +222,18 @@
                       "type": "authentication",
                       "relationships": {
                         "basicAuth": {
-                          "type": "basicAuth",
-                          "attributes": {
-                            "email": "braian@itdevexpert.com"
-                          },
-                          "relationships": {
-                            "password": {
-                              "data": {
-                                "type": "password",
-                                "attributes": {
-                                  "apiHashPassword": "apiHashPassword"
+                          "data": {
+                            "type": "basicAuth",
+                            "attributes": {
+                              "email": "braian@itdevexpert.com"
+                            },
+                            "relationships": {
+                              "password": {
+                                "data": {
+                                  "type": "password",
+                                  "attributes": {
+                                    "apiHashPassword": "apiHashPassword"
+                                  }
                                 }
                               }
                             }

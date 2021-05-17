@@ -45,5 +45,14 @@ data class Person(
                 setting = Setting(),
                 role = Role()
         )
+
+        constructor(
+                username: String,
+        ) : this(
+                username = username,
+                profile = Profile(),
+                setting = Setting(),
+                role = Role()
+        )
 }
 
