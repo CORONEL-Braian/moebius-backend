@@ -273,7 +273,7 @@ class JsonApiRequestTest {
     }
 
     @Test
-    fun `4A - When write Links from ktAsJson and jsonAsKt", Then the properties are nulls`() {
+    fun `4A - When write Links from ktAsJson and jsonAsKt, Then the properties are nulls`() {
 //        Given
         val expectedLinks = provideLinks()
         val relPath = "/generated/resource/links/propertiesNulls.json"
