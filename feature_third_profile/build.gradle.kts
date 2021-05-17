@@ -1,4 +1,4 @@
-group = "app.möbius"
+group = "app.mobius.feature.thirdProfile"
 version = "0.0.0"
 
 repositories {

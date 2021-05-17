@@ -1,0 +1,38 @@
+{
+  "type": "",
+  "id": null,
+  "attributes": {},
+  "relationships": {
+    "profile": {
+      "links": {
+        "self": null,
+        "next": null,
+        "last": null,
+        "related": null
+      },
+      "data": {
+        "type": "",
+        "id": null,
+        "attributes": {},
+        "relationships": {},
+        "links": null
+      }
+    },
+    "settings": {
+      "links": {
+        "self": null,
+        "next": null,
+        "last": null,
+        "related": null
+      },
+      "data": {
+        "type": "",
+        "id": null,
+        "attributes": {},
+        "relationships": {},
+        "links": null
+      }
+    }
+  },
+  "links": null
+}

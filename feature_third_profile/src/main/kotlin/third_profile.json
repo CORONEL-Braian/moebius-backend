@@ -3,11 +3,11 @@
   "info": {
     "title": "Third profile",
     "description": "Third profile",
-    "termsOfService": "möbius.app/terms",
+    "termsOfService": "mobius.app/terms",
     "contact": {
       "name": "API Support",
-      "url": "http://www.möbius.app/support/api",
-      "email": "support@möbius.app"
+      "url": "http://www.mobius.app/support/api",
+      "email": "support@mobius.app"
     },
     "license": {
       "name": "Apache 2.0",
@@ -18,23 +18,23 @@
 
   "servers": [
     {
-      "url": "development.möbius.app/person/sign_up",
+      "url": "development.mobius.app/person/sign_up",
       "description": "Development server"
     },
     {
-      "url": "integration.möbius.app/person/sign_up",
+      "url": "integration.mobius.app/person/sign_up",
       "description": "Integration server"
     },
     {
-      "url": "testing.möbius.app/person/sign_up",
+      "url": "testing.mobius.app/person/sign_up",
       "description": "Testing server"
     },
     {
-      "url": "staging.möbius.app/person/sign_up",
+      "url": "staging.mobius.app/person/sign_up",
       "description": "Staging server"
     },
     {
-      "url": "api.möbius.app/person/sign_up",
+      "url": "api.mobius.app/person/sign_up",
       "description": "Production server"
     }
 

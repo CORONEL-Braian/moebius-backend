@@ -3,6 +3,9 @@ package app.mobius.security.authentication.configuration
 import app.mobius.MobiusFeatureIntegrationTest
 import app.mobius.api.ApiEndpoints.URL_BASE
 import app.mobius.security.authentication.controller.FeatureSecurityCoreEndpointsTest
+import app.mobius.web.filter.XHeaderAuthenticationFilter.Companion.HEADER_ENVIRONMENT
+import app.mobius.web.filter.XHeaderAuthenticationFilter.Companion.HEADER_PLATFORM_ECOSYSTEM
+import app.mobius.web.filter.XHeaderAuthenticationFilter.Companion.HEADER_PLATFORM_NAME
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
@@ -31,9 +34,10 @@ class FeatureSecurityBasicAuthConfigurationIntegrationTest {
     fun `when authenticated developer requests a secure endpoint, then success`() {
         val requestBuilder = MockMvcRequestBuilders
                 .get(provideFullUrl(FeatureSecurityCoreEndpointsTest.Keys.SECURE))
-                .with(httpBasic("userForTest", "mobius123"))
-                        .header("Platform-Name", "Android")
-                        .header("Platform-Ecosystem", "Mobile")
+                .with(httpBasic("userForTest", "123"))
+                        .header(HEADER_PLATFORM_NAME, "Android")
+                        .header(HEADER_PLATFORM_ECOSYSTEM, "Mobile")
+                        .header(HEADER_ENVIRONMENT, "TESTING")
 
         val resultMatcher = MockMvcResultMatchers.status().isOk
 
@@ -47,6 +51,7 @@ class FeatureSecurityBasicAuthConfigurationIntegrationTest {
                 .with(httpBasic("userForTest", "wrongpassword"))
                 .header("Platform-Name", "Android")
                 .header("Platform-Ecosystem", "Mobile")
+                .header("Environment", "TESTING")
 
         val resultMatcher = MockMvcResultMatchers.status().isUnauthorized
 
@@ -57,14 +62,13 @@ class FeatureSecurityBasicAuthConfigurationIntegrationTest {
     fun `when developer with the absence of header platform-name then an exception is throwed`() {
         val requestBuilder = MockMvcRequestBuilders
                 .get(provideFullUrl(FeatureSecurityCoreEndpointsTest.Keys.SECURE))
-                .with(httpBasic("userForTest", "mobius123"))
+                .with(httpBasic("userForTest", "123"))
                 .header("Platform-Ecosystem", "Mobile")
+                .header("Environment", "TESTING")
 
-        val resultMatcher = MockMvcResultMatchers.status().isOk
+        val resultMatcher = MockMvcResultMatchers.status().is4xxClientError
 
-        assertThrows<Exception> {
-            mockMvc.perform(requestBuilder).andExpect(resultMatcher)
-        }
+        mockMvc.perform(requestBuilder).andExpect(resultMatcher)
     }
     @Test
     fun `when developer with the absence of header platform-ecosystem then an exception is throwed`() {
@@ -72,12 +76,11 @@ class FeatureSecurityBasicAuthConfigurationIntegrationTest {
                 .get(provideFullUrl(FeatureSecurityCoreEndpointsTest.Keys.SECURE))
                 .with(httpBasic("userForTest", "mobius123"))
                 .header("Platform-Name", "Android")
+                .header("Environment", "TESTING")
 
-        val resultMatcher = MockMvcResultMatchers.status().isOk
+        val resultMatcher = MockMvcResultMatchers.status().is4xxClientError
 
-        assertThrows<Exception> {
-            mockMvc.perform(requestBuilder).andExpect(resultMatcher)
-        }
+        mockMvc.perform(requestBuilder).andExpect(resultMatcher)
     }
 
 }

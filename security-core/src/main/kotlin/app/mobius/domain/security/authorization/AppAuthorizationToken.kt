@@ -1,5 +1,6 @@
 package app.mobius.domain.security.authorization
 
+import app.mobius.credentialManagment.domain.entity.security.Environment
 import app.mobius.credentialManagment.domain.entity.security.Platform
 import org.springframework.security.authentication.AbstractAuthenticationToken
 import org.springframework.security.core.GrantedAuthority
@@ -14,6 +15,7 @@ open class AppAuthorizationToken : AbstractAuthenticationToken {
     private var developer: String
     private var password: String
     var platform: Platform
+    var environment: Environment
 
     /**
      * This constructor can be safely used by any code that wishes to create a
@@ -21,10 +23,11 @@ open class AppAuthorizationToken : AbstractAuthenticationToken {
      * will return `false`.
      *
      */
-    constructor(developer: String, password: String, platform: Platform) : super(null) {
+    constructor(developer: String, password: String, platform: Platform, environment: Environment) : super(null) {
         this.developer = developer
         this.password = password
         this.platform = platform
+        this.environment = environment
         isAuthenticated = false
     }
 
@@ -34,11 +37,12 @@ open class AppAuthorizationToken : AbstractAuthenticationToken {
      * producing a trusted (i.e. [.isAuthenticated] = `true`)
      * authentication token.
      */
-    constructor(developer: String, password: String, platform: Platform, authorities: Collection<GrantedAuthority?>?
+    constructor(developer: String, password: String, platform: Platform, environment: Environment, authorities: Collection<GrantedAuthority?>?
     ) : super(authorities) {
         this.developer = developer
         this.password = password
         this.platform = platform
+        this.environment  =  environment
         super.setAuthenticated(true) // must use super, as we override
     }
 

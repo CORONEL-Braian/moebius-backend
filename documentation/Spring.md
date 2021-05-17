@@ -4,6 +4,22 @@ TODO: Add name strategy
 
  * https://www.baeldung.com/spring-data-jpa-query
  
+#### When an Enum is used in JpaRepository nativeQuery
+
+> You must to transform the value of the parameter to a String using .name() (or receive a String as a parameter) and cast that value of type String to the specific Enum that is needed.
+
+    @Query(
+        value = "SELECT some_routine(CAST(:#{#environmentNamedParam.name()} as environment))",
+        nativeQuery = true
+    )
+    fun yourFunction(
+        @Param("environmentNamedParam") environmentParam: Environment
+    ) : Boolean
+
+
+ 
+ 
+ 
  ___
 ### Modules
 
@@ -14,44 +30,18 @@ ___
 ### @QueryParams
 
  * https://stackoverflow.com/a/28993810/5279996
+ 
+---
+### @TestPropertySource
+
+ * https://www.baeldung.com/spring-test-property-source
 
 ___
 ### Headers
 
 [Read HTTP Headers](https://www.baeldung.com/spring-rest-http-headers)
 
+___
+### Exception Handling
 
-
-
----
----
-
-## ERRORS:
-
-`alter table if exists role add column securityLevel int4 not null;`
-[23502] ERROR: column "securitylevel" contains null values
-
-Solution: Add annotation
- * From: `val securityLevel: Int = 0,`
- * To: `@Column(name = "security_level") val securityLevel: Int = 0,`
-
----
-
-Error executing DDL "alter table if exists daily_reload_token add column keepSessionDaily boolean"
- * From: `@Column(name = "keepSessionDaily") val keepSessionDaily: Boolean = false,`
- * To: `@Column(name = "keep_session_daily") val keepSessionDaily: Boolean = false,`
- 
----
-
-When select * with @Query
-
-    @Query(value = "SELECT * FROM platform", nativeQuery = true)
-    fun findAllPlatforms(): List<Any>
-
-Error: `No Dialect mapping for JDBC type: 1111`
-
-Solution:  `CAST(a_uuid as varchar) a_uuid` in query
-
-Source: https://stackoverflow.com/a/54017193/5279996
-
-
+ * [Exception Handling in MVC](https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc)

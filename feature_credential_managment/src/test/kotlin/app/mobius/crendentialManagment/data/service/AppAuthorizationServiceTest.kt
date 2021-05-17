@@ -1,66 +1,110 @@
 package app.mobius.crendentialManagment.data.service
 
+import app.mobius.MobiusFeatureIntegrationTest
 import app.mobius.credentialManagment.data.repository.AppAuthorizationJpaRepository
+import app.mobius.credentialManagment.domain.entity.security.Environment
 import app.mobius.credentialManagment.domain.entity.security.Platform
-import app.mobius.credentialManagment.service.AppAuthorizationService
+import app.mobius.crendentialManagment.CredentialManagmentFeatureTestConfiguration
+import app.mobius.crendentialManagment.data.CredentialManagmentTestPropertySource
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
-import org.mockito.InjectMocks
-import org.mockito.Mockito
-import org.mockito.junit.jupiter.MockitoExtension
-import org.springframework.boot.test.mock.mockito.MockBean
-import org.springframework.test.context.junit.jupiter.SpringExtension
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.ContextConfiguration
+import org.springframework.test.context.TestPropertySource
 import java.util.*
+import javax.annotation.PostConstruct
 
-@ExtendWith(value = [MockitoExtension::class, SpringExtension::class])
+/**
+ * OBS: Not mock JpaRepository, you must use MobiusFeatureIntegrationTest and @Autowired
+ * https://www.baeldung.com/spring-beancreationexception
+ */
+@AutoConfigureMockMvc
+@SpringBootTest(classes = [MobiusFeatureIntegrationTest::class])
+@CredentialManagmentFeatureTestConfiguration
 open class AppAuthorizationServiceTest {
 
-    @MockBean
+    @Autowired
     private lateinit var appAuthorizationJpaRepository: AppAuthorizationJpaRepository
 
-    @InjectMocks
-    private lateinit var appAuthorizationService: AppAuthorizationService
+    @Autowired
+    private lateinit var propertySource: CredentialManagmentTestPropertySource
+
+    private lateinit var developerName: String
+    private lateinit var privateKey: String
+
+    /**
+     * This scope is executed after autowired for initialize providers of TestPropertySource
+     *
+     * Source:
+     *  . Autowiring order: https://stackoverflow.com/a/38068933/5279996
+     */
+    @PostConstruct
+    fun afterAutowired() {
+        developerName = propertySource.developerName!!
+        privateKey = propertySource.privateKey!!
+    }
+
+    private fun provideDeveloperName(developerName: String = this.developerName) = developerName
+
+    private fun providePrivateKey(privateKey: String = this.privateKey) = privateKey
+
+    private fun providePlatform(
+            name: String = "Android",
+            ecosystem: String = "Mobile"
+    ) = Platform(name = name, ecosystem = ecosystem)
+
+    private fun provideEnvironment(environment: Environment = Environment.DEV) = environment
+
+    private fun provideAppAuthorizationDeveloperUUID(
+            platform: Platform = providePlatform(),
+            developerName: String = provideDeveloperName(),
+            environment: Environment = provideEnvironment()
+    ) = UUID.fromString(
+            appAuthorizationJpaRepository.findAppAuthorizationDeveloperUUID(platform, developerName, environment)
+    )
 
     @Test
-    fun `should return true when app authorization is valid app`() {
-        val appAuthorizationDeveloper = "f60b447c-90c7-4edd-9399-cb7ebd9051a8"
-        val androidMobile = Platform(name = "Android", ecosystem = "Mobile")
-        val developerName = "userForTest"
-        val privateKey = "randomKey"
+    open fun `Given a Test Property Source, When variables retrieved, Then the values are returned`() {
+        Assertions.assertNotNull(propertySource.developerName)
+        Assertions.assertNotNull(propertySource.privateKey)
+    }
 
-        Mockito
-                .`when`(appAuthorizationJpaRepository.findAppAuthorizationDeveloperUUID(androidMobile, developerName))
-                .thenReturn(appAuthorizationDeveloper)
-        Mockito
-                .`when`(appAuthorizationJpaRepository.isValidAppAuthorization(
-                            UUID.fromString(appAuthorizationDeveloper),
-                            privateKey))
-                .thenReturn(true)
+    @Test
+    fun `test a simple routine`() {
+        assert(appAuthorizationJpaRepository.simpleRoutineForTesting())
+    }
 
+    @Test
+    fun `when find a app authorization developer UUID for Testing, then a UUID is not null`() {
+        Assertions.assertNotNull(
+                provideAppAuthorizationDeveloperUUID(environment = provideEnvironment(Environment.TESTING))
+        )
+    }
+
+    @Test
+    fun `when check if an app authorization is valid, thene should return true`() {
         assert(
-                appAuthorizationService.isValidAppAuthorization(androidMobile, developerName, privateKey)
+                appAuthorizationJpaRepository.isValidAppAuthorization(
+                        provideAppAuthorizationDeveloperUUID(environment = provideEnvironment(Environment.TESTING)),
+                        providePrivateKey(),
+                        provideEnvironment(Environment.TESTING)
+                )
         )
     }
 
     @Test
     fun `should return false when app authorization is valid app`() {
-        val appAuthorizationDeveloper = "f60b447c-90c7-4edd-9399-cb7ebd9051a8"
-        val androidMobile = Platform(name = "Android", ecosystem = "Mobile")
-        val developerName = "userForTest"
         val privateKey = "randomKey"
 
-        Mockito
-                .`when`(appAuthorizationJpaRepository.findAppAuthorizationDeveloperUUID(androidMobile, developerName))
-                .thenReturn(appAuthorizationDeveloper)
-        Mockito
-                .`when`(appAuthorizationJpaRepository.isValidAppAuthorization(
-                        UUID.fromString(appAuthorizationDeveloper),
-                        privateKey))
-                .thenReturn(false)
-
         Assertions.assertFalse(
-                appAuthorizationService.isValidAppAuthorization(androidMobile, developerName, privateKey)
+                appAuthorizationJpaRepository.isValidAppAuthorization(
+                        provideAppAuthorizationDeveloperUUID(environment = provideEnvironment(Environment.TESTING)),
+                        providePrivateKey(privateKey),
+                        provideEnvironment(Environment.TESTING)
+                )
         )
     }
 

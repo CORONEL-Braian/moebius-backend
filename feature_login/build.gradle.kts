@@ -1,4 +1,4 @@
-group = "app.möbius"
+group = "app.mobius.backend.feature.login"
 version = "0.0.0"
 
 repositories {

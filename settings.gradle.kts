@@ -16,7 +16,7 @@ include("common-feature")
 // Main
 include("data")
 include("domain")
-include("api")
+include("api-core")
 include("service")
 
 // Core

@@ -34,8 +34,6 @@ subprojects {
 		plugin("io.spring.dependency-management")
 	}
 
-	group = "app.mobius"
-
 	repositories {
 		maven("https://dl.bintray.com/kotlin/kotlin-eap")
 		mavenCentral()
@@ -63,6 +61,14 @@ subprojects {
 
 		getByName<Jar>("jar") {
 			enabled = true
+		}
+
+		/**
+		 * Allow Run tests for all modules by command or IDE UI without the result will be always BUILD SUCCESSFUL.
+		 * Source: https://stackoverflow.com/a/67029241/5279996
+		 */
+		withType<Test> {
+			useJUnitPlatform()
 		}
 	}
 

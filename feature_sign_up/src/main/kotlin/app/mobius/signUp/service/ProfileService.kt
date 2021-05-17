@@ -1,7 +1,7 @@
 package app.mobius.signUp.service
 
 import app.mobius.signUp.data.repository.ProfileRepository
-import app.mobius.domain.entity.Profile
+import app.mobius.domain.entity.profile.Profile
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -18,6 +18,5 @@ class ProfileService {
     fun isOpen(): Boolean {
         return profileRepository.isEntityManagerOpen()
     }
-
 
 }

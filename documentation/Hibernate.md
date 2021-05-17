@@ -34,6 +34,7 @@ The entity class may have other constructors as well. The no-arg constructor mus
 
 ##### @Enum:
 [Source](https://stackoverflow.com/a/64021041/5279996)
+[The best way to map an Enum Type with JPA and Hibernate](https://vladmihalcea.com/the-best-way-to-map-an-enum-type-with-jpa-and-hibernate/)
 
 
 ##### @ManyToMany:
@@ -65,3 +66,7 @@ Insert default value using DBMS and optional using Hibernate
 ##### @MappedSuperclass
 
 * [Source](https://thorben-janssen.com/hibernate-tips-map-multiple-entities-same-table/#:~:text=Yes%2C%20you%20can%20map%20two,better%20use%20a%20DTO%20projection.)
+
+##### Date | Time
+
+* [Mapping Date and Time](https://www.baeldung.com/hibernate-date-time)

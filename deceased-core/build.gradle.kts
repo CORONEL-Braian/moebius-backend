@@ -6,12 +6,3 @@ repositories {
 dependencies {
     implementation(project(":domain"))
 }
-
-tasks {
-    compileKotlin {
-        kotlinOptions.jvmTarget = "1.8"
-    }
-    compileTestKotlin {
-        kotlinOptions.jvmTarget = "1.8"
-    }
-}

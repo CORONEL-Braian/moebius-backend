@@ -1,0 +1,253 @@
+{
+  "data": [{
+    "type": "person",
+    "attributes": {
+      "username": "aUsername"
+    },
+    "relationships": {
+      "profile": {
+        "data": {
+          "type": "profile",
+          "attributes": {
+            "avatarUrl": "http://",
+            "biography": "",
+            "birthDate": "2020-11-13",
+            "birthTime": "00:18:00",
+            "name": "Braian",
+            "nickname": "nickname",
+            "sex": "M",
+            "surname": "Coronel"
+          },
+          "relationships": {
+            "gender": {
+              "data": {
+                "type": "gender",
+                "id": "03915d99-c1da-4584-93e9-680d572b5295",
+                "attributes": {
+                  "type": "Heterosexual"
+                }
+              }
+            },
+            "location": {
+              "data": {
+                "type": "location",
+                "relationships": {
+                  "country": {
+                    "data": {
+                      "type": "country",
+                      "attributes": {
+                        "name": "Argentina"
+                      },
+                      "relationships": {
+                        "locationLimits": {
+                          "data": {
+                            "type": "locationLimits",
+                            "relationships": {
+                              "northeast": {
+                                "data": {
+                                  "type": "coordinate",
+                                  "attributes": {
+                                    "lat": 0.0,
+                                    "lng": 0.0
+                                  }
+                                }
+                              },
+                              "southwest": {
+                                "data": {
+                                  "type": "coordinate",
+                                  "attributes": {
+                                    "lat": 0.0,
+                                    "lng": 0.0
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "province": {
+                    "data": {
+                      "type": "province",
+                      "attributes": {
+                        "name": "Buenos Aires"
+                      },
+                      "relationships": {
+                        "locationLimits": {
+                          "data": {
+                            "type": "locationLimits",
+                            "relationships": {
+                              "northeast": {
+                                "data": {
+                                  "type": "coordinate",
+                                  "attributes": {
+                                    "lat": 0.0,
+                                    "lng": 0.0
+                                  }
+                                }
+                              },
+                              "southwest": {
+                                "data": {
+                                  "type": "coordinate",
+                                  "attributes": {
+                                    "lat": 0.0,
+                                    "lng": 0.0
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "city": {
+                    "data": {
+                      "type": "city",
+                      "attributes": {
+                        "name": "Bosques"
+                      },
+                      "relationships": {
+                        "locationLimits": {
+                          "data": {
+                            "type": "locationLimits",
+                            "relationships": {
+                              "northeast": {
+                                "data": {
+                                  "type": "coordinate",
+                                  "attributes": {
+                                    "lat": 0.0,
+                                    "lng": 0.0
+                                  }
+                                }
+                              },
+                              "southwest": {
+                                "data": {
+                                  "type": "coordinate",
+                                  "attributes": {
+                                    "lat": 0.0,
+                                    "lng": 0.0
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "direction": {
+                    "data": {
+                      "type": "direction",
+                      "attributes": {
+                        "street": "street",
+                        "number": 1234,
+                        "firstBetweenStreet": "first",
+                        "secondBetweenStreet": "second"
+                      },
+                      "relationships": {
+                        "coordinate": {
+                          "data": {
+                            "type": "coordinate",
+                            "attributes": {
+                              "lat": 0.0,
+                              "lng": 0.0
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "phone": {
+              "data": {
+                "type": "phone",
+                "attributes": {
+                  "country": "+54",
+                  "codeArea": "011",
+                  "number": "1234512345"
+                }
+              }
+            },
+            "nationality": {
+              "data": {
+                "type": "country",
+                "attributes": {
+                  "name": "Argentina"
+                }
+              }
+            }
+          }
+        }
+      },
+      "setting": {
+        "data": {
+          "type": "setting",
+          "attributes": {
+            "theme": "DEFAULT"
+          },
+          "relationships": {
+            "account": {
+              "data": {
+                "type": "account",
+                "relationships": {
+                  "linkedAccount": {
+                    "data": {
+                      "type": "linkedAccount",
+                      "relationships": {
+                        "facebook": {
+                          "data": {
+                            "type": "facebook",
+                            "attributes": {
+                              "username": "LiveFull.23"
+                            }
+                          }
+                        }
+                      }
+                    }
+
+                  }
+                }
+              }
+            },
+            "security": {
+              "data": {
+                "type": "security",
+                "relationships": {
+                  "authentication": {
+                    "data": {
+                      "type": "authentication",
+                      "relationships": {
+                        "basicAuth": {
+                          "data": {
+                            "type": "basicAuth",
+                            "attributes": {
+                              "email": "braian@itdevexpert.com"
+                            },
+                            "relationships": {
+                              "password": {
+                                "data": {
+                                  "type": "password",
+                                  "attributes": {
+                                    "apiHashPassword": "apiHashPassword"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }]
+}

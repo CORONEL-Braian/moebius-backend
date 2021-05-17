@@ -1,5 +1,6 @@
 package app.mobius.data.dataAccess.spring
 
+import app.mobius.data.dataAccess.PackagesToScan
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
 import org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
@@ -40,10 +41,8 @@ open class PersistenceJPAConfig {
     open fun entityManagerFactory() : LocalContainerEntityManagerFactoryBean {
         val em = LocalContainerEntityManagerFactoryBean()
         em.dataSource = dataSource()
-        em.setPackagesToScan(
-                "app.mobius.domain.entity",
-                "app.mobius.*.domain.entity"    // For the features
-        )
+
+        em.setPackagesToScan(*PackagesToScan.SUMMATION)
 
         val vendorAdapter: JpaVendorAdapter = HibernateJpaVendorAdapter()
         em.jpaVendorAdapter = vendorAdapter
@@ -67,7 +66,12 @@ open class PersistenceJPAConfig {
         properties.setProperty("hibernate.physical_naming_strategy", SpringPhysicalNamingStrategy::class.java.name)
         properties.setProperty("hibernate.implicit_naming_strategy", SpringImplicitNamingStrategy::class.java.name)
 
+//        TODO: Set properties by environment
         properties.setProperty("hibernate.show_sql", "true")
+        properties.setProperty("spring.jpa.show-sql", "true")
+        properties.setProperty("logging.level.org.hibernate.SQL", "DEBUG")
+        properties.setProperty("logging.level.org.hibernate.type.descriptor.sql.BasicBinder", "TRACE")
+
         return properties
     }
 

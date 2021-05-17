@@ -1,0 +1,144 @@
+[
+  {
+    "username": "aUsername",
+    "profile": {
+      "avatarUrl": "http://",
+      "biography": "",
+      "birthDate": "2020-11-13",
+      "birthTime": "00:18:00",
+      "name": "Braian",
+      "nickname": "itdev",
+      "sex": "M",
+      "surname": "Coronel",
+      "gender": {
+        "genderUUID": "03915d99-c1da-4584-93e9-680d572b5295",
+        "type": "Heterosexual",
+        "description": "Atracción hacia personas del sexo contrario",
+        "iconUrl": null
+      },
+      "location": {
+        "currentLocationUUID": "93f0b2d6-35bd-48cf-ac78-c312362a5fe6",
+        "country": {
+          "countryUUID": "0a66add3-0c8e-4735-b992-bb0211d5358e",
+          "name": "",
+          "locationLimits": {
+            "limitsUUID": "34e87d18-53ae-483d-857b-bb4b67762df4",
+            "northeast": {
+              "coordinateUUID": "52a2706e-498d-48f8-8e74-0197573469e0",
+              "lat": 0.0,
+              "lng": 0.0
+            },
+            "southwest": {
+              "coordinateUUID": "753c18fa-7208-4f1e-b2fd-d4ecc41ee919",
+              "lat": 0.0,
+              "lng": 0.0
+            }
+          }
+        },
+        "province": {
+          "provinceUUID": "3b2d4fbf-75db-4028-b944-097ff58956b8",
+          "name": "",
+          "locationLimits": {
+            "limitsUUID": "8379a7f5-9c99-40dc-aa0e-d4f02be1d0d8",
+            "northeast": {
+              "coordinateUUID": "4263842c-74ca-4f6f-89ac-33e80a3f8e92",
+              "lat": 0.0,
+              "lng": 0.0
+            },
+            "southwest": {
+              "coordinateUUID": "c4f2c8f5-cf3c-430e-ad55-3523e7b3aaa3",
+              "lat": 0.0,
+              "lng": 0.0
+            }
+          }
+        },
+        "city": {
+          "cityUUID": "370c7180-b26b-4463-b89e-5a302beb7a59",
+          "name": "",
+          "locationLimits": {
+            "limitsUUID": "f6aa6bf8-a818-44ac-99a8-e51378a57692",
+            "northeast": {
+              "coordinateUUID": "51898353-9669-4127-8d24-7ad0b3aa5305",
+              "lat": 0.0,
+              "lng": 0.0
+            },
+            "southwest": {
+              "coordinateUUID": "6205b35e-0d86-42e3-b9cd-9530ae5b9c2d",
+              "lat": 0.0,
+              "lng": 0.0
+            }
+          }
+        },
+        "direction": null
+      },
+      "phone": {
+        "phoneUUID": "933e50b3-d7d8-4868-8647-0f6b74323d83",
+        "codeCountry": "",
+        "codeArea": "",
+        "number": -1
+      },
+      "nationality": {
+        "countryUUID": "21af1e31-4597-4c69-8a81-d9fa6fb805ee",
+        "name": "Argentina"
+      }
+    },
+    "setting": {
+      "settingUUID": "0c2a244d-1d19-4483-9830-297b1f9e7677",
+      "account": {
+        "accountUUID": "0dc8084c-3290-4b44-8bcb-9d6ab57a1a29",
+        "linkedAccount": null
+      },
+      "security": {
+        "securityUUID": "06560baf-ff32-46d5-98e2-e08fdd76ab24",
+        "authentication": {
+          "authenticationUUID": "1cb5e85d-9963-4474-a512-443f7b370794",
+          "session": {
+            "sessionUUID": "9966fe96-f2de-4e29-8a47-d677e8c956d0",
+            "accessToken": {
+              "tokenUUID": "29c8eb16-944b-4eb4-91aa-54229aac6555",
+              "token": {
+                "tokenUUID": "bbabff5e-c04f-477f-8486-4a8cd2572c66",
+                "token": "$2a$08$UvctGZJjO2xJ8zqxwYw.0Obo0z4tcB8Tc0AWiajqKMyyWsg4BORXS",
+                "created": "2020-11-13T00:18:35.428+00:00",
+                "expiry": "2020-11-13T00:18:35.428+00:00"
+              }
+            },
+            "dailyReloadToken": {
+              "dailyAccessTokenUUID": "70e1fdf3-3df1-46d1-b182-77780a555ca6",
+              "keepSessionDaily": false,
+              "token": {
+                "tokenUUID": "8c0f67dd-f25b-4108-9653-a3fe6b421119",
+                "token": "$2a$08$UR3WH0Xj7V45eexgyvuQEuftApT4T3vX/8Nuvz2o0bQUKBKuNogKy",
+                "created": "2020-11-13T00:18:35.428+00:00",
+                "expiry": "2020-11-13T00:18:35.428+00:00"
+              }
+            },
+            "monthlyReloadToken": {
+              "dailyAccessTokenUUID": "bd296909-d0f8-4853-900c-e01f14bf6dc9",
+              "token": {
+                "tokenUUID": "9f631728-3bfa-4a09-9f3b-c6a4ca9c5679",
+                "token": "$2a$08$3gjOAKxP2hCXj1/dm/ytFOrcD1XCuhb0F.8.w6S2TVq.VetwC7BWC",
+                "created": "2020-11-13T00:18:35.428+00:00",
+                "expiry": "2020-11-13T00:18:35.428+00:00"
+              }
+            }
+          },
+          "basicAuth": {
+            "basicAuthUUID": "b00e2b00-9e67-4970-b99c-b396ce2b7293",
+            "email": "",
+            "password": {
+              "passwordUUID": "4e62de1e-6e7b-4d72-a3bb-af5dc2708bf8",
+              "apiHashPassword": "-1",
+              "dbHashPassword": "$2a$08$qsqC1VTSGnsy28qZx0Xio..xAT9XEl05OUsVI8TtElxkRRb.i2fwG",
+              "resetPasswordToken": null,
+              "resetPasswordTokenExpire": null
+            }
+          }
+        },
+        "securityLevel": 0,
+        "securityMethods": null
+      },
+      "theme": "DEFAULT"
+    }
+  }
+]

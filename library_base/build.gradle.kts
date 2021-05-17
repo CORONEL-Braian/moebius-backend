@@ -1,4 +1,4 @@
-group = "app.möbius"
+group = "app.mobius.library.base"
 version = "0.0.0"
 
 

@@ -1,5 +1,7 @@
 package app.mobius.data.dataAccess
 
+import app.mobius.io.ParentPath
+import app.mobius.io.ResourceUtils.getFile
 import org.hibernate.HibernateException
 import org.hibernate.Session
 import org.hibernate.SessionFactory
@@ -8,8 +10,8 @@ import org.hibernate.cfg.Configuration
 import org.reflections.Reflections
 import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
 import org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
-import java.io.File
 import javax.persistence.*
+import kotlin.io.path.ExperimentalPathApi
 
 
 /**
@@ -19,10 +21,10 @@ import javax.persistence.*
  */
 class JDBMConfig {
 
+    @ExperimentalPathApi
     object Hibernate {
 
-        private const val HIBERNATE_CONFIGURATION = "secret-hibernate.cfg.xml"
-        private const val PACKAGE_ENTITIES = "app.mobius.domain.entity"
+        private const val HIBERNATE_CONFIGURATION = "/secret-hibernate.cfg.xml"
 
        /* @Bean(name = ["entityManagerFactory"])
         fun sessionFactory(): LocalSessionFactoryBean? {
@@ -54,10 +56,10 @@ class JDBMConfig {
 
         /**
          * Open the session using hibernate cfg for only mapped entity
-         * @param canonicalName: e.g: secret-hibernate.cfg.xml
+         * @param relPath: e.g: /secret-hibernate.cfg.xml
          */
-        fun openSessionForOnly(annotatedClass: Class<*>, canonicalName: String = HIBERNATE_CONFIGURATION) : Session {
-            val sessionFactory = getSessionFactoryForOnly(annotatedClass, canonicalName)
+        fun openSessionForOnly(annotatedClass: Class<*>, relPath: String = HIBERNATE_CONFIGURATION) : Session {
+            val sessionFactory = getSessionFactoryForOnly(annotatedClass, relPath)
             return sessionFactory.openSession()
         }
 
@@ -75,28 +77,18 @@ class JDBMConfig {
          * PRE: Configure entity mapping in open-persistence.xml necessary for the class hierarchy
          * OBS: Session Factory puede tener varias sesiones abiertas.
          * @param annotatedClass The class containing annotations
-         * @param canonicalName: e.g: secret-hibernate.cfg.xml
+         * @param relPath: e.g: secret-hibernate.cfg.xml
          */
         @Throws(HibernateException::class)
-        fun getSessionFactoryForOnly(annotatedClass: Class<*>, canonicalName: String) : SessionFactory {
+        fun getSessionFactoryForOnly(annotatedClass: Class<*>, relPath: String) : SessionFactory {
             return Configuration()
-                    .configure(getFile(canonicalName))
+                    .configure(getFile(
+                            moduleName = "data-core",
+                            parentPath = ParentPath.Main.RESOURCES,
+                            relPath = relPath
+                    ))
                     .addAnnotatedClass(annotatedClass)
                     .buildSessionFactory()
-        }
-
-        /**
-         * Get absolute path of file of secret-hibernate
-         * PRE: File is in data-core module
-         * @param canonicalName: e.g: secret-hibernate.cfg.xml
-         * Source: https://stackoverflow.com/a/64084771/5279996
-         */
-        private fun getFile(canonicalName: String): File {
-            val absolutePathCurrentModule = System.getProperty("user.dir")
-            val pathFromProjectRoot = absolutePathCurrentModule.dropLastWhile { it != '/' }
-            val absolutePathFromProjectRoot = "${pathFromProjectRoot}data-core/src/main/resources/$canonicalName"
-            println("Absolute Path of secret-hibernate.cfg.xml: $absolutePathFromProjectRoot")
-            return File(absolutePathFromProjectRoot)
         }
 
         /**
@@ -110,11 +102,18 @@ class JDBMConfig {
          */
         private fun autoScanEntities(canonicalName: String) : SessionFactory {
             val configuration = Configuration()
-                    .configure(getFile(canonicalName))
+                    .configure(
+                                getFile(
+                                    moduleName = "data-core",
+                                    parentPath = ParentPath.Main.RESOURCES,
+                                    relPath = canonicalName
+                            )
+                    )
 
-//            Auto Scan Entities
-            val reflections = Reflections(PACKAGE_ENTITIES)
+//            Auto Scan Entities packages per features
+            val reflections = Reflections(PackagesToScan.SUMMATION)
             val importantClasses: Set<Class<*>> = reflections.getTypesAnnotatedWith(Entity::class.java)
+
             var i = 0
             println("-------")
             for (clazz in importantClasses) {

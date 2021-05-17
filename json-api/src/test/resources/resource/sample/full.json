@@ -1,0 +1,20 @@
+{
+  "data": [{
+    "type": "photos",
+    "attributes": {
+      "title": "Ember Hamster",
+      "src": "http://example.com/images/productivity.png"
+    },
+    "relationships": {
+      "photographer": {
+        "data": {
+          "type": "photographer",
+          "attributes": {
+            "type": "aType",
+            "id": "anId"
+          }
+        }
+      }
+    }
+  }]
+}
