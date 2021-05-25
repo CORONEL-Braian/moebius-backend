@@ -16,7 +16,7 @@ import kotlin.jvm.Throws
 @ExperimentalPathApi
 class HibernateData {
 
-    private val session = JDBMConfig.Hibernate.openSession()
+    private val session = JDBMConfig.Hibernate.openSession()    //TODO: Check close session
     private val builder = session.criteriaBuilder
 
     private var isSubEntity = false
